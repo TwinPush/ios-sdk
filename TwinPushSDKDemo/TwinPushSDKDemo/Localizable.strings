@@ -1,0 +1,35 @@
+/* 
+  Localizable.strings
+  TwinPushSDK
+
+  Created by Diego Prados on 05/02/13.
+  Copyright (c) 2013 TwinCoders. All rights reserved.
+*/
+
+/* Alert shown when receive notification */
+"NOTIFICATION_RECEIVED_ALERT_TITLE" = "Notification received";
+"NOTIFICATION_RECEIVED_ALERT_CANCEL_BUTTON" = "Cancel";
+"NOTIFICATION_RECEIVED_ALERT_OPEN_BUTTON" = "Open";
+
+/* Alert shown when the device is registered */
+"DEVICE_REGISTERED_ALERT_TITLE" = "Device registered";
+"DEVICE_REGISTERED_ALERT_MESSAGE" = "Device with ID: %@ and alias: %@ registered succesfully";
+"DEVICE_REGISTERED_ALERT_ACCEPT_BUTTON" = "Accept";
+
+/* Alert shown when an error occurs during the registration */
+"DEVICE_REGISTRATION_ERROR_ALERT_TITLE" = "Failed registration";
+
+/* Alert shown when an error occurs during process of getting all the notifications of the device */
+"GET_NOTIFICATIONS_ERROR_ALERT_TITLE" = "Error";
+
+/* Modal view shown when opening a received notification */
+"MODAL_NOTIFICATION_DETAIL_CLOSE_BUTTON" = "Close";
+
+/* AppId or ApiKey missing */
+"APPID_APIKEY_MISSING_MESSAGE" = "You have to set the values for the App Id and the Api Key in order to use the SDK";
+"APPID_APIKEY_MISSING_TITLE" = "Error";
+
+/* Error when loading the webview */
+"WEBVIEW_LOADING_ERROR" = "An error happened when trying to load the rich content of the notificacion. Error code: %@";
+"WEBVIEW_LOADING_ERROR_TITLE" = "Error";
+"WEBVIEW_LOADING_ERROR_BUTTON" = "OK";

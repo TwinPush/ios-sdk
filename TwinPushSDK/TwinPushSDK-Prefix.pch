@@ -1,0 +1,33 @@
+//
+// Prefix header for all source files of the 'TwinPushSDK' target in the 'TwinPushSDK' project
+//
+
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+#endif
+
+#ifdef DEBUG
+#define TCLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#define TCAssert(_condition_, ...) NSAssert(_condition_, @"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#define TCAssertNilOrConformsToProtocol(OBJ,PROT) TCAssert(((OBJ == nil) || ((OBJ != nil) && [OBJ conformsToProtocol:@protocol(PROT)])),([NSString stringWithFormat:@"Variable %s must either be nil or conform to %s protocol.", ( (#OBJ) ), ( (#PROT) )]))
+#define TCAssertNilOrIsKindOfClass(OBJ,CLASS) TCAssert(((OBJ == nil) || ((OBJ != nil) && [OBJ isKindOfClass:[CLASS class]])), ([NSString stringWithFormat:@"Variable %s must either be nil or be kind of %s class.", (#OBJ), (#CLASS)]))
+#else
+#define TCLog(...) do {} while (0)
+#define TCAssert(_condition_, ...) do {} while (0)
+#define TCAssertNilOrConformsToProtocol(OBJ,PROT) do {} while (0)
+#define TCAssertNilOrIsKindOfClass(OBJ,CLASS) do {} while (0)
+#endif
+
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+
+/*
+ *  System Versioning Preprocessor Macros
+ */
+
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
+#define LOCALIZATION_TABLE @"TwinPushSDK"

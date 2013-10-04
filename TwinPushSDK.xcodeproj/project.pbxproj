@@ -1,0 +1,831 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2124D01116B1306900B39430 /* TPRequestParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124D01016B1306900B39430 /* TPRequestParam.m */; };
+		2124D01316B131D800B39430 /* TPRequestLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124D01216B131D700B39430 /* TPRequestLauncher.m */; };
+		2124D01716B1334C00B39430 /* NSDictionary+ArrayForKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124D01616B1334C00B39430 /* NSDictionary+ArrayForKey.m */; };
+		2124D01D16B1347700B39430 /* TPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124D01A16B1347700B39430 /* TPDevice.m */; };
+		2124D02016B134E300B39430 /* TPNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124D01F16B134E300B39430 /* TPNotification.m */; };
+		2124D02916B151BE00B39430 /* TPNotificationsFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124D02816B151BD00B39430 /* TPNotificationsFilters.m */; };
+		2124D03A16B17E4B00B39430 /* TPNotificationsInboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124D03816B17E4B00B39430 /* TPNotificationsInboxViewController.m */; };
+		2124D03E16B1835C00B39430 /* TPInboxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124D03C16B1835C00B39430 /* TPInboxCell.m */; };
+		214683BD16C2A9EB00F9E886 /* TPNoResultsCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 214683BB16C2A9EB00F9E886 /* TPNoResultsCell.h */; };
+		214683BE16C2A9EB00F9E886 /* TPNoResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 214683BC16C2A9EB00F9E886 /* TPNoResultsCell.m */; };
+		214683C216C2A9F900F9E886 /* TPLoadingCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 214683C016C2A9F900F9E886 /* TPLoadingCell.h */; };
+		214683C316C2A9F900F9E886 /* TPLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 214683C116C2A9F900F9E886 /* TPLoadingCell.m */; };
+		218C2AC316B28AA700F498CE /* TwinPushManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 219BB79816B03F89008739D7 /* TwinPushManager.h */; settings = {ATTRIBUTES = (); }; };
+		218C2AC416B28B3B00F498CE /* TPNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 2124D01B16B1347700B39430 /* TPNotification.h */; settings = {ATTRIBUTES = (); }; };
+		218C2AC516B28B3B00F498CE /* TPNotificationsFilters.h in Headers */ = {isa = PBXBuildFile; fileRef = 2124D02716B151BD00B39430 /* TPNotificationsFilters.h */; settings = {ATTRIBUTES = (); }; };
+		218C2AC616B28B3B00F498CE /* TPInboxCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 2124D03B16B1835C00B39430 /* TPInboxCell.h */; settings = {ATTRIBUTES = (); }; };
+		218C2AC716B28B3B00F498CE /* TPNotificationsInboxViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2124D03716B17E4B00B39430 /* TPNotificationsInboxViewController.h */; settings = {ATTRIBUTES = (); }; };
+		218C5BC216B68545007F49DD /* TPCreateDeviceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 218CB3B316B12E290080A5CA /* TPCreateDeviceRequest.h */; settings = {ATTRIBUTES = (); }; };
+		218C5BC416B68579007F49DD /* TPDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 2124D01916B1347700B39430 /* TPDevice.h */; settings = {ATTRIBUTES = (); }; };
+		218C5BFA16B6D332007F49DD /* NSDictionary+ArrayForKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 2124D01516B1334C00B39430 /* NSDictionary+ArrayForKey.h */; settings = {ATTRIBUTES = (); }; };
+		218CB3BB16B12E630080A5CA /* TPCreateDeviceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 218CB3BA16B12E630080A5CA /* TPCreateDeviceRequest.m */; };
+		2198DA8717816E30003BA36B /* TPUserOpenNotificationRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 2198DA8517816E30003BA36B /* TPUserOpenNotificationRequest.h */; };
+		2198DA8817816E30003BA36B /* TPUserOpenNotificationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2198DA8617816E30003BA36B /* TPUserOpenNotificationRequest.m */; };
+		219BB6D816B02B5B008739D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 219BB6D716B02B5B008739D7 /* Foundation.framework */; };
+		219BB6E716B02B5B008739D7 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 219BB6E616B02B5B008739D7 /* SenTestingKit.framework */; };
+		219BB6EA16B02B5B008739D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 219BB6D716B02B5B008739D7 /* Foundation.framework */; };
+		219BB6ED16B02B5B008739D7 /* libTwinPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 219BB6D416B02B5B008739D7 /* libTwinPushSDK.a */; };
+		219BB6F316B02B5B008739D7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 219BB6F116B02B5B008739D7 /* InfoPlist.strings */; };
+		219BB6F616B02B5B008739D7 /* TwinPushSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB6F516B02B5B008739D7 /* TwinPushSDKTests.m */; };
+		219BB76D16B03769008739D7 /* TPBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB76616B03769008739D7 /* TPBaseRequest.m */; };
+		219BB76F16B03769008739D7 /* TPRESTJSONRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB76A16B03769008739D7 /* TPRESTJSONRequest.m */; };
+		219BB77016B03769008739D7 /* TPRESTRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB76C16B03769008739D7 /* TPRESTRequest.m */; };
+		219BB79616B03A06008739D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 219BB79516B03A06008739D7 /* UIKit.framework */; };
+		219BB79A16B03F8A008739D7 /* TwinPushManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB79916B03F8A008739D7 /* TwinPushManager.m */; };
+		219BB79D16B03FDE008739D7 /* TPRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB79C16B03FDD008739D7 /* TPRequestFactory.m */; };
+		219BB7B116B0478C008739D7 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB7B016B0478C008739D7 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		21A1EC9E170D72690036A957 /* TPTwinPushRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 21A1EC9C170D72690036A957 /* TPTwinPushRequest.h */; };
+		21A1EC9F170D72690036A957 /* TPTwinPushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1EC9D170D72690036A957 /* TPTwinPushRequest.m */; };
+		21A33B4E16C4F78200EC7AF5 /* TPNotificationsPagination.h in Headers */ = {isa = PBXBuildFile; fileRef = 21A33B4C16C4F78200EC7AF5 /* TPNotificationsPagination.h */; };
+		21A33B4F16C4F78200EC7AF5 /* TPNotificationsPagination.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A33B4D16C4F78200EC7AF5 /* TPNotificationsPagination.m */; };
+		21F0777716B29070001CE5C5 /* TPNotificationDetailViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 21F0777416B29070001CE5C5 /* TPNotificationDetailViewController.h */; settings = {ATTRIBUTES = (); }; };
+		21F0777816B29070001CE5C5 /* TPNotificationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F0777516B29070001CE5C5 /* TPNotificationDetailViewController.m */; };
+		7A63CB751779CC640073E0E7 /* TPReportStatisticsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A63CB731779CC640073E0E7 /* TPReportStatisticsRequest.h */; };
+		7A63CB761779CC640073E0E7 /* TPReportStatisticsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63CB741779CC640073E0E7 /* TPReportStatisticsRequest.m */; };
+		7A63CB791779D8980073E0E7 /* TPOpenAppRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A63CB771779D8980073E0E7 /* TPOpenAppRequest.h */; };
+		7A63CB7A1779D8980073E0E7 /* TPOpenAppRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63CB781779D8980073E0E7 /* TPOpenAppRequest.m */; };
+		7A63CB7D1779D8AA0073E0E7 /* TPCloseAppRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A63CB7B1779D8AA0073E0E7 /* TPCloseAppRequest.h */; };
+		7A63CB7E1779D8AA0073E0E7 /* TPCloseAppRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63CB7C1779D8AA0073E0E7 /* TPCloseAppRequest.m */; };
+		7A88FA281793E529006C133A /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB77716B0396D008739D7 /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7A88FA291793E529006C133A /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB77A16B0396D008739D7 /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7A88FA2A1793E529006C133A /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB77C16B0396D008739D7 /* ASIDataDecompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7A88FA2B1793E529006C133A /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB77E16B0396D008739D7 /* ASIDownloadCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7A88FA2C1793E529006C133A /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB78016B0396D008739D7 /* ASIFormDataRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7A88FA2D1793E529006C133A /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB78216B0396D008739D7 /* ASIHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7A88FA2E1793E529006C133A /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB78616B0396D008739D7 /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7A88FA2F1793E529006C133A /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB78816B0396D008739D7 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7A88FA301793E529006C133A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB78B16B0396D008739D7 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7A88FA311793E529006C133A /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB77316B03896008739D7 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7AD27C551758E334003ADC3C /* TPGetDeviceNotificationsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AD27C4F1758E334003ADC3C /* TPGetDeviceNotificationsRequest.h */; };
+		7AD27C561758E334003ADC3C /* TPGetDeviceNotificationsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD27C501758E334003ADC3C /* TPGetDeviceNotificationsRequest.m */; };
+		7AD27C571758E334003ADC3C /* TPGetNotificationWithIdRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AD27C511758E334003ADC3C /* TPGetNotificationWithIdRequest.h */; };
+		7AD27C581758E334003ADC3C /* TPGetNotificationWithIdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD27C521758E334003ADC3C /* TPGetNotificationWithIdRequest.m */; };
+		7AD27C591758E334003ADC3C /* TPUpdateBadgeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AD27C531758E334003ADC3C /* TPUpdateBadgeRequest.h */; };
+		7AD27C5A1758E334003ADC3C /* TPUpdateBadgeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD27C541758E334003ADC3C /* TPUpdateBadgeRequest.m */; };
+		7AD27C5D1758E3D6003ADC3C /* TPSetCustomPropertyRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AD27C5B1758E3D6003ADC3C /* TPSetCustomPropertyRequest.h */; };
+		7AD27C5E1758E3D6003ADC3C /* TPSetCustomPropertyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD27C5C1758E3D6003ADC3C /* TPSetCustomPropertyRequest.m */; };
+		7AD80F6517660FAC00C69CFC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AD80F6417660FAC00C69CFC /* CoreLocation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		219BB6EB16B02B5B008739D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 219BB6CB16B02B5B008739D7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 219BB6D316B02B5B008739D7;
+			remoteInfo = TwinPushSDK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		219BB6D216B02B5B008739D7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2124D01016B1306900B39430 /* TPRequestParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRequestParam.m; sourceTree = "<group>"; };
+		2124D01216B131D700B39430 /* TPRequestLauncher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRequestLauncher.m; sourceTree = "<group>"; };
+		2124D01516B1334C00B39430 /* NSDictionary+ArrayForKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ArrayForKey.h"; sourceTree = "<group>"; };
+		2124D01616B1334C00B39430 /* NSDictionary+ArrayForKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ArrayForKey.m"; sourceTree = "<group>"; };
+		2124D01916B1347700B39430 /* TPDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDevice.h; sourceTree = "<group>"; };
+		2124D01A16B1347700B39430 /* TPDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDevice.m; sourceTree = "<group>"; };
+		2124D01B16B1347700B39430 /* TPNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNotification.h; sourceTree = "<group>"; };
+		2124D01F16B134E300B39430 /* TPNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNotification.m; sourceTree = "<group>"; };
+		2124D02716B151BD00B39430 /* TPNotificationsFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNotificationsFilters.h; sourceTree = "<group>"; };
+		2124D02816B151BD00B39430 /* TPNotificationsFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNotificationsFilters.m; sourceTree = "<group>"; };
+		2124D03716B17E4B00B39430 /* TPNotificationsInboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNotificationsInboxViewController.h; sourceTree = "<group>"; };
+		2124D03816B17E4B00B39430 /* TPNotificationsInboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNotificationsInboxViewController.m; sourceTree = "<group>"; };
+		2124D03B16B1835C00B39430 /* TPInboxCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPInboxCell.h; sourceTree = "<group>"; };
+		2124D03C16B1835C00B39430 /* TPInboxCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPInboxCell.m; sourceTree = "<group>"; };
+		214683BB16C2A9EB00F9E886 /* TPNoResultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNoResultsCell.h; sourceTree = "<group>"; };
+		214683BC16C2A9EB00F9E886 /* TPNoResultsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNoResultsCell.m; sourceTree = "<group>"; };
+		214683C016C2A9F900F9E886 /* TPLoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLoadingCell.h; sourceTree = "<group>"; };
+		214683C116C2A9F900F9E886 /* TPLoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLoadingCell.m; sourceTree = "<group>"; };
+		218CB3B316B12E290080A5CA /* TPCreateDeviceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCreateDeviceRequest.h; sourceTree = "<group>"; };
+		218CB3BA16B12E630080A5CA /* TPCreateDeviceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPCreateDeviceRequest.m; sourceTree = "<group>"; };
+		2198DA8517816E30003BA36B /* TPUserOpenNotificationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPUserOpenNotificationRequest.h; sourceTree = "<group>"; };
+		2198DA8617816E30003BA36B /* TPUserOpenNotificationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPUserOpenNotificationRequest.m; sourceTree = "<group>"; };
+		219BB6D416B02B5B008739D7 /* libTwinPushSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTwinPushSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		219BB6D716B02B5B008739D7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		219BB6DB16B02B5B008739D7 /* TwinPushSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TwinPushSDK-Prefix.pch"; sourceTree = "<group>"; };
+		219BB6E516B02B5B008739D7 /* TwinPushSDKTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TwinPushSDKTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		219BB6E616B02B5B008739D7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		219BB6F016B02B5B008739D7 /* TwinPushSDKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TwinPushSDKTests-Info.plist"; sourceTree = "<group>"; };
+		219BB6F216B02B5B008739D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		219BB6F416B02B5B008739D7 /* TwinPushSDKTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TwinPushSDKTests.h; sourceTree = "<group>"; };
+		219BB6F516B02B5B008739D7 /* TwinPushSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TwinPushSDKTests.m; sourceTree = "<group>"; };
+		219BB76216B0375C008739D7 /* TPRequestLauncher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRequestLauncher.h; sourceTree = "<group>"; };
+		219BB76516B03769008739D7 /* TPBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPBaseRequest.h; sourceTree = "<group>"; };
+		219BB76616B03769008739D7 /* TPBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPBaseRequest.m; sourceTree = "<group>"; };
+		219BB76716B03769008739D7 /* TPRequestParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRequestParam.h; sourceTree = "<group>"; };
+		219BB76916B03769008739D7 /* TPRESTJSONRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRESTJSONRequest.h; sourceTree = "<group>"; };
+		219BB76A16B03769008739D7 /* TPRESTJSONRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRESTJSONRequest.m; sourceTree = "<group>"; };
+		219BB76B16B03769008739D7 /* TPRESTRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRESTRequest.h; sourceTree = "<group>"; };
+		219BB76C16B03769008739D7 /* TPRESTRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRESTRequest.m; sourceTree = "<group>"; };
+		219BB77216B03896008739D7 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		219BB77316B03896008739D7 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		219BB77616B0396D008739D7 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
+		219BB77716B0396D008739D7 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
+		219BB77816B0396D008739D7 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
+		219BB77916B0396D008739D7 /* ASIDataCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataCompressor.h; sourceTree = "<group>"; };
+		219BB77A16B0396D008739D7 /* ASIDataCompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataCompressor.m; sourceTree = "<group>"; };
+		219BB77B16B0396D008739D7 /* ASIDataDecompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataDecompressor.h; sourceTree = "<group>"; };
+		219BB77C16B0396D008739D7 /* ASIDataDecompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataDecompressor.m; sourceTree = "<group>"; };
+		219BB77D16B0396D008739D7 /* ASIDownloadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDownloadCache.h; sourceTree = "<group>"; };
+		219BB77E16B0396D008739D7 /* ASIDownloadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDownloadCache.m; sourceTree = "<group>"; };
+		219BB77F16B0396D008739D7 /* ASIFormDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIFormDataRequest.h; sourceTree = "<group>"; };
+		219BB78016B0396D008739D7 /* ASIFormDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIFormDataRequest.m; sourceTree = "<group>"; };
+		219BB78116B0396D008739D7 /* ASIHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequest.h; sourceTree = "<group>"; };
+		219BB78216B0396D008739D7 /* ASIHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIHTTPRequest.m; sourceTree = "<group>"; };
+		219BB78316B0396D008739D7 /* ASIHTTPRequestConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestConfig.h; sourceTree = "<group>"; };
+		219BB78416B0396D008739D7 /* ASIHTTPRequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestDelegate.h; sourceTree = "<group>"; };
+		219BB78516B0396D008739D7 /* ASIInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIInputStream.h; sourceTree = "<group>"; };
+		219BB78616B0396D008739D7 /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIInputStream.m; sourceTree = "<group>"; };
+		219BB78716B0396D008739D7 /* ASINetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASINetworkQueue.h; sourceTree = "<group>"; };
+		219BB78816B0396D008739D7 /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASINetworkQueue.m; sourceTree = "<group>"; };
+		219BB78916B0396D008739D7 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
+		219BB78A16B0396D008739D7 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		219BB78B16B0396D008739D7 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		219BB79516B03A06008739D7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		219BB79816B03F89008739D7 /* TwinPushManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwinPushManager.h; sourceTree = "<group>"; };
+		219BB79916B03F8A008739D7 /* TwinPushManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwinPushManager.m; sourceTree = "<group>"; };
+		219BB79B16B03FDD008739D7 /* TPRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRequestFactory.h; sourceTree = "<group>"; };
+		219BB79C16B03FDD008739D7 /* TPRequestFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRequestFactory.m; sourceTree = "<group>"; };
+		219BB7AF16B0478C008739D7 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
+		219BB7B016B0478C008739D7 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
+		21A1EC9C170D72690036A957 /* TPTwinPushRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTwinPushRequest.h; sourceTree = "<group>"; };
+		21A1EC9D170D72690036A957 /* TPTwinPushRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTwinPushRequest.m; sourceTree = "<group>"; };
+		21A33B4C16C4F78200EC7AF5 /* TPNotificationsPagination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNotificationsPagination.h; sourceTree = "<group>"; };
+		21A33B4D16C4F78200EC7AF5 /* TPNotificationsPagination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNotificationsPagination.m; sourceTree = "<group>"; };
+		21F0777416B29070001CE5C5 /* TPNotificationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNotificationDetailViewController.h; sourceTree = "<group>"; };
+		21F0777516B29070001CE5C5 /* TPNotificationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNotificationDetailViewController.m; sourceTree = "<group>"; };
+		7A63CB731779CC640073E0E7 /* TPReportStatisticsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPReportStatisticsRequest.h; sourceTree = "<group>"; };
+		7A63CB741779CC640073E0E7 /* TPReportStatisticsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPReportStatisticsRequest.m; sourceTree = "<group>"; };
+		7A63CB771779D8980073E0E7 /* TPOpenAppRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPOpenAppRequest.h; sourceTree = "<group>"; };
+		7A63CB781779D8980073E0E7 /* TPOpenAppRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPOpenAppRequest.m; sourceTree = "<group>"; };
+		7A63CB7B1779D8AA0073E0E7 /* TPCloseAppRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCloseAppRequest.h; sourceTree = "<group>"; };
+		7A63CB7C1779D8AA0073E0E7 /* TPCloseAppRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPCloseAppRequest.m; sourceTree = "<group>"; };
+		7AD27C4F1758E334003ADC3C /* TPGetDeviceNotificationsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPGetDeviceNotificationsRequest.h; sourceTree = "<group>"; };
+		7AD27C501758E334003ADC3C /* TPGetDeviceNotificationsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPGetDeviceNotificationsRequest.m; sourceTree = "<group>"; };
+		7AD27C511758E334003ADC3C /* TPGetNotificationWithIdRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPGetNotificationWithIdRequest.h; sourceTree = "<group>"; };
+		7AD27C521758E334003ADC3C /* TPGetNotificationWithIdRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPGetNotificationWithIdRequest.m; sourceTree = "<group>"; };
+		7AD27C531758E334003ADC3C /* TPUpdateBadgeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPUpdateBadgeRequest.h; sourceTree = "<group>"; };
+		7AD27C541758E334003ADC3C /* TPUpdateBadgeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPUpdateBadgeRequest.m; sourceTree = "<group>"; };
+		7AD27C5B1758E3D6003ADC3C /* TPSetCustomPropertyRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSetCustomPropertyRequest.h; sourceTree = "<group>"; };
+		7AD27C5C1758E3D6003ADC3C /* TPSetCustomPropertyRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSetCustomPropertyRequest.m; sourceTree = "<group>"; };
+		7AD80F6417660FAC00C69CFC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		219BB6D116B02B5B008739D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AD80F6517660FAC00C69CFC /* CoreLocation.framework in Frameworks */,
+				219BB79616B03A06008739D7 /* UIKit.framework in Frameworks */,
+				219BB6D816B02B5B008739D7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		219BB6E116B02B5B008739D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				219BB6E716B02B5B008739D7 /* SenTestingKit.framework in Frameworks */,
+				219BB6EA16B02B5B008739D7 /* Foundation.framework in Frameworks */,
+				219BB6ED16B02B5B008739D7 /* libTwinPushSDK.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2124D01416B1334B00B39430 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2124D01516B1334C00B39430 /* NSDictionary+ArrayForKey.h */,
+				2124D01616B1334C00B39430 /* NSDictionary+ArrayForKey.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		2124D01816B1347700B39430 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				2124D01916B1347700B39430 /* TPDevice.h */,
+				2124D01A16B1347700B39430 /* TPDevice.m */,
+				2124D01B16B1347700B39430 /* TPNotification.h */,
+				2124D01F16B134E300B39430 /* TPNotification.m */,
+				2124D02716B151BD00B39430 /* TPNotificationsFilters.h */,
+				2124D02816B151BD00B39430 /* TPNotificationsFilters.m */,
+				21A33B4C16C4F78200EC7AF5 /* TPNotificationsPagination.h */,
+				21A33B4D16C4F78200EC7AF5 /* TPNotificationsPagination.m */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		2124D02A16B17C2600B39430 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2124D03516B17E4B00B39430 /* Detail */,
+				2124D03616B17E4B00B39430 /* Inbox */,
+			);
+			name = Controllers;
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2124D03516B17E4B00B39430 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				21F0777416B29070001CE5C5 /* TPNotificationDetailViewController.h */,
+				21F0777516B29070001CE5C5 /* TPNotificationDetailViewController.m */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		2124D03616B17E4B00B39430 /* Inbox */ = {
+			isa = PBXGroup;
+			children = (
+				2124D03B16B1835C00B39430 /* TPInboxCell.h */,
+				2124D03C16B1835C00B39430 /* TPInboxCell.m */,
+				214683BB16C2A9EB00F9E886 /* TPNoResultsCell.h */,
+				214683BC16C2A9EB00F9E886 /* TPNoResultsCell.m */,
+				214683C016C2A9F900F9E886 /* TPLoadingCell.h */,
+				214683C116C2A9F900F9E886 /* TPLoadingCell.m */,
+				2124D03716B17E4B00B39430 /* TPNotificationsInboxViewController.h */,
+				2124D03816B17E4B00B39430 /* TPNotificationsInboxViewController.m */,
+			);
+			path = Inbox;
+			sourceTree = "<group>";
+		};
+		219BB6C916B02B5B008739D7 = {
+			isa = PBXGroup;
+			children = (
+				219BB6D916B02B5B008739D7 /* TwinPushSDK */,
+				219BB6EE16B02B5B008739D7 /* TwinPushSDKTests */,
+				219BB6D616B02B5B008739D7 /* Frameworks */,
+				219BB6D516B02B5B008739D7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		219BB6D516B02B5B008739D7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				219BB6D416B02B5B008739D7 /* libTwinPushSDK.a */,
+				219BB6E516B02B5B008739D7 /* TwinPushSDKTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		219BB6D616B02B5B008739D7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				219BB7AE16B0478C008739D7 /* OpenUDID */,
+				219BB77516B0396D008739D7 /* ASIHTTP */,
+				219BB77116B03896008739D7 /* JSONKit */,
+				219BB79516B03A06008739D7 /* UIKit.framework */,
+				219BB6D716B02B5B008739D7 /* Foundation.framework */,
+				219BB6E616B02B5B008739D7 /* SenTestingKit.framework */,
+				7AD80F6417660FAC00C69CFC /* CoreLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		219BB6D916B02B5B008739D7 /* TwinPushSDK */ = {
+			isa = PBXGroup;
+			children = (
+				219BB75B16B03542008739D7 /* Classes */,
+				2124D02A16B17C2600B39430 /* Controllers */,
+				219BB6DA16B02B5B008739D7 /* Supporting Files */,
+			);
+			path = TwinPushSDK;
+			sourceTree = "<group>";
+		};
+		219BB6DA16B02B5B008739D7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				219BB6DB16B02B5B008739D7 /* TwinPushSDK-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		219BB6EE16B02B5B008739D7 /* TwinPushSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				219BB6F416B02B5B008739D7 /* TwinPushSDKTests.h */,
+				219BB6F516B02B5B008739D7 /* TwinPushSDKTests.m */,
+				219BB6EF16B02B5B008739D7 /* Supporting Files */,
+			);
+			path = TwinPushSDKTests;
+			sourceTree = "<group>";
+		};
+		219BB6EF16B02B5B008739D7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				219BB6F016B02B5B008739D7 /* TwinPushSDKTests-Info.plist */,
+				219BB6F116B02B5B008739D7 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		219BB75B16B03542008739D7 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				219BB79816B03F89008739D7 /* TwinPushManager.h */,
+				219BB79916B03F8A008739D7 /* TwinPushManager.m */,
+				2124D01816B1347700B39430 /* Entities */,
+				2124D01416B1334B00B39430 /* Utils */,
+				219BB75C16B03542008739D7 /* Communications */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		219BB75C16B03542008739D7 /* Communications */ = {
+			isa = PBXGroup;
+			children = (
+				219BB79B16B03FDD008739D7 /* TPRequestFactory.h */,
+				219BB79C16B03FDD008739D7 /* TPRequestFactory.m */,
+				219BB76216B0375C008739D7 /* TPRequestLauncher.h */,
+				2124D01216B131D700B39430 /* TPRequestLauncher.m */,
+				219BB75D16B03542008739D7 /* Requests */,
+			);
+			path = Communications;
+			sourceTree = "<group>";
+		};
+		219BB75D16B03542008739D7 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				219BB76516B03769008739D7 /* TPBaseRequest.h */,
+				219BB76616B03769008739D7 /* TPBaseRequest.m */,
+				219BB76716B03769008739D7 /* TPRequestParam.h */,
+				2124D01016B1306900B39430 /* TPRequestParam.m */,
+				219BB76916B03769008739D7 /* TPRESTJSONRequest.h */,
+				219BB76A16B03769008739D7 /* TPRESTJSONRequest.m */,
+				219BB76B16B03769008739D7 /* TPRESTRequest.h */,
+				219BB76C16B03769008739D7 /* TPRESTRequest.m */,
+				21A1EC9C170D72690036A957 /* TPTwinPushRequest.h */,
+				21A1EC9D170D72690036A957 /* TPTwinPushRequest.m */,
+				219BB75E16B03542008739D7 /* TwinPush */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		219BB75E16B03542008739D7 /* TwinPush */ = {
+			isa = PBXGroup;
+			children = (
+				7A63CB721779CB960073E0E7 /* Statistics */,
+				7AD27C4E1758E2F1003ADC3C /* Properties */,
+				7AD27C4D1758E2EA003ADC3C /* Notifications */,
+				218CB3B316B12E290080A5CA /* TPCreateDeviceRequest.h */,
+				218CB3BA16B12E630080A5CA /* TPCreateDeviceRequest.m */,
+			);
+			path = TwinPush;
+			sourceTree = "<group>";
+		};
+		219BB77116B03896008739D7 /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				219BB77216B03896008739D7 /* JSONKit.h */,
+				219BB77316B03896008739D7 /* JSONKit.m */,
+			);
+			name = JSONKit;
+			path = TwinPushSDK/Frameworks/JSONKit;
+			sourceTree = "<group>";
+		};
+		219BB77516B0396D008739D7 /* ASIHTTP */ = {
+			isa = PBXGroup;
+			children = (
+				219BB77616B0396D008739D7 /* ASIAuthenticationDialog.h */,
+				219BB77716B0396D008739D7 /* ASIAuthenticationDialog.m */,
+				219BB77816B0396D008739D7 /* ASICacheDelegate.h */,
+				219BB77916B0396D008739D7 /* ASIDataCompressor.h */,
+				219BB77A16B0396D008739D7 /* ASIDataCompressor.m */,
+				219BB77B16B0396D008739D7 /* ASIDataDecompressor.h */,
+				219BB77C16B0396D008739D7 /* ASIDataDecompressor.m */,
+				219BB77D16B0396D008739D7 /* ASIDownloadCache.h */,
+				219BB77E16B0396D008739D7 /* ASIDownloadCache.m */,
+				219BB77F16B0396D008739D7 /* ASIFormDataRequest.h */,
+				219BB78016B0396D008739D7 /* ASIFormDataRequest.m */,
+				219BB78116B0396D008739D7 /* ASIHTTPRequest.h */,
+				219BB78216B0396D008739D7 /* ASIHTTPRequest.m */,
+				219BB78316B0396D008739D7 /* ASIHTTPRequestConfig.h */,
+				219BB78416B0396D008739D7 /* ASIHTTPRequestDelegate.h */,
+				219BB78516B0396D008739D7 /* ASIInputStream.h */,
+				219BB78616B0396D008739D7 /* ASIInputStream.m */,
+				219BB78716B0396D008739D7 /* ASINetworkQueue.h */,
+				219BB78816B0396D008739D7 /* ASINetworkQueue.m */,
+				219BB78916B0396D008739D7 /* ASIProgressDelegate.h */,
+				219BB78A16B0396D008739D7 /* Reachability.h */,
+				219BB78B16B0396D008739D7 /* Reachability.m */,
+			);
+			name = ASIHTTP;
+			path = TwinPushSDK/Frameworks/ASIHTTP;
+			sourceTree = "<group>";
+		};
+		219BB7AE16B0478C008739D7 /* OpenUDID */ = {
+			isa = PBXGroup;
+			children = (
+				219BB7AF16B0478C008739D7 /* OpenUDID.h */,
+				219BB7B016B0478C008739D7 /* OpenUDID.m */,
+			);
+			name = OpenUDID;
+			path = TwinPushSDK/Frameworks/OpenUDID;
+			sourceTree = "<group>";
+		};
+		7A63CB721779CB960073E0E7 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				7A63CB731779CC640073E0E7 /* TPReportStatisticsRequest.h */,
+				7A63CB741779CC640073E0E7 /* TPReportStatisticsRequest.m */,
+				7A63CB771779D8980073E0E7 /* TPOpenAppRequest.h */,
+				7A63CB781779D8980073E0E7 /* TPOpenAppRequest.m */,
+				7A63CB7B1779D8AA0073E0E7 /* TPCloseAppRequest.h */,
+				7A63CB7C1779D8AA0073E0E7 /* TPCloseAppRequest.m */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		7AD27C4D1758E2EA003ADC3C /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				7AD27C4F1758E334003ADC3C /* TPGetDeviceNotificationsRequest.h */,
+				7AD27C501758E334003ADC3C /* TPGetDeviceNotificationsRequest.m */,
+				7AD27C511758E334003ADC3C /* TPGetNotificationWithIdRequest.h */,
+				7AD27C521758E334003ADC3C /* TPGetNotificationWithIdRequest.m */,
+				7AD27C531758E334003ADC3C /* TPUpdateBadgeRequest.h */,
+				7AD27C541758E334003ADC3C /* TPUpdateBadgeRequest.m */,
+				2198DA8517816E30003BA36B /* TPUserOpenNotificationRequest.h */,
+				2198DA8617816E30003BA36B /* TPUserOpenNotificationRequest.m */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		7AD27C4E1758E2F1003ADC3C /* Properties */ = {
+			isa = PBXGroup;
+			children = (
+				7AD27C5B1758E3D6003ADC3C /* TPSetCustomPropertyRequest.h */,
+				7AD27C5C1758E3D6003ADC3C /* TPSetCustomPropertyRequest.m */,
+			);
+			path = Properties;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		218C2AC016B28A3E00F498CE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				218C2AC316B28AA700F498CE /* TwinPushManager.h in Headers */,
+				218C2AC416B28B3B00F498CE /* TPNotification.h in Headers */,
+				218C2AC516B28B3B00F498CE /* TPNotificationsFilters.h in Headers */,
+				218C2AC616B28B3B00F498CE /* TPInboxCell.h in Headers */,
+				21F0777716B29070001CE5C5 /* TPNotificationDetailViewController.h in Headers */,
+				218C2AC716B28B3B00F498CE /* TPNotificationsInboxViewController.h in Headers */,
+				218C5BC216B68545007F49DD /* TPCreateDeviceRequest.h in Headers */,
+				218C5BFA16B6D332007F49DD /* NSDictionary+ArrayForKey.h in Headers */,
+				218C5BC416B68579007F49DD /* TPDevice.h in Headers */,
+				214683BD16C2A9EB00F9E886 /* TPNoResultsCell.h in Headers */,
+				214683C216C2A9F900F9E886 /* TPLoadingCell.h in Headers */,
+				21A33B4E16C4F78200EC7AF5 /* TPNotificationsPagination.h in Headers */,
+				21A1EC9E170D72690036A957 /* TPTwinPushRequest.h in Headers */,
+				7AD27C551758E334003ADC3C /* TPGetDeviceNotificationsRequest.h in Headers */,
+				7AD27C571758E334003ADC3C /* TPGetNotificationWithIdRequest.h in Headers */,
+				7AD27C591758E334003ADC3C /* TPUpdateBadgeRequest.h in Headers */,
+				7AD27C5D1758E3D6003ADC3C /* TPSetCustomPropertyRequest.h in Headers */,
+				7A63CB751779CC640073E0E7 /* TPReportStatisticsRequest.h in Headers */,
+				7A63CB791779D8980073E0E7 /* TPOpenAppRequest.h in Headers */,
+				7A63CB7D1779D8AA0073E0E7 /* TPCloseAppRequest.h in Headers */,
+				2198DA8717816E30003BA36B /* TPUserOpenNotificationRequest.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		219BB6D316B02B5B008739D7 /* TwinPushSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 219BB6F916B02B5B008739D7 /* Build configuration list for PBXNativeTarget "TwinPushSDK" */;
+			buildPhases = (
+				219BB6D016B02B5B008739D7 /* Sources */,
+				219BB6D116B02B5B008739D7 /* Frameworks */,
+				219BB6D216B02B5B008739D7 /* CopyFiles */,
+				218C2AC016B28A3E00F498CE /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TwinPushSDK;
+			productName = TwinPushSDK;
+			productReference = 219BB6D416B02B5B008739D7 /* libTwinPushSDK.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		219BB6E416B02B5B008739D7 /* TwinPushSDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 219BB6FC16B02B5B008739D7 /* Build configuration list for PBXNativeTarget "TwinPushSDKTests" */;
+			buildPhases = (
+				219BB6E016B02B5B008739D7 /* Sources */,
+				219BB6E116B02B5B008739D7 /* Frameworks */,
+				219BB6E216B02B5B008739D7 /* Resources */,
+				219BB6E316B02B5B008739D7 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				219BB6EC16B02B5B008739D7 /* PBXTargetDependency */,
+			);
+			name = TwinPushSDKTests;
+			productName = TwinPushSDKTests;
+			productReference = 219BB6E516B02B5B008739D7 /* TwinPushSDKTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		219BB6CB16B02B5B008739D7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = TwinCoders;
+			};
+			buildConfigurationList = 219BB6CE16B02B5B008739D7 /* Build configuration list for PBXProject "TwinPushSDK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 219BB6C916B02B5B008739D7;
+			productRefGroup = 219BB6D516B02B5B008739D7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				219BB6D316B02B5B008739D7 /* TwinPushSDK */,
+				219BB6E416B02B5B008739D7 /* TwinPushSDKTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		219BB6E216B02B5B008739D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				219BB6F316B02B5B008739D7 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		219BB6E316B02B5B008739D7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		219BB6D016B02B5B008739D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7A88FA281793E529006C133A /* ASIAuthenticationDialog.m in Sources */,
+				7A88FA291793E529006C133A /* ASIDataCompressor.m in Sources */,
+				7A88FA2A1793E529006C133A /* ASIDataDecompressor.m in Sources */,
+				7A88FA2B1793E529006C133A /* ASIDownloadCache.m in Sources */,
+				7A88FA2C1793E529006C133A /* ASIFormDataRequest.m in Sources */,
+				7A88FA2D1793E529006C133A /* ASIHTTPRequest.m in Sources */,
+				7A88FA2E1793E529006C133A /* ASIInputStream.m in Sources */,
+				7A88FA2F1793E529006C133A /* ASINetworkQueue.m in Sources */,
+				7A88FA301793E529006C133A /* Reachability.m in Sources */,
+				7A88FA311793E529006C133A /* JSONKit.m in Sources */,
+				219BB76D16B03769008739D7 /* TPBaseRequest.m in Sources */,
+				219BB76F16B03769008739D7 /* TPRESTJSONRequest.m in Sources */,
+				219BB77016B03769008739D7 /* TPRESTRequest.m in Sources */,
+				219BB79A16B03F8A008739D7 /* TwinPushManager.m in Sources */,
+				219BB79D16B03FDE008739D7 /* TPRequestFactory.m in Sources */,
+				219BB7B116B0478C008739D7 /* OpenUDID.m in Sources */,
+				218CB3BB16B12E630080A5CA /* TPCreateDeviceRequest.m in Sources */,
+				2124D01116B1306900B39430 /* TPRequestParam.m in Sources */,
+				2124D01316B131D800B39430 /* TPRequestLauncher.m in Sources */,
+				2124D01716B1334C00B39430 /* NSDictionary+ArrayForKey.m in Sources */,
+				2124D01D16B1347700B39430 /* TPDevice.m in Sources */,
+				2124D02016B134E300B39430 /* TPNotification.m in Sources */,
+				2124D02916B151BE00B39430 /* TPNotificationsFilters.m in Sources */,
+				2124D03A16B17E4B00B39430 /* TPNotificationsInboxViewController.m in Sources */,
+				2124D03E16B1835C00B39430 /* TPInboxCell.m in Sources */,
+				21F0777816B29070001CE5C5 /* TPNotificationDetailViewController.m in Sources */,
+				214683BE16C2A9EB00F9E886 /* TPNoResultsCell.m in Sources */,
+				214683C316C2A9F900F9E886 /* TPLoadingCell.m in Sources */,
+				21A33B4F16C4F78200EC7AF5 /* TPNotificationsPagination.m in Sources */,
+				21A1EC9F170D72690036A957 /* TPTwinPushRequest.m in Sources */,
+				7AD27C561758E334003ADC3C /* TPGetDeviceNotificationsRequest.m in Sources */,
+				7AD27C581758E334003ADC3C /* TPGetNotificationWithIdRequest.m in Sources */,
+				7AD27C5A1758E334003ADC3C /* TPUpdateBadgeRequest.m in Sources */,
+				7AD27C5E1758E3D6003ADC3C /* TPSetCustomPropertyRequest.m in Sources */,
+				7A63CB761779CC640073E0E7 /* TPReportStatisticsRequest.m in Sources */,
+				7A63CB7A1779D8980073E0E7 /* TPOpenAppRequest.m in Sources */,
+				7A63CB7E1779D8AA0073E0E7 /* TPCloseAppRequest.m in Sources */,
+				2198DA8817816E30003BA36B /* TPUserOpenNotificationRequest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		219BB6E016B02B5B008739D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				219BB6F616B02B5B008739D7 /* TwinPushSDKTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		219BB6EC16B02B5B008739D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 219BB6D316B02B5B008739D7 /* TwinPushSDK */;
+			targetProxy = 219BB6EB16B02B5B008739D7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		219BB6F116B02B5B008739D7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				219BB6F216B02B5B008739D7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		219BB6F716B02B5B008739D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		219BB6F816B02B5B008739D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		219BB6FA16B02B5B008739D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
+				DSTROOT = /tmp/TwinPushSDK.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TwinPushSDK/TwinPushSDK-Prefix.pch";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SEPARATE_STRIP = NO;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		219BB6FB16B02B5B008739D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
+				DSTROOT = /tmp/TwinPushSDK.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TwinPushSDK/TwinPushSDK-Prefix.pch";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SEPARATE_STRIP = NO;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		219BB6FD16B02B5B008739D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TwinPushSDK/TwinPushSDK-Prefix.pch";
+				INFOPLIST_FILE = "TwinPushSDKTests/TwinPushSDKTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		219BB6FE16B02B5B008739D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TwinPushSDK/TwinPushSDK-Prefix.pch";
+				INFOPLIST_FILE = "TwinPushSDKTests/TwinPushSDKTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		219BB6CE16B02B5B008739D7 /* Build configuration list for PBXProject "TwinPushSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				219BB6F716B02B5B008739D7 /* Debug */,
+				219BB6F816B02B5B008739D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		219BB6F916B02B5B008739D7 /* Build configuration list for PBXNativeTarget "TwinPushSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				219BB6FA16B02B5B008739D7 /* Debug */,
+				219BB6FB16B02B5B008739D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		219BB6FC16B02B5B008739D7 /* Build configuration list for PBXNativeTarget "TwinPushSDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				219BB6FD16B02B5B008739D7 /* Debug */,
+				219BB6FE16B02B5B008739D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 219BB6CB16B02B5B008739D7 /* Project object */;
+}
