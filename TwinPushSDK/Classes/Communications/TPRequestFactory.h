@@ -49,7 +49,7 @@
  @param onComplete Block that will be executed if we obtain the notification with the specified id
  @param onError Block that will be executed if the device is not correct
  */
-- (TPBaseRequest*)createGetDeviceNotificationWithId:(NSInteger)notificationId deviceId:(NSString*)deviceId appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (TPBaseRequest*)createGetDeviceNotificationWithId:(NSInteger)notificationId appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 
 /**

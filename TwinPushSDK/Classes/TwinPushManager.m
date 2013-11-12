@@ -424,7 +424,7 @@ static TwinPushManager *_sharedInstance;
     if ([self hasAppIdAndApiKey]) {
         [self.singleNotificationRequest cancel];
         self.requestFactory = [TPRequestFactory sharedInstance];
-        self.singleNotificationRequest = [self.requestFactory createGetDeviceNotificationWithId:notificationId deviceId:_deviceId appId:_appId apiKey:_apiKey onComplete:^(TPNotification* notification) {
+        self.singleNotificationRequest = [self.requestFactory createGetDeviceNotificationWithId:notificationId appId:_appId apiKey:_apiKey onComplete:^(TPNotification* notification) {
             self.singleNotificationRequest = nil;
             onComplete(notification);
         } onError:^(NSError *error) {

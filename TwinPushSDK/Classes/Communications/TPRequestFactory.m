@@ -52,8 +52,8 @@ static TPRequestFactory *_sharedInstance;
     return request;
 }
 
-- (TPBaseRequest *)createGetDeviceNotificationWithId:(NSInteger)notificationId deviceId:(NSString*)deviceId appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
-    TPBaseRequest* request = [[TPGetNotificationWithIdRequest alloc] initGetDeviceNotificationWithId:notificationId deviceId:deviceId appId:appId apiKey:apiKey onComplete:onComplete onError:onError];
+- (TPBaseRequest *)createGetDeviceNotificationWithId:(NSInteger)notificationId appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    TPBaseRequest* request = [[TPGetNotificationWithIdRequest alloc] initGetDeviceNotificationWithId:notificationId appId:appId apiKey:apiKey onComplete:onComplete onError:onError];
     request.requestLauncher = _tcRequestLauncher;
     return request;
 }

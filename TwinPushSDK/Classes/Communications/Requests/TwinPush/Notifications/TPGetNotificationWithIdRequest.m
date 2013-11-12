@@ -10,7 +10,6 @@
 #import "NSDictionary+ArrayForKey.h"
 
 /* Request info */
-static NSString* const kResourceName = @"devices";
 static NSString* const kSegmentParamNotifications = @"notifications";
 
 /* Response parameters */
@@ -18,15 +17,13 @@ static NSString* const kObjectsResponseWrapper = @"objects";
 
 @implementation TPGetNotificationWithIdRequest
 
-- (id)initGetDeviceNotificationWithId:(NSInteger)notificationId deviceId:(NSString*)deviceId appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+- (id)initGetDeviceNotificationWithId:(NSInteger)notificationId appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
     self = [super init];
     if (self) {
-        [self addSegmentParam:deviceId];
         [self addSegmentParam:kSegmentParamNotifications];
         [self addSegmentParam:[NSString stringWithFormat:@"%d", notificationId]];
         self.requestMethod = kTPRequestMethodGET;
         // Set resource name
-        self.resource = kResourceName;
         self.apiKey = apiKey;
         self.appId = appId;
         // Set response handler blocks
