@@ -9,7 +9,7 @@
 #import "TPTwinPushRequest.h"
 #import "ASIHTTPRequest.h"
 
-static NSString* kServerURLKey = @"http://beta.twinpush.com/api/v2/";
+static NSString* kServerURLKey = @"https://app.twinpush.com/api/v2/";
 static NSString* kBaseResourceName = @"apps";
 
 @implementation TPTwinPushRequest
