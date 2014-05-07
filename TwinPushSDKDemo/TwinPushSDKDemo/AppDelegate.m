@@ -14,7 +14,7 @@
 
 
 #pragma mark - App ID and API Key
-// Set here your API Key and APP ID. If you don't have one already, go to https://beta.twinpush.com
+// Set here your API Key and APP ID. If you don't have one already, go to https://app.twinpush.com
 // to obtain your own key
 #define TWINPUSH_APP_ID @"----"
 #define TWINPUSH_API_KEY @"-----------------------------"

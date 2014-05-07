@@ -13,7 +13,7 @@
 //-H "X-TwinPush-REST-API-Token: ${REST_API_TOKEN}" \
 //-H "Content-Type: application/json" \
 //-d '{ "device_id": 12, "notification_id": 10, "open_at": 1372665442 }' \
-//http://beta.twinpush.com/api/v1/open_notification
+//http://app.twinpush.com/api/v1/open_notification
 
 
 /* Request info */
