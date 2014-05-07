@@ -561,6 +561,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-all_load";
+				PROVISIONING_PROFILE = "70815E2B-0C06-4BFB-9408-83B16F557DC1";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../TwinPushSDK/**";
 			};
@@ -586,6 +587,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-all_load";
+				PROVISIONING_PROFILE = "70815E2B-0C06-4BFB-9408-83B16F557DC1";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../TwinPushSDK/**";
 				VALIDATE_PRODUCT = YES;
@@ -595,14 +597,12 @@
 		219BB72F16B02BF4008739D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Twin Coders S.L.";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TwinPushSDKDemo/TwinPushSDKDemo-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "TwinPushSDKDemo/TwinPushSDKDemo-Info.plist";
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "499F67FA-A3A4-429F-905A-9B32CA9A446F";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -610,14 +610,12 @@
 		219BB73016B02BF4008739D7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Twin Coders S.L.";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TwinPushSDKDemo/TwinPushSDKDemo-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "TwinPushSDKDemo/TwinPushSDKDemo-Info.plist";
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "499F67FA-A3A4-429F-905A-9B32CA9A446F";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
