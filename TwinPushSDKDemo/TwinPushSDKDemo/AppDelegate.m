@@ -23,8 +23,6 @@
 @implementation AppDelegate
 
 - (void)applyCustomAppearance {
-    // Set the background image all UINavigationBars
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"nav_bar"] forBarMetrics:UIBarMetricsDefault];
     NSDictionary* titleAttributes = @{UITextAttributeTextColor: [UIColor whiteColor],
                                       UITextAttributeFont: [UIFont fontWithName:@"MuseoSans-500" size:13]};
     

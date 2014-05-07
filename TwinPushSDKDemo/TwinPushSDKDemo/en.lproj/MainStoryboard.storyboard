@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="oQ6-xm-yur">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="oQ6-xm-yur">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <deployment defaultVersion="1280" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller - Device-->
+        <!--Navigation Controller-->
         <scene sceneID="At4-2p-ptG">
             <objects>
                 <navigationController definesPresentationContext="YES" id="oQ6-xm-yur" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Device" image="icon_device.png" id="HAs-QD-D3Q"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ki2-FW-sNe">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.23137256503105164" green="0.54509806632995605" blue="0.75294125080108643" alpha="1" colorSpace="deviceRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="2" kind="relationship" relationship="rootViewController" id="Raw-XM-xKI"/>
@@ -26,16 +28,16 @@
             <objects>
                 <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="i8H-hD-SCf" customClass="TCKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="background.jpeg" id="Rwm-LF-bzh">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="st1-s2-1lr">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
@@ -202,15 +204,15 @@
             <objects>
                 <viewController id="2Jm-QI-Usa" customClass="InboxViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QTB-3Z-A3a">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="background.jpeg" id="M7E-el-7IY">
-                                <rect key="frame" x="0.0" y="-2" width="320" height="418"/>
+                                <rect key="frame" x="0.0" y="-2" width="320" height="482"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" id="6Uo-Bq-h2x">
-                                <rect key="frame" x="12" y="12" width="296" height="141"/>
+                                <rect key="frame" x="12" y="75" width="296" height="141"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="icon_magnifier.png" id="8UD-xf-kxg">
@@ -263,7 +265,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Not include these tags" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xG4-s5-gKe">
-                                                <rect key="frame" x="8" y="49.5" width="176" height="18.5"/>
+                                                <rect key="frame" x="8" y="50" width="176" height="19"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="10"/>
                                                 <color key="textColor" red="0.27843137254901962" green="0.59215686274509804" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
@@ -286,21 +288,22 @@
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="68" maxX="0.0" maxY="-68"/>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" id="Xrd-Uh-eYQ">
-                                <rect key="frame" x="12" y="167" width="296" height="232"/>
+                                <rect key="frame" x="12" y="230" width="296" height="226"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="fYU-6o-4Bn">
-                                        <rect key="frame" x="0.0" y="0.0" width="296" height="232"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="296" height="226"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="inboxCell" id="eFM-Ml-hHs" customClass="TPDemoInboxCell">
                                                 <rect key="frame" x="0.0" y="22" width="296" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="296" height="43"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eFM-Ml-hHs" id="OaE-EK-trr">
+                                                    <rect key="frame" x="0.0" y="0.0" width="296" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ecY-P0-wbP">
@@ -322,8 +325,7 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
+                                                </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="fontName" value="MuseoSans-300"/>
@@ -339,8 +341,8 @@
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="noResultsCell" id="3OZ-Kb-B4g" customClass="TPDemoNoResultsCell">
                                                 <rect key="frame" x="0.0" y="66" width="296" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="296" height="43"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3OZ-Kb-B4g" id="HOr-J7-wx5">
+                                                    <rect key="frame" x="0.0" y="0.0" width="296" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="No results found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cfa-2u-Nz5">
@@ -351,8 +353,7 @@
                                                             <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
+                                                </tableViewCellContentView>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="fontName" value="MuseoSans-300"/>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
@@ -366,8 +367,8 @@
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="loadingCell" id="Kq3-gc-RsH" customClass="TPDemoLoadingCell">
                                                 <rect key="frame" x="0.0" y="110" width="296" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="296" height="43"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kq3-gc-RsH" id="sBm-ch-tTy">
+                                                    <rect key="frame" x="0.0" y="0.0" width="296" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" text="Loading" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PZ9-cS-k9h">
@@ -383,8 +384,7 @@
                                                             <color key="color" red="0.2784313725" green="0.59215686270000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                                         </activityIndicatorView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
+                                                </tableViewCellContentView>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="string" keyPath="fontName" value="MuseoSans-300"/>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
@@ -404,13 +404,13 @@
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="insetFor6xAndEarlier" minX="0.0" minY="68" maxX="0.0" maxY="0.0"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Inbox" id="9On-uH-8NE">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="qNi-Ze-VtF">
-                            <color key="tintColor" red="0.2784313725" green="0.59215686270000001" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="reloadInbox" destination="2Jm-QI-Usa" id="E8f-sy-qIj"/>
                             </connections>
@@ -442,11 +442,11 @@
             <objects>
                 <viewController id="mj1-8H-CqK" customClass="DetailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qvE-PV-GXu">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="background.jpeg" id="nEv-1y-57y">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" id="xEF-Sn-ysV">
@@ -490,11 +490,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" id="8EF-WE-MmN">
-                                <rect key="frame" x="7" y="59" width="306" height="347"/>
+                                <rect key="frame" x="7" y="59" width="306" height="409"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <webView contentMode="scaleToFill" id="hXe-Ec-5Is">
-                                        <rect key="frame" x="0.0" y="0.0" width="306" height="347"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="306" height="409"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </webView>
@@ -528,118 +528,11 @@
         <image name="button.png" width="248" height="52"/>
         <image name="button_h.png" width="248" height="52"/>
         <image name="container_box.png" width="78" height="75"/>
-        <image name="icon_device.png" width="17" height="27"/>
         <image name="icon_magnifier.png" width="21" height="15"/>
         <image name="logo_twinpush_blue.png" width="100" height="85"/>
         <image name="text_field.png" width="43" height="29"/>
         <image name="text_field_h.png" width="43" height="29"/>
     </resources>
-    <classes>
-        <class className="DetailViewController" superclassName="TPNotificationDetailViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="detailsContainerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="loadingLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="loadingView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="webViewContainerView" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="InboxViewController" superclassName="TPNotificationsInboxViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/InboxViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="hideSearchFields:"/>
-                <relationship kind="action" name="reload:"/>
-                <relationship kind="outlet" name="collapseSearchSectionImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="hideSearchFieldsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="includeTagsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="noTagsTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="noTagsTextFieldImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="notIncludeTagsLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="reloadInboxButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="searchContainerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="searchFieldsContainerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="searchLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tableViewContainerView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="tagsTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="tagsTextFieldImageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="TCKeyboardAvoidingScrollView" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TCKeyboardAvoidingScrollView.h"/>
-        </class>
-        <class className="TPDemoInboxCell" superclassName="TPInboxCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPDemoInboxCell.h"/>
-            <relationships>
-                <relationship kind="outletCollection" name="highlightElements" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="TPDemoLoadingCell" superclassName="TPLoadingCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPDemoLoadingCell.h"/>
-        </class>
-        <class className="TPDemoNoResultsCell" superclassName="TPNoResultsCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPDemoNoResultsCell.h"/>
-        </class>
-        <class className="TPInboxCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPInboxCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="notificationDateLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="notificationDescriptionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="TPLoadingCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPLoadingCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="loadingLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
-            </relationships>
-        </class>
-        <class className="TPNoResultsCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPNoResultsCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="noResultsLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="TPNotificationDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPNotificationDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="dismissButtonTapped:"/>
-                <relationship kind="outlet" name="notificationDateLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="notificationTitleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="TPNotificationsInboxViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPNotificationsInboxViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="reloadInbox"/>
-                <relationship kind="outlet" name="inboxTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="TPStretchableImageView" superclassName="UIImageView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TPStretchableImageView.h"/>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="hideKeyboard:"/>
-                <relationship kind="action" name="locationSegmentChanged:"/>
-                <relationship kind="action" name="registerDevice:"/>
-                <relationship kind="outlet" name="ageLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="ageTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="ageTextFieldBackground" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="aliasTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="buttonTitleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="containerImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="deviceAliasLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="genderSegmentedControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="locationSegmentedControl" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="registerConfirmationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="registerDeviceButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="textFieldImageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
