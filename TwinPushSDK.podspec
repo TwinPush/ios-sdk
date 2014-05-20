@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
                   "TwinPushSDK/Frameworks/OpenUDID/*.{h,m}"
   s.source_files  = "TwinPushSDK/**/*.{h,m}"
   s.exclude_files = non_arc_files
-  s.public_header_files = "TwinPushSDK/Classes/**/*.h"
+  s.public_header_files = "TwinPushSDK/Classes/**/*.h", "TwinPushSDK/ViewControllers/**/*.h"
   s.frameworks = "MobileCoreServices", "CFNetwork", "SystemConfiguration", "CoreLocation"
   s.library   = "z"
   s.requires_arc = true
