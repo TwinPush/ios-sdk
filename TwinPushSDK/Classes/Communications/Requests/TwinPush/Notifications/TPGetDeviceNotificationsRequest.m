@@ -51,8 +51,8 @@ static NSString* const kReferencesResponseWrapper = @"references";
             pagination = [[TPNotificationsPagination alloc] init];
             pagination.page = 1;
         }
-        [self addParam:[NSString stringWithFormat:@"%d", pagination.resultsPerPage] forKey:kPerPage];
-        [self addParam:[NSString stringWithFormat:@"%d", pagination.page] forKey:kPage];
+        [self addParam:[NSString stringWithFormat:@"%ld", (long)pagination.resultsPerPage] forKey:kPerPage];
+        [self addParam:[NSString stringWithFormat:@"%ld", (long)pagination.page] forKey:kPage];
         
         // Set response handler blocks
         self.onError = onError;

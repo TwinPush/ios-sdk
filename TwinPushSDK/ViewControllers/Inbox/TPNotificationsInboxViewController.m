@@ -144,7 +144,7 @@ static NSString* const kOnlyRichNotificationsTag = @"tp_rich";
         if (hasMore) {
             self.page = _pagination.page + 1;
             self.pagination.page = _page;
-            TCLog(@"Page: %d and HasMore: %@", self.pagination.page, _hasMore ? @"YES" : @"NO");
+            TCLog(@"Page: %ld and HasMore: %@", (long)self.pagination.page, _hasMore ? @"YES" : @"NO");
         } else {
             self.page = 1;
         }

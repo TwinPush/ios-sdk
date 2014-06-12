@@ -51,7 +51,7 @@ static NSString* const kAgeKey = @"age";
         self.aliasTextField.text = savedAlias;
     }
     if ([defaults objectForKey:kAgeKey]) {
-        NSString* age = [NSString stringWithFormat:@"%d", [defaults integerForKey:kAgeKey]];
+        NSString* age = [NSString stringWithFormat:@"%ld", (long)[defaults integerForKey:kAgeKey]];
         [self.ageTextField setText:age];
     }
     if ([defaults objectForKey:kGenderKey]) {

@@ -21,7 +21,7 @@ static NSString* const kObjectsResponseWrapper = @"objects";
     self = [super init];
     if (self) {
         [self addSegmentParam:kSegmentParamNotifications];
-        [self addSegmentParam:[NSString stringWithFormat:@"%d", notificationId]];
+        [self addSegmentParam:[NSString stringWithFormat:@"%ld", (long)notificationId]];
         self.requestMethod = kTPRequestMethodGET;
         // Set resource name
         self.apiKey = apiKey;
