@@ -55,7 +55,6 @@
 		7A63CB7A1779D8980073E0E7 /* TPOpenAppRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63CB781779D8980073E0E7 /* TPOpenAppRequest.m */; };
 		7A63CB7D1779D8AA0073E0E7 /* TPCloseAppRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A63CB7B1779D8AA0073E0E7 /* TPCloseAppRequest.h */; };
 		7A63CB7E1779D8AA0073E0E7 /* TPCloseAppRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63CB7C1779D8AA0073E0E7 /* TPCloseAppRequest.m */; };
-		7A88FA311793E529006C133A /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB77316B03896008739D7 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7AD27C551758E334003ADC3C /* TPGetDeviceNotificationsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AD27C4F1758E334003ADC3C /* TPGetDeviceNotificationsRequest.h */; };
 		7AD27C561758E334003ADC3C /* TPGetDeviceNotificationsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD27C501758E334003ADC3C /* TPGetDeviceNotificationsRequest.m */; };
 		7AD27C571758E334003ADC3C /* TPGetNotificationWithIdRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AD27C511758E334003ADC3C /* TPGetNotificationWithIdRequest.h */; };
@@ -129,8 +128,6 @@
 		219BB76A16B03769008739D7 /* TPRESTJSONRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRESTJSONRequest.m; sourceTree = "<group>"; };
 		219BB76B16B03769008739D7 /* TPRESTRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRESTRequest.h; sourceTree = "<group>"; };
 		219BB76C16B03769008739D7 /* TPRESTRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRESTRequest.m; sourceTree = "<group>"; };
-		219BB77216B03896008739D7 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
-		219BB77316B03896008739D7 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		219BB79516B03A06008739D7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		219BB79816B03F89008739D7 /* TwinPushManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwinPushManager.h; sourceTree = "<group>"; };
 		219BB79916B03F8A008739D7 /* TwinPushManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwinPushManager.m; sourceTree = "<group>"; };
@@ -266,7 +263,6 @@
 			isa = PBXGroup;
 			children = (
 				219BB7AE16B0478C008739D7 /* OpenUDID */,
-				219BB77116B03896008739D7 /* JSONKit */,
 				219BB79516B03A06008739D7 /* UIKit.framework */,
 				219BB6D716B02B5B008739D7 /* Foundation.framework */,
 				219BB6E616B02B5B008739D7 /* SenTestingKit.framework */,
@@ -364,16 +360,6 @@
 				218CB3BA16B12E630080A5CA /* TPCreateDeviceRequest.m */,
 			);
 			path = TwinPush;
-			sourceTree = "<group>";
-		};
-		219BB77116B03896008739D7 /* JSONKit */ = {
-			isa = PBXGroup;
-			children = (
-				219BB77216B03896008739D7 /* JSONKit.h */,
-				219BB77316B03896008739D7 /* JSONKit.m */,
-			);
-			name = JSONKit;
-			path = TwinPushSDK/Frameworks/JSONKit;
 			sourceTree = "<group>";
 		};
 		219BB7AE16B0478C008739D7 /* OpenUDID */ = {
@@ -553,7 +539,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A88FA311793E529006C133A /* JSONKit.m in Sources */,
 				219BB76D16B03769008739D7 /* TPBaseRequest.m in Sources */,
 				219BB76F16B03769008739D7 /* TPRESTJSONRequest.m in Sources */,
 				219BB77016B03769008739D7 /* TPRESTRequest.m in Sources */,

@@ -8,7 +8,6 @@
 
 #import "TPRESTJSONRequest.h"
 #import "TPRequestParam.h"
-#import "JSONKit.h"
 
 @interface TPRESTJSONRequest()
 
@@ -36,15 +35,29 @@ static NSString* const kContentTypeJSON = @"application/json";
 }
 
 - (NSDictionary*)dictionaryForResponseString:(NSString*)string {
-    NSDictionary* dictionary = [string objectFromJSONString];
+    NSDictionary* dictionary = nil;
+    if (string.length > 1) {
+        NSError* error = nil;
+        NSData* jsonData = [string dataUsingEncoding:NSUTF8StringEncoding];
+        dictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:nil error:&error];
+        if (error != nil) {
+            TCLog(@"Error parsing response string '%@': %@", string, error);
+        }
+    }
+
     return dictionary;
 }
 
 - (NSString*)createBodyContent {
     NSString* bodyContent = nil;
     if (self.contentParams.count > 0) {
+        NSError* error = nil;
         NSDictionary* paramsDictionary = [self dictionaryForParams:self.contentParams];
-        bodyContent = [paramsDictionary JSONString];
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:paramsDictionary options:nil error:&error];
+        if (error != nil) {
+            TCLog(@"Error generating JSON request for dictionary '%@': %@", paramsDictionary, error);
+        }
+        bodyContent = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     }
     return bodyContent;
 }

@@ -9,7 +9,6 @@
 #import "TwinPushManager.h"
 #import "OpenUDID.h"
 #import "TPBaseRequest.h"
-#import "JSONKit.h"
 
 static NSString* const kPushIdKey = @"pushId";
 static NSString* const kPushTokenKey = @"pushToken";
