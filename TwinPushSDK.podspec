@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
   # Meta data
   s.name         = "TwinPushSDK"
-  s.version      = "1.0.1"
+  s.version      = "1.1.0"
   s.summary      = "TwinPush SDK is the official open source SDK for the TwinPush iOS and Android notification platform"
   s.homepage     = "http://twinpush.com"
   s.license      = { :type => "MIT", :file => "LICENSE" }
@@ -11,13 +11,9 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/TwinPush/ios-sdk.git", :tag => "v#{s.version}" }
 
   # Source configuration
-  non_arc_files = "TwinPushSDK/Frameworks/ASIHTTP/*.{h,m}",
-                  "TwinPushSDK/Frameworks/JSONKit/*.{h,m}",
-                  "TwinPushSDK/Frameworks/OpenUDID/*.{h,m}"
   s.source_files  = "TwinPushSDK/**/*.{h,m}"
-  s.exclude_files = non_arc_files
   s.public_header_files = "TwinPushSDK/Classes/**/*.h", "TwinPushSDK/ViewControllers/**/*.h"
-  s.frameworks = "MobileCoreServices", "CFNetwork", "SystemConfiguration", "CoreLocation"
+  s.frameworks = "MobileCoreServices", "CFNetwork", "SystemConfiguration", "CoreLocation", "Security"
   s.library   = "z"
   s.requires_arc = true
   s.prefix_header_contents = <<-EOS
@@ -37,8 +33,4 @@ Pod::Spec.new do |s|
     #define LOCALIZATION_TABLE @"TwinPushSDK"
   EOS
 
-  s.subspec 'no-arc' do |sna|
-    sna.requires_arc = false
-    sna.source_files = non_arc_files
-  end
 end
