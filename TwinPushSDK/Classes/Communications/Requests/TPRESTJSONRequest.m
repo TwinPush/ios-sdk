@@ -39,7 +39,7 @@ static NSString* const kContentTypeJSON = @"application/json";
     if (string.length > 1) {
         NSError* error = nil;
         NSData* jsonData = [string dataUsingEncoding:NSUTF8StringEncoding];
-        dictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:nil error:&error];
+        dictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
         if (error != nil) {
             TCLog(@"Error parsing response string '%@': %@", string, error);
         }
@@ -53,7 +53,7 @@ static NSString* const kContentTypeJSON = @"application/json";
     if (self.contentParams.count > 0) {
         NSError* error = nil;
         NSDictionary* paramsDictionary = [self dictionaryForParams:self.contentParams];
-        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:paramsDictionary options:nil error:&error];
+        NSData* jsonData = [NSJSONSerialization dataWithJSONObject:paramsDictionary options:0 error:&error];
         if (error != nil) {
             TCLog(@"Error generating JSON request for dictionary '%@': %@", paramsDictionary, error);
         }
