@@ -8,28 +8,24 @@
 
 #import "TPTwinPushRequest.h"
 
-static NSString* kServerURLKey = @"https://app.twinpush.com/api/v2/";
+static NSString* ServerURLKey = nil;
 static NSString* kBaseResourceName = @"apps";
 
 @implementation TPTwinPushRequest
 
 #pragma mark - Init
 
-- (id)init {
-    self = [super init];
-    if (self) {
-
-    }
-    return self;
++ (void)setServerURL:(NSString*)serverURL {
+    ServerURLKey = [serverURL copy];
 }
 
 - (NSMutableURLRequest *)createRequest {
     if (self.appId != nil) {
         NSString* appIdSegment = self.appId != nil ? [NSString stringWithFormat:@"%@/%@/", kBaseResourceName, self.appId] : @"";
-        self.baseServerUrl = [NSString stringWithFormat:@"%@%@", kServerURLKey, appIdSegment];
+        self.baseServerUrl = [NSString stringWithFormat:@"%@%@", ServerURLKey, appIdSegment];
     }
     else {
-        self.baseServerUrl = kServerURLKey;
+        self.baseServerUrl = ServerURLKey;
     }
     TCLog(@"URL: %@", self.baseServerUrl);
     

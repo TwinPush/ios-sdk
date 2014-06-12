@@ -83,6 +83,15 @@ extern NSString* const kStringErrorCodeKey;
 
 @property (nonatomic, strong) NSString* acceptsContentType;
 
+@property (nonatomic) BOOL shouldFollowRedirects;
+
+@property (nonatomic) BOOL allowUntrustedCertificates;
+
+/** @brief If not null, the request will validate the SSL certificate chain names using the list of certificate
+ * names provided from (starting from the leaf certificate and ending with the root). The request will fail with
+ * a generic error if the certificate names don't match */
+@property (nonatomic, strong) NSArray* expectedCertNames;
+
 /** @brief Starts the asynchronous execution of the request */
 -(void)start;
 

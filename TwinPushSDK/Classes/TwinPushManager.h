@@ -49,6 +49,8 @@ typedef enum {
 @property (nonatomic, copy) NSString* apiKey;
 /** Unique identifier of the device. Defaults to [[[UIDevice currentDevice] identifierForVendor] UUIDString] if not set */
 @property (nonatomic, copy) NSString* deviceUDID;
+/** TwinPush Server URL. Change this URL if you have a custom URL for Enterprise hosted applications, including the version tag */
+@property (nonatomic, copy) NSString* serverURL;
 
 #pragma mark - Shared instance
 + (TwinPushManager*) manager;
@@ -61,6 +63,11 @@ typedef enum {
 - (void)applicationWillResignActive:(UIApplication *)application;
 - (void)setupTwinPushManagerWithAppId:(NSString*)appId apiKey:(NSString*)apiKey delegate:(id<TwinPushManagerDelegate>)delegate;
 - (void)setApplicationBadgeCount:(NSUInteger)badgeCount;
+
+#pragma mark - Certificate pinning
+- (void)enableCertificateNamePinningWithDefaultValues;
+- (void)enableCertificateNamePinningWithCertificateNames:(NSArray*)certificateNames;
+- (void)disableCertificateNamePinning;
 
 #pragma mark Notifications
 - (void)getDeviceNotificationsWithFilters:(TPNotificationsFilters*)filters andPagination:(TPNotificationsPagination*)pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete;

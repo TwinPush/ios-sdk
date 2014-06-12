@@ -24,7 +24,7 @@ static TPRequestFactory *_sharedInstance;
 - (id)init {
     self = [super init];
     if (self) {
-        self.tcRequestLauncher = [[TPRequestLauncher alloc] init];
+        self.tcRequestLauncher = [TPRequestLauncher sharedInstance];
     }
     return self;
 }

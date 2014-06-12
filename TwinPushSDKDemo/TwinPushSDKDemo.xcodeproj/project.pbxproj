@@ -55,6 +55,7 @@
 		695433DD1716CC1400FA06D5 /* text_field_h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 695433B61716CC1400FA06D5 /* text_field_h@2x.png */; };
 		695433DE1716CC1400FA06D5 /* text_field.png in Resources */ = {isa = PBXBuildFile; fileRef = 695433B71716CC1400FA06D5 /* text_field.png */; };
 		695433DF1716CC1400FA06D5 /* text_field@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 695433B81716CC1400FA06D5 /* text_field@2x.png */; };
+		69BDAE8D194A2DA7000B0E57 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69BDAE8C194A2DA7000B0E57 /* Security.framework */; };
 		7A0D23C3175E48D500F4580C /* background-568h@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 7A0D23BD175E48D500F4580C /* background-568h@2x.jpeg */; };
 		7A0D23C4175E48D500F4580C /* background.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 7A0D23BE175E48D500F4580C /* background.jpeg */; };
 		7A0D23C5175E48D500F4580C /* background@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 7A0D23BF175E48D500F4580C /* background@2x.jpeg */; };
@@ -152,6 +153,7 @@
 		695433B61716CC1400FA06D5 /* text_field_h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "text_field_h@2x.png"; sourceTree = "<group>"; };
 		695433B71716CC1400FA06D5 /* text_field.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text_field.png; sourceTree = "<group>"; };
 		695433B81716CC1400FA06D5 /* text_field@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "text_field@2x.png"; sourceTree = "<group>"; };
+		69BDAE8C194A2DA7000B0E57 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7A0D23BD175E48D500F4580C /* background-568h@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background-568h@2x.jpeg"; sourceTree = "<group>"; };
 		7A0D23BE175E48D500F4580C /* background.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpeg; sourceTree = "<group>"; };
 		7A0D23BF175E48D500F4580C /* background@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpeg"; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69BDAE8D194A2DA7000B0E57 /* Security.framework in Frameworks */,
 				7AD80F6717660FC400C69CFC /* CoreLocation.framework in Frameworks */,
 				218C5BC016B680BC007F49DD /* MobileCoreServices.framework in Frameworks */,
 				218C5BBE16B68074007F49DD /* CFNetwork.framework in Frameworks */,
@@ -327,6 +330,7 @@
 				219BB71016B02BF4008739D7 /* Foundation.framework */,
 				219BB71216B02BF4008739D7 /* CoreGraphics.framework */,
 				7AD80F6617660FC300C69CFC /* CoreLocation.framework */,
+				69BDAE8C194A2DA7000B0E57 /* Security.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

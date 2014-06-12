@@ -18,7 +18,16 @@
 
 @end
 
+static TPRequestLauncher *_sharedInstance;
+
 @implementation TPRequestLauncher
+
++ (TPRequestLauncher*) sharedInstance {
+    if (_sharedInstance == nil) {
+        _sharedInstance = [[TPRequestLauncher alloc] init];
+    }
+    return _sharedInstance;
+}
 
 #pragma mark - Init
 
@@ -40,13 +49,8 @@
     // Check if a equal request is not already launched
     if ([_activeRequests objectForKey:request.requestId] == nil) {
         [request addRequestEndDelegate:self];
-        
-        // TODO: Allows self-signed certificate and perform certificate pinning
-        if (self.allowUnsafeCertificate) {
-            //            [request setValidatesSecureCertificate:NO];
-        }
-        //        // TODO: Avoid redirect
-        //        request.shouldRedirect = NO;
+        request.allowUntrustedCertificates = self.allowUnsafeCertificate;
+        request.expectedCertNames = self.expectedCertNames;
         
         NSURLRequest* urlRequest = [request createRequest];
         NSURLConnection* urlConnection = [NSURLConnection connectionWithRequest:urlRequest delegate:request];

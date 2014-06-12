@@ -43,6 +43,7 @@
     
     [self applyCustomAppearance];
     
+    [[TwinPushManager manager] enableCertificateNamePinningWithDefaultValues];
     [[TwinPushManager manager] setupTwinPushManagerWithAppId:TWINPUSH_APP_ID apiKey:TWINPUSH_API_KEY delegate:self];
     [[TwinPushManager manager] application:application didFinishLaunchingWithOptions:launchOptions];
     [[TwinPushManager manager] setApplicationBadgeCount:0];

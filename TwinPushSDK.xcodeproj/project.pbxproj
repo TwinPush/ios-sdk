@@ -48,6 +48,7 @@
 		21A33B4F16C4F78200EC7AF5 /* TPNotificationsPagination.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A33B4D16C4F78200EC7AF5 /* TPNotificationsPagination.m */; };
 		21F0777716B29070001CE5C5 /* TPNotificationDetailViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 21F0777416B29070001CE5C5 /* TPNotificationDetailViewController.h */; settings = {ATTRIBUTES = (); }; };
 		21F0777816B29070001CE5C5 /* TPNotificationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F0777516B29070001CE5C5 /* TPNotificationDetailViewController.m */; };
+		69BDAE8B194A0648000B0E57 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69BDAE8A194A0648000B0E57 /* Security.framework */; };
 		7A63CB751779CC640073E0E7 /* TPReportStatisticsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A63CB731779CC640073E0E7 /* TPReportStatisticsRequest.h */; };
 		7A63CB761779CC640073E0E7 /* TPReportStatisticsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63CB741779CC640073E0E7 /* TPReportStatisticsRequest.m */; };
 		7A63CB791779D8980073E0E7 /* TPOpenAppRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A63CB771779D8980073E0E7 /* TPOpenAppRequest.h */; };
@@ -138,6 +139,7 @@
 		21A33B4D16C4F78200EC7AF5 /* TPNotificationsPagination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNotificationsPagination.m; sourceTree = "<group>"; };
 		21F0777416B29070001CE5C5 /* TPNotificationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNotificationDetailViewController.h; sourceTree = "<group>"; };
 		21F0777516B29070001CE5C5 /* TPNotificationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNotificationDetailViewController.m; sourceTree = "<group>"; };
+		69BDAE8A194A0648000B0E57 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7A63CB731779CC640073E0E7 /* TPReportStatisticsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPReportStatisticsRequest.h; sourceTree = "<group>"; };
 		7A63CB741779CC640073E0E7 /* TPReportStatisticsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPReportStatisticsRequest.m; sourceTree = "<group>"; };
 		7A63CB771779D8980073E0E7 /* TPOpenAppRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPOpenAppRequest.h; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69BDAE8B194A0648000B0E57 /* Security.framework in Frameworks */,
 				7AD80F6517660FAC00C69CFC /* CoreLocation.framework in Frameworks */,
 				219BB79616B03A06008739D7 /* UIKit.framework in Frameworks */,
 				219BB6D816B02B5B008739D7 /* Foundation.framework in Frameworks */,
@@ -259,6 +262,7 @@
 		219BB6D616B02B5B008739D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				69BDAE8A194A0648000B0E57 /* Security.framework */,
 				219BB79516B03A06008739D7 /* UIKit.framework */,
 				219BB6D716B02B5B008739D7 /* Foundation.framework */,
 				219BB6E616B02B5B008739D7 /* SenTestingKit.framework */,

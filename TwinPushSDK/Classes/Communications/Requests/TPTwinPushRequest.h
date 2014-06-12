@@ -10,6 +10,8 @@
 
 @interface TPTwinPushRequest : TPRESTJSONRequest
 
++ (void)setServerURL:(NSString*)serverURL;
+
 @property (strong, nonatomic) NSString* appId;
 @property (strong, nonatomic) NSString* apiKey;
 

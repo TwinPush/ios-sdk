@@ -8,6 +8,11 @@
 
 #import "TwinPushManager.h"
 #import "TPBaseRequest.h"
+#import "TPTwinPushRequest.h"
+#import "TPRequestLauncher.h"
+
+static NSString* const kDefaultServerUrl = @"https://app.twinpush.com/api/v2/";
+#define kDefaultCertificateNames @[@"*.twinpush.com", @"Starfield Secure Certificate Authority - G2", @"Starfield Root Certificate Authority - G2"]
 
 static NSString* const kPushIdKey = @"pushId";
 static NSString* const kPushTokenKey = @"pushToken";
@@ -45,6 +50,7 @@ static TwinPushManager *_sharedInstance;
         _activeRequests = [NSMutableArray array];
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
+        self.serverURL = kDefaultServerUrl;
         
         // Defaults to identifierForVendor on iOS 6
         if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)]) {
@@ -116,6 +122,12 @@ static TwinPushManager *_sharedInstance;
         TCLog(@"User Open Notification: %@ request error: %@", notificationId, error);
     }];
     [self enqueueRequest:request];
+}
+
+- (void)setServerURL:(NSString *)serverURL {
+    _serverURL = serverURL;
+    
+    [TPTwinPushRequest setServerURL:serverURL];
 }
 
 #pragma mark Custom properties
@@ -298,6 +310,18 @@ static TwinPushManager *_sharedInstance;
     [self enqueueRequest:request];
 }
 
+#pragma mark - Certificate pinning
+- (void)enableCertificateNamePinningWithDefaultValues {
+    [self enableCertificateNamePinningWithCertificateNames:kDefaultCertificateNames];
+}
+
+- (void)enableCertificateNamePinningWithCertificateNames:(NSArray*)certificateNames {
+    [TPRequestLauncher sharedInstance].expectedCertNames = certificateNames;
+}
+
+- (void)disableCertificateNamePinning {
+    [self enableCertificateNamePinningWithCertificateNames:nil];
+}
 
 #pragma mark - Private methods
 -(void) enqueueRequest:(TPBaseRequest*)request {
@@ -588,7 +612,7 @@ static TwinPushManager *_sharedInstance;
 }
 
 -(TPLocationAccuracy) regionMonitoringAccuracy {
-    return [[NSUserDefaults standardUserDefaults] integerForKey:kNSUserDefaultsRegionAccuracyKey];
+    return (TPLocationAccuracy)[[NSUserDefaults standardUserDefaults] integerForKey:kNSUserDefaultsRegionAccuracyKey];
 }
 
 -(void) setMonitoringSignificantChanges:(BOOL)isMonitoring {
