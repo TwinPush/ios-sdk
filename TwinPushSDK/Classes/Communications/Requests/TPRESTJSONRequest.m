@@ -16,9 +16,19 @@
 
 @end
 
+static NSString* const kContentTypeJSON = @"application/json";
+
 @implementation TPRESTJSONRequest
 
 #pragma mark - Public methods
+
+- (NSString *)contentType {
+    return kContentTypeJSON;
+}
+
+- (NSString*)acceptsContentType {
+    return kContentTypeJSON;
+}
 
 - (NSString *)createSegmentParamsString {
     NSMutableArray* params = [NSMutableArray arrayWithArray:self.segmentParams];
@@ -29,12 +39,6 @@
     NSDictionary* dictionary = [string objectFromJSONString];
     return dictionary;
 }
-
-//- (NSDictionary *)dictionaryForResponseString:(NSString *)string {
-//    NSDictionary* dictionary = [super dictionaryForResponseString:string];
-//    // If dictionary contains errors, call onError
-//    return dictionary;
-//}
 
 - (NSString*)createBodyContent {
     NSString* bodyContent = nil;

@@ -7,7 +7,6 @@
 //
 
 #import "TPTwinPushRequest.h"
-#import "ASIHTTPRequest.h"
 
 static NSString* kServerURLKey = @"https://app.twinpush.com/api/v2/";
 static NSString* kBaseResourceName = @"apps";
@@ -24,7 +23,7 @@ static NSString* kBaseResourceName = @"apps";
     return self;
 }
 
-- (ASIHTTPRequest *)createAsiRequest {
+- (NSMutableURLRequest *)createRequest {
     if (self.appId != nil) {
         NSString* appIdSegment = self.appId != nil ? [NSString stringWithFormat:@"%@/%@/", kBaseResourceName, self.appId] : @"";
         self.baseServerUrl = [NSString stringWithFormat:@"%@%@", kServerURLKey, appIdSegment];
@@ -34,9 +33,8 @@ static NSString* kBaseResourceName = @"apps";
     }
     TCLog(@"URL: %@", self.baseServerUrl);
     
-    ASIHTTPRequest* request = [super createAsiRequest];
-    [request addRequestHeader:@"X-TwinPush-REST-API-Token" value:self.apiKey];
-    [request addRequestHeader:@"Content-Type" value:@"application/json"];
+    NSMutableURLRequest* request = [super createRequest];
+    [request addValue:self.apiKey forHTTPHeaderField:@"X-TwinPush-REST-API-Token"];
     return request;
 }
 

@@ -6,10 +6,9 @@
 //  Copyright (c) 2012 TwinCoders. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "TPRequestLauncher.h"
 #import "TPRequestParam.h"
-#import "ASIHTTPRequest.h"
-#import "ASIFormDataRequest.h"
 
 @interface TPRequestLauncher()
 
@@ -41,32 +40,22 @@
     // Check if a equal request is not already launched
     if ([_activeRequests objectForKey:request.requestId] == nil) {
         [request addRequestEndDelegate:self];
-        ASIHTTPRequest* asiRequest = [request createAsiRequest];
-        // Set request timeout
-        [asiRequest setTimeOutSeconds:_requestTimeOutSeconds];
-        // Allows self-signed certificate
+        
+        // TODO: Allows self-signed certificate and perform certificate pinning
         if (self.allowUnsafeCertificate) {
-            [asiRequest setValidatesSecureCertificate:NO];
+            //            [request setValidatesSecureCertificate:NO];
         }
-        // Avoid redirect
-        asiRequest.shouldRedirect = NO;
-        asiRequest.delegate = request;
+        //        // TODO: Avoid redirect
+        //        request.shouldRedirect = NO;
+        
+        NSURLRequest* urlRequest = [request createRequest];
+        NSURLConnection* urlConnection = [NSURLConnection connectionWithRequest:urlRequest delegate:request];
+        
         // Display network activity indicator
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         // Add request to active request array
-        [_activeRequests setObject:asiRequest forKey:request.requestId];
-        if (!request.isDummy) {
-            // Start request
-            [asiRequest startAsynchronous];
-        } else {
-            if ([request respondsToSelector:@selector(requestFinished:)]) {
-                NSBlockOperation* operation = [NSBlockOperation blockOperationWithBlock:^{
-                    [(id<ASIHTTPRequestDelegate>)request requestFinished:asiRequest];
-                }];
-                
-                [[NSOperationQueue mainQueue] performSelector:@selector(addOperation:) withObject:operation afterDelay:1];
-            }
-        }
+        [_activeRequests setObject:urlConnection forKey:request.requestId];
+
     } else {
         TCLog(@"Equal request already launched. Ignoring...");
     }
@@ -75,18 +64,18 @@
 /** @brief Cancel the selected request */
 - (void)cancelRequest:(TPBaseRequest*)request {
     TCLog(@"Cancelling request...");
-    ASIHTTPRequest* asiRequest = [_activeRequests objectForKey:request.requestId];
-    if (asiRequest != nil) {
-        [asiRequest clearDelegatesAndCancel];
+    NSURLConnection* urlConnection = [_activeRequests objectForKey:request.requestId];
+    if (urlConnection != nil) {
+        [urlConnection cancel];
         [_activeRequests removeObjectForKey:request.requestId];
     }
 }
 
 #pragma mark - RequestEndDelegate
 - (void)requestDidFinish:(TPBaseRequest *)request {
-    ASIHTTPRequest* asiRequest = [_activeRequests objectForKey:request.requestId];
-    if (asiRequest != nil) {
-        [asiRequest clearDelegatesAndCancel];
+    NSURLConnection* urlConnection = [_activeRequests objectForKey:request.requestId];
+    if (urlConnection != nil) {
+        [urlConnection cancel];
         [_activeRequests removeObjectForKey:request.requestId];
     }
     

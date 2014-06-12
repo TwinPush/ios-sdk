@@ -9,17 +9,17 @@
 #import "TPBaseRequest.h"
 #import "TPRequestLauncher.h"
 #import "TPRequestParam.h"
-#import "ASIFormDataRequest.h"
-#import "ASIHTTPRequest.h"
 
 // Error domain
 static NSString* const kErrorDomain  = @"com.twincoders.TCBaseRequest";
 static NSString* const kContentTypeHeaderKey = @"Content-Type";
+static NSString* const kAcceptContentTypeHeaderKey = @"Accept";
 
 @interface TPBaseRequest()
 
 @property (nonatomic, strong) NSArray *endDelegateArray;
 @property (nonatomic, strong, readwrite) NSString* requestId;
+@property (nonatomic, strong) NSMutableData* responseData;
 
 @end
 
@@ -55,6 +55,7 @@ static NSString* const kContentTypeHeaderKey = @"Content-Type";
 }
 
 - (void)start {
+    self.responseData = [[NSMutableData alloc] init];
     self.canceled = NO;
     [_requestLauncher launchRequest:self];
 }
@@ -79,29 +80,37 @@ static NSString* const kContentTypeHeaderKey = @"Content-Type";
     }
 }
 
-#pragma mark - ASIRequest Delegate
+#pragma mark - NSURLConnectionDelegate
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    // Perform operations in main thread and retaining self
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self notifyEndDelegates];
-        [self onRequestFinished:request];
-    });
-}
-
-- (void)requestFailed:(ASIHTTPRequest *)request {
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // Perform operations in main thread and retaining self
     dispatch_async(dispatch_get_main_queue(), ^{
         if (!self.isDummy) {
             // Notify delegates
             [self notifyEndDelegates];
-            [self onRequestError:request];
+            [self onRequestError:connection error:error];
         } else {
-            [self requestFinished:request];
+            [self connectionDidFinishLoading:connection];
         }
     });
 }
 
+#pragma mark - NSURLConnectionDataDelegate
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    // Perform operations in main thread and retaining self
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self notifyEndDelegates];
+        [self onRequestFinished:connection];
+    });
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    [self.responseData appendData:data];
+}
+
+
+#pragma mark - Param methods
 - (void)addParam:(TPRequestParam*)param {
     [_contentParams addObject:param];
 }
@@ -114,7 +123,7 @@ static NSString* const kContentTypeHeaderKey = @"Content-Type";
 - (void)addNumberParam:(NSNumber*)paramValue forKey:(NSString*)paramKey {
     NSString* stringValue = nil;
     if (paramValue != nil) {
-        stringValue = [NSString stringWithFormat:@"%i", paramValue.integerValue];
+        stringValue = [NSString stringWithFormat:@"%li", (long)paramValue.integerValue];
     }
     [self addParam:stringValue forKey:paramKey];
 }
@@ -129,19 +138,23 @@ static NSString* const kContentTypeHeaderKey = @"Content-Type";
 
 #pragma mark - Request launch methods
 
-- (ASIHTTPRequest*)createAsiRequest {
+- (NSMutableURLRequest*)createRequest {
     NSURL* url = [NSURL URLWithString:self.url];
     TCLog(@"\nREQUEST: %@ (%@)", self.name, url);
-    // Instance ASI Request with url
-    ASIFormDataRequest* asiRequest = [[ASIFormDataRequest alloc] initWithURL: url];
-    [asiRequest setStringEncoding:NSUTF8StringEncoding];
-    asiRequest.requestMethod = [self stringFromMethod:self.requestMethod];
+    
+    // Instance Request with url
+    NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL:url];
+    request.HTTPMethod = [self stringFromMethod:self.requestMethod];
+    
     // Set content type
     if (self.contentType != nil) {
-        [asiRequest addRequestHeader:kContentTypeHeaderKey value:self.contentType];
+        [request addValue:self.contentType forHTTPHeaderField:kContentTypeHeaderKey];
     }
-
-    return asiRequest;
+    if (self.acceptsContentType != nil) {
+        [request addValue:self.acceptsContentType forHTTPHeaderField:kAcceptContentTypeHeaderKey];
+    }
+    
+    return request;
 }
 
 - (NSString*)stringFromMethod:(TPRequestMethod)method {
@@ -164,19 +177,22 @@ static NSString* const kContentTypeHeaderKey = @"Content-Type";
 
 #pragma mark - Request interception methods
 
-- (void)onRequestFinished:(ASIHTTPRequest *)request {
-    
+- (void)onRequestStarted:(NSURLConnection*)connection {
+    // By default no additional operation is required
+}
+
+- (void)onRequestFinished:(NSURLConnection*)connection {
     if (![self isCanceled]) {
         // Use when fetching text data
         NSString *responseString = nil;
         if (self.encoding != 0) {
-            responseString = [[NSString alloc] initWithData:request.responseData encoding:self.encoding];
+            responseString = [[NSString alloc] initWithData:self.responseData encoding:self.encoding];
         }
         if (responseString == nil) {
-            responseString = [[NSString alloc] initWithData:request.responseData encoding:NSUTF8StringEncoding];
+            responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
         }
         if (responseString == nil) {
-            responseString = [[NSString alloc] initWithData:request.responseData encoding:NSASCIIStringEncoding];
+            responseString = [[NSString alloc] initWithData:self.responseData encoding:NSASCIIStringEncoding];
         }
         TCLog(@"\nOUTPUT:\n%@", responseString);
         NSDictionary* responseDictionary = nil;
@@ -197,9 +213,9 @@ static NSString* const kContentTypeHeaderKey = @"Content-Type";
     }
 }
 
-- (void)onRequestError:(ASIHTTPRequest *)request {
-    TCLog(@"Request error: %@", request.error);
-    _onError(request.error);
+- (void)onRequestError:(NSURLConnection*)connection error:(NSError*)error {
+    TCLog(@"Request error: %@", error);
+    _onError(error);
 }
 
 - (NSDictionary*)onProcessResponseDictionary:(NSDictionary*)response withError:(NSError**) error {

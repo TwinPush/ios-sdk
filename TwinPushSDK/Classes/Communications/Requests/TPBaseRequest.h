@@ -19,7 +19,6 @@ typedef enum {
     kTPRequestMethodDELETE,
 } TPRequestMethod;
 
-@class ASIHTTPRequest;
 
 /** @brief Protocol that must be implemented by objects that want to be notified when a Request ends, regardless of its result */
 @protocol TPRequestEndDelegate <NSObject>
@@ -82,6 +81,8 @@ extern NSString* const kStringErrorCodeKey;
 
 @property (nonatomic, strong) NSString* contentType;
 
+@property (nonatomic, strong) NSString* acceptsContentType;
+
 /** @brief Starts the asynchronous execution of the request */
 -(void)start;
 
@@ -117,15 +118,19 @@ extern NSString* const kStringErrorCodeKey;
 #pragma mark - Request launch methods
 
 /** @brief Method that must be overriden by subclasses to properly create the request object */
--(ASIHTTPRequest*)createAsiRequest;
+- (NSMutableURLRequest*)createRequest;
 
 #pragma mark - Request interception methods
 
+/** @brief Method that can be overriden by subclass to perform any additional processing
+    when the request is started */
+- (void)onRequestStarted:(NSURLConnection*)connection;
+
 /** @brief Method that can be overriden by subclass to process result from request. Default behavior is call onProcessResponseDictionary method with nil argument */
-- (void)onRequestFinished:(ASIHTTPRequest *)request;
+- (void)onRequestFinished:(NSURLConnection*)connection;
 
 /** @brief Method that can be overriden by subclass to process error from request. Default behavior is call onError with obtained error from request */
-- (void)onRequestError:(ASIHTTPRequest *)request;
+- (void)onRequestError:(NSURLConnection*)connection error:(NSError*)error;
 
 /** @brief Method that can be overriden by subclass to create a Dictionary from the response String. Default behavior returns nil */
 - (NSDictionary*) dictionaryForResponseString:(NSString*)string;

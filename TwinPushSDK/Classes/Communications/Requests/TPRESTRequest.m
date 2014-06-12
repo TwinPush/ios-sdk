@@ -8,7 +8,6 @@
 
 #import "TPRESTRequest.h"
 #import "TPRequestParam.h"
-#import "ASIHTTPRequest.h"
 
 // Segment Params
 NSString* const kTPRESTSegmentParamsSeparator = @"/";
@@ -89,8 +88,9 @@ static NSString* const kContentType = @"application/x-www-form-urlencoded";
     return self.resource;
 }
 
-- (ASIHTTPRequest *)createAsiRequest {
-    ASIHTTPRequest* asiRequest = [super createAsiRequest];
+- (NSMutableURLRequest*)createRequest {
+    NSMutableURLRequest* request = [super createRequest];
+    
     switch (self.requestMethod) {
             // For POST and PUT requests, include body content
         case kTPRequestMethodPOST:
@@ -98,14 +98,15 @@ static NSString* const kContentType = @"application/x-www-form-urlencoded";
             NSString* bodyContent = [self createBodyContent];
             TCLog(@"\nINPUT:\n%@", bodyContent);
             if (bodyContent != nil) {
-                [asiRequest appendPostData:[bodyContent dataUsingEncoding:NSUTF8StringEncoding]];
-                [asiRequest buildPostBody];
+                request.HTTPBody = [bodyContent dataUsingEncoding:NSUTF8StringEncoding];
+                [request addValue:@(request.HTTPBody.length).stringValue forHTTPHeaderField:@"Content-Length"];
             }
             break;
         }
-        default:;
+        default:
+            break;
     }
-    return asiRequest;
+    return request;
 }
 
 - (NSString*)createBodyContent {
