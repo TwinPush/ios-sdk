@@ -42,7 +42,6 @@
 		219BB79616B03A06008739D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 219BB79516B03A06008739D7 /* UIKit.framework */; };
 		219BB79A16B03F8A008739D7 /* TwinPushManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB79916B03F8A008739D7 /* TwinPushManager.m */; };
 		219BB79D16B03FDE008739D7 /* TPRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB79C16B03FDD008739D7 /* TPRequestFactory.m */; };
-		219BB7B116B0478C008739D7 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB7B016B0478C008739D7 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		21A1EC9E170D72690036A957 /* TPTwinPushRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 21A1EC9C170D72690036A957 /* TPTwinPushRequest.h */; };
 		21A1EC9F170D72690036A957 /* TPTwinPushRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A1EC9D170D72690036A957 /* TPTwinPushRequest.m */; };
 		21A33B4E16C4F78200EC7AF5 /* TPNotificationsPagination.h in Headers */ = {isa = PBXBuildFile; fileRef = 21A33B4C16C4F78200EC7AF5 /* TPNotificationsPagination.h */; };
@@ -133,8 +132,6 @@
 		219BB79916B03F8A008739D7 /* TwinPushManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwinPushManager.m; sourceTree = "<group>"; };
 		219BB79B16B03FDD008739D7 /* TPRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPRequestFactory.h; sourceTree = "<group>"; };
 		219BB79C16B03FDD008739D7 /* TPRequestFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPRequestFactory.m; sourceTree = "<group>"; };
-		219BB7AF16B0478C008739D7 /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
-		219BB7B016B0478C008739D7 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		21A1EC9C170D72690036A957 /* TPTwinPushRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTwinPushRequest.h; sourceTree = "<group>"; };
 		21A1EC9D170D72690036A957 /* TPTwinPushRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTwinPushRequest.m; sourceTree = "<group>"; };
 		21A33B4C16C4F78200EC7AF5 /* TPNotificationsPagination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNotificationsPagination.h; sourceTree = "<group>"; };
@@ -262,7 +259,6 @@
 		219BB6D616B02B5B008739D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				219BB7AE16B0478C008739D7 /* OpenUDID */,
 				219BB79516B03A06008739D7 /* UIKit.framework */,
 				219BB6D716B02B5B008739D7 /* Foundation.framework */,
 				219BB6E616B02B5B008739D7 /* SenTestingKit.framework */,
@@ -360,16 +356,6 @@
 				218CB3BA16B12E630080A5CA /* TPCreateDeviceRequest.m */,
 			);
 			path = TwinPush;
-			sourceTree = "<group>";
-		};
-		219BB7AE16B0478C008739D7 /* OpenUDID */ = {
-			isa = PBXGroup;
-			children = (
-				219BB7AF16B0478C008739D7 /* OpenUDID.h */,
-				219BB7B016B0478C008739D7 /* OpenUDID.m */,
-			);
-			name = OpenUDID;
-			path = TwinPushSDK/Frameworks/OpenUDID;
 			sourceTree = "<group>";
 		};
 		7A63CB721779CB960073E0E7 /* Statistics */ = {
@@ -544,7 +530,6 @@
 				219BB77016B03769008739D7 /* TPRESTRequest.m in Sources */,
 				219BB79A16B03F8A008739D7 /* TwinPushManager.m in Sources */,
 				219BB79D16B03FDE008739D7 /* TPRequestFactory.m in Sources */,
-				219BB7B116B0478C008739D7 /* OpenUDID.m in Sources */,
 				218CB3BB16B12E630080A5CA /* TPCreateDeviceRequest.m in Sources */,
 				2124D01116B1306900B39430 /* TPRequestParam.m in Sources */,
 				2124D01316B131D800B39430 /* TPRequestLauncher.m in Sources */,

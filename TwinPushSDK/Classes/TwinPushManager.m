@@ -7,7 +7,6 @@
 //
 
 #import "TwinPushManager.h"
-#import "OpenUDID.h"
 #import "TPBaseRequest.h"
 
 static NSString* const kPushIdKey = @"pushId";
@@ -20,9 +19,6 @@ static NSString* const kNSUserDefaultsMonitorRegionKey = @"TPIsMonitoringRegion"
 static NSString* const kNSUserDefaultsRegionAccuracyKey = @"TPRegionAccuracy";
 
 @interface TwinPushManager()
-
-// Unique identifier of the device
-@property (readonly, copy) NSString* deviceUDID;
 
 @property (nonatomic, strong) TPRequestFactory* requestFactory;
 @property (nonatomic, strong) TPBaseRequest* registerRequest;
@@ -49,6 +45,11 @@ static TwinPushManager *_sharedInstance;
         _activeRequests = [NSMutableArray array];
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
+        
+        // Defaults to identifierForVendor on iOS 6
+        if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)]) {
+            _deviceUDID = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        }
     }
     return self;
 }
@@ -92,12 +93,6 @@ static TwinPushManager *_sharedInstance;
 - (void)setAlias:(NSString *)alias {
     _alias = alias;
     [self registerDevice];
-}
-
-#pragma mark - Getters
-
-- (NSString *)deviceUDID {
-    return [OpenUDID value];
 }
 
 #pragma mark - Public methods

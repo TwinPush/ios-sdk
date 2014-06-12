@@ -38,15 +38,17 @@ typedef enum {
 
 #pragma mark - Properties
 @property (nonatomic, weak) id<TwinPushManagerDelegate> delegate;
-// Identifier of the device provided by the app at the moment of registering for receiving remote notifications
+/** Identifier of the device provided by the app at the moment of registering for receiving remote notifications */
 @property (nonatomic, copy) NSString* pushToken;
-// Device identifier provided by the service when registering the device
+/** Device identifier provided by the service when registering the device */
 @property (nonatomic, copy) NSString* deviceId;
 @property (nonatomic, copy) NSString* alias;
-// App identifier, provided by the web portal
+/** App identifier, provided by the web portal */
 @property (nonatomic, copy) NSString* appId;
-// Security token provided by the web portal. It is included in the header of all the API TwinPush requests
+/** Security token provided by the web portal. It is included in the header of all the API TwinPush requests */
 @property (nonatomic, copy) NSString* apiKey;
+/** Unique identifier of the device. Defaults to [[[UIDevice currentDevice] identifierForVendor] UUIDString] if not set */
+@property (nonatomic, copy) NSString* deviceUDID;
 
 #pragma mark - Shared instance
 + (TwinPushManager*) manager;
