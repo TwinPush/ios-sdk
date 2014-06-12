@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
   # Meta data
   s.name         = "TwinPushSDK"
-  s.version      = "1.1.1"
+  s.version      = "1.1.2"
   s.summary      = "TwinPush SDK is the official open source SDK for the TwinPush iOS and Android notification platform"
   s.homepage     = "http://twinpush.com"
   s.license      = { :type => "MIT", :file => "LICENSE" }
