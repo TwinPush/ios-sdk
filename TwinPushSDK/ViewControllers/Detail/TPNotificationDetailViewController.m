@@ -76,9 +76,11 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
     if ([TwinPushManager manager].deviceId != nil) {
         self.loading = YES;
         [[TwinPushManager manager] getDeviceNotificationWithId:self.notification.notificationId.integerValue onComplete:^(TPNotification *notification) {
-            self.notification = notification;
+            if (notification != nil) {
+                self.notification = notification;
+                [self setNotificationDetails];
+            }
             self.loading = NO;
-            [self setNotificationDetails];
         }];
     }
     else {
@@ -99,11 +101,16 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
 }
 
 - (void)closeModal {
-    [self.delegate dismissModalView];
+    if ([_delegate respondsToSelector:@selector(dismissModalView)]) {
+        [_delegate dismissModalView];
+    }
+    else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)displayAlert:(NSString*)alert withTitle:(NSString*)title {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:alert delegate:self cancelButtonTitle:NSLocalizedStringWithDefaultValue(@"WEBVIEW_LOADING_ERROR_BUTTON", nil, [NSBundle mainBundle], @"OK", nil) otherButtonTitles:nil, nil];
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:alert delegate:nil cancelButtonTitle:NSLocalizedStringWithDefaultValue(@"WEBVIEW_LOADING_ERROR_BUTTON", nil, [NSBundle mainBundle], @"OK", nil) otherButtonTitles:nil, nil];
     [alertView show];
 }
 
@@ -128,12 +135,7 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
 }
 
 - (IBAction)dismissButtonTapped:(id)sender {
-    if ([_delegate respondsToSelector:@selector(dismissModalView)]) {
-        [_delegate dismissModalView];
-    }
-    else {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
+    [self closeModal];
 }
 
 @end

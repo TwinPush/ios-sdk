@@ -9,6 +9,8 @@
 #import "TPGetNotificationWithIdRequest.h"
 #import "NSDictionary+ArrayForKey.h"
 
+static NSString* const kErrorDomain  = @"com.twincoders.TCBaseRequest";
+
 /* Request info */
 static NSString* const kSegmentParamNotifications = @"notifications";
 
@@ -41,9 +43,11 @@ static NSString* const kObjectsResponseWrapper = @"objects";
 
 - (TPNotification*)notificationFromDictionary:(NSDictionary*)dictionary {
     NSArray* objectsDict = [dictionary arrayForKey:kObjectsResponseWrapper];
-    NSDictionary* notificationDict = [objectsDict objectAtIndex:0];
-    
-    TPNotification* notification = [TPNotification notificationFromDictionary:notificationDict];
+    TPNotification* notification = nil;
+    if (objectsDict.count > 0) {
+        NSDictionary* notificationDict = [objectsDict objectAtIndex:0];
+        notification = [TPNotification notificationFromDictionary:notificationDict];
+    }
     return notification;
 }
 
