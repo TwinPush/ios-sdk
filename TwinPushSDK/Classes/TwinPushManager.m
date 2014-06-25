@@ -125,6 +125,9 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)userDidOpenNotificationWithId:(NSString*)notificationId {
+    if (![self isDeviceRegistered])
+        return;
+    
     TPBaseRequest* request = [self.requestFactory createUserOpenNotificationRequestWithDeviceId:self.deviceId notificationId:notificationId apiKey:self.apiKey onComplete:^(NSDictionary *response) {
         TCLog(@"User Open Notification: %@ request success", notificationId);
     } onError:^(NSError *error) {
@@ -155,14 +158,15 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void) setProperty:(NSString*)name type:(TPPropertyType)type value:(NSObject*)value {
-    if ([self isDeviceRegistered]) {
-        TPBaseRequest* request = [[self requestFactory] createSetCustomPropertyRequestWithName:name type:type value:value deviceId:_deviceId appId:_appId apiKey:_apiKey onComplete:^{
-            TCLog(@"Property set successfull: %@=%@", name, value);
-        } onError:^(NSError *error) {
-            TCLog(@"ERROR setting property: %@=%@", name, value);
-        }];
-        [self enqueueRequest:request];
-    }
+    if (![self isDeviceRegistered])
+        return;
+    
+    TPBaseRequest* request = [[self requestFactory] createSetCustomPropertyRequestWithName:name type:type value:value deviceId:_deviceId appId:_appId apiKey:_apiKey onComplete:^{
+        TCLog(@"Property set successfull: %@=%@", name, value);
+    } onError:^(NSError *error) {
+        TCLog(@"ERROR setting property: %@=%@", name, value);
+    }];
+    [self enqueueRequest:request];
 }
 
 #pragma mark Location
@@ -203,6 +207,9 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)setLocationWithLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude {
+    if (![self isDeviceRegistered])
+        return;
+    
     TCLog(@"Current location updated: %f, %f", latitude, longitude);
     if (self.reportStatisticsRequest != nil) {
         [self.reportStatisticsRequest cancel];
@@ -247,6 +254,9 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)sendBadgeCountUpdate {
+    if (![self isDeviceRegistered])
+        return;
+    
     // Send badge count update request if it's required and hasn't been sent yet
     BOOL badgeCountChanged = _pendingBadgeCount != nil && self.updateBadgeRequest == nil;
     if (badgeCountChanged && [self isDeviceRegistered]) {
@@ -302,6 +312,9 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    if (![self isDeviceRegistered])
+        return;
+    
     TPBaseRequest* request = [self.requestFactory createOpenAppRequestWithDeviceId:self.deviceId apiKey:self.apiKey onComplete:^{
         TCLog(@"Open App request success");
     } onError:^(NSError *error) {
@@ -311,6 +324,9 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
+    if (![self isDeviceRegistered])
+        return;
+    
     TPBaseRequest* request = [self.requestFactory createCloseAppRequestWithDeviceId:self.deviceId apiKey:self.apiKey onComplete:^{
         TCLog(@"Close App request success");
     } onError:^(NSError *error) {
@@ -407,6 +423,7 @@ static TwinPushManager *_sharedInstance;
             [self didChangeValueForKey:@"deviceId"];
             
             [[NSUserDefaults standardUserDefaults] setValue:_deviceId forKey:kNSUserDefaultsDeviceIdKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             
             if ([self.delegate respondsToSelector:@selector(didFinishRegisteringDevice)]) {
                 [self.delegate didFinishRegisteringDevice];
