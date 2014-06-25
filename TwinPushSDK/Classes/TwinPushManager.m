@@ -47,6 +47,7 @@ static TwinPushManager *_sharedInstance;
 {
     self = [super init];
     if (self) {
+        self.requestFactory = [TPRequestFactory sharedInstance];
         _activeRequests = [NSMutableArray array];
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
@@ -104,7 +105,15 @@ static TwinPushManager *_sharedInstance;
 #pragma mark - Public methods
 
 - (void)registerDevice {
-    [self sendCreateDeviceRequestWithPushToken:_pushToken andAlias:_alias];
+    BOOL shouldRegister = YES;
+    
+    if ([self.delegate respondsToSelector:@selector(shouldRegisterDeviceWithAlias:token:)]) {
+        shouldRegister = [self.delegate shouldRegisterDeviceWithAlias:_alias token:_pushToken];
+    }
+    
+    if (shouldRegister) {
+        [self sendCreateDeviceRequestWithPushToken:_pushToken andAlias:_alias];
+    }
 }
 
 - (void)getDeviceNotificationsWithFilters:(TPNotificationsFilters*)filters andPagination:(TPNotificationsPagination*)pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete {
@@ -188,8 +197,8 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)setLocation:(CLLocation*)location {
-//#warning Remove display notification after debug
-//    [self displayNotification:location];
+    //#warning Remove display notification after debug
+    //    [self displayNotification:location];
     [self setLocationWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
 }
 
@@ -384,7 +393,6 @@ static TwinPushManager *_sharedInstance;
 - (void)sendCreateDeviceRequestWithPushToken:(NSString*)pushToken andAlias:(NSString*)alias {
     if ([self hasAppIdAndApiKey]) {
         [self.registerRequest cancel];
-        self.requestFactory = [TPRequestFactory sharedInstance];
         self.registerRequest = [self.requestFactory createCreateDeviceRequestWithToken:pushToken deviceAlias:alias UDID:self.deviceUDID appId:_appId apiKey:_apiKey onComplete:^(TPDevice *device) {
             [self willChangeValueForKey:@"alias"];
             if ([device.deviceAlias isKindOfClass:[NSString class]]) {
@@ -424,7 +432,6 @@ static TwinPushManager *_sharedInstance;
 (TPNotificationsPagination*)pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete {
     [self.inboxRequest cancel];
     if ([self hasAppIdAndApiKey]) {
-        self.requestFactory = [TPRequestFactory sharedInstance];
         self.inboxRequest = [self.requestFactory createGetDeviceNotificationsRequestWithDeviceId:_deviceId filters:filters pagination:pagination appId:_appId apiKey:_apiKey onComplete:^(NSArray *array, BOOL hasMore) {
             self.inboxRequest = nil;
             onComplete(array, hasMore);
@@ -441,7 +448,6 @@ static TwinPushManager *_sharedInstance;
 - (void)sendGetDeviceNotificationRequestWithId:(NSInteger)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete {
     if ([self hasAppIdAndApiKey]) {
         [self.singleNotificationRequest cancel];
-        self.requestFactory = [TPRequestFactory sharedInstance];
         self.singleNotificationRequest = [self.requestFactory createGetDeviceNotificationWithId:notificationId appId:_appId apiKey:_apiKey onComplete:^(TPNotification* notification) {
             self.singleNotificationRequest = nil;
             onComplete(notification);

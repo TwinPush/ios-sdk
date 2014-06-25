@@ -476,6 +476,7 @@
 		219BB6CB16B02B5B008739D7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = TwinCoders;
 			};

@@ -18,6 +18,7 @@
 @protocol TwinPushManagerDelegate <NSObject>
 
 @optional
+- (BOOL)shouldRegisterDeviceWithAlias:(NSString*)alias token:(NSString*)token;
 - (void)didFinishRegisteringDevice;
 - (void)didFailRegisteringDevice:(NSString*)error;
 - (void)didFinishGettingNotifications;
