@@ -1,3 +1,3 @@
 # TwinPush iOS SDK
 
-For more information go to https://developers.twinpush.com/quickstart
+For more information go to http://developers.twinpush.com/quickstart
