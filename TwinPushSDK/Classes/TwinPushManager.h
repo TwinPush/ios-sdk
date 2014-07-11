@@ -45,9 +45,9 @@ typedef enum {
 @property (nonatomic, copy) NSString* deviceId;
 @property (nonatomic, copy) NSString* alias;
 /** App identifier, provided by the web portal */
-@property (nonatomic, copy) NSString* appId;
+@property (nonatomic, copy, readonly) NSString* appId;
 /** Security token provided by the web portal. It is included in the header of all the API TwinPush requests */
-@property (nonatomic, copy) NSString* apiKey;
+@property (nonatomic, copy, readonly) NSString* apiKey;
 /** Unique identifier of the device. Defaults to [[[UIDevice currentDevice] identifierForVendor] UUIDString] if not set */
 @property (nonatomic, copy) NSString* deviceUDID;
 /** TwinPush Server URL. Change this URL if you have a custom URL for Enterprise hosted applications, including the version tag */

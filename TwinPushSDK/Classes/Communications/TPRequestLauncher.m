@@ -18,16 +18,7 @@
 
 @end
 
-static TPRequestLauncher *_sharedInstance;
-
 @implementation TPRequestLauncher
-
-+ (TPRequestLauncher*) sharedInstance {
-    if (_sharedInstance == nil) {
-        _sharedInstance = [[TPRequestLauncher alloc] init];
-    }
-    return _sharedInstance;
-}
 
 #pragma mark - Init
 

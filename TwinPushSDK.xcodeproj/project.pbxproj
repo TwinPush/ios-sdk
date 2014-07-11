@@ -48,6 +48,10 @@
 		21A33B4F16C4F78200EC7AF5 /* TPNotificationsPagination.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A33B4D16C4F78200EC7AF5 /* TPNotificationsPagination.m */; };
 		21F0777716B29070001CE5C5 /* TPNotificationDetailViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 21F0777416B29070001CE5C5 /* TPNotificationDetailViewController.h */; settings = {ATTRIBUTES = (); }; };
 		21F0777816B29070001CE5C5 /* TPNotificationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F0777516B29070001CE5C5 /* TPNotificationDetailViewController.m */; };
+		69AD46B91970453C0091F395 /* TwinFormsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 69AD46B71970453C0091F395 /* TwinFormsManager.h */; };
+		69AD46BA1970453C0091F395 /* TwinFormsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AD46B81970453C0091F395 /* TwinFormsManager.m */; };
+		69AD46BE19704CFD0091F395 /* TPTwinFormsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 69AD46BC19704CFD0091F395 /* TPTwinFormsRequest.h */; };
+		69AD46BF19704CFD0091F395 /* TPTwinFormsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AD46BD19704CFD0091F395 /* TPTwinFormsRequest.m */; };
 		69BDAE8B194A0648000B0E57 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69BDAE8A194A0648000B0E57 /* Security.framework */; };
 		7A63CB751779CC640073E0E7 /* TPReportStatisticsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A63CB731779CC640073E0E7 /* TPReportStatisticsRequest.h */; };
 		7A63CB761779CC640073E0E7 /* TPReportStatisticsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63CB741779CC640073E0E7 /* TPReportStatisticsRequest.m */; };
@@ -139,6 +143,10 @@
 		21A33B4D16C4F78200EC7AF5 /* TPNotificationsPagination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNotificationsPagination.m; sourceTree = "<group>"; };
 		21F0777416B29070001CE5C5 /* TPNotificationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNotificationDetailViewController.h; sourceTree = "<group>"; };
 		21F0777516B29070001CE5C5 /* TPNotificationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNotificationDetailViewController.m; sourceTree = "<group>"; };
+		69AD46B71970453C0091F395 /* TwinFormsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwinFormsManager.h; sourceTree = "<group>"; };
+		69AD46B81970453C0091F395 /* TwinFormsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwinFormsManager.m; sourceTree = "<group>"; };
+		69AD46BC19704CFD0091F395 /* TPTwinFormsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTwinFormsRequest.h; sourceTree = "<group>"; };
+		69AD46BD19704CFD0091F395 /* TPTwinFormsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTwinFormsRequest.m; sourceTree = "<group>"; };
 		69BDAE8A194A0648000B0E57 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7A63CB731779CC640073E0E7 /* TPReportStatisticsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPReportStatisticsRequest.h; sourceTree = "<group>"; };
 		7A63CB741779CC640073E0E7 /* TPReportStatisticsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPReportStatisticsRequest.m; sourceTree = "<group>"; };
@@ -313,6 +321,7 @@
 			children = (
 				219BB79816B03F89008739D7 /* TwinPushManager.h */,
 				219BB79916B03F8A008739D7 /* TwinPushManager.m */,
+				69AD46B6197045250091F395 /* Forms */,
 				2124D01816B1347700B39430 /* Entities */,
 				2124D01416B1334B00B39430 /* Utils */,
 				219BB75C16B03542008739D7 /* Communications */,
@@ -346,6 +355,7 @@
 				21A1EC9C170D72690036A957 /* TPTwinPushRequest.h */,
 				21A1EC9D170D72690036A957 /* TPTwinPushRequest.m */,
 				219BB75E16B03542008739D7 /* TwinPush */,
+				69AD46BB19704CD20091F395 /* TwinForms */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -360,6 +370,24 @@
 				218CB3BA16B12E630080A5CA /* TPCreateDeviceRequest.m */,
 			);
 			path = TwinPush;
+			sourceTree = "<group>";
+		};
+		69AD46B6197045250091F395 /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+				69AD46B71970453C0091F395 /* TwinFormsManager.h */,
+				69AD46B81970453C0091F395 /* TwinFormsManager.m */,
+			);
+			path = Forms;
+			sourceTree = "<group>";
+		};
+		69AD46BB19704CD20091F395 /* TwinForms */ = {
+			isa = PBXGroup;
+			children = (
+				69AD46BC19704CFD0091F395 /* TPTwinFormsRequest.h */,
+				69AD46BD19704CFD0091F395 /* TPTwinFormsRequest.m */,
+			);
+			path = TwinForms;
 			sourceTree = "<group>";
 		};
 		7A63CB721779CB960073E0E7 /* Statistics */ = {
@@ -406,6 +434,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69AD46B91970453C0091F395 /* TwinFormsManager.h in Headers */,
 				218C2AC316B28AA700F498CE /* TwinPushManager.h in Headers */,
 				218C2AC416B28B3B00F498CE /* TPNotification.h in Headers */,
 				218C2AC516B28B3B00F498CE /* TPNotificationsFilters.h in Headers */,
@@ -420,6 +449,7 @@
 				21A33B4E16C4F78200EC7AF5 /* TPNotificationsPagination.h in Headers */,
 				21A1EC9E170D72690036A957 /* TPTwinPushRequest.h in Headers */,
 				7AD27C551758E334003ADC3C /* TPGetDeviceNotificationsRequest.h in Headers */,
+				69AD46BE19704CFD0091F395 /* TPTwinFormsRequest.h in Headers */,
 				7AD27C571758E334003ADC3C /* TPGetNotificationWithIdRequest.h in Headers */,
 				7AD27C591758E334003ADC3C /* TPUpdateBadgeRequest.h in Headers */,
 				7AD27C5D1758E3D6003ADC3C /* TPSetCustomPropertyRequest.h in Headers */,
@@ -531,6 +561,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				219BB76D16B03769008739D7 /* TPBaseRequest.m in Sources */,
+				69AD46BA1970453C0091F395 /* TwinFormsManager.m in Sources */,
 				219BB76F16B03769008739D7 /* TPRESTJSONRequest.m in Sources */,
 				219BB77016B03769008739D7 /* TPRESTRequest.m in Sources */,
 				219BB79A16B03F8A008739D7 /* TwinPushManager.m in Sources */,
@@ -549,6 +580,7 @@
 				214683C316C2A9F900F9E886 /* TPLoadingCell.m in Sources */,
 				21A33B4F16C4F78200EC7AF5 /* TPNotificationsPagination.m in Sources */,
 				21A1EC9F170D72690036A957 /* TPTwinPushRequest.m in Sources */,
+				69AD46BF19704CFD0091F395 /* TPTwinFormsRequest.m in Sources */,
 				7AD27C561758E334003ADC3C /* TPGetDeviceNotificationsRequest.m in Sources */,
 				7AD27C581758E334003ADC3C /* TPGetNotificationWithIdRequest.m in Sources */,
 				7AD27C5A1758E334003ADC3C /* TPUpdateBadgeRequest.m in Sources */,

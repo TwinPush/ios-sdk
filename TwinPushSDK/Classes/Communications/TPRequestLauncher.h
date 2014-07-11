@@ -12,8 +12,6 @@
 /** @brief Object that will handle the launch of the service requests **/
 @interface TPRequestLauncher : NSObject <TPRequestEndDelegate>
 
-+ (TPRequestLauncher*)sharedInstance;
-
 @property (nonatomic, assign, getter=isAllowUnsafeCertificate) BOOL allowUnsafeCertificate;
 
 /** @brief If not null, the request will validate the SSL certificate chain names using the list of certificate

@@ -22,9 +22,9 @@
 
 @interface TPRequestFactory : NSObject
 
-+ (TPRequestFactory*)sharedInstance;
-
 #pragma mark - Requests
+
+@property (nonatomic, readonly) TPRequestLauncher* requestLauncher;
 
 /**
  @brief Constructor for CreateDeviceRequest

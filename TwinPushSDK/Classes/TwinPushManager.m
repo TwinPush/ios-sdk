@@ -36,6 +36,8 @@ static NSString* const kNSUserDefaultsRegionAccuracyKey = @"TPRegionAccuracy";
 @property (nonatomic, strong) NSNumber* pendingBadgeCount;
 @property (nonatomic, strong) CLLocationManager* locationManager;
 @property (nonatomic, assign) TPLocationAccuracy locationAccuracy;
+@property (nonatomic, copy) NSString* appId;
+@property (nonatomic, copy) NSString* apiKey;
 
 @end
 
@@ -47,7 +49,7 @@ static TwinPushManager *_sharedInstance;
 {
     self = [super init];
     if (self) {
-        self.requestFactory = [TPRequestFactory sharedInstance];
+        self.requestFactory = [[TPRequestFactory alloc] init];
         _activeRequests = [NSMutableArray array];
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
@@ -341,7 +343,7 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)enableCertificateNamePinningWithCertificateNames:(NSArray*)certificateNames {
-    [TPRequestLauncher sharedInstance].expectedCertNames = certificateNames;
+    self.requestFactory.requestLauncher.expectedCertNames = certificateNames;
 }
 
 - (void)disableCertificateNamePinning {
