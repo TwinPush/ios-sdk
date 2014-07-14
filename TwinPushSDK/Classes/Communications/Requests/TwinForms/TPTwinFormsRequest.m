@@ -10,7 +10,7 @@
 
 @implementation TPTwinFormsRequest
 
-static NSString* ServerURLKey = nil;
+static NSString* ServerURLKey = @"https://forms.twinpush.com/";
 static NSString* kBaseResource = @"apps/%@/report";
 
 static NSString* kReporterTokenKey = @"reporter_token";
