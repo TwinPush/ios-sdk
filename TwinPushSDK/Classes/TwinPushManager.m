@@ -273,6 +273,21 @@ static TwinPushManager *_sharedInstance;
     }
 }
 
+- (void)registerForRemoteNotifications {
+#ifdef __IPHONE_8_0
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)]) {
+        UIUserNotificationSettings *userNotificationSettings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:userNotificationSettings];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+    else {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    }
+#else
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+#endif
+}
+
 #pragma mark - AppDelegate Public methods
 
 - (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -288,7 +303,7 @@ static TwinPushManager *_sharedInstance;
         //        } else
     } else {
         // Registering for remote notifications
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+        [self registerForRemoteNotifications];
         
         NSDictionary* remoteNotificationDict = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
         if (remoteNotificationDict != nil) {
