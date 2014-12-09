@@ -55,6 +55,7 @@ typedef enum {
 
 #pragma mark - Shared instance
 + (TwinPushManager*) manager;
++ (TwinPushManager*) singleton; // Required for swift compatibility. Equivalent to [TwinPushManager manager]
 
 #pragma mark - Public methods
 - (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;

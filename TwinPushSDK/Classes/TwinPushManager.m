@@ -72,6 +72,10 @@ static TwinPushManager *_sharedInstance;
     return _sharedInstance;
 }
 
++ (TwinPushManager *)singleton {
+    return [self manager];
+}
+
 #pragma mark - Setup
 
 - (void)setupTwinPushManagerWithAppId:(NSString*)appId apiKey:(NSString*)apiKey delegate:(id<TwinPushManagerDelegate>)delegate {
