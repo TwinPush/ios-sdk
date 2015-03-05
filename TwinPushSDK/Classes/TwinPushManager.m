@@ -87,6 +87,10 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)setApplicationBadgeCount:(NSUInteger)badgeCount {
+    if ([UIApplication sharedApplication].applicationIconBadgeNumber == badgeCount) {
+        return;
+    }
+    
     if (self.updateBadgeRequest != nil) {
         [self.updateBadgeRequest cancel];
         self.updateBadgeRequest = nil;
