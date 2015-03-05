@@ -261,8 +261,8 @@
 }
 
 - (void)initializeView:(UIView*)view {
-    if ( ([view isKindOfClass:[UITextField class]] || [view isKindOfClass:[UITextView class]]) && (![(id)view delegate] || [(id)view delegate] == self) ) {
-        [(id)view setDelegate:self];
+    if ( ([view isKindOfClass:[UITextField class]] || [view isKindOfClass:[UITextView class]]) && (![view performSelector:@selector(delegate)] || [view performSelector:@selector(delegate)] == self) ) {
+        [view performSelector:@selector(setDelegate:) withObject:self];
         
         if ( [view isKindOfClass:[UITextField class]] ) {
             UIView *otherView = nil;

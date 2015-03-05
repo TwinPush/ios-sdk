@@ -498,7 +498,7 @@
 			name = TwinPushSDKTests;
 			productName = TwinPushSDKTests;
 			productReference = 219BB6E516B02B5B008739D7 /* TwinPushSDKTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -506,7 +506,7 @@
 		219BB6CB16B02B5B008739D7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastTestingUpgradeCheck = 0510;
+				LastTestingUpgradeCheck = 0610;
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = TwinCoders;
 			};

@@ -23,18 +23,18 @@
 @implementation AppDelegate
 
 - (void)applyCustomAppearance {
-    NSDictionary* titleAttributes = @{UITextAttributeTextColor: [UIColor whiteColor],
-                                      UITextAttributeFont: [UIFont fontWithName:@"MuseoSans-500" size:13]};
+    NSDictionary* titleAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor],
+                                      NSFontAttributeName: [UIFont fontWithName:@"MuseoSans-500" size:13]};
     
     [[UIBarButtonItem appearance] setTitleTextAttributes:titleAttributes forState:UIControlStateNormal];
     
     // Set the text appearance for navbar
     [[UINavigationBar appearance] setTitleTextAttributes:@{
-                                UITextAttributeTextColor: [UIColor whiteColor],
-                                     UITextAttributeFont: [UIFont fontWithName:@"MuseoSans-700" size:26]}];
+                                NSForegroundColorAttributeName: [UIColor whiteColor],
+                                     NSFontAttributeName: [UIFont fontWithName:@"MuseoSans-700" size:26]}];
     
     [[UISegmentedControl appearance] setTitleTextAttributes:@{
-                                        UITextAttributeFont:[UIFont fontWithName:@"MuseoSans-500" size:13.0f]}
+                                        NSFontAttributeName:[UIFont fontWithName:@"MuseoSans-500" size:13.0f]}
                                                    forState:UIControlStateNormal];
 }
 

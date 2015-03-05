@@ -43,10 +43,8 @@
     [self.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"tabbar_h"]];
     
     NSDictionary* titleAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                     [UIFont fontWithName:@"MuseoSans-700" size:10],
-                                     UITextAttributeFont,
-                                     [UIColor whiteColor],
-                                     UITextAttributeTextColor,
+                                     [UIFont fontWithName:@"MuseoSans-700" size:10], NSFontAttributeName,
+                                     [UIColor whiteColor], NSForegroundColorAttributeName,
                                      nil];
     
     for (UIViewController* viewController in self.viewControllers) {
@@ -71,7 +69,7 @@
                 break;
         }
         
-        [tabbarItem setFinishedSelectedImage:image withFinishedUnselectedImage:image];
+        [tabbarItem setSelectedImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     }
 }
 
