@@ -20,10 +20,16 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
 
 #pragma mark - Init
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if (( self = [super initWithCoder:aDecoder] )) {
+        
+    }
+    return self;
+}
+
+- (instancetype)init {
+    if (( self = [super init])) {
+        self.requiresInitialization = YES;
     }
     return self;
 }
@@ -34,7 +40,8 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     if (_notification != nil) {
-        if (_notificationTitleLabel == nil) {
+        if (self.requiresInitialization) {
+            // Build the default GUI
             self.view.backgroundColor = [UIColor whiteColor];
             self.notificationDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, self.view.frame.size.width - 10, 30)];
             [self.view addSubview:_notificationDateLabel];
@@ -43,7 +50,7 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
             UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
             [button addTarget:self
                        action:@selector(closeModal)
-             forControlEvents:UIControlEventTouchDown];
+             forControlEvents:UIControlEventTouchUpInside];
             [button setTitle:NSLocalizedStringWithDefaultValue(@"MODAL_NOTIFICATION_DETAIL_CLOSE_BUTTON", nil, [NSBundle mainBundle], @"Close", nil) forState:UIControlStateNormal];
             button.frame = CGRectMake(5, 20 + _notificationTitleLabel.frame.size.height, self.view.frame.size.width - 10, 30);
             [self.view addSubview:button];

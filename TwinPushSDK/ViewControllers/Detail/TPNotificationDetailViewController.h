@@ -22,6 +22,7 @@
 @property (nonatomic, strong) TPNotification* notification;
 @property (nonatomic, weak) id<TPNotificationDetailViewControllerDelegate> delegate;
 @property (nonatomic, getter = isLoading) BOOL loading;
+@property (nonatomic) BOOL requiresInitialization; // Set to NO if you are creating the GUI by yourself to avoid unwanted elements
 
 #pragma mark - IBOutlets
 @property (strong, nonatomic) IBOutlet UILabel *notificationTitleLabel;
