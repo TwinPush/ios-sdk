@@ -100,8 +100,7 @@ static NSString* const kOnlyRichNotificationsTag = @"tp_rich";
 }
 
 - (void)calculateResultsPerPage {
-    self.resultsPerPage = _inboxTableView.frame.size.height / _inboxTableView.rowHeight;
-    self.resultsPerPage = _resultsPerPage + (_resultsPerPage / 2);
+    self.resultsPerPage = (_inboxTableView.frame.size.height / _inboxTableView.rowHeight > 0 ? _inboxTableView.rowHeight : 44) * 1.2;
     if (self.filters == nil) {
         self.filters = [[TPNotificationsFilters alloc] init];
         self.filters.tags = [NSMutableArray array];
