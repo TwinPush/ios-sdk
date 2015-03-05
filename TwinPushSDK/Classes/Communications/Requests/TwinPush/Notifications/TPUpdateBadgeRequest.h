@@ -19,6 +19,6 @@ typedef void(^UpdateBadgeResponse)();
  @param onComplete Block that will be executed if we obtain the notification with the specified id
  @param onError Block that will be executed if the device is not correct
  */
-- (id)initUpdateBadgeRequestWithCount:(NSUInteger)badgeCount forDeviceId:(NSString*)deviceId appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(UpdateBadgeResponse)onComplete onError:(TPRequestErrorBlock)onError;
+- (id)initUpdateBadgeRequestWithCount:(NSUInteger)badgeCount forDeviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(UpdateBadgeResponse)onComplete onError:(TPRequestErrorBlock)onError;
 
 @end

@@ -10,6 +10,7 @@
 
 static NSString* ServerURLKey = nil;
 static NSString* kBaseResourceName = @"apps";
+static NSString* kDeviceResourceName = @"devices";
 
 @implementation TPTwinPushRequest
 
@@ -20,17 +21,23 @@ static NSString* kBaseResourceName = @"apps";
 }
 
 - (NSMutableURLRequest *)createRequest {
+    NSString* baseUrl = ServerURLKey;
+    if ([baseUrl characterAtIndex:baseUrl.length - 1] != '/') {
+        baseUrl = [baseUrl stringByAppendingString:@"/"];
+    }
     if (self.appId != nil) {
-        NSString* appIdSegment = self.appId != nil ? [NSString stringWithFormat:@"%@/%@/", kBaseResourceName, self.appId] : @"";
-        self.baseServerUrl = [NSString stringWithFormat:@"%@%@", ServerURLKey, appIdSegment];
+        baseUrl = [NSString stringWithFormat:@"%@%@/%@/", baseUrl, kBaseResourceName, self.appId];
     }
-    else {
-        self.baseServerUrl = ServerURLKey;
+    if (self.deviceId != nil) {
+        baseUrl = [NSString stringWithFormat:@"%@%@/%@/", baseUrl, kDeviceResourceName, self.deviceId];
     }
+    self.baseServerUrl = baseUrl;
     TCLog(@"URL: %@", self.baseServerUrl);
     
     NSMutableURLRequest* request = [super createRequest];
-    [request addValue:self.apiKey forHTTPHeaderField:@"X-TwinPush-REST-API-Token"];
+    if (self.apiKey != nil) {
+        [request addValue:self.apiKey forHTTPHeaderField:@"X-TwinPush-REST-API-Token"];
+    }
     return request;
 }
 

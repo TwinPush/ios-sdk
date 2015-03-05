@@ -19,6 +19,6 @@ typedef void(^GetDeviceNotificationWithIdResponseBlock)(TPNotification* notifica
  @param onComplete Block that will be executed if we obtain the notification with the specified id
  @param onError Block that will be executed if the device is not correct
  */
-- (id)initGetDeviceNotificationWithId:(NSInteger)notificationId appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (id)initGetDeviceNotificationWithId:(NSInteger)notificationId deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 @end

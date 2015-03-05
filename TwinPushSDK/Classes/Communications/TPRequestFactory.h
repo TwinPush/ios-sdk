@@ -41,7 +41,7 @@
  @param onComplete Block that will be executed if we obtain the notifications for the device
  @param onError Block that will be executed if the device is not correct
  */
-- (TPBaseRequest*)createGetDeviceNotificationsRequestWithDeviceId:(NSString*)deviceId filters:(TPNotificationsFilters*)filters pagination:(TPNotificationsPagination*)pagination appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (TPBaseRequest *)createGetDeviceNotificationsRequestWithDeviceId:(NSString*)deviceId filters:(TPNotificationsFilters*)filters pagination:(TPNotificationsPagination*)pagination appId:(NSString*)appId onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 /**
  @brief Constructor for GetDeviceNotificationWithId
@@ -49,7 +49,7 @@
  @param onComplete Block that will be executed if we obtain the notification with the specified id
  @param onError Block that will be executed if the device is not correct
  */
-- (TPBaseRequest*)createGetDeviceNotificationWithId:(NSInteger)notificationId appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (TPBaseRequest *)createGetDeviceNotificationWithId:(NSInteger)notificationId deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 
 /**
@@ -59,7 +59,7 @@
  @param onComplete Block that will be executed if we obtain the notification with the specified id
  @param onError Block that will be executed if the device is not correct
  */
-- (TPBaseRequest*)createUpdateBadgeRequestWithCount:(NSUInteger)badgeCount forDeviceId:(NSString*)deviceId appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(UpdateBadgeResponse)onComplete onError:(TPRequestErrorBlock)onError;
+- (TPBaseRequest*)createUpdateBadgeRequestWithCount:(NSUInteger)badgeCount forDeviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(UpdateBadgeResponse)onComplete onError:(TPRequestErrorBlock)onError;
 
 #pragma mark Custom Properties
 
@@ -69,7 +69,7 @@
  @param onComplete Block that will be executed if we obtain the notifications for the device
  @param onError Block that will be executed if the device is not correct
  */
-- (TPBaseRequest*)createSetCustomPropertyRequestWithName:(NSString*)name type:(TPPropertyType)type value:(NSObject*)value deviceId:(NSString*)deviceId appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (TPBaseRequest*)createSetCustomPropertyRequestWithName:(NSString*)name type:(TPPropertyType)type value:(NSObject*)value deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 #pragma mark Statistics
 
@@ -80,13 +80,13 @@
  @param onComplete Block that will be executed if we obtain the notifications for the device
  @param onError Block that will be executed if the device is not correct
  */
-- (TPBaseRequest*)createReportStatisticsRequestWithCoordinate:(CLLocationCoordinate2D)coordinate deviceId:(NSString*)deviceId apiKey:(NSString*)apiKey onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (TPBaseRequest*)createReportStatisticsRequestWithCoordinate:(CLLocationCoordinate2D)coordinate deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
-- (TPBaseRequest*)createOpenAppRequestWithDeviceId:(NSString*)deviceId apiKey:(NSString*)apiKey onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (TPBaseRequest*)createOpenAppRequestWithDeviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
-- (TPBaseRequest*)createCloseAppRequestWithDeviceId:(NSString*)deviceId apiKey:(NSString*)apiKey onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (TPBaseRequest*)createCloseAppRequestWithDeviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
-- (TPBaseRequest*)createUserOpenNotificationRequestWithDeviceId:(NSString*)deviceId notificationId:(NSString*)notificationId apiKey:(NSString*)apiKey onComplete:(TPRequestCompleteBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (TPBaseRequest*)createUserOpenNotificationRequestWithDeviceId:(NSString*)deviceId notificationId:(NSString*)notificationId appId:(NSString*)appId onComplete:(TPRequestCompleteBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 
 @end

@@ -35,50 +35,50 @@
     return request;
 }
 
-- (TPBaseRequest *)createGetDeviceNotificationsRequestWithDeviceId:(NSString*)deviceId filters:(TPNotificationsFilters*)filters pagination:(TPNotificationsPagination*)pagination appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
-    TPBaseRequest* request = [[TPGetDeviceNotificationsRequest alloc] initGetDeviceNotificationsRequestWithDeviceId:deviceId filters:(TPNotificationsFilters*)filters pagination:(TPNotificationsPagination*)pagination appId:appId apiKey:apiKey onComplete:onComplete onError:onError];
+- (TPBaseRequest *)createGetDeviceNotificationsRequestWithDeviceId:(NSString*)deviceId filters:(TPNotificationsFilters*)filters pagination:(TPNotificationsPagination*)pagination appId:(NSString*)appId onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    TPBaseRequest* request = [[TPGetDeviceNotificationsRequest alloc] initGetDeviceNotificationsRequestWithDeviceId:deviceId filters:(TPNotificationsFilters*)filters pagination:(TPNotificationsPagination*)pagination appId:appId onComplete:onComplete onError:onError];
     request.requestLauncher = _requestLauncher;
     return request;
 }
 
-- (TPBaseRequest *)createGetDeviceNotificationWithId:(NSInteger)notificationId appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
-    TPBaseRequest* request = [[TPGetNotificationWithIdRequest alloc] initGetDeviceNotificationWithId:notificationId appId:appId apiKey:apiKey onComplete:onComplete onError:onError];
+- (TPBaseRequest *)createGetDeviceNotificationWithId:(NSInteger)notificationId deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    TPBaseRequest* request = [[TPGetNotificationWithIdRequest alloc] initGetDeviceNotificationWithId:notificationId deviceId:deviceId appId:appId onComplete:onComplete onError:onError];
     request.requestLauncher = _requestLauncher;
     return request;
 }
 
-- (TPBaseRequest*)createUpdateBadgeRequestWithCount:(NSUInteger)badgeCount forDeviceId:(NSString*)deviceId appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(UpdateBadgeResponse)onComplete onError:(TPRequestErrorBlock)onError {
-    TPBaseRequest* request = [[TPUpdateBadgeRequest alloc] initUpdateBadgeRequestWithCount:badgeCount forDeviceId:deviceId appId:appId apiKey:apiKey onComplete:onComplete onError:onError];
+- (TPBaseRequest*)createUpdateBadgeRequestWithCount:(NSUInteger)badgeCount forDeviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(UpdateBadgeResponse)onComplete onError:(TPRequestErrorBlock)onError {
+    TPBaseRequest* request = [[TPUpdateBadgeRequest alloc] initUpdateBadgeRequestWithCount:badgeCount forDeviceId:deviceId appId:appId onComplete:onComplete onError:onError];
     request.requestLauncher = _requestLauncher;
     return request;
 }
 
-- (TPBaseRequest*)createSetCustomPropertyRequestWithName:(NSString*)name type:(TPPropertyType)type value:(NSObject*)value deviceId:(NSString*)deviceId appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError {
-    TPBaseRequest* request = [[TPSetCustomPropertyRequest alloc] initSetCustomPropertyRequestWithName:name type:type value:value deviceId:deviceId appId:appId apiKey:apiKey onComplete:onComplete onError:onError];
+- (TPBaseRequest*)createSetCustomPropertyRequestWithName:(NSString*)name type:(TPPropertyType)type value:(NSObject*)value deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    TPBaseRequest* request = [[TPSetCustomPropertyRequest alloc] initSetCustomPropertyRequestWithName:name type:type value:value deviceId:deviceId appId:appId onComplete:onComplete onError:onError];
     request.requestLauncher = _requestLauncher;
     return request;
 }
 
-- (TPBaseRequest*)createReportStatisticsRequestWithCoordinate:(CLLocationCoordinate2D)coordinate deviceId:(NSString*)deviceId apiKey:(NSString*)apiKey onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError {
-    TPBaseRequest* request = [[TPReportStatisticsRequest alloc] initReportStatisticsRequestWithCoordinate:coordinate deviceId:deviceId apiKey:apiKey onComplete:onComplete onError:onError];
+- (TPBaseRequest*)createReportStatisticsRequestWithCoordinate:(CLLocationCoordinate2D)coordinate deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    TPBaseRequest* request = [[TPReportStatisticsRequest alloc] initReportStatisticsRequestWithCoordinate:coordinate deviceId:deviceId appId:appId onComplete:onComplete onError:onError];
     request.requestLauncher = _requestLauncher;
     return request;
 }
 
-- (TPBaseRequest*)createOpenAppRequestWithDeviceId:(NSString*)deviceId apiKey:(NSString*)apiKey onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError {
-    TPBaseRequest* request = [[TPOpenAppRequest alloc] initOpenAppRequestWithDeviceId:deviceId apiKey:apiKey onComplete:onComplete onError:onError];
+- (TPBaseRequest*)createOpenAppRequestWithDeviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    TPBaseRequest* request = [[TPOpenAppRequest alloc] initOpenAppRequestWithDeviceId:deviceId appId:appId onComplete:onComplete onError:onError];
     request.requestLauncher = _requestLauncher;
     return request;
 }
 
-- (TPBaseRequest*)createCloseAppRequestWithDeviceId:(NSString*)deviceId apiKey:(NSString*)apiKey onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError {
-    TPBaseRequest* request = [[TPCloseAppRequest alloc] initCloseAppRequestWithDeviceId:deviceId apiKey:apiKey onComplete:onComplete onError:onError];
+- (TPBaseRequest*)createCloseAppRequestWithDeviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    TPBaseRequest* request = [[TPCloseAppRequest alloc] initCloseAppRequestWithDeviceId:deviceId appId:appId onComplete:onComplete onError:onError];
     request.requestLauncher = _requestLauncher;
     return request;
 }
 
-- (TPBaseRequest*)createUserOpenNotificationRequestWithDeviceId:(NSString*)deviceId notificationId:(NSString*)notificationId apiKey:(NSString*)apiKey onComplete:(TPRequestCompleteBlock)onComplete onError:(TPRequestErrorBlock)onError {
-    TPBaseRequest* request = [[TPUserOpenNotificationRequest alloc] initUserOpenNotificationRequestWithDeviceId:deviceId notificationId:notificationId apiKey:apiKey onComplete:onComplete onError:onError];
+- (TPBaseRequest*)createUserOpenNotificationRequestWithDeviceId:(NSString*)deviceId notificationId:(NSString*)notificationId appId:(NSString*)appId onComplete:(TPRequestCompleteBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    TPBaseRequest* request = [[TPUserOpenNotificationRequest alloc] initUserOpenNotificationRequestWithNotificationId:notificationId deviceId:deviceId appId:appId onComplete:onComplete onError:onError];
     request.requestLauncher = _requestLauncher;
     return request;
 }

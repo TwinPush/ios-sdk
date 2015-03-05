@@ -12,8 +12,7 @@
 #import "TPRequestParam.h"
 
 /* Request info */
-static NSString* const kResourceName = @"devices";
-static NSString* const kRequestSegment = @"set_custom_property";
+static NSString* const kResourceName = @"set_custom_property";
 static NSString* const kNameKey = @"name";
 static NSString* const kTypeKey = @"type";
 static NSString* const kValueKey = @"value";
@@ -28,16 +27,14 @@ static NSString* const kTypeFloat = @"float";
 
 #pragma mark - Init
 
-- (id)initSetCustomPropertyRequestWithName:(NSString*)name type:(TPPropertyType)type value:(NSObject*)value deviceId:(NSString*)deviceId appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError {
+- (id)initSetCustomPropertyRequestWithName:(NSString*)name type:(TPPropertyType)type value:(NSObject*)value deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError {
     self = [super init];
     if (self) {
-        [self addSegmentParam:deviceId];
-        [self addSegmentParam:kRequestSegment];
         self.requestMethod = kTPRequestMethodPOST;
         // Set resource name
         self.resource = kResourceName;
+        self.deviceId = deviceId;
         self.appId = appId;
-        self.apiKey = apiKey;
         // Add param tags
         [self addParam:name forKey:kNameKey];
         [self addParam:[self stringForType:type] forKey:kTypeKey];

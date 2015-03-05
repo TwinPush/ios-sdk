@@ -15,8 +15,7 @@ static NSString* const kNotificationTypeDelivery = @"Delivery";
 static NSString* const kNotificationTypeTag = @"Tag";
 
 /* Request info */
-static NSString* const kResourceName = @"devices";
-static NSString* const kSegmentParamNotifications = @"search_notifications";
+static NSString* const kResourceName = @"search_notifications";
 static NSString* const kTags = @"tags";
 static NSString* const kNoTags = @"no_tags";
 static NSString* const kPerPage = @"per_page";
@@ -30,16 +29,14 @@ static NSString* const kReferencesResponseWrapper = @"references";
 
 #pragma mark - Init
 
-- (id)initGetDeviceNotificationsRequestWithDeviceId:(NSString*)deviceId filters:(TPNotificationsFilters*)filters pagination:(TPNotificationsPagination*)pagination appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+- (id)initGetDeviceNotificationsRequestWithDeviceId:(NSString*)deviceId filters:(TPNotificationsFilters*)filters pagination:(TPNotificationsPagination*)pagination appId:(NSString*)appId onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
     self = [super init];
     if (self) {
-        [self addSegmentParam:deviceId];
-        [self addSegmentParam:kSegmentParamNotifications];
         self.requestMethod = kTPRequestMethodPOST;
         // Set resource name
         self.resource = kResourceName;
+        self.deviceId = deviceId;
         self.appId = appId;
-        self.apiKey = apiKey;
         // Add param tags
         if (filters.tags.count > 0) {
             [self addParam:[TPRequestParam paramWithKey:kTags andArrayValue:filters.tags]];

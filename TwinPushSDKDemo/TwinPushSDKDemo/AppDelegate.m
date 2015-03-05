@@ -16,8 +16,8 @@
 #pragma mark - App ID and API Key
 // Set here your API Key and APP ID. If you don't have one already, go to https://app.twinpush.com
 // to obtain your own key
-#define TWINPUSH_APP_ID @"----"
-#define TWINPUSH_API_KEY @"-----------------------------"
+#define TWINPUSH_APP_ID @"23c8befd3f1b7f3d"
+#define TWINPUSH_API_KEY @"43e69710115e83638e8b939fcd38a4cf"
 #pragma mark -
 
 @implementation AppDelegate

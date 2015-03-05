@@ -24,6 +24,6 @@ typedef void(^GetDeviceNotificationsResponseBlock)(NSArray* array, BOOL hasMore)
  @param onComplete Block that will be executed if we obtain the notifications for the device
  @param onError Block that will be executed if the device is not correct
  */
-- (id)initGetDeviceNotificationsRequestWithDeviceId:(NSString*)deviceId filters:(TPNotificationsFilters*)filters pagination:(TPNotificationsPagination*)pagination appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (id)initGetDeviceNotificationsRequestWithDeviceId:(NSString*)deviceId filters:(TPNotificationsFilters*)filters pagination:(TPNotificationsPagination*)pagination appId:(NSString*)appId onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 @end

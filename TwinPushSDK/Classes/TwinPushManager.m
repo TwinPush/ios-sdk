@@ -134,7 +134,7 @@ static TwinPushManager *_sharedInstance;
     if (![self isDeviceRegistered])
         return;
     
-    TPBaseRequest* request = [self.requestFactory createUserOpenNotificationRequestWithDeviceId:self.deviceId notificationId:notificationId apiKey:self.apiKey onComplete:^(NSDictionary *response) {
+    TPBaseRequest* request = [self.requestFactory createUserOpenNotificationRequestWithDeviceId:self.deviceId notificationId:notificationId appId:self.appId onComplete:^(NSDictionary *response) {
         TCLog(@"User Open Notification: %@ request success", notificationId);
     } onError:^(NSError *error) {
         TCLog(@"User Open Notification: %@ request error: %@", notificationId, error);
@@ -167,7 +167,7 @@ static TwinPushManager *_sharedInstance;
     if (![self isDeviceRegistered])
         return;
     
-    TPBaseRequest* request = [[self requestFactory] createSetCustomPropertyRequestWithName:name type:type value:value deviceId:_deviceId appId:_appId apiKey:_apiKey onComplete:^{
+    TPBaseRequest* request = [[self requestFactory] createSetCustomPropertyRequestWithName:name type:type value:value deviceId:_deviceId appId:_appId onComplete:^{
         TCLog(@"Property set successfull: %@=%@", name, value);
     } onError:^(NSError *error) {
         TCLog(@"ERROR setting property: %@=%@", name, value);
@@ -221,7 +221,7 @@ static TwinPushManager *_sharedInstance;
         [self.reportStatisticsRequest cancel];
     }
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude, longitude);
-    self.reportStatisticsRequest = [self.requestFactory createReportStatisticsRequestWithCoordinate:coordinate deviceId:self.deviceId apiKey:self.apiKey onComplete:^{
+    self.reportStatisticsRequest = [self.requestFactory createReportStatisticsRequestWithCoordinate:coordinate deviceId:self.deviceId appId:self.appId onComplete:^{
         TCLog(@"Location set successfull: %f, %f", latitude, longitude);
         self.reportStatisticsRequest = nil;
     } onError:^(NSError *error) {
@@ -266,7 +266,7 @@ static TwinPushManager *_sharedInstance;
     // Send badge count update request if it's required and hasn't been sent yet
     BOOL badgeCountChanged = _pendingBadgeCount != nil && self.updateBadgeRequest == nil;
     if (badgeCountChanged && [self isDeviceRegistered]) {
-        self.updateBadgeRequest = [_requestFactory createUpdateBadgeRequestWithCount:_pendingBadgeCount.unsignedIntegerValue forDeviceId:_deviceId appId:_appId apiKey:_apiKey onComplete:^{
+        self.updateBadgeRequest = [_requestFactory createUpdateBadgeRequestWithCount:_pendingBadgeCount.unsignedIntegerValue forDeviceId:_deviceId appId:_appId onComplete:^{
             self.updateBadgeRequest = nil;
             self.pendingBadgeCount = nil;
         } onError:^(NSError *error) {
@@ -336,7 +336,7 @@ static TwinPushManager *_sharedInstance;
     if (![self isDeviceRegistered])
         return;
     
-    TPBaseRequest* request = [self.requestFactory createOpenAppRequestWithDeviceId:self.deviceId apiKey:self.apiKey onComplete:^{
+    TPBaseRequest* request = [self.requestFactory createOpenAppRequestWithDeviceId:self.deviceId appId:self.appId onComplete:^{
         TCLog(@"Open App request success");
     } onError:^(NSError *error) {
         TCLog(@"Open App request error: %@", error);
@@ -348,7 +348,7 @@ static TwinPushManager *_sharedInstance;
     if (![self isDeviceRegistered])
         return;
     
-    TPBaseRequest* request = [self.requestFactory createCloseAppRequestWithDeviceId:self.deviceId apiKey:self.apiKey onComplete:^{
+    TPBaseRequest* request = [self.requestFactory createCloseAppRequestWithDeviceId:self.deviceId appId:self.appId onComplete:^{
         TCLog(@"Close App request success");
     } onError:^(NSError *error) {
         TCLog(@"Close App request error: %@", error);
@@ -471,7 +471,7 @@ static TwinPushManager *_sharedInstance;
 (TPNotificationsPagination*)pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete {
     [self.inboxRequest cancel];
     if ([self hasAppIdAndApiKey]) {
-        self.inboxRequest = [self.requestFactory createGetDeviceNotificationsRequestWithDeviceId:_deviceId filters:filters pagination:pagination appId:_appId apiKey:_apiKey onComplete:^(NSArray *array, BOOL hasMore) {
+        self.inboxRequest = [self.requestFactory createGetDeviceNotificationsRequestWithDeviceId:_deviceId filters:filters pagination:pagination appId:_appId onComplete:^(NSArray *array, BOOL hasMore) {
             self.inboxRequest = nil;
             onComplete(array, hasMore);
         } onError:^(NSError *error) {
@@ -487,7 +487,7 @@ static TwinPushManager *_sharedInstance;
 - (void)sendGetDeviceNotificationRequestWithId:(NSInteger)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete {
     if ([self hasAppIdAndApiKey]) {
         [self.singleNotificationRequest cancel];
-        self.singleNotificationRequest = [self.requestFactory createGetDeviceNotificationWithId:notificationId appId:_appId apiKey:_apiKey onComplete:^(TPNotification* notification) {
+        self.singleNotificationRequest = [self.requestFactory createGetDeviceNotificationWithId:notificationId deviceId:self.deviceId appId:_appId onComplete:^(TPNotification* notification) {
             self.singleNotificationRequest = nil;
             onComplete(notification);
         } onError:^(NSError *error) {

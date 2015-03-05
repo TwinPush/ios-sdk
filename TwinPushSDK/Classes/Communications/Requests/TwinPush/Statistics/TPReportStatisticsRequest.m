@@ -13,21 +13,20 @@ static NSString* const kResourceName = @"report_statistics";
 static NSString* const kLatitudeKey = @"latitude";
 static NSString* const kLongitudeKey = @"longitude";
 static NSString* const kDeviceKey = @"device";
-static NSString* const kDeviceIdKey = @"id";
 
 @implementation TPReportStatisticsRequest
 
 #pragma mark - Init
 
--(id) initReportStatisticsRequestWithCoordinate:(CLLocationCoordinate2D)coordinate deviceId:(NSString*)deviceId apiKey:(NSString*)apiKey onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError {
+-(id) initReportStatisticsRequestWithCoordinate:(CLLocationCoordinate2D)coordinate deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError {
     self = [super init];
     if (self) {
         self.requestMethod = kTPRequestMethodPOST;
         // Set resource name
         self.resource = kResourceName;
-        self.apiKey = apiKey;
+        self.deviceId = deviceId;
+        self.appId = appId;
         // Add param tags
-        [self addParam:deviceId forKey:kDeviceIdKey];
         NSMutableDictionary* deviceStats = [NSMutableDictionary dictionaryWithCapacity:2];
         deviceStats[kLatitudeKey] = @(coordinate.latitude);
         deviceStats[kLongitudeKey] = @(coordinate.longitude);

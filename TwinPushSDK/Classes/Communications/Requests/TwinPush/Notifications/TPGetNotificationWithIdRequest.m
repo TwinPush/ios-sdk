@@ -19,15 +19,15 @@ static NSString* const kObjectsResponseWrapper = @"objects";
 
 @implementation TPGetNotificationWithIdRequest
 
-- (id)initGetDeviceNotificationWithId:(NSInteger)notificationId appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+- (id)initGetDeviceNotificationWithId:(NSInteger)notificationId deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
     self = [super init];
     if (self) {
         [self addSegmentParam:kSegmentParamNotifications];
         [self addSegmentParam:[NSString stringWithFormat:@"%ld", (long)notificationId]];
         self.requestMethod = kTPRequestMethodGET;
         // Set resource name
-        self.apiKey = apiKey;
         self.appId = appId;
+        self.deviceId = deviceId;
         // Set response handler blocks
         self.onError = onError;
         id __weak wself = self;

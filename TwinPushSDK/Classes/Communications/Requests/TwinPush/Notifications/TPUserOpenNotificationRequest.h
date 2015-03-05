@@ -12,11 +12,12 @@
 
 /**
  @brief Constructor for TPUserOpenNotificationRequest
- @param deviceId The device in which the user has opened the notification
  @param notificationId The ID of the notification opened
+ @param deviceId The device in which the user has opened the notification
+ @param appId The ID of the application
  @param timeStamp The timestamp of the moment when the user opened the notification
  @param onError Block that will be executed if the device is not correct
  */
-- (id)initUserOpenNotificationRequestWithDeviceId:(NSString*)deviceId notificationId:(NSString*)notificationId apiKey:(NSString*)apiKey onComplete:(TPRequestCompleteBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (id)initUserOpenNotificationRequestWithNotificationId:(NSString*)notificationId deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(TPRequestCompleteBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 @end
