@@ -42,10 +42,15 @@ static NSString* const kDateFormat = @"dd/MM/yyyy HH:mm";
 - (void)initializeCell {
     // Initialization code
     self.notificationDateLabel = [[UILabel alloc]init];
-    self.notificationDateLabel.textAlignment = UITextAlignmentLeft;
-    self.notificationDateLabel.font = [UIFont systemFontOfSize:12];
     self.notificationDescriptionLabel = [[UILabel alloc]init];
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_6_0
+    self.notificationDateLabel.textAlignment = NSTextAlignmentLeft;
+    self.notificationDescriptionLabel.textAlignment = NSTextAlignmentLeft;
+#else
+    self.notificationDateLabel.textAlignment = UITextAlignmentLeft;
     self.notificationDescriptionLabel.textAlignment = UITextAlignmentLeft;
+#endif
+    self.notificationDateLabel.font = [UIFont systemFontOfSize:12];
     self.notificationDescriptionLabel.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:_notificationDateLabel];
     [self.contentView addSubview:_notificationDescriptionLabel];

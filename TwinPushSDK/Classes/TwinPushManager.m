@@ -420,7 +420,8 @@ static TwinPushManager *_sharedInstance;
             TPNotificationDetailViewController* detailViewController = [[TPNotificationDetailViewController alloc] init];
             detailViewController.delegate = self;
             detailViewController.notification = notification;
-            [[[[[UIApplication sharedApplication] delegate] window] rootViewController] presentModalViewController:detailViewController animated:YES];
+            UIViewController* presenter = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+            [presenter presentViewController:detailViewController animated:YES completion:nil];
         }
     } else {
         [_delegate showNotification:notification];

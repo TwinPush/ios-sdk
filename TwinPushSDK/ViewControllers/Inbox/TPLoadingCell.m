@@ -40,7 +40,11 @@
 - (void)initializeCell {
     // Initialization code
     self.loadingLabel = [[UILabel alloc]init];
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_6_0
+    self.loadingLabel.textAlignment = NSTextAlignmentLeft;
+#else
     self.loadingLabel.textAlignment = UITextAlignmentLeft;
+#endif
     self.loadingLabel.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:_loadingLabel];
     [self.contentView addSubview:_spinner];
