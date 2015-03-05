@@ -17,6 +17,5 @@
 @property (nonatomic, strong) NSDate* updateDate;
 @property (nonatomic, strong) NSDate* lastRegistrationDate;
 @property (nonatomic, copy) NSString* appId;
-@property (nonatomic, copy) NSString* type;
 
 @end

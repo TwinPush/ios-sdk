@@ -9,26 +9,27 @@
 #import "TPCreateDeviceRequest.h"
 #import "NSDictionary+ArrayForKey.h"
 
-static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
+static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
 
 /* Request info */
-static NSString* const kResourceName = @"devices";
+static NSString* const kResourceName = @"devices/register";
 
 // Content dictionary
-static NSString* const kTokenKey = @"token";
+static NSString* const kTokenKey = @"push_token";
 static NSString* const kDeviceAliasKey = @"alias_device";
 static NSString* const kUDIDKey = @"udid";
+static NSString* const kPlatformKey = @"platform";
+static NSString* const kPlatformValue = @"ios";
 
 /* Response parameters */
 static NSString* const kResponseWrapper = @"objects";
 static NSString* const kResponseDeviceIdKey = @"id";
-static NSString* const kResponseTokenKey = @"token";
+static NSString* const kResponseTokenKey = @"push_token";
 static NSString* const kResponseDeviceAliasKey = @"alias_device";
 static NSString* const kResponseCreationDateKey = @"created_at";
 static NSString* const kResponseUpdateDateKey = @"updated_at";
 static NSString* const kResponseLastRegistrationDateKey = @"last_registered_at";
 static NSString* const kResponseAppIdKey = @"app_id";
-static NSString* const kResponseTypeKey = @"type";
 
 @implementation TPCreateDeviceRequest
 
@@ -50,6 +51,7 @@ static NSString* const kResponseTypeKey = @"type";
             [self addParam:deviceAlias forKey:kDeviceAliasKey];
         }
         [self addParam:udid forKey:kUDIDKey];
+        [self addParam:kPlatformValue forKey:kPlatformKey];
 
         // Set response handler blocks
         self.onError = onError;
@@ -63,23 +65,25 @@ static NSString* const kResponseTypeKey = @"type";
 
 #pragma mark - Private methods
 
+static NSDateFormatter* sDateFormatter = nil;
 - (TPDevice*)deviceFromDictionary:(NSDictionary*)dictionary {
     NSArray* deviceArray = [dictionary arrayForKey:kResponseWrapper];
     TPDevice* device = nil;
     if (deviceArray.count > 0) {
         device = [[TPDevice alloc] init];
-        NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:kDateFormat];
+        if (sDateFormatter == nil) {
+            sDateFormatter = [[NSDateFormatter alloc] init];
+            [sDateFormatter setDateFormat:kDateFormat];
+        }
         
         NSDictionary* deviceDict = deviceArray[0];
         device.deviceId = [deviceDict objectForKey:kResponseDeviceIdKey];
         device.token = [deviceDict objectForKey:kResponseTokenKey];
         device.deviceAlias = [deviceDict objectForKey:kResponseDeviceAliasKey];
-        device.creationDate = [dateFormatter dateFromString:[deviceDict objectForKey:kResponseCreationDateKey]];
-        device.updateDate = [dateFormatter dateFromString:[deviceDict objectForKey:kResponseUpdateDateKey]];
-        device.lastRegistrationDate = [dateFormatter dateFromString:[deviceDict objectForKey:kResponseLastRegistrationDateKey]];
+        device.creationDate = [sDateFormatter dateFromString:[deviceDict objectForKey:kResponseCreationDateKey]];
+        device.updateDate = [sDateFormatter dateFromString:[deviceDict objectForKey:kResponseUpdateDateKey]];
+        device.lastRegistrationDate = [sDateFormatter dateFromString:[deviceDict objectForKey:kResponseLastRegistrationDateKey]];
         device.appId = [deviceDict objectForKey:kResponseAppIdKey];
-        device.type = [deviceDict objectForKey:kResponseTypeKey];
     }
     return device;
 }
