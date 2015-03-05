@@ -11,6 +11,7 @@
 static NSString* ServerURLKey = nil;
 static NSString* kBaseResourceName = @"apps";
 static NSString* kDeviceResourceName = @"devices";
+static NSString* kNotificationResourceName = @"notifications";
 
 @implementation TPTwinPushRequest
 
@@ -30,6 +31,9 @@ static NSString* kDeviceResourceName = @"devices";
     }
     if (self.deviceId != nil) {
         baseUrl = [NSString stringWithFormat:@"%@%@/%@/", baseUrl, kDeviceResourceName, self.deviceId];
+    }
+    if (self.deviceId != nil) {
+        baseUrl = [NSString stringWithFormat:@"%@%@/%@/", baseUrl, kNotificationResourceName, self.notificationId];
     }
     self.baseServerUrl = baseUrl;
     TCLog(@"URL: %@", self.baseServerUrl);

@@ -12,8 +12,10 @@
 
 + (void)setServerURL:(NSString*)serverURL;
 
+@property (strong, nonatomic) NSString* notificationId;
 @property (strong, nonatomic) NSString* deviceId;
 @property (strong, nonatomic) NSString* appId;
 @property (strong, nonatomic) NSString* apiKey;
+
 
 @end

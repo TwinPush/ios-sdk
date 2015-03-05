@@ -20,7 +20,6 @@
 static NSString* const kResourceName = @"open_notification";
 
 /* Request parameters */
-static NSString* const kNotificationIdKey = @"notification_id";
 static NSString* const kOpenAtKey = @"open_at";
 
 @implementation TPUserOpenNotificationRequest
@@ -32,8 +31,8 @@ static NSString* const kOpenAtKey = @"open_at";
         self.resource = kResourceName;
         self.appId = appId;
         self.deviceId = deviceId;
+        self.notificationId = notificationId;
         // Set request parameters
-        [self addParam:notificationId forKey:kNotificationIdKey];
         [self addParam:[NSString stringWithFormat:@"%ld", (long)NSTimeIntervalSince1970] forKey:kOpenAtKey];
         // Set response handler blocks
         self.onComplete = onComplete;
