@@ -32,7 +32,7 @@ static NSString* kNotificationResourceName = @"notifications";
     if (self.deviceId != nil) {
         baseUrl = [NSString stringWithFormat:@"%@%@/%@/", baseUrl, kDeviceResourceName, self.deviceId];
     }
-    if (self.deviceId != nil) {
+    if (self.notificationId != nil) {
         baseUrl = [NSString stringWithFormat:@"%@%@/%@/", baseUrl, kNotificationResourceName, self.notificationId];
     }
     self.baseServerUrl = baseUrl;
