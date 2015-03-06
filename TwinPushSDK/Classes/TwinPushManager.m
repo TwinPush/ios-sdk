@@ -20,6 +20,8 @@ static NSString* const kPushTokenKey = @"pushToken";
 static NSString* const kAPITokenKey = @"apiToken";
 static NSString* const kDeviceIdKey = @"deviceId";
 static NSString* const kNSUserDefaultsDeviceIdKey = @"TPDeviceId";
+static NSString* const kNSUserDefaultsAliasKey = @"TPAlias";
+static NSString* const kNSUserDefaultsPushTokenKey = @"TPPushToken";
 static NSString* const kNSUserDefaultsMonitorSignificantChangesKey = @"TPIsMonitoringSignificantChanges";
 static NSString* const kNSUserDefaultsMonitorRegionKey = @"TPIsMonitoringRegion";
 static NSString* const kNSUserDefaultsRegionAccuracyKey = @"TPRegionAccuracy";
@@ -39,6 +41,8 @@ static NSString* const kNSUserDefaultsRegionAccuracyKey = @"TPRegionAccuracy";
 @property (nonatomic, assign) TPLocationAccuracy locationAccuracy;
 @property (nonatomic, copy) NSString* appId;
 @property (nonatomic, copy) NSString* apiKey;
+@property (nonatomic, copy) NSString* registeredAlias;
+@property (nonatomic, copy) NSString* registeredPushToken;
 
 @end
 
@@ -84,7 +88,11 @@ static TwinPushManager *_sharedInstance;
     self.apiKey = apiKey;
     self.delegate = delegate;
     self.deviceId = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsDeviceIdKey];
-    [self registerDevice];
+    self.registeredAlias = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsAliasKey];
+    self.registeredPushToken = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsPushTokenKey];
+    if (_deviceId == nil) {
+        [self registerDevice];
+    }
 }
 
 - (void)setApplicationBadgeCount:(NSUInteger)badgeCount {
@@ -105,12 +113,32 @@ static TwinPushManager *_sharedInstance;
 
 - (void)setPushToken:(NSString *)pushToken {
     _pushToken = pushToken;
-    [self registerDevice];
+    if (![self nilEqual:pushToken other:self.registeredPushToken]) {
+        [self registerDevice];
+    }
+    else {
+        [self registerSkipped];
+    }
 }
 
 - (void)setAlias:(NSString *)alias {
     _alias = alias;
-    [self registerDevice];
+    if (![self nilEqual:alias other:self.registeredAlias]) {
+        [self registerDevice];
+    }
+    else {
+        [self registerSkipped];
+    }
+}
+
+- (BOOL)nilEqual:(NSString*)a  other:(NSString*)b {
+    return (a == nil && b == nil) || [a isEqualToString:b];
+}
+
+- (void)registerSkipped {
+    if ([self.delegate respondsToSelector:@selector(didSkipRegisteringDevice)]) {
+        [self.delegate didSkipRegisteringDevice];
+    }
 }
 
 #pragma mark - Public methods
@@ -455,6 +483,11 @@ static TwinPushManager *_sharedInstance;
             _deviceId = device.deviceId;
             [self didChangeValueForKey:@"deviceId"];
             
+            self.registeredAlias = alias;
+            self.registeredPushToken = pushToken;
+            
+            [[NSUserDefaults standardUserDefaults] setValue:_registeredAlias forKey:kNSUserDefaultsAliasKey];
+            [[NSUserDefaults standardUserDefaults] setValue:_registeredPushToken forKey:kNSUserDefaultsPushTokenKey];
             [[NSUserDefaults standardUserDefaults] setValue:_deviceId forKey:kNSUserDefaultsDeviceIdKey];
             [[NSUserDefaults standardUserDefaults] synchronize];
             

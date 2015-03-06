@@ -138,4 +138,8 @@
     [vc registerCompleteWithDeviceId:[TwinPushManager manager].deviceId andAlias:[TwinPushManager manager].alias];
 }
 
+- (void)didSkipRegisteringDevice {
+    [self didFinishRegisteringDevice];
+}
+
 @end
