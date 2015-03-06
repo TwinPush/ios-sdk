@@ -54,7 +54,7 @@ static TwinPushManager *_sharedInstance;
         _activeRequests = [NSMutableArray array];
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
-        self.serverSubdomain = kDefaultServerUrl;
+        self.serverSubdomain = kDefaultServerSubdomain;
         
         // Defaults to identifierForVendor on iOS 6
         if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)]) {
