@@ -50,8 +50,10 @@ typedef enum {
 @property (nonatomic, copy, readonly) NSString* apiKey;
 /** Unique identifier of the device. Defaults to [[[UIDevice currentDevice] identifierForVendor] UUIDString] if not set */
 @property (nonatomic, copy) NSString* deviceUDID;
-/** TwinPush Server URL. Change this URL if you have a custom URL for Enterprise hosted applications, including the version tag */
+/** TwinPush Server URL. Change this URL if you have a custom URL for Enterprise hosted applications, including the version tag. Defaults to 'https://app.twinpush.com/api/v2' */
 @property (nonatomic, copy) NSString* serverURL;
+/** TwinPush Server Subdomain. Convenience property for setting the server URL subdomain. Defaults to 'app'  */
+@property (nonatomic, copy) NSString* serverSubdomain;
 
 #pragma mark - Shared instance
 + (TwinPushManager*) manager;

@@ -11,7 +11,8 @@
 #import "TPTwinPushRequest.h"
 #import "TPRequestLauncher.h"
 
-static NSString* const kDefaultServerUrl = @"https://app.twinpush.com/api/v2/";
+static NSString* const kDefaultServerUrl = @"https://%@.twinpush.com/api/v2";
+static NSString* const kDefaultServerSubdomain = @"app";
 #define kDefaultCertificateNames @[@"*.twinpush.com", @"Starfield Secure Certificate Authority - G2", @"Starfield Root Certificate Authority - G2"]
 
 static NSString* const kPushIdKey = @"pushId";
@@ -53,7 +54,7 @@ static TwinPushManager *_sharedInstance;
         _activeRequests = [NSMutableArray array];
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
-        self.serverURL = kDefaultServerUrl;
+        self.serverSubdomain = kDefaultServerUrl;
         
         // Defaults to identifierForVendor on iOS 6
         if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)]) {
@@ -150,6 +151,12 @@ static TwinPushManager *_sharedInstance;
     _serverURL = serverURL;
     
     [TPTwinPushRequest setServerURL:serverURL];
+}
+
+- (void)setServerSubdomain:(NSString *)serverSubdomain {
+    _serverSubdomain = serverSubdomain;
+    
+    self.serverURL = [NSString stringWithFormat:kDefaultServerUrl, serverSubdomain];
 }
 
 #pragma mark Custom properties
