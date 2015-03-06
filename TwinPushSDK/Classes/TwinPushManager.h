@@ -18,13 +18,21 @@
 @protocol TwinPushManagerDelegate <NSObject>
 
 @optional
+/** Called just before registering the device. Implement this method to intercept the registration and return 'false' to cancel it */
 - (BOOL)shouldRegisterDeviceWithAlias:(NSString*)alias token:(NSString*)token;
+/** Called after the registration has finished. Implement this method if you need to perform some operation after the registration has finished. For example, setting custom properties or device tags. */
 - (void)didFinishRegisteringDevice;
+/** If the device has already registered and the push token and device alias haven't changed, the registration will be skipped.
+    This method will be called in this case instead of 'didFinishRegisteringDevice'*/
+- (void)didSkipRegisteringDevice;
+/** Called when the registration fails. Usually due to a connection error */
 - (void)didFailRegisteringDevice:(NSString*)error;
-- (void)didFinishGettingNotifications;
+/** Called when the device receives a notification. The default behavior is to show an alert view if the application has
+    been received while the app was in foreground and call 'showNotification:' otherwise */
 - (void)didReceiveNotification:(TPNotification*)notification whileActive:(BOOL)active;
+/** Called to open the notification. The default behavior is to show a modal webview with the rich content
+    if the notification has any and do nothing otherwise */
 - (void)showNotification:(TPNotification*)notification;
-
 @end
 
 typedef enum {
@@ -38,6 +46,7 @@ typedef enum {
 @interface TwinPushManager : NSObject <UIAlertViewDelegate, TPNotificationsInboxViewControllerDelegate, TPNotificationDetailViewControllerDelegate, TPRequestEndDelegate, CLLocationManagerDelegate>
 
 #pragma mark - Properties
+/** TwinPushManager delegate. This is required to customize the default behavior of TwinPushManager */
 @property (nonatomic, weak) id<TwinPushManagerDelegate> delegate;
 /** Identifier of the device provided by the app at the moment of registering for receiving remote notifications */
 @property (nonatomic, copy) NSString* pushToken;
@@ -60,13 +69,22 @@ typedef enum {
 + (TwinPushManager*) singleton; // Required for swift compatibility. Equivalent to [TwinPushManager manager]
 
 #pragma mark - Public methods
+/** Setup TwinPush SDK with the provided App ID and the API Key. This will also trigger a register if the device hasn't been
+    registered yet. This method must be called before any other TwinPushManager method, but after changing the server URL
+    if that is required. */
+- (void)setupTwinPushManagerWithAppId:(NSString*)appId apiKey:(NSString*)apiKey delegate:(id<TwinPushManagerDelegate>)delegate;
 - (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo;
 - (void)applicationDidBecomeActive:(UIApplication *)application;
 - (void)applicationWillResignActive:(UIApplication *)application;
-- (void)setupTwinPushManagerWithAppId:(NSString*)appId apiKey:(NSString*)apiKey delegate:(id<TwinPushManagerDelegate>)delegate;
+/** Changes the application badge count in both the current application and the server.
+    Usually the badge count is reset to zero when the application goes to background */
 - (void)setApplicationBadgeCount:(NSUInteger)badgeCount;
+/** Device is already registered on setup, when a new alias is set or the push token changes. Call this method explicitly if
+    you require to refresh the register manually. It's usually required if you disabled a register by implementing
+    the method 'shouldRegisterDeviceWithAlias:token:'. This call is also interceptable by 'shouldRegisterDeviceWithAlias:token:' */
+- (void)registerDevice;
 
 #pragma mark - Certificate pinning
 - (void)enableCertificateNamePinningWithDefaultValues;
