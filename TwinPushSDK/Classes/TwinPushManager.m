@@ -174,8 +174,10 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)userDidOpenNotificationWithId:(NSString*)notificationId {
-    if (![self isDeviceRegistered])
+    if (![self isDeviceRegistered]) {
+        NSLog(@"[TwinPushSDK] Warning: device not registered yet. Unable to open notification");
         return;
+    }
     
     TPBaseRequest* request = [self.requestFactory createUserOpenNotificationRequestWithDeviceId:self.deviceId notificationId:notificationId appId:self.appId onComplete:^(NSDictionary *response) {
         TCLog(@"User Open Notification: %@ request success", notificationId);
@@ -213,8 +215,10 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void) setProperty:(NSString*)name type:(TPPropertyType)type value:(NSObject*)value {
-    if (![self isDeviceRegistered])
+    if (![self isDeviceRegistered]) {
+        NSLog(@"[TwinPushSDK] Warning: device not registered yet. Unable to set custom property");
         return;
+    }
     
     TPBaseRequest* request = [[self requestFactory] createSetCustomPropertyRequestWithName:name type:type value:value deviceId:_deviceId appId:_appId onComplete:^{
         TCLog(@"Property set successfull: %@=%@", name, value);
@@ -262,8 +266,10 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)setLocationWithLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude {
-    if (![self isDeviceRegistered])
+    if (![self isDeviceRegistered]) {
+        NSLog(@"[TwinPushSDK] Warning: device not registered yet. Unable to update user location");
         return;
+    }
     
     TCLog(@"Current location updated: %f, %f", latitude, longitude);
     if (self.reportStatisticsRequest != nil) {
@@ -296,8 +302,10 @@ static TwinPushManager *_sharedInstance;
 
 #pragma mark - Statistics
 - (void)sendApplicationOpenedEvent {
-    if (![self isDeviceRegistered])
+    if (![self isDeviceRegistered]) {
+        NSLog(@"[TwinPushSDK] Warning: device not registered yet. Unable to send application open event");
         return;
+    }
     
     TPBaseRequest* request = [self.requestFactory createOpenAppRequestWithDeviceId:self.deviceId appId:self.appId onComplete:^{
         TCLog(@"Open App request success");
@@ -308,8 +316,10 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)sendApplicationClosedEvent {
-    if (![self isDeviceRegistered])
+    if (![self isDeviceRegistered]) {
+        NSLog(@"[TwinPushSDK] Warning: device not registered yet. Unable to send application open event");
         return;
+    }
     
     TPBaseRequest* request = [self.requestFactory createCloseAppRequestWithDeviceId:self.deviceId appId:self.appId onComplete:^{
         TCLog(@"Close App request success");
@@ -340,12 +350,14 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)sendBadgeCountUpdate {
-    if (![self isDeviceRegistered])
+    if (![self isDeviceRegistered]) {
+        NSLog(@"[TwinPushSDK] Warning: device not registered yet. Unable to update remote badge count");
         return;
+    }
     
     // Send badge count update request if it's required and hasn't been sent yet
     BOOL badgeCountChanged = _pendingBadgeCount != nil && self.updateBadgeRequest == nil;
-    if (badgeCountChanged && [self isDeviceRegistered]) {
+    if (badgeCountChanged) {
         self.updateBadgeRequest = [_requestFactory createUpdateBadgeRequestWithCount:_pendingBadgeCount.unsignedIntegerValue forDeviceId:_deviceId appId:_appId onComplete:^{
             self.updateBadgeRequest = nil;
             self.pendingBadgeCount = nil;
