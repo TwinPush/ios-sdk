@@ -90,7 +90,7 @@ static TwinPushManager *_sharedInstance;
     self.deviceId = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsDeviceIdKey];
     self.registeredAlias = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsAliasKey];
     self.registeredPushToken = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsPushTokenKey];
-    if (_deviceId == nil) {
+    if (!self.isRegistered) {
         [self registerDevice];
     }
 }
@@ -142,6 +142,10 @@ static TwinPushManager *_sharedInstance;
 }
 
 #pragma mark - Public methods
+
+- (BOOL)isRegistered {
+    return _deviceId != nil;
+}
 
 - (void)registerDevice {
     BOOL shouldRegister = YES;

@@ -55,6 +55,8 @@ typedef enum {
 @property (nonatomic, copy) NSString* alias;
 /** App identifier, provided by the web portal */
 @property (nonatomic, copy, readonly) NSString* appId;
+/** Returns true if the device has been already registered in TwinPush */
+@property (nonatomic, readonly, getter=isRegistered) BOOL registered;
 /** Security token provided by the web portal. It is included in the header of all the API TwinPush requests */
 @property (nonatomic, copy, readonly) NSString* apiKey;
 /** Unique identifier of the device. Defaults to [[[UIDevice currentDevice] identifierForVendor] UUIDString] if not set */
