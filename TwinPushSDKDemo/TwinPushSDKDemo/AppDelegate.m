@@ -54,7 +54,6 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     /**** Application Open *****/
     [[TwinPushManager manager] applicationDidBecomeActive:application];
-    [[TwinPushManager manager] updateLocation:TPLocationAccuracyMedium];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -135,7 +134,11 @@
 
 - (void)didFinishRegisteringDevice {
     ViewController* vc = [self registerViewController];
-    [vc registerCompleteWithDeviceId:[TwinPushManager manager].deviceId andAlias:[TwinPushManager manager].alias];
+    BOOL finishedRegistration = [vc registerCompleteWithDeviceId:[TwinPushManager manager].deviceId andAlias:[TwinPushManager manager].alias];
+    if (finishedRegistration) {
+        [[TwinPushManager manager] askForInUseLocationPermission];
+        [[TwinPushManager manager] updateLocation:TPLocationAccuracyMedium];
+    }
 }
 
 - (void)didSkipRegisteringDevice {

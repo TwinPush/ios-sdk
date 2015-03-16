@@ -36,7 +36,7 @@
 
 #pragma mark - Public methods
 - (void)showError:(NSString*)errorMessage;
-- (void)registerCompleteWithDeviceId:(NSString*)deviceId andAlias:(NSString*)alias;
+- (BOOL)registerCompleteWithDeviceId:(NSString*)deviceId andAlias:(NSString*)alias;
 - (void)showInbox;
 - (void)showInbox:(TPNotification*)notification;
 

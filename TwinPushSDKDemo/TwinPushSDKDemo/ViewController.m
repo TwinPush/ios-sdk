@@ -128,7 +128,7 @@ static NSString* const kAgeKey = @"age";
     }
 }
 
-- (void)registerCompleteWithDeviceId:(NSString*)deviceId andAlias:(NSString*)alias {
+- (BOOL)registerCompleteWithDeviceId:(NSString*)deviceId andAlias:(NSString*)alias {
     [UIView animateWithDuration:0.3 animations:^{
         self.registerConfirmationLabel.alpha = 1;
     }];
@@ -139,6 +139,7 @@ static NSString* const kAgeKey = @"age";
     if (self.isRegistrationAsked) {
         [self showInbox];
     }
+    return self.isRegistrationAsked;
 }
 
 - (void)showInbox {

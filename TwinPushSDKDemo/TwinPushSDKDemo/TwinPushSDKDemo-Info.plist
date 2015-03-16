@@ -39,6 +39,8 @@
 	<string>MainStoryboard</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>TwinPush SDK Demo uses your location for demo purposes :)</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
