@@ -93,6 +93,9 @@ static TwinPushManager *_sharedInstance;
     if (!self.isRegistered) {
         [self registerDevice];
     }
+    else {
+        [self registerSkipped];
+    }
 }
 
 - (void)setApplicationBadgeCount:(NSUInteger)badgeCount {
@@ -156,6 +159,9 @@ static TwinPushManager *_sharedInstance;
     
     if (shouldRegister) {
         [self sendCreateDeviceRequestWithPushToken:_pushToken andAlias:_alias];
+    }
+    else {
+        [self registerSkipped];
     }
 }
 
