@@ -88,6 +88,7 @@ typedef enum {
     the method 'shouldRegisterDeviceWithAlias:token:'. This call is also interceptable by 'shouldRegisterDeviceWithAlias:token:' */
 - (void)registerDevice;
 
+
 #pragma mark - Certificate pinning
 - (void)enableCertificateNamePinningWithDefaultValues;
 - (void)enableCertificateNamePinningWithCertificateNames:(NSArray*)certificateNames;
@@ -97,11 +98,13 @@ typedef enum {
 - (void)getDeviceNotificationsWithFilters:(TPNotificationsFilters*)filters andPagination:(TPNotificationsPagination*)pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete;
 - (void)getDeviceNotificationWithId:(NSInteger)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete;
 - (void)userDidOpenNotificationWithId:(NSString*)notificationId;
+
 #pragma mark Custom properties
 - (void)setProperty:(NSString*)name withStringValue:(NSString*)value;
 - (void)setProperty:(NSString*)name withBooleanValue:(NSNumber*)value;
 - (void)setProperty:(NSString*)name withIntegerValue:(NSNumber*)value;
 - (void)setProperty:(NSString*)name withFloatValue:(NSNumber*)value;
+
 #pragma mark Location
 - (void)updateLocation:(TPLocationAccuracy)accuracy;
 - (void)startMonitoringLocationChanges;
@@ -112,5 +115,6 @@ typedef enum {
 - (void)stopMonitoringRegionChanges;
 - (BOOL)isMonitoringRegion;
 - (BOOL)isMonitoringSignificantChanges;
+- (void)askForInUseLocationPermission;
 
 @end

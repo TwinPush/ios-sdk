@@ -288,6 +288,11 @@ static TwinPushManager *_sharedInstance;
     }
 }
 
+- (void)askForInUseLocationPermission {
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+}
 
 #pragma mark - Private methods
 
