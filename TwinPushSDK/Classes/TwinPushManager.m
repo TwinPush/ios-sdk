@@ -294,6 +294,32 @@ static TwinPushManager *_sharedInstance;
     }
 }
 
+#pragma mark - Statistics
+- (void)sendApplicationOpenedEvent {
+    if (![self isDeviceRegistered])
+        return;
+    
+    TPBaseRequest* request = [self.requestFactory createOpenAppRequestWithDeviceId:self.deviceId appId:self.appId onComplete:^{
+        TCLog(@"Open App request success");
+    } onError:^(NSError *error) {
+        TCLog(@"Open App request error: %@", error);
+    }];
+    [self enqueueRequest:request];
+}
+
+- (void)sendApplicationClosedEvent {
+    if (![self isDeviceRegistered])
+        return;
+    
+    TPBaseRequest* request = [self.requestFactory createCloseAppRequestWithDeviceId:self.deviceId appId:self.appId onComplete:^{
+        TCLog(@"Close App request success");
+    } onError:^(NSError *error) {
+        TCLog(@"Close App request error: %@", error);
+    }];
+    [self enqueueRequest:request];
+}
+
+
 #pragma mark - Private methods
 
 - (BOOL)hasAppIdAndApiKey {
@@ -387,27 +413,15 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    if (![self isDeviceRegistered])
-        return;
-    
-    TPBaseRequest* request = [self.requestFactory createOpenAppRequestWithDeviceId:self.deviceId appId:self.appId onComplete:^{
-        TCLog(@"Open App request success");
-    } onError:^(NSError *error) {
-        TCLog(@"Open App request error: %@", error);
-    }];
-    [self enqueueRequest:request];
+    [self sendApplicationOpenedEvent];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    if (![self isDeviceRegistered])
-        return;
-    
-    TPBaseRequest* request = [self.requestFactory createCloseAppRequestWithDeviceId:self.deviceId appId:self.appId onComplete:^{
-        TCLog(@"Close App request success");
-    } onError:^(NSError *error) {
-        TCLog(@"Close App request error: %@", error);
-    }];
-    [self enqueueRequest:request];
+    [self sendApplicationClosedEvent];
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    [self sendApplicationClosedEvent];
 }
 
 #pragma mark - Certificate pinning
@@ -431,7 +445,7 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (BOOL) isDeviceRegistered {
-    return [self hasAppIdAndApiKey] && _deviceId.length > 0;
+    return [self hasAppIdAndApiKey] && [self isRegistered];
 }
 
 - (void)didReceiveRemoteNotification:(NSDictionary*)notificationDict whileActive:(BOOL)active {

@@ -76,10 +76,15 @@ typedef enum {
     if that is required. */
 - (void)setupTwinPushManagerWithAppId:(NSString*)appId apiKey:(NSString*)apiKey delegate:(id<TwinPushManagerDelegate>)delegate;
 - (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
+/** Convenience method for setting the push token. It strips '<' and '>' symbols and set the 'pushToken' property */
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo;
+/** Convenience method for 'sendApplicationOpenedEvent' for easier integration */
 - (void)applicationDidBecomeActive:(UIApplication *)application;
+/** Convenience method for 'sendApplicationClosedEvent' for easier integration */
 - (void)applicationWillResignActive:(UIApplication *)application;
+/** Convenience method for 'sendApplicationClosedEvent' for easier integration */
+- (void)applicationDidEnterBackground:(UIApplication *)application;
 /** Changes the application badge count in both the current application and the server.
     Usually the badge count is reset to zero when the application goes to background */
 - (void)setApplicationBadgeCount:(NSUInteger)badgeCount;
@@ -116,5 +121,11 @@ typedef enum {
 - (BOOL)isMonitoringRegion;
 - (BOOL)isMonitoringSignificantChanges;
 - (void)askForInUseLocationPermission;
+
+#pragma mark Usage statistics
+/** Sends the Application OPEN Event so the server can calculate the usage time matching open & close events */
+- (void)sendApplicationOpenedEvent;
+/** Sends the Application CLOSE Event so the server can calculate the usage time matching open & close events */
+- (void)sendApplicationClosedEvent;
 
 @end
