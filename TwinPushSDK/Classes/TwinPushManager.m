@@ -528,14 +528,14 @@ static TwinPushManager *_sharedInstance;
             [self sendBadgeCountUpdate];
         } onError:^(NSError *error) {
             if ([self.delegate respondsToSelector:@selector(didFailRegisteringDevice:)]) {
-                [self.delegate didFailRegisteringDevice:@"Impossible to register the device"];
+                [self.delegate didFailRegisteringDevice:error.localizedDescription];
             }
             self.registerRequest = nil;
         }];
         [self.registerRequest start];
     } else {
         if ([self.delegate respondsToSelector:@selector(didFailRegisteringDevice:)]) {
-            [self.delegate didFailRegisteringDevice:@"Impossible to register the device"];
+            [self.delegate didFailRegisteringDevice:@"Missing APP ID or API Key"];
         }
     }
 }
