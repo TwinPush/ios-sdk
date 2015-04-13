@@ -8,6 +8,10 @@
 
 #import "TPNotification.h"
 
+@interface TPNotification ()
+@property (nonatomic, readwrite, getter=isComplete) BOOL complete;
+@end
+
 static NSString* const kObjectsWrapper = @"objects";
 static NSString* const kReferencesWrapper = @"references";
 static NSString* const kNotificationsIdKey = @"id";
@@ -28,35 +32,20 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
     return self.contentUrl.length > 0;
 }
 
-- (BOOL)isComplete {
-    BOOL complete = _message != nil;
-    complete &= _notificationId != nil;
-    complete &= _date != nil;
-    complete &= _tags != nil;
-    complete &= _customProperties != nil;
-    
-    return complete;
-}
-
-+ (TPNotification*)notificationFromDictionary:(NSDictionary*)dict {
++ (NSDateFormatter*)dateFormatter {
     static NSDateFormatter* df = nil;
     if (df == nil) {
         df = [[NSDateFormatter alloc] init];
         [df setDateFormat:kDateFormat];
     }
-    
+    return df;
+}
+
++ (TPNotification*)notificationFromDictionary:(NSDictionary*)dict {
     TPNotification* notification = [[TPNotification alloc] init];
-    if ([dict[kApsKey] isKindOfClass:[NSDictionary class]]) {
-        // Support APNS dict
-        notification.notificationId = dict[kApsNotificationsIdKey];
-        notification.message = dict[kApsKey][kAlertKey];
-        notification.sound = dict[kApsKey][kSoundKey];
-    }
-    else {
-        notification.notificationId = dict[kNotificationsIdKey];
-        notification.message = dict[kAlertKey];
-        notification.sound = dict[kSoundKey];
-    }
+    notification.notificationId = dict[kNotificationsIdKey];
+    notification.message = dict[kAlertKey];
+    notification.sound = dict[kSoundKey];
     
     notification.title = dict[kTitleKey];
     if (dict[kRichUrlKey] == [NSNull null]) {
@@ -64,9 +53,32 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
     } else {
         notification.contentUrl = dict[kRichUrlKey];
     }
-    notification.date = [df dateFromString:dict[kSentDateKey]];
+    notification.date = [[self dateFormatter] dateFromString:dict[kSentDateKey]];
     notification.customProperties = dict[kCustomPropertiesKey];
     notification.tags = dict[kTagsKey];
+    notification.complete = YES;
+    
+    return notification;
+}
+
++ (TPNotification*)notificationFromApnsDictionary:(NSDictionary*)dict {
+    TPNotification* notification = [[TPNotification alloc] init];
+    notification.notificationId = dict[kApsNotificationsIdKey];
+    notification.message = dict[kApsKey][kAlertKey];
+    notification.sound = dict[kApsKey][kSoundKey];
+    
+    if (dict[kRichUrlKey] == [NSNull null]) {
+        notification.contentUrl = @"";
+    } else {
+        notification.contentUrl = dict[kRichUrlKey];
+    }
+    
+    NSMutableDictionary* customProperties = [NSMutableDictionary dictionaryWithDictionary:dict];
+    [customProperties removeObjectForKey:kApsKey];
+    [customProperties removeObjectForKey:kApsNotificationsIdKey];
+    [customProperties removeObjectForKey:kRichUrlKey];
+    notification.customProperties = [NSDictionary dictionaryWithDictionary:customProperties];
+    notification.complete = NO;
     
     return notification;
 }

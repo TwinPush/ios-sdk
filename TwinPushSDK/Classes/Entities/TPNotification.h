@@ -23,5 +23,6 @@
 @property (nonatomic, readonly, getter = isComplete) BOOL complete; // NO if some information is missing
 
 + (TPNotification*)notificationFromDictionary:(NSDictionary*)dict;
++ (TPNotification*)notificationFromApnsDictionary:(NSDictionary*)dict;
 
 @end

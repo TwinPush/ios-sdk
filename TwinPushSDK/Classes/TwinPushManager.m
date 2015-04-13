@@ -345,10 +345,6 @@ static TwinPushManager *_sharedInstance;
     return alert;
 }
 
-- (TPNotification*)getNoficationFromDictionary:(NSDictionary*)userInfo {
-    return [TPNotification notificationFromDictionary:userInfo];
-}
-
 - (void)sendBadgeCountUpdate {
     if (![self isDeviceRegistered]) {
         NSLog(@"[TwinPushSDK] Warning: device not registered yet. Unable to update remote badge count");
@@ -461,7 +457,7 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)didReceiveRemoteNotification:(NSDictionary*)notificationDict whileActive:(BOOL)active {
-    self.receivedNotification = [self getNoficationFromDictionary:notificationDict];
+    self.receivedNotification = [TPNotification notificationFromApnsDictionary:notificationDict];
     NSString* notificationId = [NSString stringWithFormat:@"%@", self.receivedNotification.notificationId];
     [[TwinPushManager manager] userDidOpenNotificationWithId:notificationId];
     if (![_delegate respondsToSelector:@selector(didReceiveNotification:whileActive:)]) {
