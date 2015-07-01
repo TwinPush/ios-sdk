@@ -16,8 +16,8 @@
 #pragma mark - App ID and API Key
 // Set here your API Key and APP ID. If you don't have one already, go to https://app.twinpush.com
 // to obtain your own key
-#define TWINPUSH_APP_ID @"23c8befd3f1b7f3d"
-#define TWINPUSH_API_KEY @"43e69710115e83638e8b939fcd38a4cf"
+#define TWINPUSH_APP_ID @"YOUR APP ID HERE"
+#define TWINPUSH_API_KEY @"YOUR API KEY HERE"
 #pragma mark -
 
 @implementation AppDelegate
@@ -90,6 +90,7 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"Received notification with contents: %@", userInfo);
     [[TwinPushManager manager] application:application didReceiveRemoteNotification:userInfo];
 }
 
@@ -105,6 +106,7 @@
 #pragma mark - TwinPushManagerDelegate
 
 - (void)showNotification:(TPNotification*)notification {
+    NSLog(@"Showing notification %@", notification.notificationId);
     if ([notification isRich]) {
         InboxViewController* inboxVC = nil;
         BOOL isOnInbox = [[[self navigationController] topViewController] isKindOfClass:[InboxViewController class]];
