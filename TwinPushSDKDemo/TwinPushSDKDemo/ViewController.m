@@ -29,6 +29,11 @@ static NSString* const kAgeKey = @"age";
 
 @end
 
+typedef NS_ENUM(NSInteger, TPLocationSegment) {
+    TPLocationSegmentOnOpen,
+    TPLocationSegmentSignificant,
+};
+
 @implementation ViewController
 
 #pragma mark - View lifecycle
@@ -58,10 +63,8 @@ static NSString* const kAgeKey = @"age";
         [self.genderSegmentedControl setSelectedSegmentIndex:[defaults integerForKey:kGenderKey]];
     }
     TwinPushManager* twinPush = [TwinPushManager manager];
-    if ([twinPush isMonitoringRegion]) {
-        [self.locationSegmentedControl setSelectedSegmentIndex:1];
-    } else if ([twinPush isMonitoringSignificantChanges]) {
-        [self.locationSegmentedControl setSelectedSegmentIndex:2];
+    if ([twinPush isMonitoringSignificantChanges]) {
+        [self.locationSegmentedControl setSelectedSegmentIndex:TPLocationSegmentSignificant];
     }
 }
 
@@ -194,14 +197,10 @@ static NSString* const kAgeKey = @"age";
 - (IBAction)locationSegmentChanged:(id)sender {
     TwinPushManager* twinPush = [TwinPushManager manager];
     switch (self.locationSegmentedControl.selectedSegmentIndex) {
-        case 0:
+        case TPLocationSegmentOnOpen:
             [twinPush stopMonitoringLocationChanges];
-            [twinPush stopMonitoringRegionChanges];
             break;
-        case 1:
-            [twinPush startMonitoringRegionChangesWithAccuracy:TPLocationAccuracyMedium];
-            break;
-        case 2:
+        case TPLocationSegmentSignificant:
             [twinPush startMonitoringLocationChanges];
             break;
     }

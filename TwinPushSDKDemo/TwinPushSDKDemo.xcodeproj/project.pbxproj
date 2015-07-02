@@ -400,6 +400,11 @@
 			attributes = {
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = TwinCoders;
+				TargetAttributes = {
+					219BB70916B02BF4008739D7 = {
+						DevelopmentTeam = WVRMQW2BQ4;
+					};
+				};
 			};
 			buildConfigurationList = 219BB70416B02BF4008739D7 /* Build configuration list for PBXProject "TwinPushSDKDemo" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -601,12 +606,15 @@
 		219BB72F16B02BF4008739D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TwinPushSDKDemo/TwinPushSDKDemo-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "TwinPushSDKDemo/TwinPushSDKDemo-Info.plist";
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "cd710d97-d966-409f-90bf-7a2232fd4727";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -614,12 +622,15 @@
 		219BB73016B02BF4008739D7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TwinPushSDKDemo/TwinPushSDKDemo-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "TwinPushSDKDemo/TwinPushSDKDemo-Info.plist";
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "cd710d97-d966-409f-90bf-7a2232fd4727";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

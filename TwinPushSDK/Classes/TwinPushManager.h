@@ -111,16 +111,29 @@ typedef enum {
 - (void)setProperty:(NSString*)name withFloatValue:(NSNumber*)value;
 
 #pragma mark Location
+/** Updates the current user location in TwinPush using the desired accuracy. It will initialize a CLLocationManager,
+    ask for 'when in use' location permissions, start the location service, wait for a valid location, stop the location service
+    and send the location to TwinPush when a new valid location is obtained.
+    This requires a valid 'NSLocationWhenInUseUsageDescription' entry in your Plist file. */
 - (void)updateLocation:(TPLocationAccuracy)accuracy;
-- (void)startMonitoringLocationChanges;
-- (void)stopMonitoringLocationChanges;
+/** Send the specified location to TwinPush servers */
 - (void)setLocation:(CLLocation*)location;
+/** Send the specified location to TwinPush servers */
 - (void)setLocationWithLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude;
-- (void)startMonitoringRegionChangesWithAccuracy:(TPLocationAccuracy)accuracy;
-- (void)stopMonitoringRegionChanges;
-- (BOOL)isMonitoringRegion;
+
+/** Starts the significant location changes listener for obtaining location changes while in background. It will ask
+    for 'always' location permissions. It will persist between application restarts.
+    It requires a valid 'NSLocationAlwaysUsageDescription' entry in your Plist file.
+    'stopMonitoringLocationChanges' must be called in order to stop the listener. */
+- (void)startMonitoringLocationChanges;
+/** Stops the significant location changes listener to stop receiving background updates of the user location */
+- (void)stopMonitoringLocationChanges;
 - (BOOL)isMonitoringSignificantChanges;
+/** Convenience method for asking 'when in use' location permission. It's automatically called by 'updateLocation:' method */
 - (void)askForInUseLocationPermission;
+/** Convenience method for asking 'always' location permission. It's automatically called by
+    'startMonitoringLocationChanges' method */
+- (void)askForAlwaysLocationPermission;
 
 #pragma mark Usage statistics
 /** Sends the Application OPEN Event so the server can calculate the usage time matching open & close events */

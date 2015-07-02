@@ -139,7 +139,6 @@
     ViewController* vc = [self registerViewController];
     BOOL finishedRegistration = [vc registerCompleteWithDeviceId:[TwinPushManager manager].deviceId andAlias:[TwinPushManager manager].alias];
     if (finishedRegistration) {
-        [[TwinPushManager manager] askForInUseLocationPermission];
         [[TwinPushManager manager] updateLocation:TPLocationAccuracyMedium];
     }
 }

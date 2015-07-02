@@ -23,8 +23,6 @@ static NSString* const kNSUserDefaultsDeviceIdKey = @"TPDeviceId";
 static NSString* const kNSUserDefaultsAliasKey = @"TPAlias";
 static NSString* const kNSUserDefaultsPushTokenKey = @"TPPushToken";
 static NSString* const kNSUserDefaultsMonitorSignificantChangesKey = @"TPIsMonitoringSignificantChanges";
-static NSString* const kNSUserDefaultsMonitorRegionKey = @"TPIsMonitoringRegion";
-static NSString* const kNSUserDefaultsRegionAccuracyKey = @"TPRegionAccuracy";
 
 @interface TwinPushManager()
 
@@ -231,32 +229,20 @@ static TwinPushManager *_sharedInstance;
 #pragma mark Location
 
 - (void)updateLocation:(TPLocationAccuracy)accuracy {
+    [self askForInUseLocationPermission];
     self.locationAccuracy = accuracy;
     self.locationManager.distanceFilter = [self distanceFilterForAccuracy:accuracy];
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     [self.locationManager startUpdatingLocation];
 }
 - (void)startMonitoringLocationChanges {
-    [self stopMonitoringRegionChanges];
+    [self askForAlwaysLocationPermission];
     [self setMonitoringSignificantChanges:YES];
     [[self locationManager] startMonitoringSignificantLocationChanges];
 }
 - (void)stopMonitoringLocationChanges {
     [self setMonitoringSignificantChanges:NO];
     [[self locationManager] stopMonitoringSignificantLocationChanges];
-}
-- (void)startMonitoringRegionChangesWithAccuracy:(TPLocationAccuracy)accuracy {
-    [self stopMonitoringLocationChanges];
-    [self setMonitoringRegion:YES];
-    [self setRegionMonitoringAccuracy:accuracy];
-    [self updateLocation:accuracy];
-}
-
-- (void)stopMonitoringRegionChanges {
-    [self setMonitoringRegion:NO];
-    for (CLRegion* region in self.locationManager.monitoredRegions) {
-        [self.locationManager stopMonitoringForRegion:region];
-    }
 }
 
 - (void)setLocation:(CLLocation*)location {
@@ -284,19 +270,17 @@ static TwinPushManager *_sharedInstance;
         self.reportStatisticsRequest = nil;
     }];
     [self.reportStatisticsRequest start];
-    
-    if ([CLLocationManager regionMonitoringAvailable] && [self isMonitoringRegion]) {
-        TPLocationAccuracy accuracy = [self regionMonitoringAccuracy];
-        CLRegion* region = [self regionForLocation:coordinate withAccuracy:accuracy];
-        [self.locationManager startMonitoringForRegion:region];
-    } else if ([self isMonitoringSignificantChanges]) {
-        [self startMonitoringLocationChanges];
-    }
 }
 
 - (void)askForInUseLocationPermission {
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [self.locationManager requestWhenInUseAuthorization];
+    }
+}
+
+- (void)askForAlwaysLocationPermission {
+    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+        [self.locationManager requestAlwaysAuthorization];
     }
 }
 
@@ -388,11 +372,6 @@ static TwinPushManager *_sharedInstance;
     if (launchOptions[UIApplicationLaunchOptionsLocationKey]) {
         TCLog(@"Started application due to location event");
         
-        [self setLocation:self.locationManager.location];
-        
-        //        if ([self isMonitoringRegion]) {
-        //            [self updateLocation:[self regionMonitoringAccuracy]];
-        //        } else
     } else {
         // Registering for remote notifications
         [self registerForRemoteNotifications];
@@ -402,6 +381,7 @@ static TwinPushManager *_sharedInstance;
             [self didReceiveRemoteNotification:remoteNotificationDict whileActive:NO];
         }
     }
+    // Restart monitoring significant location changes to receive pending updates
     if ([self isMonitoringSignificantChanges]) {
         [self startMonitoringLocationChanges];
     }
@@ -426,6 +406,7 @@ static TwinPushManager *_sharedInstance;
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     [self sendApplicationClosedEvent];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -622,23 +603,6 @@ static TwinPushManager *_sharedInstance;
     }
 }
 
--(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
-    TCLog(@"Exit region event");
-    [manager stopMonitoringForRegion:region];
-    if ([self isMonitoringRegion]) {
-        CLLocation* location = manager.location;
-        if ([self isValidLocation:location]) {
-            [self setLocation:location];
-        } else {
-            [self updateLocation:[self regionMonitoringAccuracy]];
-        }
-    }
-}
-
--(void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region {
-    TCLog(@"Monitoring new region: %@", region);
-}
-
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     TCLog(@"Location manager failed: %@", error.localizedDescription);
 }
@@ -689,56 +653,8 @@ static TwinPushManager *_sharedInstance;
     return precision;
 }
 
-- (CLRegion*) regionForLocation:(CLLocationCoordinate2D)location withAccuracy:(TPLocationAccuracy)accuracy {
-    double radius = [self distanceFilterForAccuracy:accuracy];
-    return [[CLRegion alloc] initCircularRegionWithCenter:location radius:radius identifier:@"LastKnownLocation"];
-}
-
-//- (void)updateBackgroundLocation:(CLLocation*)location application:(UIApplication*)application {
-//    // REMEMBER. We are running in the background if this is being executed.
-//    // We can't assume normal network access.
-//    // bgTask is defined as an instance variable of type UIBackgroundTaskIdentifier
-//
-//    // Note that the expiration handler block simply ends the task. It is important that we always
-//    // end tasks that we have started.
-//    UIBackgroundTaskIdentifier bgTask = 0;
-//
-//    bgTask = [application beginBackgroundTaskWithExpirationHandler:
-//              ^{
-//                  [application endBackgroundTask:bgTask];
-//              }];
-//
-//    // ANY CODE WE PUT HERE IS OUR BACKGROUND TASK
-//
-//    [self setLocation:location];
-//
-//    // AFTER ALL THE UPDATES, close the task
-//
-//    if (bgTask != UIBackgroundTaskInvalid)
-//    {
-//        [application endBackgroundTask:bgTask];
-//        bgTask = UIBackgroundTaskInvalid;
-//    }
-//}
-
 -(BOOL) isValidLocation:(CLLocation*)location {
     return location != nil && CLLocationCoordinate2DIsValid(location.coordinate) && location.coordinate.latitude != 0 && location.coordinate.longitude != 0;
-}
-
--(void) setMonitoringRegion:(BOOL)isMonitoring {
-    [[NSUserDefaults standardUserDefaults] setBool:isMonitoring forKey:kNSUserDefaultsMonitorRegionKey];
-}
-
--(BOOL) isMonitoringRegion {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:kNSUserDefaultsMonitorRegionKey];
-}
-
--(void) setRegionMonitoringAccuracy:(TPLocationAccuracy)accuracy {
-    [[NSUserDefaults standardUserDefaults] setInteger:accuracy forKey:kNSUserDefaultsRegionAccuracyKey];
-}
-
--(TPLocationAccuracy) regionMonitoringAccuracy {
-    return (TPLocationAccuracy)[[NSUserDefaults standardUserDefaults] integerForKey:kNSUserDefaultsRegionAccuracyKey];
 }
 
 -(void) setMonitoringSignificantChanges:(BOOL)isMonitoring {
