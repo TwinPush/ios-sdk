@@ -22,6 +22,7 @@ static NSString* const kDeviceIdKey = @"deviceId";
 static NSString* const kNSUserDefaultsDeviceIdKey = @"TPDeviceId";
 static NSString* const kNSUserDefaultsAliasKey = @"TPAlias";
 static NSString* const kNSUserDefaultsPushTokenKey = @"TPPushToken";
+static NSString* const kNSUserDefaultsApiHashKey = @"TPApiHash";
 static NSString* const kNSUserDefaultsMonitorSignificantChangesKey = @"TPIsMonitoringSignificantChanges";
 
 @interface TwinPushManager()
@@ -85,9 +86,17 @@ static TwinPushManager *_sharedInstance;
     self.appId = appId;
     self.apiKey = apiKey;
     self.delegate = delegate;
-    self.deviceId = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsDeviceIdKey];
-    self.registeredAlias = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsAliasKey];
-    self.registeredPushToken = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsPushTokenKey];
+    
+    // If the API Hash has changed since last register, we will ignore saved values
+    NSInteger previousApiHash = [[NSUserDefaults standardUserDefaults] integerForKey:kNSUserDefaultsApiHashKey];
+    if (previousApiHash == 0 || previousApiHash == [self getApiHash]) {
+        self.deviceId = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsDeviceIdKey];
+        self.registeredAlias = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsAliasKey];
+        self.registeredPushToken = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsPushTokenKey];
+    }
+    else {
+        NSLog(@"[TwinPushSDK] Info: API connection changed, ignoring previous register");
+    }
     if (!self.isRegistered) {
         [self registerDevice];
     }
@@ -140,6 +149,11 @@ static TwinPushManager *_sharedInstance;
     if ([self.delegate respondsToSelector:@selector(didSkipRegisteringDevice)]) {
         [self.delegate didSkipRegisteringDevice];
     }
+}
+
+- (NSInteger)getApiHash {
+    NSString* apiString = [NSString stringWithFormat:@"%@;;%@;;%@", self.serverURL, self.apiKey, self.appId];
+    return [apiString hash];
 }
 
 #pragma mark - Public methods
@@ -504,6 +518,7 @@ static TwinPushManager *_sharedInstance;
             self.registeredAlias = alias;
             self.registeredPushToken = pushToken;
             
+            [[NSUserDefaults standardUserDefaults] setInteger:[self getApiHash] forKey:kNSUserDefaultsApiHashKey];
             [[NSUserDefaults standardUserDefaults] setValue:_registeredAlias forKey:kNSUserDefaultsAliasKey];
             [[NSUserDefaults standardUserDefaults] setValue:_registeredPushToken forKey:kNSUserDefaultsPushTokenKey];
             [[NSUserDefaults standardUserDefaults] setValue:_deviceId forKey:kNSUserDefaultsDeviceIdKey];
