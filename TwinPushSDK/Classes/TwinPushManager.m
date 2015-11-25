@@ -26,6 +26,7 @@ static NSString* const kNSUserDefaultsDeviceIdKey = @"TPDeviceId";
 static NSString* const kNSUserDefaultsAliasKey = @"TPAlias";
 static NSString* const kNSUserDefaultsPushTokenKey = @"TPPushToken";
 static NSString* const kNSUserDefaultsApiHashKey = @"TPApiHash";
+static NSString* const kNSUserDefaultsRegisterHashKey = @"TPRegisterHash";
 static NSString* const kNSUserDefaultsMonitorSignificantChangesKey = @"TPIsMonitoringSignificantChanges";
 
 @interface TwinPushManager()
@@ -45,6 +46,7 @@ static NSString* const kNSUserDefaultsMonitorSignificantChangesKey = @"TPIsMonit
 @property (nonatomic, copy) NSString* apiKey;
 @property (nonatomic, copy) NSString* registeredAlias;
 @property (nonatomic, copy) NSString* registeredPushToken;
+@property (nonatomic) NSUInteger lastRegisterHash;
 
 @end
 
@@ -96,11 +98,12 @@ static TwinPushManager *_sharedInstance;
         self.deviceId = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsDeviceIdKey];
         self.registeredAlias = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsAliasKey];
         self.registeredPushToken = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsPushTokenKey];
+        self.lastRegisterHash = [[NSUserDefaults standardUserDefaults] integerForKey:kNSUserDefaultsRegisterHashKey];
     }
     else {
         NSLog(@"[TwinPushSDK] Info: API connection changed, ignoring previous register");
     }
-    if (!self.isRegistered) {
+    if (!self.isRegistered || [self currentRegisterHash] != self.lastRegisterHash) {
         [self registerDevice];
     }
     else {
@@ -152,6 +155,11 @@ static TwinPushManager *_sharedInstance;
     if ([self.delegate respondsToSelector:@selector(didSkipRegisteringDevice)]) {
         [self.delegate didSkipRegisteringDevice];
     }
+}
+
+- (NSUInteger)currentRegisterHash {
+    TPCreateDeviceRequest* request = [[TPCreateDeviceRequest alloc] initCreateDeviceRequestWithToken:_pushToken deviceAlias:_alias UDID:self.deviceUDID appId:_appId apiKey:_apiKey onComplete:nil onError:nil];
+    return [[request createBodyContent] hash];
 }
 
 - (NSInteger)getApiHash {
@@ -524,11 +532,13 @@ static TwinPushManager *_sharedInstance;
             
             self.registeredAlias = alias;
             self.registeredPushToken = pushToken;
+            self.lastRegisterHash = [[((TPCreateDeviceRequest*)self.registerRequest) createBodyContent] hash];
             
             [[NSUserDefaults standardUserDefaults] setInteger:[self getApiHash] forKey:kNSUserDefaultsApiHashKey];
             [[NSUserDefaults standardUserDefaults] setValue:_registeredAlias forKey:kNSUserDefaultsAliasKey];
             [[NSUserDefaults standardUserDefaults] setValue:_registeredPushToken forKey:kNSUserDefaultsPushTokenKey];
             [[NSUserDefaults standardUserDefaults] setValue:_deviceId forKey:kNSUserDefaultsDeviceIdKey];
+            [[NSUserDefaults standardUserDefaults] setInteger:_lastRegisterHash forKey:kNSUserDefaultsRegisterHashKey];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             if ([self.delegate respondsToSelector:@selector(didFinishRegisteringDevice)]) {
