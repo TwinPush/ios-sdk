@@ -14,7 +14,7 @@
 		<string>icon@2x.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>es.twincoders.twinpush.demo</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

@@ -506,8 +506,8 @@
 		219BB6CB16B02B5B008739D7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastTestingUpgradeCheck = 0610;
-				LastUpgradeCheck = 0450;
+				LastTestingUpgradeCheck = 0710;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = TwinCoders;
 			};
 			buildConfigurationList = 219BB6CE16B02B5B008739D7 /* Build configuration list for PBXProject "TwinPushSDK" */;
@@ -632,6 +632,7 @@
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;

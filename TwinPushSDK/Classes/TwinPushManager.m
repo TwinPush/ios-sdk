@@ -11,6 +11,9 @@
 #import "TPTwinPushRequest.h"
 #import "TPRequestLauncher.h"
 
+
+static NSString* const kSdkVersion = @"1.4.1";
+
 static NSString* const kDefaultServerUrl = @"https://%@.twinpush.com/api/v2";
 static NSString* const kDefaultServerSubdomain = @"app";
 #define kDefaultCertificateNames @[@"*.twinpush.com", @"Starfield Secure Certificate Authority - G2", @"Starfield Root Certificate Authority - G2"]
@@ -209,6 +212,10 @@ static TwinPushManager *_sharedInstance;
     _serverSubdomain = serverSubdomain;
     
     self.serverURL = [NSString stringWithFormat:kDefaultServerUrl, serverSubdomain];
+}
+
+- (NSString *)versionNumber {
+    return kSdkVersion;
 }
 
 #pragma mark Custom properties

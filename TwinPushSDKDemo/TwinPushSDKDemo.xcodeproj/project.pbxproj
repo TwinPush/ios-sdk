@@ -398,7 +398,7 @@
 		219BB70116B02BF4008739D7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = TwinCoders;
 				TargetAttributes = {
 					219BB70916B02BF4008739D7 = {
@@ -552,7 +552,9 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guillermo Gutierrez Doral (YRT83YP2RU)";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -570,7 +572,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-all_load";
-				PROVISIONING_PROFILE = "BD012ABE-8218-47C8-A121-803E27E76B13";
+				PROVISIONING_PROFILE = "cd710d97-d966-409f-90bf-7a2232fd4727";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../TwinPushSDK/**";
 			};
@@ -585,6 +587,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Twin Coders S.L.";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -596,7 +599,7 @@
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-all_load";
-				PROVISIONING_PROFILE = "BD012ABE-8218-47C8-A121-803E27E76B13";
+				PROVISIONING_PROFILE = "9f9a94b0-c4f5-4d49-a394-9b627ef7d4ee";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../TwinPushSDK/**";
 				VALIDATE_PRODUCT = YES;
@@ -607,14 +610,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TwinPushSDKDemo/TwinPushSDKDemo-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "TwinPushSDKDemo/TwinPushSDKDemo-Info.plist";
 				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = es.twincoders.twinpush.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cd710d97-d966-409f-90bf-7a2232fd4727";
+				PROVISIONING_PROFILE = "9f9a94b0-c4f5-4d49-a394-9b627ef7d4ee";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -622,15 +625,15 @@
 		219BB73016B02BF4008739D7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Twin Coders S.L.";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TwinPushSDKDemo/TwinPushSDKDemo-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "TwinPushSDKDemo/TwinPushSDKDemo-Info.plist";
 				LIBRARY_SEARCH_PATHS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = es.twincoders.twinpush.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cd710d97-d966-409f-90bf-7a2232fd4727";
+				PROVISIONING_PROFILE = "9f9a94b0-c4f5-4d49-a394-9b627ef7d4ee";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

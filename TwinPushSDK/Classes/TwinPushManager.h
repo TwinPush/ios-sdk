@@ -65,6 +65,9 @@ typedef enum {
 @property (nonatomic, copy) NSString* serverURL;
 /** TwinPush Server Subdomain. Convenience property for setting the server URL subdomain. Defaults to 'app'  */
 @property (nonatomic, copy) NSString* serverSubdomain;
+/** Current TwinPush SDK version number */
+@property (nonatomic, readonly) NSString* versionNumber;
+
 
 #pragma mark - Shared instance
 + (TwinPushManager*) manager;
