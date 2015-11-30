@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *notIncludeTagsLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *tagsTextFieldImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *noTagsTextFieldImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchBoxHeightConstraint;
 
 #pragma mark - IBActions
 - (IBAction)hideSearchFields:(id)sender;

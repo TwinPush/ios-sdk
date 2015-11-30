@@ -23,9 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *ageLabel;
 @property (weak, nonatomic) IBOutlet UITextField *ageTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *ageTextFieldBackground;
-@property (weak, nonatomic) IBOutlet UILabel *buttonTitleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *textFieldImageView;
-@property (weak, nonatomic) IBOutlet UILabel *registerConfirmationLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *genderSegmentedControl;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *locationSegmentedControl;
 

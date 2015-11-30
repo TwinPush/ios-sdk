@@ -10,8 +10,6 @@
 #import "InboxViewController.h"
 
 static NSString* const kInboxSegue = @"inbox";
-static NSString* const kFont500 = @"MuseoSans-500";
-static NSString* const kFont700 = @"MuseoSans-700";
 static NSString* const kAliasKey = @"alias";
 static NSString* const kDeviceIdKey = @"deviceId";
 /* Gender */
@@ -45,10 +43,6 @@ typedef NS_ENUM(NSInteger, TPLocationSegment) {
     self.registered = NO;
     self.aliasTextField.delegate = self;
     self.spinner.hidden = YES;
-    self.deviceAliasLabel.font = self.ageLabel.font = [UIFont fontWithName:kFont700 size:16];
-    self.registerConfirmationLabel.font = [UIFont fontWithName:kFont500 size:14];
-    self.aliasTextField.font = self.ageTextField.font = [UIFont fontWithName:kFont700 size:14];
-    self.registerDeviceButton.titleLabel.font = [UIFont fontWithName:kFont700 size:16];
     // Load previous properties
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* savedAlias = [defaults stringForKey:kAliasKey];
@@ -74,9 +68,7 @@ typedef NS_ENUM(NSInteger, TPLocationSegment) {
     [self setSpinner:nil];
     [self setContainerImageView:nil];
     [self setDeviceAliasLabel:nil];
-    [self setButtonTitleLabel:nil];
     [self setTextFieldImageView:nil];
-    [self setRegisterConfirmationLabel:nil];
     [self setAgeLabel:nil];
     [self setAgeTextField:nil];
     [self setAgeTextFieldBackground:nil];
@@ -114,27 +106,17 @@ typedef NS_ENUM(NSInteger, TPLocationSegment) {
 
 #pragma mark - Public methods
 - (void)showError:(NSString*)errorMessage {
-    [UIView animateWithDuration:0.3 animations:^{
-        self.registerConfirmationLabel.alpha = 1;
-    }];
     self.errorMessage = errorMessage;
-    self.registerConfirmationLabel.highlighted = YES;
-    self.registerConfirmationLabel.text = _errorMessage;
     [self enableButton:YES];
 }
 
 -(void) updateRegisterInfo {
     if ([TwinPushManager manager].alias != nil && [TwinPushManager manager].deviceId != nil) {
-        self.registerConfirmationLabel.highlighted = NO;
-        self.registerConfirmationLabel.text = [NSString stringWithFormat:@"Device registered with ID: %@", [TwinPushManager manager].deviceId];
         self.aliasTextField.text = [TwinPushManager manager].alias;
     }
 }
 
 - (BOOL)registerCompleteWithDeviceId:(NSString*)deviceId andAlias:(NSString*)alias {
-    [UIView animateWithDuration:0.3 animations:^{
-        self.registerConfirmationLabel.alpha = 1;
-    }];
     self.errorMessage = nil;
     [self enableButton:YES];
     self.registered = YES;
@@ -167,9 +149,6 @@ typedef NS_ENUM(NSInteger, TPLocationSegment) {
 - (IBAction)registerDevice:(id)sender {
     self.registrationAsked = YES;
     [self enableButton:NO];
-    [UIView animateWithDuration:0.3 animations:^{
-        self.registerConfirmationLabel.alpha = 0;
-    }];
     [self.view endEditing:NO];
     NSString* alias = [_aliasTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString* ageString = [_ageTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];

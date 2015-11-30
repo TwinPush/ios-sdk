@@ -9,8 +9,6 @@
 #import "DetailViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-static NSString* const kFont = @"MuseoSans-500";
-
 @implementation DetailViewController
 
 #pragma mark - Init
@@ -32,9 +30,6 @@ static NSString* const kFont = @"MuseoSans-500";
     [self.detailsContainerView.layer setCornerRadius:10];
     [self.webViewContainerView.layer setBorderWidth:2];
     [self.webViewContainerView.layer setBorderColor:[[UIColor whiteColor] CGColor]];
-    self.notificationDateLabel.font = [UIFont fontWithName:kFont size:12];
-    self.notificationTitleLabel.font = [UIFont fontWithName:kFont size:14];
-    self.loadingLabel.font = [UIFont fontWithName:kFont size:16];
     [self updateStatus];
 }
 

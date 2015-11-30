@@ -10,27 +10,6 @@
 
 @implementation TPDemoInboxCell
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    UIFont *font;
-    if (_fontName.length == 0) {
-        font = [UIFont systemFontOfSize:_fontSize];
-    } else {
-        font = [UIFont fontWithName:_fontName size:_fontSize];
-    }
-    self.notificationDateLabel.font = font;
-    self.notificationDescriptionLabel.font = font;
-}
-
 #pragma mark - Setters
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

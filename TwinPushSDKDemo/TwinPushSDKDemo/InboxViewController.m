@@ -13,9 +13,13 @@
 static NSString* const kCommaSeparator = @",";
 static NSString* const kDetailSegue = @"detail";
 static NSString* const kCellIdentifier = @"inboxCell";
-static NSString* const kFont300 = @"MuseoSans-300";
-static NSString* const kFont500 = @"MuseoSans-500";
-static NSString* const kFont700 = @"MuseoSans-700";
+
+@interface InboxViewController()
+
+@property (nonatomic) CGFloat collapsedSearchBoxHeight;
+@property (nonatomic) CGFloat expandedSearchBoxHeight;
+
+@end
 
 @implementation InboxViewController
 
@@ -38,14 +42,10 @@ static NSString* const kFont700 = @"MuseoSans-700";
     self.tagsTextField.delegate = self;
     self.noTagsTextField.delegate = self;
     self.delegate = self;
+    self.expandedSearchBoxHeight = self.searchBoxHeightConstraint.constant;
+    self.collapsedSearchBoxHeight = self.expandedSearchBoxHeight - self.searchFieldsContainerView.frame.size.height;
     [self.tableViewContainerView.layer setCornerRadius:10];
     [self.searchContainerView.layer setCornerRadius:10];
-    self.searchLabel.font = [UIFont fontWithName:kFont700 size:16];
-    self.includeTagsLabel.font = [UIFont fontWithName:kFont500 size:12];
-    self.notIncludeTagsLabel.font = [UIFont fontWithName:kFont500 size:12];
-    self.tagsTextField.font = [UIFont fontWithName:kFont300 size:13];
-    self.noTagsTextField.font = [UIFont fontWithName:kFont300 size:13];
-    [self hideSearchFields:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -96,11 +96,12 @@ static NSString* const kFont700 = @"MuseoSans-700";
 
 - (void)transformSearhFieldsViewWithAlpha:(NSInteger)alpha andHeight:(CGFloat)height andTransformArrowWithAngle:(CGFloat)angle {
     CGAffineTransform transform = CGAffineTransformMakeRotation(angle);
+    [self.view layoutIfNeeded];
+    self.searchBoxHeightConstraint.constant = alpha < 0.1 ? self.collapsedSearchBoxHeight : self.expandedSearchBoxHeight;
     [UIView animateWithDuration:0.3 animations:^{
         self.searchFieldsContainerView.alpha = alpha;
-        self.searchContainerView.frame = CGRectMake(_searchContainerView.frame.origin.x, _searchContainerView.frame.origin.y, _searchContainerView.frame.size.width, _searchContainerView.frame.size.height + height);
         self.collapseSearchSectionImageView.transform = transform;
-        self.tableViewContainerView.frame = CGRectMake(_tableViewContainerView.frame.origin.x, _tableViewContainerView.frame.origin.y + height, _tableViewContainerView.frame.size.width, _tableViewContainerView.frame.size.height - height);
+        [self.view layoutIfNeeded];
     }];
 }
 

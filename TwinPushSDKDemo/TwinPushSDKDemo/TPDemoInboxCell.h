@@ -13,10 +13,6 @@
 #pragma mark - Properties
 @property (nonatomic) BOOL highlightOnSelected;
 
-#pragma mark - Appearance customization
-@property (nonatomic, copy) NSString* fontName;
-@property (nonatomic) NSInteger fontSize;
-
 #pragma mark - IBOutlets
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *highlightElements;
 
