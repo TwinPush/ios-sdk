@@ -231,6 +231,7 @@ static NSString* const kOnlyRichNotificationsTag = @"tp_rich";
             if (_loadingCell == nil) {
                 self.loadingCell = [self createLoadingCell];
             }
+            [_loadingCell.spinner startAnimating];
             _loadingCell.userInteractionEnabled = NO;
             cell = _loadingCell;
             break;
