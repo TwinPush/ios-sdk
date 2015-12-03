@@ -109,8 +109,7 @@
                                                 <rect key="frame" x="30" y="245" width="236" height="29"/>
                                                 <segments>
                                                     <segment title="On open"/>
-                                                    <segment title="Region"/>
-                                                    <segment title="Significant"/>
+                                                    <segment title="Background"/>
                                                 </segments>
                                                 <color key="tintColor" red="0.38431376220000002" green="0.64705884459999996" blue="0.80392163989999998" alpha="1" colorSpace="deviceRGB"/>
                                                 <connections>
