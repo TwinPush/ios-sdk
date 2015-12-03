@@ -16,7 +16,7 @@ To start using TwinPush you have to integrate the TwinPush SDK in your iOS appli
 1. Add a reference to the [TwinPush SDK pod](http://cocoapods.org/?q=twinpushsdk) to your `Podfile`.
 
 	~~~
-	pod 'TwinPushSDK', '~> 1.3'
+	pod 'TwinPushSDK', '~> 1.5'
 	~~~
 
 2. Install the pods executing in your command line:
