@@ -1,9 +1,10 @@
-TwinPush SDK Library
+TwinPush SDK Library [![License MIT](https://go-shields.herokuapp.com/license-MIT-blue.png)](https://github.com/TwinPush/ios-sdk/blob/master/LICENSE)
 ==================
 
-Native iOS SDK for TwinPush platform.
+[![Badge w/ Version](https://cocoapod-badges.herokuapp.com/v/TwinPushSDK/badge.png)](https://cocoapods.org/pods/TwinPushSDK)
+[![Badge w/ Platform](https://cocoapod-badges.herokuapp.com/p/TwinPushSDK/badge.svg)](https://cocoapods.org/pods/TwinPushSDK)
 
-For detailed information see TwinPush [oficial documentation](http://developers.twinpush.com/quickstart?platform=ios).
+Native iOS SDK for [TwinPush platform](http://twinpush.com).
 
 ## Installation
 
@@ -16,7 +17,7 @@ To start using TwinPush you have to integrate the TwinPush SDK in your iOS appli
 1. Add a reference to the [TwinPush SDK pod](http://cocoapods.org/?q=twinpushsdk) to your `Podfile`.
 
 	~~~
-	pod 'TwinPushSDK', '~> 1.5'
+	pod 'TwinPushSDK'
 	~~~
 
 2. Install the pods executing in your command line:
