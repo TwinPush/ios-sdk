@@ -133,17 +133,17 @@ Remember that you can check the source code of the Demo project included in the 
 
 ### Updating badge count
 
-You can update the local and server badge count of your application by caling `setApplicationBadgeCount:` method of TwinPushManager. The server badge count is used for auto incremental badge counts, so it has to be reset when the notifications are read. Usually the best place is on the `applicationWillResignActive` method, although you can update the badge count wherever you want:
+You can update the local and server badge count of your application by caling `setApplicationBadgeCount:` method of TwinPushManager. The server badge count is used for auto incremental badge counts, so it has to be reset when the notifications are read. Usually the best place is on the `applicationDidEnterBackground` method, although you can update the badge count wherever you want:
 
 ~~~objective-c
 // Objective-C
-- (void) applicationWillResignActive:(UIApplication *)application {
+- (void)applicationDidEnterBackground:(UIApplication *)application {
     [[TwinPushManager manager] setApplicationBadgeCount:0];
 }
 ~~~
 ~~~swift
 // Swift
-func applicationWillResignActive(application: UIApplication) {
+func applicationDidEnterBackground(application: UIApplication) {
     TwinPushManager.singleton().setApplicationBadgeCount(0)
 }
 ~~~
