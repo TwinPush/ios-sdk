@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+- No changes
+
+## [2.0.0] - 2016-03-31
 ### Added
 - Created `changelog.md` file to keep track of version changes
 - By default `TwinPushManager` will automatically reset the application badge count on application open and notification reception unless `autoResetBadgeNumber` property is set to `NO`.
@@ -86,7 +89,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - First fully functional public release.
 
-[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v1.5.0...HEAD
+[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/TwinPush/ios-sdk/compare/v1.5.0...v2.0.0
 [1.5.0]: https://github.com/TwinPush/ios-sdk/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/TwinPush/ios-sdk/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/TwinPush/ios-sdk/compare/v1.2.0...v1.3.0

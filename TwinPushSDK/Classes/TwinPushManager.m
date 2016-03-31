@@ -12,7 +12,7 @@
 #import "TPRequestLauncher.h"
 
 
-static NSString* const kSdkVersion = @"1.5.0";
+static NSString* const kSdkVersion = @"2.0.0";
 
 static NSString* const kDefaultServerUrl = @"https://%@.twinpush.com/api/v2";
 static NSString* const kDefaultServerSubdomain = @"app";
