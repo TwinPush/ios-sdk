@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - By default `TwinPushManager` will automatically reset the application badge count on application open and notification reception unless `autoResetBadgeNumber` property is set to `NO`.
 - Added `autoRegisterForRemoteNotifications` property to disable automatic remote notifications permission request on startup.
 - `registerForRemoteNotifications` method is now public to manually request for user permission if `autoRegisterForRemoteNotifications` is set to `NO`.
+- Notification detail webview will now open the content URL in Safari if an App Transport Policy error is received while showing it
 
 ### Changed
 - `TwinPushManager` will now subscribe to `NSNotificationCenter` application notifications, making unneccessary to call application lifecycle methods directly.

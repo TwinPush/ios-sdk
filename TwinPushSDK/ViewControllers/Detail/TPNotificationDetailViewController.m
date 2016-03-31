@@ -39,6 +39,7 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.webView.delegate = self;
     if (_notification != nil) {
         if (self.requiresInitialization) {
             // Build the default GUI
@@ -49,7 +50,7 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
             [self.view addSubview:_notificationTitleLabel];
             UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
             [button addTarget:self
-                       action:@selector(closeModal)
+                       action:@selector(dismissButtonTapped:)
              forControlEvents:UIControlEventTouchUpInside];
             [button setTitle:NSLocalizedStringWithDefaultValue(@"MODAL_NOTIFICATION_DETAIL_CLOSE_BUTTON", nil, [NSBundle mainBundle], @"Close", nil) forState:UIControlStateNormal];
             button.frame = CGRectMake(5, 20 + _notificationTitleLabel.frame.size.height, self.view.frame.size.width - 10, 30);
@@ -103,7 +104,7 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
     self.notificationDateLabel.text = [df stringFromDate:_notification.date];
     if (_notification.contentUrl != nil && _notification.contentUrl.length > 0) {
         NSURLRequest* urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:_notification.contentUrl]];
-        [NSURLConnection connectionWithRequest:urlRequest delegate:self];
+        [self.webView loadRequest:urlRequest];
     }
 }
 
@@ -112,7 +113,17 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
         [_delegate dismissModalView];
     }
     else {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        if (self.presentingViewController != nil) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+        else if (self.navigationController != nil) {
+            if (self.navigationController.viewControllers.firstObject == self && self.navigationController.presentingViewController != nil) {
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            }
+            else if (self.navigationController.viewControllers.count > 1 && self.navigationController.viewControllers.lastObject == self) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
     }
 }
 
@@ -129,7 +140,26 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
     [self displayAlert:NSLocalizedStringWithDefaultValue(message, nil, [NSBundle mainBundle], defaultMessage, nil) withTitle:NSLocalizedStringWithDefaultValue(@"WEBVIEW_LOADING_ERROR_TITLE", nil, [NSBundle mainBundle], @"Error", nil)];
 }
 
-#pragma mark - NSURLConnectionDelegate
+#pragma mark - UIWebViewDelegate
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    self.loading = true;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    self.loading = false;
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    self.loading = false;
+    if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorAppTransportSecurityRequiresSecureConnection) {
+        BOOL openedInBrowser = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.notification.contentUrl]];
+        if (openedInBrowser) {
+            [self closeModal];
+            return;
+        }
+    }
+    [self closeModal];
+}
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
     if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
@@ -141,6 +171,7 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
     [self webViewLoadFailedWithErrorCode:error.localizedDescription];
 }
 
+#pragma mark - IBAction
 - (IBAction)dismissButtonTapped:(id)sender {
     [self closeModal];
 }

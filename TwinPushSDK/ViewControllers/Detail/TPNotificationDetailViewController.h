@@ -16,7 +16,7 @@
 
 @end
 
-@interface TPNotificationDetailViewController : UIViewController <NSURLConnectionDelegate>
+@interface TPNotificationDetailViewController : UIViewController <UIWebViewDelegate>
 
 #pragma mark - Properties
 @property (nonatomic, strong) TPNotification* notification;
