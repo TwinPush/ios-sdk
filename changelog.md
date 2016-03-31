@@ -10,7 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - `registerForRemoteNotifications` method is now public to manually request for user permission if `autoRegisterForRemoteNotifications` is set to `NO`.
 
 ### Changed
-- `TwinPushManager` will now subscribe to `NSNotificationCenter` application notifications, making unneccessary to call these methods directly.
+- `TwinPushManager` will now subscribe to `NSNotificationCenter` application notifications, making unneccessary to call application lifecycle methods directly.
 - `TwinPushManager` methods `application:didFinishLaunchingWithOptions`, `applicationDidBecomeActive`, `applicationWillResignActive` and `applicationDidEnterBackground` are deprecated and will be removed in a future SDK release.
 
 ### Deleted
@@ -38,7 +38,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Custom properties in received notifications are now parsed correctly into the `TPNotification` object
 
-#### Deleted
+### Deleted
 - Removed region location monitoring functionality
 
 

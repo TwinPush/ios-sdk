@@ -86,7 +86,6 @@ Make your application delegate (usually named AppDelegate) to implement TwinPush
 
 - (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[TwinPushManager manager] setupTwinPushManagerWithAppId:TWINPUSH_APP_ID apiKey:TWINPUSH_API_KEY delegate:self];
-    [[TwinPushManager manager] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -99,6 +98,10 @@ Make your application delegate (usually named AppDelegate) to implement TwinPush
     [[TwinPushManager manager] application:application didReceiveRemoteNotification:userInfo];
 }
 
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"Application did fail registering for remote notifications: %@", error);
+}
+
 @end
 ~~~
 
@@ -107,7 +110,6 @@ Make your application delegate (usually named AppDelegate) to implement TwinPush
 class AppDelegate: UIResponder, UIApplicationDelegate, TwinPushManagerDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         TwinPushManager.singleton().setupTwinPushManagerWithAppId(TWINPUSH_APP_ID, apiKey: TWINPUSH_API_KEY, delegate: self)
-        TwinPushManager.singleton().application(application, didFinishLaunchingWithOptions: launchOptions)
         return true
     }
     
@@ -127,61 +129,30 @@ At this point you should be able to register correctly to TwinPush and you shoul
 
 
 ## Advanced SDK integration
-If you followed the previous steps successfully you should be able to receive push notifications through TwinPush. To get the most out of TwinPush you can improve the SDK integration within your application to get usage statistics, user location, custom rich notification viewer or notification inbox.
+If you followed the previous steps successfully you should be able to receive push notifications through TwinPush. To get the most out of TwinPush you can improve the SDK integration within your application to get user location, custom rich notification viewer or notification inbox.
 
 Remember that you can check the source code of the Demo project included in the SDK sources to see a working sample.
 
 ### Updating badge count
 
-You can update the local and server badge count of your application by caling `setApplicationBadgeCount:` method of TwinPushManager. The server badge count is used for auto incremental badge counts, so it has to be reset when the notifications are read. Usually the best place is on the `applicationDidEnterBackground` method, although you can update the badge count wherever you want:
+The server badge count is used for auto incremental badge counts. TwinPush SDK will reset the application and server badge count to zero when the application starts or a remote notification is received with the application open. You can deactivate this behavior by setting the `autoResetBadgeNumber` property of `TwinPushManager` to `NO`.
+
+Additionally, you can update the local and server badge count of your application by calling `setApplicationBadgeCount:` method of `TwinPushManager` anywhere in your application:
 
 ~~~objective-c
 // Objective-C
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    [[TwinPushManager manager] setApplicationBadgeCount:0];
-}
+// Disable auto reset badge number on application startup
+[TwinPushManager manager].autoResetBadgeNumber = NO;
+// Update application badge count
+[[TwinPushManager manager] setApplicationBadgeCount:0];
 ~~~
 ~~~swift
 // Swift
-func applicationDidEnterBackground(application: UIApplication) {
-    TwinPushManager.singleton().setApplicationBadgeCount(0)
-}
+// Disable auto reset badge number on application startup
+TwinPushManager.singleton().autoResetBadgeNumber = false
+// Update application badge count
+TwinPushManager.singleton().setApplicationBadgeCount(0)
 ~~~
-
-### Sending usage statistics
-
-Through TwinPush it is possible to register the time that a user uses the application, as well as the amount of times that he uses it. To send usage statistics is necessary to add a call to the methods `applicationDidBecomeActive` and `applicationWillResignActive` of TwinPush SDK in the methods of the same name of the AppDelegate of the application.
-
-~~~objective-c
-// Objective-C
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    [[TwinPushManager manager] applicationDidBecomeActive: application];
-}
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-    [[TwinPushManager manager] applicationWillResignActive: application];
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    [[TwinPushManager manager] applicationDidEnterBackground: application];
-}
-~~~
-~~~swift
-// Swift
-func applicationDidBecomeActive(application: UIApplication) {
-    TwinPushManager.singleton().applicationDidBecomeActive(application)
-}
-
-func applicationWillResignActive(application: UIApplication) {
-    TwinPushManager.singleton().applicationWillResignActive(application)
-}
-
-func applicationDidEnterBackground(application: UIApplication) {
-    TwinPushManager.singleton().applicationDidEnterBackground(application)
-}
-~~~
-
-Through these calls, TwinPush can determine the periods of activity of the user with the application and will show statistics reports in the web portal.
 
 ### Assigning an alias to a device
 
@@ -205,7 +176,7 @@ The device will remain associated to that alias until the alias property is set 
 
 ### Sending user information
 
-Through TwinPush SDK you can send information about application users, that you can use later for segmenting push targets or generate statistics. TwinPushManager offers methods for sending text, boolean, integer and float values.
+TwinPush SDK will automatically send information about the user device, like the operating system version, device model or the current locale. You can send additional information about your application users that you can use later for segmenting push targets or generate statistics. `TwinPushManager` offers methods for sending text, boolean, integer and float values.
 
 The name that you to assign to every property will be visible from the TwinPush web portal.
 
@@ -232,7 +203,9 @@ Use `nil` as the property value to delete that property for the current device.
 
 Sometimes you don't want to register devices to TwinPush right after starting the application. Common scenarios are waiting for a successful login to set the alias or skip registers with no push token. `TwinPushManagerDelegate` offers a way to control when a device should be registered with the method `shouldRegisterDeviceWithAlias`. To skip the register of a device, simply return `NO` (or `false` in Swift) and the device won't be registered.
 
-This sample shows how to avoid registration of devices with no push token:
+Devices not registered in the platform won't send usage statistics and will be unable to receive push notifications by any mean.
+
+This sample shows how to avoid registration of devices with no alias:
 
 ~~~objective-c
 // Objective-C
