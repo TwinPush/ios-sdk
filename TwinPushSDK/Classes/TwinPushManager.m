@@ -63,6 +63,8 @@ static TwinPushManager *_sharedInstance;
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
         self.serverSubdomain = kDefaultServerSubdomain;
+        _autoRegisterForRemoteNotifications = YES;
+        _autoResetBadgeNumber = YES;
         
         // Defaults to identifierForVendor on iOS 6
         if ([[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)]) {
@@ -109,10 +111,16 @@ static TwinPushManager *_sharedInstance;
     else {
         [self registerSkipped];
     }
+    
+    [self registerForApplicationEvents];
 }
 
 - (void)setApplicationBadgeCount:(NSUInteger)badgeCount {
-    if ([UIApplication sharedApplication].applicationIconBadgeNumber == badgeCount) {
+    [self setApplicationBadgeCount:badgeCount force:NO];
+}
+
+- (void)setApplicationBadgeCount:(NSUInteger)badgeCount force:(BOOL)force {
+    if (!force && [UIApplication sharedApplication].applicationIconBadgeNumber == badgeCount) {
         return;
     }
     
@@ -165,6 +173,61 @@ static TwinPushManager *_sharedInstance;
 - (NSInteger)getApiHash {
     NSString* apiString = [NSString stringWithFormat:@"%@;;%@;;%@", self.serverURL, self.apiKey, self.appId];
     return [apiString hash];
+}
+
+#pragma mark - Application notifications
+- (void)registerForApplicationEvents {
+    NSArray* notificationNames = @[UIApplicationDidBecomeActiveNotification, UIApplicationDidFinishLaunchingNotification, UIApplicationWillResignActiveNotification];
+    for (NSString* notificationName in notificationNames) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appNotificationReceived:) name:notificationName object:nil];
+    }
+}
+
+- (void)unregisterForApplicationEvents {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)appNotificationReceived:(NSNotification*)notification {
+    if ([notification.name isEqualToString: UIApplicationDidFinishLaunchingNotification]) {
+        [self applicationStartedWithOptions: notification.userInfo];
+    }
+    else if ([notification.name isEqualToString: UIApplicationDidBecomeActiveNotification]) {
+        if (self.autoResetBadgeNumber) {
+            [self setApplicationBadgeCount:0];
+        }
+        [self sendApplicationOpenedEvent];
+    }
+    else if ([notification.name isEqualToString: UIApplicationWillResignActiveNotification]) {
+        [self sendApplicationClosedEvent];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)applicationStartedWithOptions: (NSDictionary *)launchOptions {
+    TCLog(@"Started application");
+    // Check if application is opened due to location change
+    if (launchOptions[UIApplicationLaunchOptionsLocationKey]) {
+        TCLog(@"Started application due to location event");
+        
+    } else {
+        // Registering for remote notifications
+        if (self.autoRegisterForRemoteNotifications) {
+            [self registerForRemoteNotifications];
+        }
+        
+        NSDictionary* remoteNotificationDict = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+        if (remoteNotificationDict != nil) {
+            [self didReceiveRemoteNotification:remoteNotificationDict whileActive:NO];
+        }
+    }
+    // Restart monitoring significant location changes to receive pending updates
+    if ([self isMonitoringSignificantChanges]) {
+        [self startMonitoringLocationChanges];
+    }
+}
+
+- (void)dealloc {
+    [self unregisterForApplicationEvents];
 }
 
 #pragma mark - Public methods
@@ -330,7 +393,7 @@ static TwinPushManager *_sharedInstance;
 
 - (void)sendApplicationClosedEvent {
     if (![self isDeviceRegistered]) {
-        NSLog(@"[TwinPushSDK] Warning: device not registered yet. Unable to send application open event");
+        NSLog(@"[TwinPushSDK] Warning: device not registered yet. Unable to send application close event");
         return;
     }
     
@@ -395,26 +458,7 @@ static TwinPushManager *_sharedInstance;
 
 #pragma mark - AppDelegate Public methods
 
-- (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    TCLog(@"Started application");
-    // Check if application is opened due to location change
-    if (launchOptions[UIApplicationLaunchOptionsLocationKey]) {
-        TCLog(@"Started application due to location event");
-        
-    } else {
-        // Registering for remote notifications
-        [self registerForRemoteNotifications];
-        
-        NSDictionary* remoteNotificationDict = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
-        if (remoteNotificationDict != nil) {
-            [self didReceiveRemoteNotification:remoteNotificationDict whileActive:NO];
-        }
-    }
-    // Restart monitoring significant location changes to receive pending updates
-    if ([self isMonitoringSignificantChanges]) {
-        [self startMonitoringLocationChanges];
-    }
-}
+
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSString* stringPushToken = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
@@ -427,19 +471,26 @@ static TwinPushManager *_sharedInstance;
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     TCLog(@"Application did receive remote notifications: %@", userInfo);
     [self didReceiveRemoteNotification:userInfo whileActive:application.applicationState == UIApplicationStateActive];
+    if (self.autoResetBadgeNumber) {
+        [self setApplicationBadgeCount:0 force:YES];
+    }
+}
+
+#pragma mark - Deprecated methods
+- (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    NSLog(@"Calling TwinPushManager application:didFinishLaunchingWithOptions: is no longer necessary");
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [self sendApplicationOpenedEvent];
+    NSLog(@"Calling TwinPushManager applicationDidBecomeActive: is no longer necessary");
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    [self sendApplicationClosedEvent];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSLog(@"Calling TwinPushManager applicationWillResignActive: is no longer necessary");
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    [self sendApplicationClosedEvent];
+    NSLog(@"Calling TwinPushManager applicationWillResignActive: is no longer necessary");
 }
 
 #pragma mark - Certificate pinning

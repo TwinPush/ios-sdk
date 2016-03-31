@@ -31,11 +31,6 @@
 		2198DA8717816E30003BA36B /* TPUserOpenNotificationRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 2198DA8517816E30003BA36B /* TPUserOpenNotificationRequest.h */; };
 		2198DA8817816E30003BA36B /* TPUserOpenNotificationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2198DA8617816E30003BA36B /* TPUserOpenNotificationRequest.m */; };
 		219BB6D816B02B5B008739D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 219BB6D716B02B5B008739D7 /* Foundation.framework */; };
-		219BB6E716B02B5B008739D7 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 219BB6E616B02B5B008739D7 /* SenTestingKit.framework */; };
-		219BB6EA16B02B5B008739D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 219BB6D716B02B5B008739D7 /* Foundation.framework */; };
-		219BB6ED16B02B5B008739D7 /* libTwinPushSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 219BB6D416B02B5B008739D7 /* libTwinPushSDK.a */; };
-		219BB6F316B02B5B008739D7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 219BB6F116B02B5B008739D7 /* InfoPlist.strings */; };
-		219BB6F616B02B5B008739D7 /* TwinPushSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB6F516B02B5B008739D7 /* TwinPushSDKTests.m */; };
 		219BB76D16B03769008739D7 /* TPBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB76616B03769008739D7 /* TPBaseRequest.m */; };
 		219BB76F16B03769008739D7 /* TPRESTJSONRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB76A16B03769008739D7 /* TPRESTJSONRequest.m */; };
 		219BB77016B03769008739D7 /* TPRESTRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 219BB76C16B03769008739D7 /* TPRESTRequest.m */; };
@@ -69,16 +64,6 @@
 		7AD27C5E1758E3D6003ADC3C /* TPSetCustomPropertyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD27C5C1758E3D6003ADC3C /* TPSetCustomPropertyRequest.m */; };
 		7AD80F6517660FAC00C69CFC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AD80F6417660FAC00C69CFC /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		219BB6EB16B02B5B008739D7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 219BB6CB16B02B5B008739D7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 219BB6D316B02B5B008739D7;
-			remoteInfo = TwinPushSDK;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		219BB6D216B02B5B008739D7 /* CopyFiles */ = {
@@ -118,7 +103,6 @@
 		219BB6D416B02B5B008739D7 /* libTwinPushSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTwinPushSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		219BB6D716B02B5B008739D7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		219BB6DB16B02B5B008739D7 /* TwinPushSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TwinPushSDK-Prefix.pch"; sourceTree = "<group>"; };
-		219BB6E516B02B5B008739D7 /* TwinPushSDKTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TwinPushSDKTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		219BB6E616B02B5B008739D7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		219BB6F016B02B5B008739D7 /* TwinPushSDKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TwinPushSDKTests-Info.plist"; sourceTree = "<group>"; };
 		219BB6F216B02B5B008739D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -174,16 +158,6 @@
 				7AD80F6517660FAC00C69CFC /* CoreLocation.framework in Frameworks */,
 				219BB79616B03A06008739D7 /* UIKit.framework in Frameworks */,
 				219BB6D816B02B5B008739D7 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		219BB6E116B02B5B008739D7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				219BB6E716B02B5B008739D7 /* SenTestingKit.framework in Frameworks */,
-				219BB6EA16B02B5B008739D7 /* Foundation.framework in Frameworks */,
-				219BB6ED16B02B5B008739D7 /* libTwinPushSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,7 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				219BB6D416B02B5B008739D7 /* libTwinPushSDK.a */,
-				219BB6E516B02B5B008739D7 /* TwinPushSDKTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -481,32 +454,13 @@
 			productReference = 219BB6D416B02B5B008739D7 /* libTwinPushSDK.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		219BB6E416B02B5B008739D7 /* TwinPushSDKTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 219BB6FC16B02B5B008739D7 /* Build configuration list for PBXNativeTarget "TwinPushSDKTests" */;
-			buildPhases = (
-				219BB6E016B02B5B008739D7 /* Sources */,
-				219BB6E116B02B5B008739D7 /* Frameworks */,
-				219BB6E216B02B5B008739D7 /* Resources */,
-				219BB6E316B02B5B008739D7 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				219BB6EC16B02B5B008739D7 /* PBXTargetDependency */,
-			);
-			name = TwinPushSDKTests;
-			productName = TwinPushSDKTests;
-			productReference = 219BB6E516B02B5B008739D7 /* TwinPushSDKTests.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		219BB6CB16B02B5B008739D7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastTestingUpgradeCheck = 0710;
+				LastTestingUpgradeCheck = 0720;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = TwinCoders;
 			};
@@ -523,37 +477,9 @@
 			projectRoot = "";
 			targets = (
 				219BB6D316B02B5B008739D7 /* TwinPushSDK */,
-				219BB6E416B02B5B008739D7 /* TwinPushSDKTests */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		219BB6E216B02B5B008739D7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				219BB6F316B02B5B008739D7 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		219BB6E316B02B5B008739D7 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		219BB6D016B02B5B008739D7 /* Sources */ = {
@@ -592,23 +518,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		219BB6E016B02B5B008739D7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				219BB6F616B02B5B008739D7 /* TwinPushSDKTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		219BB6EC16B02B5B008739D7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 219BB6D316B02B5B008739D7 /* TwinPushSDK */;
-			targetProxy = 219BB6EB16B02B5B008739D7 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		219BB6F116B02B5B008739D7 /* InfoPlist.strings */ = {
@@ -702,36 +612,6 @@
 			};
 			name = Release;
 		};
-		219BB6FD16B02B5B008739D7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TwinPushSDK/TwinPushSDK-Prefix.pch";
-				INFOPLIST_FILE = "TwinPushSDKTests/TwinPushSDKTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		219BB6FE16B02B5B008739D7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TwinPushSDK/TwinPushSDK-Prefix.pch";
-				INFOPLIST_FILE = "TwinPushSDKTests/TwinPushSDKTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -749,15 +629,6 @@
 			buildConfigurations = (
 				219BB6FA16B02B5B008739D7 /* Debug */,
 				219BB6FB16B02B5B008739D7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		219BB6FC16B02B5B008739D7 /* Build configuration list for PBXNativeTarget "TwinPushSDKTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				219BB6FD16B02B5B008739D7 /* Debug */,
-				219BB6FE16B02B5B008739D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -67,6 +67,12 @@ typedef enum {
 @property (nonatomic, copy) NSString* serverSubdomain;
 /** Current TwinPush SDK version number */
 @property (nonatomic, readonly) NSString* versionNumber;
+/** Automatically request notification permissions to the user on application startup.
+    Set to NO if you want to manually control permission request. Defaults to 'YES' */
+@property (nonatomic) BOOL autoRegisterForRemoteNotifications;
+/** Automatically reset local and remote application badge number when the application is opened or a notification is received with the application open
+    Set to NO if you want to manually control the application badge number. Defaults to 'YES' */
+@property (nonatomic) BOOL autoResetBadgeNumber;
 
 
 #pragma mark - Shared instance
@@ -78,16 +84,9 @@ typedef enum {
     registered yet. This method must be called before any other TwinPushManager method, but after changing the server URL
     if that is required. */
 - (void)setupTwinPushManagerWithAppId:(NSString*)appId apiKey:(NSString*)apiKey delegate:(id<TwinPushManagerDelegate>)delegate;
-- (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 /** Convenience method for setting the push token. It strips '<' and '>' symbols and set the 'pushToken' property */
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo;
-/** Convenience method for 'sendApplicationOpenedEvent' for easier integration */
-- (void)applicationDidBecomeActive:(UIApplication *)application;
-/** Convenience method for 'sendApplicationClosedEvent' for easier integration */
-- (void)applicationWillResignActive:(UIApplication *)application;
-/** Convenience method for 'sendApplicationClosedEvent' for easier integration */
-- (void)applicationDidEnterBackground:(UIApplication *)application;
 /** Changes the application badge count in both the current application and the server.
     Usually the badge count is reset to zero when the application goes to background */
 - (void)setApplicationBadgeCount:(NSUInteger)badgeCount;
@@ -95,7 +94,16 @@ typedef enum {
     you require to refresh the register manually. It's usually required if you disabled a register by implementing
     the method 'shouldRegisterDeviceWithAlias:token:'. This call is also interceptable by 'shouldRegisterDeviceWithAlias:token:' */
 - (void)registerDevice;
+/** Requests permission to the user to receive remote push notifications.
+    Calling this method is only required if `autoRequestNotificationPermission` is set to NO */
+- (void)registerForRemoteNotifications;
 
+
+/** These methods are deprecated and will be removed in a future SDK release **/
+- (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions DEPRECATED_MSG_ATTRIBUTE("Calling this method is no longer required");
+- (void)applicationDidBecomeActive:(UIApplication *)application DEPRECATED_ATTRIBUTE DEPRECATED_MSG_ATTRIBUTE("Calling this method is no longer required");
+- (void)applicationWillResignActive:(UIApplication *)application DEPRECATED_ATTRIBUTE DEPRECATED_MSG_ATTRIBUTE("Calling this method is no longer required");
+- (void)applicationDidEnterBackground:(UIApplication *)application DEPRECATED_ATTRIBUTE DEPRECATED_MSG_ATTRIBUTE("Calling this method is no longer required");
 
 #pragma mark - Certificate pinning
 - (void)enableCertificateNamePinningWithDefaultValues;
