@@ -16,7 +16,7 @@ static NSString* const kSdkVersion = @"2.0.0";
 
 static NSString* const kDefaultServerUrl = @"https://%@.twinpush.com/api/v2";
 static NSString* const kDefaultServerSubdomain = @"app";
-#define kDefaultCertificateNames @[@"*.twinpush.com", @"Starfield Secure Certificate Authority - G2", @"Starfield Root Certificate Authority - G2"]
+#define kDefaultCertificateNames @[@"*.twinpush.com", @"Go Daddy Secure Certificate Authority - G2", @"Go Daddy Root Certificate Authority - G2"]
 
 static NSString* const kPushIdKey = @"pushId";
 static NSString* const kPushTokenKey = @"pushToken";

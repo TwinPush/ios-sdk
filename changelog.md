@@ -3,7 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- No changes
+### Changed
+- Updated default intermediate certificate names for certificate pinning functionality
 
 ## [2.0.0] - 2016-03-31
 ### Added
