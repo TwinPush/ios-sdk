@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Reverted changes to intermediate certificate names
 - Improved automatic modal view discovery of notification detail view
+- Notification inbox sections enum is now public to allow easier customization of notification inbox subclasses
 
 ### Fixed
 - Notification detail view will no longer dismiss itself when an error occurs

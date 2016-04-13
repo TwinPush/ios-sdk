@@ -9,13 +9,6 @@
 #import "TPNotificationsInboxViewController.h"
 #import "TwinPushManager.h"
 
-enum {
-    kSectionNotifications,
-    kSectionLoadingCell,
-    kSectionNoResultsCell,
-    kSectionCount
-};
-
 static NSString* const kCellIdentifier = @"inboxCell";
 static NSString* const kLoadingCellIdentifier = @"loadingCell";
 static NSString* const kNoResultsCellIdentifier = @"noResultsCell";

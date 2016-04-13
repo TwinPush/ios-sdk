@@ -14,6 +14,13 @@
 #import "TPLoadingCell.h"
 #import "TPNoResultsCell.h"
 
+enum {
+    kSectionNotifications,
+    kSectionLoadingCell,
+    kSectionNoResultsCell,
+    kSectionCount
+};
+
 @protocol TPNotificationsInboxViewControllerDelegate <NSObject>
 
 - (void)didFinishLoadingNotifications;
