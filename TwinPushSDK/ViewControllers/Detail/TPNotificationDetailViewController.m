@@ -113,16 +113,11 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
         [_delegate dismissModalView];
     }
     else {
-        if (self.presentingViewController != nil) {
-            [self dismissViewControllerAnimated:YES completion:nil];
+        if (self.navigationController != nil && self.navigationController.viewControllers.count > 1 && self.navigationController.viewControllers.lastObject == self) {
+            [self.navigationController popViewControllerAnimated:YES];
         }
-        else if (self.navigationController != nil) {
-            if (self.navigationController.viewControllers.firstObject == self && self.navigationController.presentingViewController != nil) {
-                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-            }
-            else if (self.navigationController.viewControllers.count > 1 && self.navigationController.viewControllers.lastObject == self) {
-                [self.navigationController popViewControllerAnimated:YES];
-            }
+        else if (self.presentingViewController != nil || self.navigationController.presentingViewController != nil) {
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }
 }
@@ -158,16 +153,6 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
             return;
         }
     }
-    [self closeModal];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_notification.contentUrl]]];
-    }
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     [self webViewLoadFailedWithErrorCode:error.localizedDescription];
 }
 

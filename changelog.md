@@ -3,8 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- No changes
-- 
+### Changed
+- Reverted changes to intermediate certificate names
+- Improved automatic modal view discovery of notification detail view
+
+### Fixed
+- Notification detail view will no longer dismiss itself when an error occurs
+
+
 ## [2.0.1] - 2016-04-08
 ### Changed
 - Updated default intermediate certificate names for certificate pinning functionality
