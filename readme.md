@@ -85,6 +85,7 @@ Make your application delegate (usually named AppDelegate) to implement TwinPush
 @interface AppDelegate : UIResponder <UIApplicationDelegate, TwinPushManagerDelegate> 
 
 - (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+     [TwinPushManager manager].serverSubdomain = SUBDOMAIN;
     [[TwinPushManager manager] setupTwinPushManagerWithAppId:TWINPUSH_APP_ID apiKey:TWINPUSH_API_KEY delegate:self];
 }
 
@@ -109,6 +110,7 @@ Make your application delegate (usually named AppDelegate) to implement TwinPush
 // Swift
 class AppDelegate: UIResponder, UIApplicationDelegate, TwinPushManagerDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        TwinPushManager.singleton().serverSubdomain = SUBDOMAIN;
         TwinPushManager.singleton().setupTwinPushManagerWithAppId(TWINPUSH_APP_ID, apiKey: TWINPUSH_API_KEY, delegate: self)
         return true
     }
@@ -123,7 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TwinPushManagerDelegate {
     }
 }
 ~~~
-Replace `TWINPUSH_APP_ID` and `TWINPUSH_API_KEY` with the configuration values for your application in [app.twinpush.com](http://app.twinpush.com). The method `setupTwinPushManagerWithAppId` must be called before any other TwinPushSDK method other than changing the server URL (see below).
+Replace `SUBDOMAIN`, `TWINPUSH_APP_ID` and `TWINPUSH_API_KEY` with the configuration values for your application in [app.twinpush.com](http://app.twinpush.com). The method `setupTwinPushManagerWithAppId` must be called before any other TwinPushSDK method other than setting the subdomain or changing the server URL (see below).
 
 At this point you should be able to register correctly to TwinPush and you should be able to receive push notifications if both the application and the server certificates have been configured correctly. If not, check the Troubleshooting section.
 
