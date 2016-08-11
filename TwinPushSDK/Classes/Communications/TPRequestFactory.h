@@ -10,6 +10,7 @@
 #import "TPBaseRequest.h"
 #import "TPCreateDeviceRequest.h"
 #import "TPGetDeviceNotificationsRequest.h"
+#import "TPGetAliasNotificationsRequest.h"
 #import "TPNotificationsFilters.h"
 #import "TPGetNotificationWithIdRequest.h"
 #import "TPUpdateBadgeRequest.h"
@@ -42,6 +43,14 @@
  @param onError Block that will be executed if the device is not correct
  */
 - (TPBaseRequest *)createGetDeviceNotificationsRequestWithDeviceId:(NSString*)deviceId filters:(TPNotificationsFilters*)filters pagination:(TPNotificationsPagination*)pagination appId:(NSString*)appId onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
+
+/**
+ @brief Constructor for GetAliasNotifications
+ @param device The Device for which we want to get the notifications
+ @param onComplete Block that will be executed if we obtain the notifications for the device
+ @param onError Block that will be executed if the device is not correct
+ */
+- (TPBaseRequest *)createGetAliasNotificationsRequestWithDeviceId:(NSString*)deviceId pagination:(TPNotificationsPagination*)pagination appId:(NSString*)appId onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 /**
  @brief Constructor for GetDeviceNotificationWithId

@@ -256,6 +256,10 @@ static TwinPushManager *_sharedInstance;
     [self sendGetDeviceNotificationsRequestWithFilters:filters andPagination:pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete];
 }
 
+- (void)getAliasNotificationsWithPagination:(TPNotificationsPagination*)pagination onComplete:(GetAliasNotificationsResponseBlock)onComplete {
+    [self sendGetAliasNotificationsRequestWithPagination: pagination onComplete:onComplete];
+}
+
 - (void)getDeviceNotificationWithId:(NSInteger)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete {
     [self sendGetDeviceNotificationRequestWithId:notificationId onComplete:onComplete];
 }
@@ -618,6 +622,23 @@ static TwinPushManager *_sharedInstance;
     [self.inboxRequest cancel];
     if ([self hasAppIdAndApiKey]) {
         self.inboxRequest = [self.requestFactory createGetDeviceNotificationsRequestWithDeviceId:_deviceId filters:filters pagination:pagination appId:_appId onComplete:^(NSArray *array, BOOL hasMore) {
+            self.inboxRequest = nil;
+            onComplete(array, hasMore);
+        } onError:^(NSError *error) {
+            [self displayAlert:error.localizedDescription withTitle:NSLocalizedStringWithDefaultValue(@"GET_NOTIFICATIONS_ERROR_ALERT_TITLE", nil, [NSBundle mainBundle], @"Error", nil)];
+            self.inboxRequest = nil;
+        }];
+        [self.inboxRequest start];
+    } else {
+        onComplete (nil, NO);
+    }
+}
+
+- (void)sendGetAliasNotificationsRequestWithPagination:
+(TPNotificationsPagination*)pagination onComplete:(GetAliasNotificationsResponseBlock)onComplete {
+    [self.inboxRequest cancel];
+    if ([self hasAppIdAndApiKey]) {
+        self.inboxRequest = [self.requestFactory createGetAliasNotificationsRequestWithDeviceId:_deviceId pagination:pagination appId:_appId onComplete:^(NSArray *array, BOOL hasMore) {
             self.inboxRequest = nil;
             onComplete(array, hasMore);
         } onError:^(NSError *error) {

@@ -112,6 +112,7 @@ typedef enum {
 
 #pragma mark Notifications
 - (void)getDeviceNotificationsWithFilters:(TPNotificationsFilters*)filters andPagination:(TPNotificationsPagination*)pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete;
+- (void)getAliasNotificationsWithPagination:(TPNotificationsPagination*)pagination onComplete:(GetAliasNotificationsResponseBlock)onComplete;
 - (void)getDeviceNotificationWithId:(NSInteger)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete;
 - (void)userDidOpenNotificationWithId:(NSString*)notificationId;
 

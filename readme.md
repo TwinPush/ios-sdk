@@ -341,6 +341,16 @@ self.getInbox()
 
 Calling `getInbox` after the first successful load will load more pages if any exists. To reload from the first page, use `reloadInbox` method.
 
+
+#### Alias inbox
+
+TwinPush also provides a notification inbox based on the user alias instead of the device identifier. This way a user can see all the notifications received in any of their devices, even if they were received before installing the applications.
+
+To use this inbox, simply use `TPAliasInboxViewController` instead of `TPNotificationsInboxViewController`.
+
+This functionality requires that the alias is assigned before presenting the inbox. Users without alias will receive an error when trying to show the alias inbox.
+
+
 ### Sending user location
 
 You can send the location of your users to TwinPush to generate statistics and segment push notification targets by location.

@@ -43,6 +43,10 @@
 		21A33B4F16C4F78200EC7AF5 /* TPNotificationsPagination.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A33B4D16C4F78200EC7AF5 /* TPNotificationsPagination.m */; };
 		21F0777716B29070001CE5C5 /* TPNotificationDetailViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 21F0777416B29070001CE5C5 /* TPNotificationDetailViewController.h */; settings = {ATTRIBUTES = (); }; };
 		21F0777816B29070001CE5C5 /* TPNotificationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F0777516B29070001CE5C5 /* TPNotificationDetailViewController.m */; };
+		69215C551D5CD16C00A53FBE /* TPGetAliasNotificationsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 69215C531D5CD16C00A53FBE /* TPGetAliasNotificationsRequest.h */; };
+		69215C561D5CD16C00A53FBE /* TPGetAliasNotificationsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 69215C541D5CD16C00A53FBE /* TPGetAliasNotificationsRequest.m */; };
+		69215C591D5CE9E400A53FBE /* TPAliasInboxViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 69215C571D5CE9E400A53FBE /* TPAliasInboxViewController.h */; };
+		69215C5A1D5CE9E400A53FBE /* TPAliasInboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69215C581D5CE9E400A53FBE /* TPAliasInboxViewController.m */; };
 		69AD46B91970453C0091F395 /* TwinFormsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 69AD46B71970453C0091F395 /* TwinFormsManager.h */; };
 		69AD46BA1970453C0091F395 /* TwinFormsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AD46B81970453C0091F395 /* TwinFormsManager.m */; };
 		69AD46BE19704CFD0091F395 /* TPTwinFormsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 69AD46BC19704CFD0091F395 /* TPTwinFormsRequest.h */; };
@@ -127,6 +131,10 @@
 		21A33B4D16C4F78200EC7AF5 /* TPNotificationsPagination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNotificationsPagination.m; sourceTree = "<group>"; };
 		21F0777416B29070001CE5C5 /* TPNotificationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPNotificationDetailViewController.h; sourceTree = "<group>"; };
 		21F0777516B29070001CE5C5 /* TPNotificationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPNotificationDetailViewController.m; sourceTree = "<group>"; };
+		69215C531D5CD16C00A53FBE /* TPGetAliasNotificationsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPGetAliasNotificationsRequest.h; sourceTree = "<group>"; };
+		69215C541D5CD16C00A53FBE /* TPGetAliasNotificationsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPGetAliasNotificationsRequest.m; sourceTree = "<group>"; };
+		69215C571D5CE9E400A53FBE /* TPAliasInboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPAliasInboxViewController.h; sourceTree = "<group>"; };
+		69215C581D5CE9E400A53FBE /* TPAliasInboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPAliasInboxViewController.m; sourceTree = "<group>"; };
 		69AD46B71970453C0091F395 /* TwinFormsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwinFormsManager.h; sourceTree = "<group>"; };
 		69AD46B81970453C0091F395 /* TwinFormsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwinFormsManager.m; sourceTree = "<group>"; };
 		69AD46BC19704CFD0091F395 /* TPTwinFormsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTwinFormsRequest.h; sourceTree = "<group>"; };
@@ -218,6 +226,8 @@
 				214683C116C2A9F900F9E886 /* TPLoadingCell.m */,
 				2124D03716B17E4B00B39430 /* TPNotificationsInboxViewController.h */,
 				2124D03816B17E4B00B39430 /* TPNotificationsInboxViewController.m */,
+				69215C571D5CE9E400A53FBE /* TPAliasInboxViewController.h */,
+				69215C581D5CE9E400A53FBE /* TPAliasInboxViewController.m */,
 			);
 			path = Inbox;
 			sourceTree = "<group>";
@@ -379,6 +389,8 @@
 		7AD27C4D1758E2EA003ADC3C /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
+				69215C531D5CD16C00A53FBE /* TPGetAliasNotificationsRequest.h */,
+				69215C541D5CD16C00A53FBE /* TPGetAliasNotificationsRequest.m */,
 				7AD27C4F1758E334003ADC3C /* TPGetDeviceNotificationsRequest.h */,
 				7AD27C501758E334003ADC3C /* TPGetDeviceNotificationsRequest.m */,
 				7AD27C511758E334003ADC3C /* TPGetNotificationWithIdRequest.h */,
@@ -413,6 +425,7 @@
 				218C2AC516B28B3B00F498CE /* TPNotificationsFilters.h in Headers */,
 				218C2AC616B28B3B00F498CE /* TPInboxCell.h in Headers */,
 				21F0777716B29070001CE5C5 /* TPNotificationDetailViewController.h in Headers */,
+				69215C551D5CD16C00A53FBE /* TPGetAliasNotificationsRequest.h in Headers */,
 				218C2AC716B28B3B00F498CE /* TPNotificationsInboxViewController.h in Headers */,
 				218C5BC216B68545007F49DD /* TPCreateDeviceRequest.h in Headers */,
 				218C5BFA16B6D332007F49DD /* NSDictionary+ArrayForKey.h in Headers */,
@@ -430,6 +443,7 @@
 				7A63CB791779D8980073E0E7 /* TPOpenAppRequest.h in Headers */,
 				7A63CB7D1779D8AA0073E0E7 /* TPCloseAppRequest.h in Headers */,
 				2198DA8717816E30003BA36B /* TPUserOpenNotificationRequest.h in Headers */,
+				69215C591D5CE9E400A53FBE /* TPAliasInboxViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,10 +512,12 @@
 				2124D01716B1334C00B39430 /* NSDictionary+ArrayForKey.m in Sources */,
 				2124D01D16B1347700B39430 /* TPDevice.m in Sources */,
 				2124D02016B134E300B39430 /* TPNotification.m in Sources */,
+				69215C5A1D5CE9E400A53FBE /* TPAliasInboxViewController.m in Sources */,
 				2124D02916B151BE00B39430 /* TPNotificationsFilters.m in Sources */,
 				2124D03A16B17E4B00B39430 /* TPNotificationsInboxViewController.m in Sources */,
 				2124D03E16B1835C00B39430 /* TPInboxCell.m in Sources */,
 				21F0777816B29070001CE5C5 /* TPNotificationDetailViewController.m in Sources */,
+				69215C561D5CD16C00A53FBE /* TPGetAliasNotificationsRequest.m in Sources */,
 				214683BE16C2A9EB00F9E886 /* TPNoResultsCell.m in Sources */,
 				214683C316C2A9F900F9E886 /* TPLoadingCell.m in Sources */,
 				21A33B4F16C4F78200EC7AF5 /* TPNotificationsPagination.m in Sources */,

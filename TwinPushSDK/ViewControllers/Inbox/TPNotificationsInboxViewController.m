@@ -17,7 +17,6 @@ static NSString* const kOnlyRichNotificationsTag = @"tp_rich";
 @interface TPNotificationsInboxViewController ()
 
 @property (nonatomic) NSInteger resultsPerPage;
-@property (nonatomic) NSInteger page;
 @property (nonatomic, strong) TPLoadingCell* loadingCell;
 @property (nonatomic, strong) TPNoResultsCell* noResultsCell;
 
@@ -134,11 +133,8 @@ static NSString* const kOnlyRichNotificationsTag = @"tp_rich";
         self.loading = NO;
         self.hasMore = hasMore;
         if (hasMore) {
-            self.page = _pagination.page + 1;
-            self.pagination.page = _page;
+            self.pagination.page += 1;
             TCLog(@"Page: %ld and HasMore: %@", (long)self.pagination.page, _hasMore ? @"YES" : @"NO");
-        } else {
-            self.page = 1;
         }
         [_inboxTableView reloadData];
     }];
@@ -167,7 +163,6 @@ static NSString* const kOnlyRichNotificationsTag = @"tp_rich";
 - (IBAction)reloadInbox {
     self.notifications = nil;
     self.hasMore = YES;
-    self.page = 1;
     [self calculateResultsPerPage];
     [self getInbox];
 }
