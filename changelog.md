@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+- No changes
+
+## [2.1.0] - 2016-08-11
+### Added
 - Included alias inbox functionality
 
 ## [2.0.2] - 2016-04-13
@@ -103,7 +107,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - First fully functional public release.
 
-[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v2.0.2...HEAD
+[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/TwinPush/ios-sdk/compare/v2.0.2...v2.1.0
 [2.0.2]: https://github.com/TwinPush/ios-sdk/compare/v2.0.1...v2.0.2
 [2.0.1]: https://github.com/TwinPush/ios-sdk/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/TwinPush/ios-sdk/compare/v1.5.0...v2.0.0
