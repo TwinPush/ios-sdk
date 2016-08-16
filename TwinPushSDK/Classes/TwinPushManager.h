@@ -115,6 +115,7 @@ typedef enum {
 - (void)getAliasNotificationsWithPagination:(TPNotificationsPagination*)pagination onComplete:(GetAliasNotificationsResponseBlock)onComplete;
 - (void)getDeviceNotificationWithId:(NSInteger)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete;
 - (void)userDidOpenNotificationWithId:(NSString*)notificationId;
+- (void)deleteNotificationWithId:(NSString*)notificationId onComplete:(DeleteNotificationResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 #pragma mark Custom properties
 - (void)setProperty:(NSString*)name withStringValue:(NSString*)value;

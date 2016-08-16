@@ -11,4 +11,6 @@
 
 @interface TPAliasInboxViewController : TPNotificationsInboxViewController
 
+- (void)deleteNotification:(TPNotification*)notification;
+
 @end

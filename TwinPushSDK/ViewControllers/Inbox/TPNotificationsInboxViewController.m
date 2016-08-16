@@ -241,7 +241,8 @@ static NSString* const kOnlyRichNotificationsTag = @"tp_rich";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self onSelectedNotification:[(TPInboxCell*)[tableView cellForRowAtIndexPath:indexPath] notification]];
+    TPNotification* notification = self.notifications[indexPath.row];
+    [self onSelectedNotification:notification];
 }
 
 @end

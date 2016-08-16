@@ -19,6 +19,7 @@
 #import "TPOpenAppRequest.h"
 #import "TPCloseAppRequest.h"
 #import "TPUserOpenNotificationRequest.h"
+#import "TPDeleteNotificationRequest.h"
 #import <CoreLocation/CoreLocation.h>
 
 @interface TPRequestFactory : NSObject
@@ -60,6 +61,13 @@
  */
 - (TPBaseRequest *)createGetDeviceNotificationWithId:(NSInteger)notificationId deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
+/**
+ @brief Constructor for TPDeleteNotificationRequest
+ @param notificationId The notification's ID of the notification we are deleting
+ @param onComplete Block that will be executed after a successful deletion
+ @param onError Block that will be executed if the device is not correct
+ */
+- (TPBaseRequest*)createDeleteNotificationWithId:(NSString*)notificationId deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(DeleteNotificationResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 /**
  @brief Constructor for TPUpdateBadgeRequest

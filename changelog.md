@@ -3,7 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- No changes
+### Added
+- Added functionality to delete inbox notifications using `deleteNotification:` method of alias inbox view controller.
 
 ## [2.1.0] - 2016-08-11
 ### Added

@@ -264,6 +264,13 @@ static TwinPushManager *_sharedInstance;
     [self sendGetDeviceNotificationRequestWithId:notificationId onComplete:onComplete];
 }
 
+- (void)deleteNotificationWithId:(NSString*)notificationId onComplete:(DeleteNotificationResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    if ([self hasAppIdAndApiKey]) {
+        TPBaseRequest* request = [self.requestFactory createDeleteNotificationWithId:notificationId deviceId:_deviceId appId:_appId onComplete:onComplete onError:onError];
+        [self enqueueRequest:request];
+    }
+}
+
 - (void)userDidOpenNotificationWithId:(NSString*)notificationId {
     if (![self isDeviceRegistered]) {
         NSLog(@"[TwinPushSDK] Warning: device not registered yet. Unable to open notification");

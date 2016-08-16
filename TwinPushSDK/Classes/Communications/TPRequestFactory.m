@@ -53,6 +53,12 @@
     return request;
 }
 
+- (TPBaseRequest*)createDeleteNotificationWithId:(NSString*)notificationId deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(DeleteNotificationResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    TPBaseRequest* request = [[TPDeleteNotificationRequest alloc] initDeleteNotificationWithId:notificationId deviceId:deviceId appId:appId onComplete:onComplete onError:onError];
+    request.requestLauncher = _requestLauncher;
+    return request;
+}
+
 - (TPBaseRequest*)createUpdateBadgeRequestWithCount:(NSUInteger)badgeCount forDeviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(UpdateBadgeResponse)onComplete onError:(TPRequestErrorBlock)onError {
     TPBaseRequest* request = [[TPUpdateBadgeRequest alloc] initUpdateBadgeRequestWithCount:badgeCount forDeviceId:deviceId appId:appId onComplete:onComplete onError:onError];
     request.requestLauncher = _requestLauncher;

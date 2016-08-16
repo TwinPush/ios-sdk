@@ -47,6 +47,8 @@
 		69215C561D5CD16C00A53FBE /* TPGetAliasNotificationsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 69215C541D5CD16C00A53FBE /* TPGetAliasNotificationsRequest.m */; };
 		69215C591D5CE9E400A53FBE /* TPAliasInboxViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 69215C571D5CE9E400A53FBE /* TPAliasInboxViewController.h */; };
 		69215C5A1D5CE9E400A53FBE /* TPAliasInboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69215C581D5CE9E400A53FBE /* TPAliasInboxViewController.m */; };
+		699CF17A1D5DC11000DCA452 /* TPDeleteNotificationRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 699CF1781D5DC11000DCA452 /* TPDeleteNotificationRequest.h */; };
+		699CF17B1D5DC11000DCA452 /* TPDeleteNotificationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 699CF1791D5DC11000DCA452 /* TPDeleteNotificationRequest.m */; };
 		69AD46B91970453C0091F395 /* TwinFormsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 69AD46B71970453C0091F395 /* TwinFormsManager.h */; };
 		69AD46BA1970453C0091F395 /* TwinFormsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AD46B81970453C0091F395 /* TwinFormsManager.m */; };
 		69AD46BE19704CFD0091F395 /* TPTwinFormsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 69AD46BC19704CFD0091F395 /* TPTwinFormsRequest.h */; };
@@ -135,6 +137,8 @@
 		69215C541D5CD16C00A53FBE /* TPGetAliasNotificationsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPGetAliasNotificationsRequest.m; sourceTree = "<group>"; };
 		69215C571D5CE9E400A53FBE /* TPAliasInboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPAliasInboxViewController.h; sourceTree = "<group>"; };
 		69215C581D5CE9E400A53FBE /* TPAliasInboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPAliasInboxViewController.m; sourceTree = "<group>"; };
+		699CF1781D5DC11000DCA452 /* TPDeleteNotificationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDeleteNotificationRequest.h; sourceTree = "<group>"; };
+		699CF1791D5DC11000DCA452 /* TPDeleteNotificationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDeleteNotificationRequest.m; sourceTree = "<group>"; };
 		69AD46B71970453C0091F395 /* TwinFormsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwinFormsManager.h; sourceTree = "<group>"; };
 		69AD46B81970453C0091F395 /* TwinFormsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwinFormsManager.m; sourceTree = "<group>"; };
 		69AD46BC19704CFD0091F395 /* TPTwinFormsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTwinFormsRequest.h; sourceTree = "<group>"; };
@@ -389,6 +393,8 @@
 		7AD27C4D1758E2EA003ADC3C /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
+				699CF1781D5DC11000DCA452 /* TPDeleteNotificationRequest.h */,
+				699CF1791D5DC11000DCA452 /* TPDeleteNotificationRequest.m */,
 				69215C531D5CD16C00A53FBE /* TPGetAliasNotificationsRequest.h */,
 				69215C541D5CD16C00A53FBE /* TPGetAliasNotificationsRequest.m */,
 				7AD27C4F1758E334003ADC3C /* TPGetDeviceNotificationsRequest.h */,
@@ -439,6 +445,7 @@
 				7AD27C571758E334003ADC3C /* TPGetNotificationWithIdRequest.h in Headers */,
 				7AD27C591758E334003ADC3C /* TPUpdateBadgeRequest.h in Headers */,
 				7AD27C5D1758E3D6003ADC3C /* TPSetCustomPropertyRequest.h in Headers */,
+				699CF17A1D5DC11000DCA452 /* TPDeleteNotificationRequest.h in Headers */,
 				7A63CB751779CC640073E0E7 /* TPReportStatisticsRequest.h in Headers */,
 				7A63CB791779D8980073E0E7 /* TPOpenAppRequest.h in Headers */,
 				7A63CB7D1779D8AA0073E0E7 /* TPCloseAppRequest.h in Headers */,
@@ -531,6 +538,7 @@
 				7A63CB7A1779D8980073E0E7 /* TPOpenAppRequest.m in Sources */,
 				7A63CB7E1779D8AA0073E0E7 /* TPCloseAppRequest.m in Sources */,
 				2198DA8817816E30003BA36B /* TPUserOpenNotificationRequest.m in Sources */,
+				699CF17B1D5DC11000DCA452 /* TPDeleteNotificationRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

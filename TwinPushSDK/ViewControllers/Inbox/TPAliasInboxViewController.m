@@ -31,4 +31,21 @@
     }];
 }
 
+- (void)deleteNotification:(TPNotification*)notification {
+    self.loading = YES;
+    [[TwinPushManager manager] deleteNotificationWithId:notification.notificationId onComplete:^{
+        self.loading = NO;
+        [self reloadInbox];
+    } onError:^(NSError *error) {
+        self.loading = NO;
+        NSString* title = NSLocalizedStringWithDefaultValue(@"ERROR_DELETING_NOTIFICATION_TITLE", nil, [NSBundle mainBundle], @"Error", nil);
+        NSString* message = NSLocalizedStringWithDefaultValue(@"ERROR_DELETING_NOTIFICATION_MSG", nil, [NSBundle mainBundle], @"Error deleting notification: ", nil);
+        NSString* button = NSLocalizedStringWithDefaultValue(@"ERROR_DELETING_NOTIFICATION_BUTTON", nil, [NSBundle mainBundle], @"Accept", nil);
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:button otherButtonTitles:nil, nil];
+        [alertView show];
+    }];
+}
+
+
+
 @end
