@@ -68,13 +68,6 @@
 			remoteGlobalIDString = 219BB6D416B02B5B008739D7;
 			remoteInfo = TwinPushSDK;
 		};
-		21213DAC16B2DC2200F62607 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 21213DA516B2DC2200F62607 /* TwinPushSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 219BB6E516B02B5B008739D7;
-			remoteInfo = TwinPushSDKTests;
-		};
 		21213DB916B2DC3600F62607 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 21213DA516B2DC2200F62607 /* TwinPushSDK.xcodeproj */;
@@ -141,6 +134,7 @@
 		69B9C8531C0CA06E002CDFFE /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		69B9C8551C0CB1FF002CDFFE /* background@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpeg"; sourceTree = "<group>"; };
 		69BDAE8C194A2DA7000B0E57 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		69FFE0D81E9779B200211E94 /* TwinPushSDKDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TwinPushSDKDemo.entitlements; sourceTree = "<group>"; };
 		7A0E2864175DFA6700A1AB71 /* TCKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		7A0E2865175DFA6700A1AB71 /* TCKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		7AD27C491758BB4E003ADC3C /* logo_twinpush_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_twinpush_blue.png; sourceTree = "<group>"; };
@@ -173,7 +167,6 @@
 			isa = PBXGroup;
 			children = (
 				21213DAB16B2DC2200F62607 /* libTwinPushSDK.a */,
-				21213DAD16B2DC2200F62607 /* TwinPushSDKTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -306,6 +299,7 @@
 		219BB71416B02BF4008739D7 /* TwinPushSDKDemo */ = {
 			isa = PBXGroup;
 			children = (
+				69FFE0D81E9779B200211E94 /* TwinPushSDKDemo.entitlements */,
 				214683AF16C2A57900F9E886 /* Storyboard */,
 				214683AE16C2A56700F9E886 /* AppDelegate */,
 				214683AD16C2A55200F9E886 /* Controllers */,
@@ -373,6 +367,12 @@
 				TargetAttributes = {
 					219BB70916B02BF4008739D7 = {
 						DevelopmentTeam = WVRMQW2BQ4;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -405,13 +405,6 @@
 			fileType = archive.ar;
 			path = libTwinPushSDK.a;
 			remoteRef = 21213DAA16B2DC2200F62607 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		21213DAD16B2DC2200F62607 /* TwinPushSDKTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = TwinPushSDKTests.octest;
-			remoteRef = 21213DAC16B2DC2200F62607 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -573,7 +566,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = TwinPushSDKDemo/TwinPushSDKDemo.entitlements;
 				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TwinPushSDKDemo/TwinPushSDKDemo-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
@@ -581,7 +577,8 @@
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = es.twincoders.twinpush.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9f9a94b0-c4f5-4d49-a394-9b627ef7d4ee";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -591,7 +588,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = TwinPushSDKDemo/TwinPushSDKDemo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Twin Coders S.L.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TwinPushSDKDemo/TwinPushSDKDemo-Prefix.pch";
 				HEADER_SEARCH_PATHS = "";
@@ -599,7 +599,8 @@
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = es.twincoders.twinpush.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9f9a94b0-c4f5-4d49-a394-9b627ef7d4ee";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
