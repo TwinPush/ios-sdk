@@ -15,6 +15,10 @@
 #import "TPRequestFactory.h"
 #import <CoreLocation/CoreLocation.h>
 
+#ifdef __IPHONE_10_0
+#import <UserNotifications/UserNotifications.h>
+#endif
+
 @protocol TwinPushManagerDelegate <NSObject>
 
 @optional

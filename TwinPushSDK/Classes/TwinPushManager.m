@@ -11,6 +11,11 @@
 #import "TPTwinPushRequest.h"
 #import "TPRequestLauncher.h"
 
+#ifdef __IPHONE_10_0
+@interface TwinPushManager()<UNUserNotificationCenterDelegate>
+@end
+#endif
+
 
 static NSString* const kSdkVersion = @"2.0.2";
 
@@ -455,6 +460,24 @@ static TwinPushManager *_sharedInstance;
 
 - (void)registerForRemoteNotifications {
 #ifdef __IPHONE_8_0
+    #ifdef __IPHONE_10_0
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0")) {
+        UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+             if( !error ) {
+                 [[UIApplication sharedApplication] registerForRemoteNotifications];
+                 NSLog( @"Push registration success." );
+             }
+             else {
+                 NSLog( @"Push registration FAILED" );
+                 NSLog( @"ERROR: %@ - %@", error.localizedFailureReason, error.localizedDescription );
+                 NSLog( @"SUGGESTIONS: %@ - %@", error.localizedRecoveryOptions, error.localizedRecoverySuggestion );  
+             }  
+         }];
+    }
+    else
+    #endif
     if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)]) {
         UIUserNotificationSettings *userNotificationSettings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:userNotificationSettings];
@@ -795,5 +818,19 @@ static TwinPushManager *_sharedInstance;
 	// Schedule the notification
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
 }
+
+#ifdef __IPHONE_10_0
+//Called when a notification is delivered to a foreground app.
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler {
+    NSLog(@"User Info : %@", notification.request.content.userInfo);
+    completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge);
+}
+
+//Called to let your app know which action was selected by the user for a given notification.
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler {
+    NSLog(@"User Info : %@", response.notification.request.content.userInfo);
+    completionHandler();
+}
+#endif
 
 @end

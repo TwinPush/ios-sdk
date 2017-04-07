@@ -54,6 +54,8 @@
 		69B9C8541C0CA06E002CDFFE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69B9C8531C0CA06E002CDFFE /* LaunchScreen.xib */; };
 		69B9C8561C0CB1FF002CDFFE /* background@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 69B9C8551C0CB1FF002CDFFE /* background@2x.jpeg */; };
 		69BDAE8D194A2DA7000B0E57 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69BDAE8C194A2DA7000B0E57 /* Security.framework */; };
+		69FFE0DB1E97E3B800211E94 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FFE0D91E97E3B800211E94 /* UserNotifications.framework */; };
+		69FFE0DC1E97E3B800211E94 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FFE0DA1E97E3B800211E94 /* UserNotificationsUI.framework */; };
 		7A0E2866175DFA6700A1AB71 /* TCKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0E2865175DFA6700A1AB71 /* TCKeyboardAvoidingScrollView.m */; };
 		7AD27C4B1758BB4E003ADC3C /* logo_twinpush_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD27C491758BB4E003ADC3C /* logo_twinpush_blue.png */; };
 		7AD27C4C1758BB4E003ADC3C /* logo_twinpush_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD27C4A1758BB4E003ADC3C /* logo_twinpush_blue@2x.png */; };
@@ -135,6 +137,8 @@
 		69B9C8551C0CB1FF002CDFFE /* background@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpeg"; sourceTree = "<group>"; };
 		69BDAE8C194A2DA7000B0E57 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		69FFE0D81E9779B200211E94 /* TwinPushSDKDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TwinPushSDKDemo.entitlements; sourceTree = "<group>"; };
+		69FFE0D91E97E3B800211E94 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		69FFE0DA1E97E3B800211E94 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
 		7A0E2864175DFA6700A1AB71 /* TCKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		7A0E2865175DFA6700A1AB71 /* TCKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		7AD27C491758BB4E003ADC3C /* logo_twinpush_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo_twinpush_blue.png; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69FFE0DB1E97E3B800211E94 /* UserNotifications.framework in Frameworks */,
+				69FFE0DC1E97E3B800211E94 /* UserNotificationsUI.framework in Frameworks */,
 				69BDAE8D194A2DA7000B0E57 /* Security.framework in Frameworks */,
 				7AD80F6717660FC400C69CFC /* CoreLocation.framework in Frameworks */,
 				218C5BC016B680BC007F49DD /* MobileCoreServices.framework in Frameworks */,
@@ -282,6 +288,8 @@
 		219BB70D16B02BF4008739D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				69FFE0D91E97E3B800211E94 /* UserNotifications.framework */,
+				69FFE0DA1E97E3B800211E94 /* UserNotificationsUI.framework */,
 				21213DA516B2DC2200F62607 /* TwinPushSDK.xcodeproj */,
 				218C5BBF16B680BC007F49DD /* MobileCoreServices.framework */,
 				218C5BBD16B68074007F49DD /* CFNetwork.framework */,
