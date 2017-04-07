@@ -64,7 +64,14 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
 + (TPNotification*)notificationFromApnsDictionary:(NSDictionary*)dict {
     TPNotification* notification = [[TPNotification alloc] init];
     notification.notificationId = dict[kApsNotificationsIdKey];
-    notification.message = dict[kApsKey][kAlertKey];
+    id alert = dict[kApsKey][kAlertKey];
+    if ([alert isKindOfClass:[NSString class]]) {
+        notification.message = alert;
+    }
+    else if ([alert isKindOfClass:[NSDictionary class]]) {
+        notification.message = alert[@"body"];
+        notification.title = alert[@"title"];
+    }
     notification.sound = dict[kApsKey][kSoundKey];
     
     if (dict[kRichUrlKey] == [NSNull null]) {
