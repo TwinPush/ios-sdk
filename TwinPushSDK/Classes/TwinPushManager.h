@@ -37,6 +37,18 @@
 /** Called to open the notification. The default behavior is to show a modal webview with the rich content
     if the notification has any and do nothing otherwise */
 - (void)showNotification:(TPNotification*)notification;
+#ifdef __IPHONE_10_0
+/** Called when a notification is delivered to a foreground app. Return UNNotificationPresentationOptionNone to silcence it **/
+-(UNNotificationPresentationOptions)presentationOptionsForNotification:(UNNotification *)notification;
+/** Called to let your app know which action was selected by the user for a given notification.
+    At the end of your implementation, you must call the completionHandler block to let the system know that you 
+    are done processing the notification.
+    Default implementation will call `showNotification:` regardless of the selected action */
+-(void)didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler;
+/** Called to let your app know which action was selected by the user for a given notification.
+    Default implementation will call `showNotification:` regardless of the selected action */
+-(void)didReceiveNotificationResponse:(UNNotificationResponse *)response;
+#endif
 @end
 
 typedef enum {

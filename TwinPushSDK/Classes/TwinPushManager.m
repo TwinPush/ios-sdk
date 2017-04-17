@@ -823,14 +823,30 @@ static TwinPushManager *_sharedInstance;
 //Called when a notification is delivered to a foreground app.
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler {
     NSLog(@"User Info : %@", notification.request.content.userInfo);
-    completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge);
+    UNNotificationPresentationOptions options = UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge;
+    if ([_delegate respondsToSelector:@selector(presentationOptionsForNotification:)]) {
+        options = [_delegate presentationOptionsForNotification:notification];
+    }
+    completionHandler(options);
 }
 
 //Called to let your app know which action was selected by the user for a given notification.
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler {
-    NSLog(@"User Info : %@", response.notification.request.content.userInfo);
-    completionHandler();
+    if ([_delegate respondsToSelector:@selector(didReceiveNotificationResponse:withCompletionHandler:)]) {
+        [_delegate didReceiveNotificationResponse:response withCompletionHandler:completionHandler];
+    }
+    else {
+        if ([_delegate respondsToSelector:@selector(didReceiveNotificationResponse:)]) {
+            [_delegate didReceiveNotificationResponse:response];
+        }
+        else {
+            TPNotification* notification = [TPNotification notificationFromUserNotification: response.notification];
+            [self showNotification: notification];
+        }
+        completionHandler();
+    }
 }
+
 #endif
 
 @end
