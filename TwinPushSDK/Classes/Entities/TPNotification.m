@@ -18,10 +18,12 @@ static NSString* const kNotificationsIdKey = @"id";
 static NSString* const kApsNotificationsIdKey = @"tp_id";
 static NSString* const kAlertKey = @"alert";
 static NSString* const kTitleKey = @"title";
+static NSString* const kSubtitleKey = @"subtitle";
 static NSString* const kSoundKey = @"sound";
 static NSString* const kSentDateKey = @"last_sent_at";
 static NSString* const kRichUrlKey = @"tp_rich_url";
 static NSString* const kCustomPropertiesKey = @"custom_properties";
+static NSString* const kCategoryKey = @"category";
 static NSString* const kTagsKey = @"tags";
 static NSString* const kApsKey = @"aps";
 static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
@@ -48,11 +50,13 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
     notification.sound = dict[kSoundKey];
     
     notification.title = dict[kTitleKey];
+    notification.subtitle = dict[kSubtitleKey];
     if (dict[kRichUrlKey] == [NSNull null]) {
         notification.contentUrl = @"";
     } else {
         notification.contentUrl = dict[kRichUrlKey];
     }
+    notification.category = dict[kCategoryKey];
     notification.date = [[self dateFormatter] dateFromString:dict[kSentDateKey]];
     notification.customProperties = dict[kCustomPropertiesKey];
     notification.tags = dict[kTagsKey];
@@ -70,7 +74,8 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
     }
     else if ([alert isKindOfClass:[NSDictionary class]]) {
         notification.message = alert[@"body"];
-        notification.title = alert[@"title"];
+        notification.title = alert[kTitleKey];
+        notification.subtitle = alert[kSubtitleKey];
     }
     notification.sound = dict[kApsKey][kSoundKey];
     
@@ -79,6 +84,7 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
     } else {
         notification.contentUrl = dict[kRichUrlKey];
     }
+    notification.category = dict[kCategoryKey];
     
     NSMutableDictionary* customProperties = [NSMutableDictionary dictionaryWithDictionary:dict];
     [customProperties removeObjectForKey:kApsKey];
@@ -89,6 +95,14 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
     
     return notification;
 }
+
+#ifdef __IPHONE_10_0
++ (TPNotification*)notificationFromUserNotification:(UNNotification*)userNotification {
+    TPNotification* notification = [TPNotification notificationFromApnsDictionary: userNotification.request.content.userInfo];
+    notification.date = notification.date;
+    return notification;
+}
+#endif
 
 
 
