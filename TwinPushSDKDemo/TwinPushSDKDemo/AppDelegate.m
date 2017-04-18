@@ -38,10 +38,38 @@
                                                    forState:UIControlStateNormal];
 }
 
+- (void)configureCategories {
+    UNNotificationCategory* generalCategory = [UNNotificationCategory
+                                               categoryWithIdentifier:@"GENERAL"
+                                               actions:@[]
+                                               intentIdentifiers:@[]
+                                               options:UNNotificationCategoryOptionCustomDismissAction];
+    
+    UNNotificationAction* openAction = [UNNotificationAction
+                                        actionWithIdentifier:@"OPEN"
+                                        title:@"Open"
+                                        options:UNNotificationActionOptionForeground];
+    UNNotificationAction* openInSafariAction = [UNNotificationAction
+                                                actionWithIdentifier:@"SAFARI"
+                                                title:@"Open in Safari"
+                                                options:UNNotificationActionOptionForeground];
+    
+    UNNotificationCategory* richNotificationCategory = [UNNotificationCategory
+                                               categoryWithIdentifier:@"RICH"
+                                               actions:@[openAction, openInSafariAction]
+                                               intentIdentifiers:@[]
+                                               options:UNNotificationCategoryOptionNone];
+    
+    // Register the notification categories.
+    UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+    [center setNotificationCategories:[NSSet setWithObjects:generalCategory, richNotificationCategory, nil]];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
     [self applyCustomAppearance];
+    [self configureCategories];
     
     [[TwinPushManager manager] enableCertificateNamePinningWithDefaultValues];
     [[TwinPushManager manager] setupTwinPushManagerWithAppId:TWINPUSH_APP_ID apiKey:TWINPUSH_API_KEY delegate:self];
@@ -72,6 +100,18 @@
 }
 
 #pragma mark - TwinPushManagerDelegate
+- (void)didReceiveNotificationResponse:(UNNotificationResponse *)response {
+    TPNotification* notification = [TPNotification notificationFromUserNotification:response.notification];
+    NSURL* richURL = [NSURL URLWithString:notification.contentUrl];
+    if ([response.actionIdentifier isEqualToString:@"SAFARI"] && richURL != nil) {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
+            [[UIApplication sharedApplication] openURL:richURL];
+        });
+    }
+    else {
+        [self showNotification:notification];
+    }
+}
 
 - (void)showNotification:(TPNotification*)notification {
     NSLog(@"Showing notification %@", notification.notificationId);
