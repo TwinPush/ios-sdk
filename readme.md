@@ -254,7 +254,7 @@ These methods are:
 
 iOS 10 brings the hability to mutate notification content before displaying it to the user. We're gonna use it to attach image, audio or video files to a notification. And it will be shown without opening the application.
 
-![](http://i.imgur.com/YPNTw57.gif)
+![](http://i.imgur.com/fRkUqkH.gif)
 
 First thing to do is creating a new Notification Service Extension. In XCode go to `File` -> `New` -> `Target` and select **Notification Service Extension**.
 
