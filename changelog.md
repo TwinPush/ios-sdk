@@ -3,7 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- No changes
+### Fixed
+- Fixed crash when receiving notification with complex alert dictionary instead of plain string from APNS.
 
 ## [2.2.0] - 2016-08-16
 ### Added
