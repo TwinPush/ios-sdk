@@ -28,6 +28,8 @@
 		21FFB5AB16C26E6600838756 /* MuseoSans_300.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21FFB5A816C26E6600838756 /* MuseoSans_300.otf */; };
 		21FFB5AC16C26E6600838756 /* MuseoSans_500.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21FFB5A916C26E6600838756 /* MuseoSans_500.otf */; };
 		21FFB5AD16C26E6600838756 /* MuseoSans_700.otf in Resources */ = {isa = PBXBuildFile; fileRef = 21FFB5AA16C26E6600838756 /* MuseoSans_700.otf */; };
+		6924BD161EA533E1003DD5A3 /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6924BD151EA533E1003DD5A3 /* NotificationService.m */; };
+		6924BD1A1EA533E1003DD5A3 /* RichNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6924BD121EA533E1003DD5A3 /* RichNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		695433B91716CC1400FA06D5 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 695433921716CC1400FA06D5 /* arrow.png */; };
 		695433BA1716CC1400FA06D5 /* arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 695433931716CC1400FA06D5 /* arrow@2x.png */; };
 		695433BB1716CC1400FA06D5 /* arrowUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 695433941716CC1400FA06D5 /* arrowUp.png */; };
@@ -77,7 +79,28 @@
 			remoteGlobalIDString = 219BB6D316B02B5B008739D7;
 			remoteInfo = TwinPushSDK;
 		};
+		6924BD181EA533E1003DD5A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 219BB70116B02BF4008739D7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6924BD111EA533E1003DD5A3;
+			remoteInfo = RichNotificationService;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6924BD0A1EA52FD0003DD5A3 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6924BD1A1EA533E1003DD5A3 /* RichNotificationService.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		21213DA516B2DC2200F62607 /* TwinPushSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TwinPushSDK.xcodeproj; path = ../TwinPushSDK.xcodeproj; sourceTree = "<group>"; };
@@ -110,6 +133,10 @@
 		21FFB5A816C26E6600838756 /* MuseoSans_300.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MuseoSans_300.otf; sourceTree = "<group>"; };
 		21FFB5A916C26E6600838756 /* MuseoSans_500.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MuseoSans_500.otf; sourceTree = "<group>"; };
 		21FFB5AA16C26E6600838756 /* MuseoSans_700.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MuseoSans_700.otf; sourceTree = "<group>"; };
+		6924BD121EA533E1003DD5A3 /* RichNotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RichNotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6924BD141EA533E1003DD5A3 /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
+		6924BD151EA533E1003DD5A3 /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
+		6924BD171EA533E1003DD5A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		695433921716CC1400FA06D5 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
 		695433931716CC1400FA06D5 /* arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow@2x.png"; sourceTree = "<group>"; };
 		695433941716CC1400FA06D5 /* arrowUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowUp.png; sourceTree = "<group>"; };
@@ -163,6 +190,13 @@
 				219BB70F16B02BF4008739D7 /* UIKit.framework in Frameworks */,
 				219BB71116B02BF4008739D7 /* Foundation.framework in Frameworks */,
 				219BB71316B02BF4008739D7 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6924BD0F1EA533E1003DD5A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				219BB71416B02BF4008739D7 /* TwinPushSDKDemo */,
+				6924BD131EA533E1003DD5A3 /* RichNotificationService */,
 				219BB70D16B02BF4008739D7 /* Frameworks */,
 				219BB70B16B02BF4008739D7 /* Products */,
 			);
@@ -281,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				219BB70A16B02BF4008739D7 /* TwinPushSDKDemo.app */,
+				6924BD121EA533E1003DD5A3 /* RichNotificationService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -334,6 +370,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6924BD131EA533E1003DD5A3 /* RichNotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				6924BD141EA533E1003DD5A3 /* NotificationService.h */,
+				6924BD151EA533E1003DD5A3 /* NotificationService.m */,
+				6924BD171EA533E1003DD5A3 /* Info.plist */,
+			);
+			path = RichNotificationService;
+			sourceTree = "<group>";
+		};
 		7A0E2862175DFA1900A1AB71 /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,16 +399,35 @@
 				219BB70616B02BF4008739D7 /* Sources */,
 				219BB70716B02BF4008739D7 /* Frameworks */,
 				219BB70816B02BF4008739D7 /* Resources */,
+				6924BD0A1EA52FD0003DD5A3 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				21213DBA16B2DC3600F62607 /* PBXTargetDependency */,
+				6924BD191EA533E1003DD5A3 /* PBXTargetDependency */,
 			);
 			name = TwinPushSDKDemo;
 			productName = TwinPushSDKDemo;
 			productReference = 219BB70A16B02BF4008739D7 /* TwinPushSDKDemo.app */;
 			productType = "com.apple.product-type.application";
+		};
+		6924BD111EA533E1003DD5A3 /* RichNotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6924BD1B1EA533E1003DD5A3 /* Build configuration list for PBXNativeTarget "RichNotificationService" */;
+			buildPhases = (
+				6924BD0E1EA533E1003DD5A3 /* Sources */,
+				6924BD0F1EA533E1003DD5A3 /* Frameworks */,
+				6924BD101EA533E1003DD5A3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RichNotificationService;
+			productName = RichNotificationService;
+			productReference = 6924BD121EA533E1003DD5A3 /* RichNotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -370,6 +435,7 @@
 		219BB70116B02BF4008739D7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = TwinCoders;
 				TargetAttributes = {
@@ -381,6 +447,11 @@
 								enabled = 1;
 							};
 						};
+					};
+					6924BD111EA533E1003DD5A3 = {
+						CreatedOnToolsVersion = 8.3;
+						DevelopmentTeam = WVRMQW2BQ4;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -403,6 +474,7 @@
 			projectRoot = "";
 			targets = (
 				219BB70916B02BF4008739D7 /* TwinPushSDKDemo */,
+				6924BD111EA533E1003DD5A3 /* RichNotificationService */,
 			);
 		};
 /* End PBXProject section */
@@ -458,6 +530,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6924BD101EA533E1003DD5A3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -476,6 +555,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6924BD0E1EA533E1003DD5A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6924BD161EA533E1003DD5A3 /* NotificationService.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -483,6 +570,11 @@
 			isa = PBXTargetDependency;
 			name = TwinPushSDK;
 			targetProxy = 21213DB916B2DC3600F62607 /* PBXContainerItemProxy */;
+		};
+		6924BD191EA533E1003DD5A3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6924BD111EA533E1003DD5A3 /* RichNotificationService */;
+			targetProxy = 6924BD181EA533E1003DD5A3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -515,7 +607,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Guillermo Gutierrez Doral (YRT83YP2RU)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -535,7 +627,6 @@
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-all_load";
-				PROVISIONING_PROFILE = "cd710d97-d966-409f-90bf-7a2232fd4727";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../TwinPushSDK/**";
 			};
@@ -550,7 +641,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Twin Coders S.L.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -562,7 +653,6 @@
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-all_load";
-				PROVISIONING_PROFILE = "9f9a94b0-c4f5-4d49-a394-9b627ef7d4ee";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../TwinPushSDK/**";
 				VALIDATE_PRODUCT = YES;
@@ -613,6 +703,81 @@
 			};
 			name = Release;
 		};
+		6924BD1C1EA533E1003DD5A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = WVRMQW2BQ4;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = RichNotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = es.twincoders.twinpush.demo.RichNotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		6924BD1D1EA533E1003DD5A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Twin Coders S.L.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = WVRMQW2BQ4;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = RichNotificationService/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = es.twincoders.twinpush.demo.RichNotificationService;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -633,6 +798,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		6924BD1B1EA533E1003DD5A3 /* Build configuration list for PBXNativeTarget "RichNotificationService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6924BD1C1EA533E1003DD5A3 /* Debug */,
+				6924BD1D1EA533E1003DD5A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
