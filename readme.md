@@ -250,6 +250,28 @@ These methods are:
 
 - `didSkipRegisteringDevice` notifies when the registration has been skipped. There are two reasons to skip a registration: the implementation for `shouldRegisterDeviceWithAlias` returned `NO` or no changes have been detected since the last successful registration.
 
+### Notification Attachments
+
+iOS 10 brings the hability to mutate notification content before displaying it to the user. We're gonna use it to attach image, audio or video files to a notification. And it will be shown without opening the application.
+
+![](http://i.imgur.com/YPNTw57.gif)
+
+First thing to do is creating a new Notification Service Extension. In XCode go to `File` -> `New` -> `Target` and select **Notification Service Extension**.
+
+![](http://i.imgur.com/G34LtGh.png)
+
+Enter a name for the extension and make sure to embed it to your application.
+
+![](http://i.imgur.com/6ZCGEuq.png)
+
+It will create a new target with a single class named `NotificationService`. Open it and replace it with the content of [the sample code provided](https://github.com/TwinPush/ios-sdk/blob/user-notification-framework/TwinPushSDKDemo/RichNotificationService/NotificationService.m) in the demo application. This reference code will download the attachment (defined in the `attachment` field of the payload) of the notification prior to showing the notification to the user.
+
+To test this functionality make sure that `mutable-content` is set to `1` in the notification payload for the extension to be called.
+
+#### Allowing non-secure attachment URL's
+Notification Service Extension is a separate binary and **has its own Info.plist** file. To download the content from non-https URL (ex: http://) you have to add `App Transport Security Settings` with `Allow Arbitrary Loads` flag set to YES to **extension's Info.plist** file.
+
+![](http://i.imgur.com/m7JlJ5N.png)
 ### Custom rich notification viewer
 
 TwinPush allows sending rich notifications to the device, that consists in a URL that is displayed in a web view. By default TwinPush SDK will show a full screen modal view containing the webview and a navigation bar. You can customize the navigation bar using [`UIAppearance`](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIAppearance_Protocol/) proxy. For further customization you can create your own rich notification viewer.
