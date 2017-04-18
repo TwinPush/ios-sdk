@@ -355,8 +355,6 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)setLocation:(CLLocation*)location {
-    //#warning Remove display notification after debug
-    //    [self displayNotification:location];
     [self setLocationWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
 }
 
@@ -800,24 +798,6 @@ static TwinPushManager *_sharedInstance;
     return [[NSUserDefaults standardUserDefaults] boolForKey:kNSUserDefaultsMonitorSignificantChangesKey];
 }
 
--(void) displayNotification:(CLLocation*)location {
-    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
-    NSDateComponents* components = [[NSDateComponents alloc] init];
-    [components setSecond:1];
-    localNotif.fireDate = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:[NSDate date] options:0];
-    localNotif.timeZone = [NSTimeZone defaultTimeZone];
-    
-	// Notification details
-    localNotif.alertBody = [NSString stringWithFormat:@"New location: %f, %f", location.coordinate.latitude, location.coordinate.longitude];
-	// Set the action button
-    localNotif.alertAction = @"OK";
-    
-    localNotif.soundName = UILocalNotificationDefaultSoundName;
-    localNotif.applicationIconBadgeNumber = 1;
-    
-	// Schedule the notification
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
-}
 
 #ifdef __IPHONE_10_0
 //Called when a notification is delivered to a foreground app.
