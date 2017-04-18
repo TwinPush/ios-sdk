@@ -39,6 +39,11 @@
 }
 
 - (void)configureCategories {
+    if (![UNNotificationAction class]) {
+        // Not available on iOS 9 or lower
+        return;
+    }
+    
     UNNotificationCategory* generalCategory = [UNNotificationCategory
                                                categoryWithIdentifier:@"GENERAL"
                                                actions:@[]

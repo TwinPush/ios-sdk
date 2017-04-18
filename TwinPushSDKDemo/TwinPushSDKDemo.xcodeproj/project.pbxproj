@@ -56,8 +56,8 @@
 		69B9C8541C0CA06E002CDFFE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69B9C8531C0CA06E002CDFFE /* LaunchScreen.xib */; };
 		69B9C8561C0CB1FF002CDFFE /* background@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 69B9C8551C0CB1FF002CDFFE /* background@2x.jpeg */; };
 		69BDAE8D194A2DA7000B0E57 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69BDAE8C194A2DA7000B0E57 /* Security.framework */; };
-		69FFE0DB1E97E3B800211E94 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FFE0D91E97E3B800211E94 /* UserNotifications.framework */; };
-		69FFE0DC1E97E3B800211E94 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FFE0DA1E97E3B800211E94 /* UserNotificationsUI.framework */; };
+		69FFE0DB1E97E3B800211E94 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FFE0D91E97E3B800211E94 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		69FFE0DC1E97E3B800211E94 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FFE0DA1E97E3B800211E94 /* UserNotificationsUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7A0E2866175DFA6700A1AB71 /* TCKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0E2865175DFA6700A1AB71 /* TCKeyboardAvoidingScrollView.m */; };
 		7AD27C4B1758BB4E003ADC3C /* logo_twinpush_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD27C491758BB4E003ADC3C /* logo_twinpush_blue.png */; };
 		7AD27C4C1758BB4E003ADC3C /* logo_twinpush_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD27C4A1758BB4E003ADC3C /* logo_twinpush_blue@2x.png */; };
