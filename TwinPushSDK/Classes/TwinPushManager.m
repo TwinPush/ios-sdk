@@ -459,7 +459,8 @@ static TwinPushManager *_sharedInstance;
 - (void)registerForRemoteNotifications {
 #ifdef __IPHONE_8_0
     #ifdef __IPHONE_10_0
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0")) {
+    // Use UserNotifications framework whenever possible
+    if ([UNUserNotificationCenter class]) {
         UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
         center.delegate = self;
         [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
