@@ -1,8 +1,9 @@
-TwinPush SDK Library [![License MIT](https://go-shields.herokuapp.com/license-MIT-blue.png)](https://github.com/TwinPush/ios-sdk/blob/master/LICENSE)
+TwinPush SDK Library
 ==================
 
 [![Badge w/ Version](https://cocoapod-badges.herokuapp.com/v/TwinPushSDK/badge.png)](https://cocoapods.org/pods/TwinPushSDK)
 [![Badge w/ Platform](https://cocoapod-badges.herokuapp.com/p/TwinPushSDK/badge.svg)](https://cocoapods.org/pods/TwinPushSDK)
+[![License MIT](https://go-shields.herokuapp.com/license-MIT-blue.png)](https://github.com/TwinPush/ios-sdk/blob/master/LICENSE)
 
 Native iOS SDK for [TwinPush platform](http://twinpush.com).
 
