@@ -273,7 +273,105 @@ Notification Service Extension is a separate binary and **has its own Info.plist
 
 ![](http://i.imgur.com/m7JlJ5N.png)
 
-### Custom notification actions
+### Interactive notification actions
+
+Custom actions allow the user to choose the action to take with a notification without having to open the application first. It requires a small integration in the application source code before they can be sent from the platform.
+
+![](http://i.imgur.com/jCgoJUhl.jpg)
+
+#### Register action categories
+
+In order to show actionable notifications in your application, you have to register your actions associated to a category.
+
+The following code is extracted from the SDK Demo.
+
+~~~objective-c
+// Objective-C
+if (![UNNotificationAction class]) {
+    // Requires iOS 10 or higher
+    return;
+}
+
+UNNotificationAction* openAction = [UNNotificationAction
+                                    actionWithIdentifier:@"OPEN"
+                                    title:@"Open"
+                                    options:UNNotificationActionOptionForeground];
+UNNotificationAction* openInSafariAction = [UNNotificationAction
+                                            actionWithIdentifier:@"SAFARI"
+                                            title:@"Open in Safari"
+                                            options:UNNotificationActionOptionForeground];
+
+UNNotificationCategory* richNotificationCategory = [UNNotificationCategory
+                                           categoryWithIdentifier:@"RICH"
+                                           actions:@[openAction, openInSafariAction]
+                                           intentIdentifiers:@[]
+                                           options:UNNotificationCategoryOptionNone];
+
+// Register the notification categories.
+UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+[center setNotificationCategories:[NSSet setWithObjects: richNotificationCategory, nil]];
+~~~
+~~~swift
+// Swift
+guard #available(iOS 10, *) else { return }
+
+let openAction = UNNotificationAction(identifier: "OPEN", title: "Open", options: .foreground)
+let openInSafariAction = UNNotificationAction(identifier: "SAFARI", title: "Open in Safari", options: [])
+
+let richNotificationCategory = UNNotificationCategory(
+    identifier: "RICH",
+    actions: [openAction, openInSafariAction],
+    intentIdentifiers: [],
+    options: [])
+
+// Register the notification categories.
+UNUserNotificationCenter.current().setNotificationCategories(Set([richNotificationCategory]))
+~~~
+
+The registered actions will appear like this when sending a notification with category set to `RICH`:
+
+![](http://i.imgur.com/ywms3Z0l.png)
+
+For further information check [_Configuring Categories and Actionable Notifications_](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/SupportingNotificationsinYourApp.html#//apple_ref/doc/uid/TP40008194-CH4-SW26).
+
+#### Handling notification action responses
+
+Once the categories and actions are setup, you can handle the action responses from your application by implementing the method `didReceiveNotificationResponse:` of your `TwinPushManagerDelegate` and checking for the notification action identifier.
+
+This code is extracted from the SDK Demo and will open the notification URL in Safari when _Open in Safari_ button is selected:
+
+~~~objective-c
+// Objective-C
+- (void)didReceiveNotificationResponse:(UNNotificationResponse *)response {
+    TPNotification* notification = [TPNotification notificationFromUserNotification:response.notification];
+    NSURL* richURL = [NSURL URLWithString:notification.contentUrl];
+    if ([response.actionIdentifier isEqualToString:@"SAFARI"] && richURL != nil) {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
+            [[UIApplication sharedApplication] openURL:richURL];
+        });
+    }
+    else {
+        [self showNotification:notification];
+    }
+}
+~~~
+~~~swift
+// Swift
+@available(iOS 10.0, *)
+func didReceive(_ response: UNNotificationResponse!) {
+    let notification = TPNotification(fromUserNotification: response.notification)
+    if response.actionIdentifier == "SAFARI", let urlString = notification?.contentUrl, let richUrl = URL(string: urlString) {
+        DispatchQueue.global(qos: .background).async {
+            UIApplication.shared.openURL(richUrl)
+        }
+    }
+    else {
+        show(notification)
+    }
+}
+~~~
+
+Notice how we check for `response.actionIdentifier` in order to know exactly which action was selected. In this scenario, if the user selected _Open in Safari_ (`SAFARI` identifier) in a rich notification, it will open Safari with the specified URL.
 
 ### Custom rich notification viewer
 
