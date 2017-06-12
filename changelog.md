@@ -6,6 +6,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Fixed crash when receiving notification with complex alert dictionary instead of plain string from APNS.
 
+### Added
+- Added support for `UserNotifications` framework for iOS 10+ devices.
+
+#### Demo project
+- Added notification service extension target with sample code for rich notification attachments.
+- Added sample code for custom notification categories and actions.
+- Added sample code for handling custom action responses.
+
+
 ## [2.2.0] - 2016-08-16
 ### Added
 - Added functionality to delete inbox notifications using `deleteNotification:` method of alias inbox view controller.

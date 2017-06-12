@@ -11,8 +11,13 @@
 #import "TPTwinPushRequest.h"
 #import "TPRequestLauncher.h"
 
+#ifdef __IPHONE_10_0
+@interface TwinPushManager()<UNUserNotificationCenterDelegate>
+@end
+#endif
 
-static NSString* const kSdkVersion = @"2.0.2";
+
+static NSString* const kSdkVersion = @"3.0.0";
 
 static NSString* const kDefaultServerUrl = @"https://%@.twinpush.com/api/v2";
 static NSString* const kDefaultServerSubdomain = @"app";
@@ -350,8 +355,6 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)setLocation:(CLLocation*)location {
-    //#warning Remove display notification after debug
-    //    [self displayNotification:location];
     [self setLocationWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
 }
 
@@ -455,6 +458,25 @@ static TwinPushManager *_sharedInstance;
 
 - (void)registerForRemoteNotifications {
 #ifdef __IPHONE_8_0
+    #ifdef __IPHONE_10_0
+    // Use UserNotifications framework whenever possible
+    if ([UNUserNotificationCenter class]) {
+        UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+             if( !error ) {
+                 [[UIApplication sharedApplication] registerForRemoteNotifications];
+                 NSLog( @"Push registration success." );
+             }
+             else {
+                 NSLog( @"Push registration FAILED" );
+                 NSLog( @"ERROR: %@ - %@", error.localizedFailureReason, error.localizedDescription );
+                 NSLog( @"SUGGESTIONS: %@ - %@", error.localizedRecoveryOptions, error.localizedRecoverySuggestion );  
+             }  
+         }];
+    }
+    else
+    #endif
     if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)]) {
         UIUserNotificationSettings *userNotificationSettings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:userNotificationSettings];
@@ -777,23 +799,37 @@ static TwinPushManager *_sharedInstance;
     return [[NSUserDefaults standardUserDefaults] boolForKey:kNSUserDefaultsMonitorSignificantChangesKey];
 }
 
--(void) displayNotification:(CLLocation*)location {
-    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
-    NSDateComponents* components = [[NSDateComponents alloc] init];
-    [components setSecond:1];
-    localNotif.fireDate = [[NSCalendar currentCalendar] dateByAddingComponents:components toDate:[NSDate date] options:0];
-    localNotif.timeZone = [NSTimeZone defaultTimeZone];
-    
-	// Notification details
-    localNotif.alertBody = [NSString stringWithFormat:@"New location: %f, %f", location.coordinate.latitude, location.coordinate.longitude];
-	// Set the action button
-    localNotif.alertAction = @"OK";
-    
-    localNotif.soundName = UILocalNotificationDefaultSoundName;
-    localNotif.applicationIconBadgeNumber = 1;
-    
-	// Schedule the notification
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+
+#ifdef __IPHONE_10_0
+//Called when a notification is delivered to a foreground app.
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler {
+    NSLog(@"User Info : %@", notification.request.content.userInfo);
+    UNNotificationPresentationOptions options = UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge;
+    if ([_delegate respondsToSelector:@selector(presentationOptionsForNotification:)]) {
+        options = [_delegate presentationOptionsForNotification:notification];
+    }
+    completionHandler(options);
 }
+
+//Called to let your app know which action was selected by the user for a given notification.
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler {
+    TPNotification* notification = [TPNotification notificationFromUserNotification:response.notification];
+    [self userDidOpenNotificationWithId:notification.notificationId];
+    if ([_delegate respondsToSelector:@selector(didReceiveNotificationResponse:withCompletionHandler:)]) {
+        [_delegate didReceiveNotificationResponse:response withCompletionHandler:completionHandler];
+    }
+    else {
+        if ([_delegate respondsToSelector:@selector(didReceiveNotificationResponse:)]) {
+            [_delegate didReceiveNotificationResponse:response];
+        }
+        else {
+            TPNotification* notification = [TPNotification notificationFromUserNotification: response.notification];
+            [self showNotification: notification];
+        }
+        completionHandler();
+    }
+}
+
+#endif
 
 @end

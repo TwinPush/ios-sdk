@@ -138,7 +138,7 @@ Remember that you can check the source code of the Demo project included in the 
 
 ### Updating badge count
 
-The server badge count is used for auto incremental badge counts. TwinPush SDK will reset the application and server badge count to zero when the application starts or a remote notification is received with the application open. You can deactivate this behavior by setting the `autoResetBadgeNumber` property of `TwinPushManager` to `NO`.
+The server badge count is used for auto incremental badge counts. TwinPush SDK will automatically reset the application and server badge count to zero when the application starts or a remote notification is received with the application open. You can deactivate this behavior by setting the `autoResetBadgeNumber` property of `TwinPushManager` to `NO`.
 
 Additionally, you can update the local and server badge count of your application by calling `setApplicationBadgeCount:` method of `TwinPushManager` anywhere in your application:
 
@@ -250,6 +250,129 @@ These methods are:
 - `didFailRegisteringDevice` notifies about errors when trying to register the device and provides the details.
 
 - `didSkipRegisteringDevice` notifies when the registration has been skipped. There are two reasons to skip a registration: the implementation for `shouldRegisterDeviceWithAlias` returned `NO` or no changes have been detected since the last successful registration.
+
+### Notification Attachments
+
+iOS 10 brings the hability to [mutate notification content](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ModifyingNotifications.html) before displaying it to the user. We're gonna use it to attach image, audio or video files to a notification, and it will be shown without opening the application.
+
+![](http://i.imgur.com/fRkUqkH.gif)
+
+First you have to create a new [Notification Service Extension](https://developer.apple.com/reference/usernotifications/unnotificationserviceextension). In XCode go to `File` -> `New` -> `Target` and select **Notification Service Extension**.
+
+![](http://i.imgur.com/G34LtGh.png)
+
+Enter a name for the extension and make sure to embed it to your application.
+
+![](http://i.imgur.com/6ZCGEuq.png)
+
+It will create a new target with a single class named `NotificationService`. Open it and replace it with the content of [the sample code provided](https://github.com/TwinPush/ios-sdk/blob/user-notification-framework/TwinPushSDKDemo/RichNotificationService/NotificationService.m) in the demo application. This reference code will download the attachment (defined in the `attachment` field of the payload) of the notification prior to showing the notification to the user.
+
+To test this functionality make sure that `mutable-content` is set to `1` in the notification payload for the extension to be called. Check [`UNNotificationAttachment` reference](https://developer.apple.com/reference/usernotifications/unnotificationattachment) for supported file types and maximum file sizes.
+
+#### Allowing non-secure attachment URL's
+Notification Service Extension is a separate binary and **has its own Info.plist** file. To download the content from non-https URL (ex: http://) you have to add `App Transport Security Settings` with `Allow Arbitrary Loads` flag set to YES to **extension's Info.plist** file.
+
+![](http://i.imgur.com/m7JlJ5N.png)
+
+### Interactive notification actions
+
+Custom actions allow the user to choose the action to take with a notification without having to open the application first. It requires a small integration in the application source code before they can be sent from the platform.
+
+![](http://i.imgur.com/jCgoJUhl.jpg)
+
+#### Register action categories
+
+In order to show actionable notifications in your application, you have to register your actions associated to a category.
+
+The following code is extracted from the SDK Demo.
+
+~~~objective-c
+// Objective-C
+if (![UNNotificationAction class]) {
+    // Requires iOS 10 or higher
+    return;
+}
+
+UNNotificationAction* openAction = [UNNotificationAction
+                                    actionWithIdentifier:@"OPEN"
+                                    title:@"Open"
+                                    options:UNNotificationActionOptionForeground];
+UNNotificationAction* openInSafariAction = [UNNotificationAction
+                                            actionWithIdentifier:@"SAFARI"
+                                            title:@"Open in Safari"
+                                            options:UNNotificationActionOptionForeground];
+
+UNNotificationCategory* richNotificationCategory = [UNNotificationCategory
+                                           categoryWithIdentifier:@"RICH"
+                                           actions:@[openAction, openInSafariAction]
+                                           intentIdentifiers:@[]
+                                           options:UNNotificationCategoryOptionNone];
+
+// Register the notification categories.
+UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+[center setNotificationCategories:[NSSet setWithObjects: richNotificationCategory, nil]];
+~~~
+~~~swift
+// Swift
+guard #available(iOS 10, *) else { return }
+
+let openAction = UNNotificationAction(identifier: "OPEN", title: "Open", options: .foreground)
+let openInSafariAction = UNNotificationAction(identifier: "SAFARI", title: "Open in Safari", options: [])
+
+let richNotificationCategory = UNNotificationCategory(
+    identifier: "RICH",
+    actions: [openAction, openInSafariAction],
+    intentIdentifiers: [],
+    options: [])
+
+// Register the notification categories.
+UNUserNotificationCenter.current().setNotificationCategories(Set([richNotificationCategory]))
+~~~
+
+The registered actions will appear like this when sending a notification with category set to `RICH`:
+
+![](http://i.imgur.com/ywms3Z0l.png)
+
+For further information check [_Configuring Categories and Actionable Notifications_](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/SupportingNotificationsinYourApp.html#//apple_ref/doc/uid/TP40008194-CH4-SW26).
+
+#### Handling notification action responses
+
+Once the categories and actions are setup, you can handle the action responses from your application by implementing the method `didReceiveNotificationResponse:` of your `TwinPushManagerDelegate` and checking for the notification action identifier.
+
+This code is extracted from the SDK Demo and will open the notification URL in Safari when _Open in Safari_ button is selected:
+
+~~~objective-c
+// Objective-C
+- (void)didReceiveNotificationResponse:(UNNotificationResponse *)response {
+    TPNotification* notification = [TPNotification notificationFromUserNotification:response.notification];
+    NSURL* richURL = [NSURL URLWithString:notification.contentUrl];
+    if ([response.actionIdentifier isEqualToString:@"SAFARI"] && richURL != nil) {
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
+            [[UIApplication sharedApplication] openURL:richURL];
+        });
+    }
+    else {
+        [self showNotification:notification];
+    }
+}
+~~~
+~~~swift
+// Swift
+@available(iOS 10.0, *)
+func didReceive(_ response: UNNotificationResponse!) {
+    let notification = TPNotification(fromUserNotification: response.notification)
+    if response.actionIdentifier == "SAFARI", let urlString = notification?.contentUrl, let richUrl = URL(string: urlString) {
+        DispatchQueue.global(qos: .background).async {
+            UIApplication.shared.openURL(richUrl)
+        }
+    }
+    else {
+        show(notification)
+    }
+}
+~~~
+
+Notice how we check for `response.actionIdentifier` in order to know exactly which action was selected. In this scenario, if the user selected _Open in Safari_ (`SAFARI` identifier) in a rich notification, it will open Safari with the specified URL.
 
 ### Custom rich notification viewer
 
