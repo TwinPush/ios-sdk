@@ -9,6 +9,7 @@
 #import "TPNotificationDetailViewController.h"
 #import "TwinPushManager.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIImage+UIBarButtonItem.h"
 
 static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
 
@@ -39,25 +40,22 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.webView.delegate = self;
     if (_notification != nil) {
         if (self.requiresInitialization) {
             // Build the default GUI
             self.view.backgroundColor = [UIColor whiteColor];
-            self.notificationDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, self.view.frame.size.width - 10, 30)];
-            [self.view addSubview:_notificationDateLabel];
-            self.notificationTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5 + _notificationDateLabel.frame.size.height, self.view.frame.size.width - 10, 30)];
-            [self.view addSubview:_notificationTitleLabel];
-            UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-            [button addTarget:self
-                       action:@selector(dismissButtonTapped:)
-             forControlEvents:UIControlEventTouchUpInside];
-            [button setTitle:NSLocalizedStringWithDefaultValue(@"MODAL_NOTIFICATION_DETAIL_CLOSE_BUTTON", nil, [NSBundle mainBundle], @"Close", nil) forState:UIControlStateNormal];
-            button.frame = CGRectMake(5, 20 + _notificationTitleLabel.frame.size.height, self.view.frame.size.width - 10, 30);
+            
+            UIWebView* webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+            webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+            self.webView = webView;
+            [self.view addSubview:webView];
+            
+            UIButton *button = [self createCloseButton];
             [self.view addSubview:button];
         }
         [self setNotificationDetails];
     }
+    self.webView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,6 +95,23 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
 }
 
 #pragma mark - Private methods
+- (UIButton*)createCloseButton {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage* buttonImage = [[UIImage imageFromSystemBarButton:UIBarButtonSystemItemStop] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    button.tintColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+    [button addTarget:self
+               action:@selector(dismissButtonTapped:)
+     forControlEvents:UIControlEventTouchUpInside];
+    [button setImage:buttonImage forState:UIControlStateNormal];
+    button.frame = CGRectMake(10, 30, 30, 30);
+    button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleBottomMargin;
+    button.layer.cornerRadius = button.frame.size.height / 2;
+    button.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
+    button.layer.borderWidth = 1;
+    button.layer.borderColor = [[[UIColor blackColor] colorWithAlphaComponent:0.2] CGColor];
+    return button;
+}
+
 - (void)setNotificationDetails {
     self.notificationTitleLabel.text = _notification.message;
     NSDateFormatter* df = [[NSDateFormatter alloc] init];
