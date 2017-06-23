@@ -2,7 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [3.1.0] - 2017-06-23
+### Fixed
+- Fixed default notification details view not showing the content URL correctly
+
+### Changed
+- Changed default design for notification details view, featuring only a flat close button
+
+
+## [3.0.0] - 2017-06-12
 ### Fixed
 - Fixed crash when receiving notification with complex alert dictionary instead of plain string from APNS.
 
@@ -121,7 +129,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - First fully functional public release.
 
-[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v2.2.0...HEAD
+[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v3.1.0...HEAD
+[3.1.0]: https://github.com/TwinPush/ios-sdk/compare/v3.0.0...v3.1.0
+[3.0.0]: https://github.com/TwinPush/ios-sdk/compare/v2.2.0...v3.0.0
 [2.2.0]: https://github.com/TwinPush/ios-sdk/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/TwinPush/ios-sdk/compare/v2.0.2...v2.1.0
 [2.0.2]: https://github.com/TwinPush/ios-sdk/compare/v2.0.1...v2.0.2
