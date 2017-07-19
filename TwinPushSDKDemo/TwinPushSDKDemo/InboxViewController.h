@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TPNotificationsInboxViewController.h"
+#import "TPAliasInboxViewController.h"
 
-@interface InboxViewController : TPNotificationsInboxViewController <TPNotificationsInboxViewControllerDelegate, UITextFieldDelegate>
+@interface InboxViewController : TPAliasInboxViewController <TPNotificationsInboxViewControllerDelegate, UITextFieldDelegate>
 
 #pragma mark - IBOutlets
 @property (weak, nonatomic) IBOutlet UITextField *tagsTextField;

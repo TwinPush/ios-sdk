@@ -411,24 +411,26 @@ func showNotification(notification: TPNotification!) {
 }
 ~~~
 
-### Custom notification inbox
+### User notification inbox
 
 TwinPush also offers a Notification Inbox View Controller to let users browse through received rich notifications. This view controller can be integrated anywhere inside your application as a normal `UIViewController`. You can also define a custom appearance for the view controller to match the _look&feel_ of your App.
 
 Users with push notifications disabled will be able to browse through the notifications even when they didn't received the push alert. This allows your users to not miss any important information even when they rejected to receive push notifications.
 
-To include the inbox in your application, instantiate the class (or your custom subclass) of `TPNotificationsInboxViewController` and present it whenever you want. Common scenarios include showing the inbox inside a `UINavigationController`, as one more tab in a `UITabBarController` or presented modally. This sample shows how to present it modally:
+To include the inbox in your application, instantiate the class (or your custom subclass) of `TPAliasInboxViewController ` and present it whenever you want. Common scenarios include showing the inbox inside a `UINavigationController`, as one more tab in a `UITabBarController` or presented modally. This sample shows how to present it modally:
 
 ~~~objective-c
 // Objective-C
-TPNotificationDetailViewController* inboxVC = [[TPNotificationsInboxViewController alloc] initWithNibName:@"CustomInboxVC" bundle:nil];
+TPAliasInboxViewController* inboxVC = [[TPAliasInboxViewController alloc] initWithNibName:@"CustomInboxVC" bundle:nil];
 [self.window.rootViewController presentViewController:inboxVC animated:YES completion:nil];
 ~~~
 ~~~swift
 // Swift
-let inboxVC = TPNotificationsInboxViewController(nibName: "CustomInboxVC", bundle: nil)
+let inboxVC = TPAliasInboxViewController(nibName: "CustomInboxVC", bundle: nil)
 self.window?.rootViewController?.presentViewController(inboxVC, animated: true, completion: nil)
 ~~~
+
+#### Filtering notification
 
 You can also filter the notifications that are shown in the inbox view using filters. The filters are created in a `TPNotificationsFilters` object, where you can specify the tags you want to include or exclude from the inbox. You can also override the default pagination parameters usinga `TPNotificationPagination` object, specifying how many results you want per page, and the page you want to show. For example:
 
@@ -467,15 +469,40 @@ self.getInbox()
 
 Calling `getInbox` after the first successful load will load more pages if any exists. To reload from the first page, use `reloadInbox` method.
 
+#### Delete inbox notification
 
-#### Alias inbox
+Inbox notification can be removed by calling the `deleteNotification:` method of `TPAliasInboxViewController`. This sample shows how to show the swipe-to-delete option of the notification table rows and call the appropiate delete method. In your `TPAliasInboxViewController` subclass, implement the following methods:
 
-TwinPush also provides a notification inbox based on the user alias instead of the device identifier. This way a user can see all the notifications received in any of their devices, even if they were received before installing the applications.
+~~~objective-c
+// Objective-C
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.inboxTableView.allowsMultipleSelectionDuringEditing = NO;
+}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        TPNotification* notification = self.notifications[indexPath.row];
+        [self deleteNotification:notification];
+    }
+}
+~~~
+~~~swift
+// Swift
+override func viewDidLoad() {
+    super.viewDidLoad()
+    self.inboxTableView.allowsMultipleSelectionDuringEditing = false
+}
+override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    if (editingStyle == .delete) {
+        let notification = self.notifications[indexPath.row] as! TPNotification
+        self.deleteNotification(notification)
+    }
+}
+~~~
 
-To use this inbox, simply use `TPAliasInboxViewController` instead of `TPNotificationsInboxViewController`.
+#### Device-based notification inbox
 
-This functionality requires that the alias is assigned before presenting the inbox. Users without alias will receive an error when trying to show the alias inbox.
-
+User inbox requires that the alias is assigned before presenting the inbox. Users without alias will receive an error when trying to show the alias inbox. If your application is not using alias you can use `TPNotificationInboxViewController` instead of `TPAliasInboxViewController` for inbox based on device instead of user alias.
 
 ### Sending user location
 

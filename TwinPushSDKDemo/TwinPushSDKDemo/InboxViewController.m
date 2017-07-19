@@ -46,6 +46,7 @@ static NSString* const kCellIdentifier = @"inboxCell";
     self.collapsedSearchBoxHeight = self.expandedSearchBoxHeight - self.searchFieldsContainerView.frame.size.height;
     [self.tableViewContainerView.layer setCornerRadius:10];
     [self.searchContainerView.layer setCornerRadius:10];
+    self.inboxTableView.allowsMultipleSelectionDuringEditing = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,6 +75,14 @@ static NSString* const kCellIdentifier = @"inboxCell";
     [super viewDidAppear:animated];
     if (self.selectedNotification != nil) {
         [self openNotification:self.selectedNotification];
+    }
+}
+
+#pragma mark - UITableViewDataSource
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        TPNotification* notification = self.notifications[indexPath.row];
+        [self deleteNotification:notification];
     }
 }
 
