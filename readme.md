@@ -430,6 +430,7 @@ let inboxVC = TPAliasInboxViewController(nibName: "CustomInboxVC", bundle: nil)
 self.window?.rootViewController?.presentViewController(inboxVC, animated: true, completion: nil)
 ~~~
 
+<!---
 #### Filtering notification
 
 You can also filter the notifications that are shown in the inbox view using filters. The filters are created in a `TPNotificationsFilters` object, where you can specify the tags you want to include or exclude from the inbox. You can also override the default pagination parameters usinga `TPNotificationPagination` object, specifying how many results you want per page, and the page you want to show. For example:
@@ -468,6 +469,7 @@ self.getInbox()
 ~~~
 
 Calling `getInbox` after the first successful load will load more pages if any exists. To reload from the first page, use `reloadInbox` method.
+-->
 
 #### Delete inbox notification
 
