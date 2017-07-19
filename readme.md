@@ -380,8 +380,6 @@ TwinPush allows sending rich notifications to the device, that consists in a URL
 
 The most common scenario is creating the interface for a `TPNotificationDetailViewController` and assign the already created `IBOutlet` properties and `IBAction` methods. `TPNotificationDetailViewController` already provides some common functionality like loading notification details from TwinPush or handling `UIWebView` errors. 
 
-![Custom viewer](http://developers.twinpush.com/assets/ios_step3-f6c2c34f5561e5206c37ae1df6847cf0.png)
-
 If you need something more complex, you can subclass `TPNotificationDetailViewController` to reuse the code base or create a new rich content viewer from scratch. Either way the result will be a `UIViewController` that takes a notification object (`TPNotification`) and shows its rich content URL in a web view.
 
 Once you have that controller, you have to override the default behavior to stop TwinPush from showing the default viewer. To achieve it, simply implement the method `showNotification`, declared in `TwinPushManagerDelegate`, in your application delegate and show your view controller. For example:
@@ -429,47 +427,6 @@ TPAliasInboxViewController* inboxVC = [[TPAliasInboxViewController alloc] initWi
 let inboxVC = TPAliasInboxViewController(nibName: "CustomInboxVC", bundle: nil)
 self.window?.rootViewController?.presentViewController(inboxVC, animated: true, completion: nil)
 ~~~
-
-<!---
-#### Filtering notification
-
-You can also filter the notifications that are shown in the inbox view using filters. The filters are created in a `TPNotificationsFilters` object, where you can specify the tags you want to include or exclude from the inbox. You can also override the default pagination parameters usinga `TPNotificationPagination` object, specifying how many results you want per page, and the page you want to show. For example:
-
-~~~objective-c
-// Objective-C
-TPNotificationsFilters* filters = [[TPNotificationsFilters alloc] init];
-filters.tags = [NSArray arrayWithObjects:@"tag1", @"tag2", nil];
-filters.noTags = [NSArray arrayWithObjects:@"notag1", @"notag2", nil];
-self.filters = filters;
-
-TPNotificationsPagination* pagination = [[TPNotificationsPagination alloc] init];
-pagination.page = 1; // First page
-pagination.resultsPerPage = 15;
-self.pagination = pagination;
-
-self.inboxOnlyRichNotifications = NO;
-
-[self getInbox];
-~~~
-~~~swift
-// Swift
-let filters = TPNotificationsFilters()
-filters.tags = ["tag1", "tag2"];
-filters.noTags = ["notag1", "notag2"]
-self.filters = filters
-
-let pagination = TPNotificationsPagination()
-pagination.page = 1 // First page
-pagination.resultsPerPage = 15
-self.pagination = pagination
-
-self.inboxOnlyRichNotifications = false
-
-self.getInbox()
-~~~
-
-Calling `getInbox` after the first successful load will load more pages if any exists. To reload from the first page, use `reloadInbox` method.
--->
 
 #### Delete inbox notification
 
