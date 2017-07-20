@@ -56,4 +56,7 @@ enum {
 #pragma mark - Public methods
 - (void)getInbox;
 
+#pragma mark - Override points
+- (void)onSelectedNotification:(TPNotification*)notification;
+
 @end

@@ -16,7 +16,6 @@ static NSString* const kPage = @"page";
 
 /* Response parameters */
 static NSString* const kObjectsResponseWrapper = @"objects";
-static NSString* const kNotificationResponseWrapper = @"notification";
 static NSString* const kReferencesResponseWrapper = @"references";
 
 @implementation TPGetAliasNotificationsRequest
@@ -53,8 +52,7 @@ static NSString* const kReferencesResponseWrapper = @"references";
     NSArray* notificationsDict = [dictionary arrayForKey:kObjectsResponseWrapper];
     
     for (NSDictionary* dict in notificationsDict) {
-        NSDictionary* notificationDict = [dict objectForKey:kNotificationResponseWrapper];
-        TPNotification* notification = [TPNotification notificationFromDictionary:notificationDict];
+        TPNotification* notification = [TPInboxNotification inboxNotificationFromDictionary:dict];
         [notifications addObject:notification];
     }
     return notifications;

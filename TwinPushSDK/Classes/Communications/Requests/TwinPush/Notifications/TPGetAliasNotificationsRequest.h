@@ -8,9 +8,9 @@
 
 #import "TPTwinPushRequest.h"
 #import "TPNotificationsPagination.h"
-#import "TPNotification.h"
+#import "TPInboxNotification.h"
 
-typedef void(^GetAliasNotificationsResponseBlock)(NSArray<TPNotification*>* array, BOOL hasMore);
+typedef void(^GetAliasNotificationsResponseBlock)(NSArray<TPInboxNotification*>* array, BOOL hasMore);
 
 @interface TPGetAliasNotificationsRequest : TPTwinPushRequest
 

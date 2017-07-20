@@ -33,4 +33,6 @@
 + (TPNotification*)notificationFromUserNotification:(UNNotification*)userNotification;
 #endif
 
+- (void)populateFromDictionary:(NSDictionary*)dict;
+
 @end

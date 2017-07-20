@@ -49,6 +49,8 @@
 		69215C5A1D5CE9E400A53FBE /* TPAliasInboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69215C581D5CE9E400A53FBE /* TPAliasInboxViewController.m */; };
 		6941BECE1EFD72520041240B /* UIImage+UIBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 6941BECC1EFD72520041240B /* UIImage+UIBarButtonItem.h */; };
 		6941BECF1EFD72520041240B /* UIImage+UIBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 6941BECD1EFD72520041240B /* UIImage+UIBarButtonItem.m */; };
+		6973E8AE1F1FC4400005D76B /* TPInboxNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 6973E8AC1F1FC4400005D76B /* TPInboxNotification.h */; };
+		6973E8AF1F1FC4400005D76B /* TPInboxNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 6973E8AD1F1FC4400005D76B /* TPInboxNotification.m */; };
 		699CF17A1D5DC11000DCA452 /* TPDeleteNotificationRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 699CF1781D5DC11000DCA452 /* TPDeleteNotificationRequest.h */; };
 		699CF17B1D5DC11000DCA452 /* TPDeleteNotificationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 699CF1791D5DC11000DCA452 /* TPDeleteNotificationRequest.m */; };
 		69AD46B91970453C0091F395 /* TwinFormsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 69AD46B71970453C0091F395 /* TwinFormsManager.h */; };
@@ -141,6 +143,8 @@
 		69215C581D5CE9E400A53FBE /* TPAliasInboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPAliasInboxViewController.m; sourceTree = "<group>"; };
 		6941BECC1EFD72520041240B /* UIImage+UIBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIBarButtonItem.h"; sourceTree = "<group>"; };
 		6941BECD1EFD72520041240B /* UIImage+UIBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIBarButtonItem.m"; sourceTree = "<group>"; };
+		6973E8AC1F1FC4400005D76B /* TPInboxNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPInboxNotification.h; sourceTree = "<group>"; };
+		6973E8AD1F1FC4400005D76B /* TPInboxNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPInboxNotification.m; sourceTree = "<group>"; };
 		699CF1781D5DC11000DCA452 /* TPDeleteNotificationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPDeleteNotificationRequest.h; sourceTree = "<group>"; };
 		699CF1791D5DC11000DCA452 /* TPDeleteNotificationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPDeleteNotificationRequest.m; sourceTree = "<group>"; };
 		69AD46B71970453C0091F395 /* TwinFormsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwinFormsManager.h; sourceTree = "<group>"; };
@@ -196,6 +200,8 @@
 			children = (
 				2124D01916B1347700B39430 /* TPDevice.h */,
 				2124D01A16B1347700B39430 /* TPDevice.m */,
+				6973E8AC1F1FC4400005D76B /* TPInboxNotification.h */,
+				6973E8AD1F1FC4400005D76B /* TPInboxNotification.m */,
 				2124D01B16B1347700B39430 /* TPNotification.h */,
 				2124D01F16B134E300B39430 /* TPNotification.m */,
 				2124D02716B151BD00B39430 /* TPNotificationsFilters.h */,
@@ -441,6 +447,7 @@
 				218C2AC716B28B3B00F498CE /* TPNotificationsInboxViewController.h in Headers */,
 				6941BECE1EFD72520041240B /* UIImage+UIBarButtonItem.h in Headers */,
 				218C5BC216B68545007F49DD /* TPCreateDeviceRequest.h in Headers */,
+				6973E8AE1F1FC4400005D76B /* TPInboxNotification.h in Headers */,
 				218C5BFA16B6D332007F49DD /* NSDictionary+ArrayForKey.h in Headers */,
 				218C5BC416B68579007F49DD /* TPDevice.h in Headers */,
 				214683BD16C2A9EB00F9E886 /* TPNoResultsCell.h in Headers */,
@@ -519,6 +526,7 @@
 				219BB76F16B03769008739D7 /* TPRESTJSONRequest.m in Sources */,
 				219BB77016B03769008739D7 /* TPRESTRequest.m in Sources */,
 				219BB79A16B03F8A008739D7 /* TwinPushManager.m in Sources */,
+				6973E8AF1F1FC4400005D76B /* TPInboxNotification.m in Sources */,
 				219BB79D16B03FDE008739D7 /* TPRequestFactory.m in Sources */,
 				218CB3BB16B12E630080A5CA /* TPCreateDeviceRequest.m in Sources */,
 				2124D01116B1306900B39430 /* TPRequestParam.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TPNotification.h"
+#import "TPInboxNotification.h"
 
 @interface TPInboxCell : UITableViewCell
 

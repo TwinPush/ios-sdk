@@ -34,6 +34,25 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
     return self.contentUrl.length > 0;
 }
 
+- (void)populateFromDictionary:(NSDictionary*)dict {
+    self.notificationId = dict[kNotificationsIdKey];
+    self.message = dict[kAlertKey];
+    self.sound = dict[kSoundKey];
+    
+    self.title = dict[kTitleKey];
+    self.subtitle = dict[kSubtitleKey];
+    if (dict[kRichUrlKey] == [NSNull null]) {
+        self.contentUrl = @"";
+    } else {
+        self.contentUrl = dict[kRichUrlKey];
+    }
+    self.category = dict[kCategoryKey];
+    self.date = [[TPNotification dateFormatter] dateFromString:dict[kSentDateKey]];
+    self.customProperties = dict[kCustomPropertiesKey];
+    self.tags = dict[kTagsKey];
+    self.complete = YES;
+}
+
 + (NSDateFormatter*)dateFormatter {
     static NSDateFormatter* df = nil;
     if (df == nil) {
@@ -45,23 +64,7 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
 
 + (TPNotification*)notificationFromDictionary:(NSDictionary*)dict {
     TPNotification* notification = [[TPNotification alloc] init];
-    notification.notificationId = dict[kNotificationsIdKey];
-    notification.message = dict[kAlertKey];
-    notification.sound = dict[kSoundKey];
-    
-    notification.title = dict[kTitleKey];
-    notification.subtitle = dict[kSubtitleKey];
-    if (dict[kRichUrlKey] == [NSNull null]) {
-        notification.contentUrl = @"";
-    } else {
-        notification.contentUrl = dict[kRichUrlKey];
-    }
-    notification.category = dict[kCategoryKey];
-    notification.date = [[self dateFormatter] dateFromString:dict[kSentDateKey]];
-    notification.customProperties = dict[kCustomPropertiesKey];
-    notification.tags = dict[kTagsKey];
-    notification.complete = YES;
-    
+    [notification populateFromDictionary:dict];
     return notification;
 }
 

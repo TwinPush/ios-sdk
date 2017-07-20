@@ -47,5 +47,18 @@
 }
 
 
+- (void)onSelectedNotification:(TPNotification *)notification {
+    [super onSelectedNotification:notification];
+    if ([notification isKindOfClass:[TPInboxNotification class]]) {
+        TPInboxNotification* inboxNotification = (TPInboxNotification*)notification;
+        inboxNotification.openDate = [NSDate date];
+        NSUInteger row = [self.notifications indexOfObject:notification];
+        if (row != NSNotFound) {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+            [self.inboxTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }
+    }
+}
+
 
 @end
