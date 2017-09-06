@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.2.1] - 2017-09-06
+### Fixed
+- Fixed `#ifdef` check for XCode 8 to work with previous versions of XCode even when XCode 8 has been already installed
+
 ## [3.2.0] - 2017-07-20
 ### Changed
 - Alias inbox now uses `TPInboxNotification`, that extends `TPNotification` with an additional opened date field
@@ -134,7 +138,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - First fully functional public release.
 
-[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v3.2.0...HEAD
+[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v3.2.1...HEAD
+[3.2.0]: https://github.com/TwinPush/ios-sdk/compare/v3.2.0...v3.2.1
 [3.2.0]: https://github.com/TwinPush/ios-sdk/compare/v3.1.0...v3.2.0
 [3.1.0]: https://github.com/TwinPush/ios-sdk/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/TwinPush/ios-sdk/compare/v2.2.0...v3.0.0

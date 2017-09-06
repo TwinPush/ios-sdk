@@ -17,7 +17,7 @@
 #endif
 
 
-static NSString* const kSdkVersion = @"3.2.0";
+static NSString* const kSdkVersion = @"3.2.1";
 
 static NSString* const kDefaultServerUrl = @"https://%@.twinpush.com/api/v2";
 static NSString* const kDefaultServerSubdomain = @"app";
