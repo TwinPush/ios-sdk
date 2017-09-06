@@ -39,6 +39,7 @@
 }
 
 - (void)configureCategories {
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
     if (![UNNotificationAction class]) {
         // Not available on iOS 9 or lower
         return;
@@ -68,6 +69,7 @@
     // Register the notification categories.
     UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
     [center setNotificationCategories:[NSSet setWithObjects:generalCategory, richNotificationCategory, nil]];
+#endif
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -105,6 +107,7 @@
 }
 
 #pragma mark - TwinPushManagerDelegate
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 - (void)didReceiveNotificationResponse:(UNNotificationResponse *)response {
     TPNotification* notification = [TPNotification notificationFromUserNotification:response.notification];
     NSURL* richURL = [NSURL URLWithString:notification.contentUrl];
@@ -117,6 +120,7 @@
         [self showNotification:notification];
     }
 }
+#endif
 
 - (void)showNotification:(TPNotification*)notification {
     NSLog(@"Showing notification %@", notification.notificationId);

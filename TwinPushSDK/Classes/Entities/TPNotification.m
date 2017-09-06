@@ -99,7 +99,7 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
     return notification;
 }
 
-#ifdef __IPHONE_10_0
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 + (TPNotification*)notificationFromUserNotification:(UNNotification*)userNotification {
     TPNotification* notification = [TPNotification notificationFromApnsDictionary: userNotification.request.content.userInfo];
     notification.date = notification.date;

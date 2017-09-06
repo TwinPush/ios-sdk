@@ -15,7 +15,7 @@
 #import "TPRequestFactory.h"
 #import <CoreLocation/CoreLocation.h>
 
-#ifdef __IPHONE_10_0
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 #import <UserNotifications/UserNotifications.h>
 #endif
 
@@ -37,7 +37,7 @@
 /** Called to open the notification. The default behavior is to show a modal webview with the rich content
     if the notification has any and do nothing otherwise */
 - (void)showNotification:(TPNotification*)notification;
-#ifdef __IPHONE_10_0
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 /** Called when a notification is delivered to a foreground app. Return UNNotificationPresentationOptionNone to silcence it **/
 -(UNNotificationPresentationOptions)presentationOptionsForNotification:(UNNotification *)notification;
 /** Called to let your app know which action was selected by the user for a given notification.

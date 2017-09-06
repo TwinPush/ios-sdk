@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#ifdef __IPHONE_10_0
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 #import <UserNotifications/UserNotifications.h>
 #endif
 
@@ -29,7 +29,7 @@
 
 + (TPNotification*)notificationFromDictionary:(NSDictionary*)dict;
 + (TPNotification*)notificationFromApnsDictionary:(NSDictionary*)dict;
-#ifdef __IPHONE_10_0
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 + (TPNotification*)notificationFromUserNotification:(UNNotification*)userNotification;
 #endif
 

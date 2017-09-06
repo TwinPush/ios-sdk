@@ -11,7 +11,7 @@
 #import "TPTwinPushRequest.h"
 #import "TPRequestLauncher.h"
 
-#ifdef __IPHONE_10_0
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 @interface TwinPushManager()<UNUserNotificationCenterDelegate>
 @end
 #endif
@@ -458,7 +458,7 @@ static TwinPushManager *_sharedInstance;
 
 - (void)registerForRemoteNotifications {
 #ifdef __IPHONE_8_0
-    #ifdef __IPHONE_10_0
+    #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
     // Use UserNotifications framework whenever possible
     if ([UNUserNotificationCenter class]) {
         UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
@@ -800,7 +800,7 @@ static TwinPushManager *_sharedInstance;
 }
 
 
-#ifdef __IPHONE_10_0
+#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 //Called when a notification is delivered to a foreground app.
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler {
     NSLog(@"User Info : %@", notification.request.content.userInfo);
