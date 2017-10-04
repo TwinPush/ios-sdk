@@ -127,9 +127,9 @@ typedef enum {
 - (void)disableCertificateNamePinning;
 
 #pragma mark Notifications
-- (void)getDeviceNotificationsWithFilters:(TPNotificationsFilters*)filters andPagination:(TPNotificationsPagination*)pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete;
-- (void)getAliasNotificationsWithPagination:(TPNotificationsPagination*)pagination onComplete:(GetAliasNotificationsResponseBlock)onComplete;
-- (void)getDeviceNotificationWithId:(NSInteger)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete;
+- (void)getDeviceNotificationsWithFilters:(TPNotificationsFilters*)filters andPagination:(TPNotificationsPagination*)pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (void)getAliasNotificationsWithPagination:(TPNotificationsPagination*)pagination onComplete:(GetAliasNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (void)getDeviceNotificationWithId:(NSInteger)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 - (void)userDidOpenNotificationWithId:(NSString*)notificationId;
 - (void)deleteNotificationWithId:(NSString*)notificationId onComplete:(DeleteNotificationResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 

@@ -137,6 +137,10 @@ static NSString* const kOnlyRichNotificationsTag = @"tp_rich";
             TCLog(@"Page: %ld and HasMore: %@", (long)self.pagination.page, _hasMore ? @"YES" : @"NO");
         }
         [_inboxTableView reloadData];
+    } onError:^(NSError *error) {
+        self.loading = NO;
+        [_inboxTableView reloadData];
+        [self onRequestFailed:error];
     }];
 }
 
@@ -146,6 +150,12 @@ static NSString* const kOnlyRichNotificationsTag = @"tp_rich";
     [self.delegate didSelectNotification:notification];
 }
 
+- (void)onRequestFailed:(NSError *)error {
+    NSString* title = NSLocalizedStringWithDefaultValue(@"GET_NOTIFICATIONS_ERROR_ALERT_TITLE", nil, [NSBundle mainBundle], @"Error", nil);
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:error.localizedDescription delegate:nil cancelButtonTitle:NSLocalizedStringWithDefaultValue(@"DEVICE_REGISTERED_ALERT_ACCEPT_BUTTON", nil, [NSBundle mainBundle], @"Accept", nil) otherButtonTitles:nil, nil];
+    [alertView show];
+}
+    
 - (TPInboxCell*)createCell {
     return [[TPInboxCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_cellIdentifier];
 }
@@ -186,17 +196,17 @@ static NSString* const kOnlyRichNotificationsTag = @"tp_rich";
             rowCount = _notifications.count;
             break;
         case kSectionLoadingCell:
-            rowCount = self.hasMore ? 1 : 0;
+            rowCount = self.loading || (self.notifications.count > 0 && self.hasMore) ? 1 : 0;
             break;
         case kSectionNoResultsCell:
-            rowCount = _notifications.count == 0 && !self.loading && !self.hasMore ? 1 : 0;
+            rowCount = !self.loading && _notifications.count == 0 ? 1 : 0;
             break;
     }
     return rowCount;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (!self.loading && indexPath.section == kSectionLoadingCell) {
+    if (self.notifications.count > 0 && !self.loading && indexPath.section == kSectionLoadingCell) {
         [self getInbox];
     }
 }

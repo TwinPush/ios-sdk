@@ -257,16 +257,16 @@ static TwinPushManager *_sharedInstance;
     }
 }
 
-- (void)getDeviceNotificationsWithFilters:(TPNotificationsFilters*)filters andPagination:(TPNotificationsPagination*)pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete {
-    [self sendGetDeviceNotificationsRequestWithFilters:filters andPagination:pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete];
+- (void)getDeviceNotificationsWithFilters:(TPNotificationsFilters*)filters andPagination:(TPNotificationsPagination*)pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    [self sendGetDeviceNotificationsRequestWithFilters:filters andPagination:pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:onError];
 }
 
-- (void)getAliasNotificationsWithPagination:(TPNotificationsPagination*)pagination onComplete:(GetAliasNotificationsResponseBlock)onComplete {
-    [self sendGetAliasNotificationsRequestWithPagination: pagination onComplete:onComplete];
+- (void)getAliasNotificationsWithPagination:(TPNotificationsPagination*)pagination onComplete:(GetAliasNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    [self sendGetAliasNotificationsRequestWithPagination: pagination onComplete:onComplete onError:onError];
 }
 
-- (void)getDeviceNotificationWithId:(NSInteger)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete {
-    [self sendGetDeviceNotificationRequestWithId:notificationId onComplete:onComplete];
+- (void)getDeviceNotificationWithId:(NSInteger)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    [self sendGetDeviceNotificationRequestWithId:notificationId onComplete:onComplete onError:onError];
 }
 
 - (void)deleteNotificationWithId:(NSString*)notificationId onComplete:(DeleteNotificationResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
@@ -647,14 +647,14 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)sendGetDeviceNotificationsRequestWithFilters:(TPNotificationsFilters*)filters andPagination:
-(TPNotificationsPagination*)pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete {
+(TPNotificationsPagination*)pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
     [self.inboxRequest cancel];
     if ([self hasAppIdAndApiKey]) {
         self.inboxRequest = [self.requestFactory createGetDeviceNotificationsRequestWithDeviceId:_deviceId filters:filters pagination:pagination appId:_appId onComplete:^(NSArray *array, BOOL hasMore) {
             self.inboxRequest = nil;
             onComplete(array, hasMore);
         } onError:^(NSError *error) {
-            [self displayAlert:error.localizedDescription withTitle:NSLocalizedStringWithDefaultValue(@"GET_NOTIFICATIONS_ERROR_ALERT_TITLE", nil, [NSBundle mainBundle], @"Error", nil)];
+            onError(error);
             self.inboxRequest = nil;
         }];
         [self.inboxRequest start];
@@ -664,14 +664,14 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)sendGetAliasNotificationsRequestWithPagination:
-(TPNotificationsPagination*)pagination onComplete:(GetAliasNotificationsResponseBlock)onComplete {
+(TPNotificationsPagination*)pagination onComplete:(GetAliasNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
     [self.inboxRequest cancel];
     if ([self hasAppIdAndApiKey]) {
         self.inboxRequest = [self.requestFactory createGetAliasNotificationsRequestWithDeviceId:_deviceId pagination:pagination appId:_appId onComplete:^(NSArray *array, BOOL hasMore) {
             self.inboxRequest = nil;
             onComplete(array, hasMore);
         } onError:^(NSError *error) {
-            [self displayAlert:error.localizedDescription withTitle:NSLocalizedStringWithDefaultValue(@"GET_NOTIFICATIONS_ERROR_ALERT_TITLE", nil, [NSBundle mainBundle], @"Error", nil)];
+            onError(error);
             self.inboxRequest = nil;
         }];
         [self.inboxRequest start];
@@ -680,14 +680,14 @@ static TwinPushManager *_sharedInstance;
     }
 }
 
-- (void)sendGetDeviceNotificationRequestWithId:(NSInteger)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete {
+- (void)sendGetDeviceNotificationRequestWithId:(NSInteger)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
     if ([self hasAppIdAndApiKey]) {
         [self.singleNotificationRequest cancel];
         self.singleNotificationRequest = [self.requestFactory createGetDeviceNotificationWithId:notificationId deviceId:self.deviceId appId:_appId onComplete:^(TPNotification* notification) {
             self.singleNotificationRequest = nil;
             onComplete(notification);
         } onError:^(NSError *error) {
-            [self displayAlert:error.localizedDescription withTitle:NSLocalizedStringWithDefaultValue(@"GET_NOTIFICATIONS_ERROR_ALERT_TITLE", nil, [NSBundle mainBundle], @"Error", nil)];
+            onError(error);
             self.singleNotificationRequest = nil;
         }];
         [self.singleNotificationRequest start];

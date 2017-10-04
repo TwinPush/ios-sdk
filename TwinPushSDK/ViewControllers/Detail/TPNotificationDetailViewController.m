@@ -87,6 +87,8 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
                 [self setNotificationDetails];
             }
             self.loading = NO;
+        } onError:^(NSError *error) {
+            [self onRequestFailed:error];
         }];
     }
     else {
@@ -94,6 +96,12 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
     }
 }
 
+- (void)onRequestFailed:(NSError *)error {
+    NSString* title = NSLocalizedStringWithDefaultValue(@"GET_NOTIFICATIONS_ERROR_ALERT_TITLE", nil, [NSBundle mainBundle], @"Error", nil);
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:error.localizedDescription delegate:nil cancelButtonTitle:NSLocalizedStringWithDefaultValue(@"DEVICE_REGISTERED_ALERT_ACCEPT_BUTTON", nil, [NSBundle mainBundle], @"Accept", nil) otherButtonTitles:nil, nil];
+    [alertView show];
+}
+    
 #pragma mark - Private methods
 - (UIButton*)createCloseButton {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];

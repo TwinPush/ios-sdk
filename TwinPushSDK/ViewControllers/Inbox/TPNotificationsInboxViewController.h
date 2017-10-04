@@ -58,5 +58,6 @@ enum {
 
 #pragma mark - Override points
 - (void)onSelectedNotification:(TPNotification*)notification;
+- (void)onRequestFailed:(NSError*)error;
 
 @end

@@ -28,6 +28,10 @@
             TCLog(@"Page: %ld and HasMore: %@", (long)self.pagination.page, hasMore ? @"YES" : @"NO");
         }
         [self.inboxTableView reloadData];
+    } onError:^(NSError *error) {
+        self.loading = NO;
+        [self.inboxTableView reloadData];
+        [self onRequestFailed:error];
     }];
 }
 

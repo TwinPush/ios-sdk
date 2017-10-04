@@ -35,5 +35,8 @@
 
 #pragma mark - Actions
 - (IBAction)dismissButtonTapped:(id)sender;
+    
+#pragma mark - Override points
+- (void)onRequestFailed:(NSError *)error;
 
 @end

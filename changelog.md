@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased] - 2017-10-04
+### Changed
+- Device inbox, alias inbox and notification details request now take a new error block parameter to react to request failures.
+- Notification inbox and notification details controllers have been adjusted to the new API and error handling can be easily extended while maintaining the same behaviour by default.
+
 ## [3.2.1] - 2017-09-06
 ### Fixed
 - Fixed `#ifdef` check for XCode 8 to work with previous versions of XCode even when XCode 8 has been already installed
