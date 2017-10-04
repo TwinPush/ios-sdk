@@ -139,7 +139,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - First fully functional public release.
 
 [Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v3.2.1...HEAD
-[3.2.0]: https://github.com/TwinPush/ios-sdk/compare/v3.2.0...v3.2.1
+[3.2.1]: https://github.com/TwinPush/ios-sdk/compare/v3.2.0...v3.2.1
 [3.2.0]: https://github.com/TwinPush/ios-sdk/compare/v3.1.0...v3.2.0
 [3.1.0]: https://github.com/TwinPush/ios-sdk/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/TwinPush/ios-sdk/compare/v2.2.0...v3.0.0
