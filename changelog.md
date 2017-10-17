@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- No changes
+- TwinPushManager data storage can now be overriden by the TwinPushManagerDelegate implementation.
 
 ## [3.3.0] - 2017-10-04
 ### Changed

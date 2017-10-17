@@ -538,7 +538,7 @@ TwinPushManager.singleton().deviceUDID = "myNewUDID"
 
 Make sure to use a really unique identifier for each device, otherwise some devices may get overriden and will never receive push notifications.
 
-## Custom domain
+### Custom domain
 
 For Enterprise solutions, TwinPush offers the possibility of deploying the platform in a dedicated server. To address the requests made from the application to this new server, it is needed to specify its custom URL or domain.
 
@@ -556,3 +556,43 @@ TwinPushManager.singleton().serverSubdomain = "my-subdomain"
 ~~~
 
 Changing the server URL must be the very first call to `TwinPushManager`. Usually the right place is right before calling `setupTwinPushManagerWithAppId`.
+
+
+### Custom data storage
+
+TwinPushManager by default stores some data in `NSUserDefaults` to avoid unnecessary duplicated requests to the remote services. This storage can be overriden by implementing `storeValue:forKey` and `fetchValue` methods in `TwinPushManagerDelegate`.
+
+This sample implementation uses [`SimpleKeychain`](https://github.com/auth0/SimpleKeychain) library to store the data encrypted in the iOS keychain:
+
+~~~objective-c
+// Objective-C
+- (void)storeValue:(NSString *)value forKey:(NSString *)key {
+    if (value != nil) {
+        [[A0SimpleKeychain keychain] setString:value forKey:key];
+    }
+    else {
+        [[A0SimpleKeychain keychain] deleteEntryForKey:key];
+    }
+}
+
+- (NSString *)fetchValueForKey:(NSString *)key {
+    return [[A0SimpleKeychain keychain] stringForKey:key];
+}
+~~~
+~~~swift
+// Swift
+func storeValue(_ value: String!, forKey key: String!) {
+    if (value != nil) {
+        A0SimpleKeychain().setString(value, forKey: key)
+    }
+    else {
+        A0SimpleKeychain().deleteEntry(forKey: key)
+    }
+}
+    
+func fetchValue(forKey key: String!) -> String! {
+    return A0SimpleKeychain().string(forKey: key)
+}
+~~~
+
+Please note that `value` might be `nil`.

@@ -49,6 +49,9 @@
     Default implementation will call `showNotification:` regardless of the selected action */
 -(void)didReceiveNotificationResponse:(UNNotificationResponse *)response;
 #endif
+/** Implement to override default storage implementation using NSUserDefaults */
+- (NSString*)fetchValueForKey:(NSString*)key;
+- (void)storeValue:(NSString*)value forKey:(NSString*) key;
 @end
 
 typedef enum {

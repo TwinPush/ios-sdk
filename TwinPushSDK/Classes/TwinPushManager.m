@@ -101,12 +101,12 @@ static TwinPushManager *_sharedInstance;
     self.delegate = delegate;
     
     // If the API Hash has changed since last register, we will ignore saved values
-    NSInteger previousApiHash = [[NSUserDefaults standardUserDefaults] integerForKey:kNSUserDefaultsApiHashKey];
+    NSInteger previousApiHash = [[self fetchValueForKey:kNSUserDefaultsApiHashKey] integerValue];
     if (previousApiHash == 0 || previousApiHash == [self getApiHash]) {
-        self.deviceId = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsDeviceIdKey];
-        self.registeredAlias = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsAliasKey];
-        self.registeredPushToken = [[NSUserDefaults standardUserDefaults] valueForKey:kNSUserDefaultsPushTokenKey];
-        self.lastRegisterHash = [[NSUserDefaults standardUserDefaults] integerForKey:kNSUserDefaultsRegisterHashKey];
+        self.deviceId = [self fetchValueForKey:kNSUserDefaultsDeviceIdKey];
+        self.registeredAlias = [self fetchValueForKey:kNSUserDefaultsAliasKey];
+        self.registeredPushToken = [self fetchValueForKey:kNSUserDefaultsPushTokenKey];
+        self.lastRegisterHash = [self fetchValueForKey:kNSUserDefaultsRegisterHashKey].integerValue;
     }
     else {
         NSLog(@"[TwinPushSDK] Info: API connection changed, ignoring previous register");
@@ -205,7 +205,9 @@ static TwinPushManager *_sharedInstance;
     }
     else if ([notification.name isEqualToString: UIApplicationWillResignActiveNotification]) {
         [self sendApplicationClosedEvent];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        if (![_delegate respondsToSelector:@selector(storeValue:forKey:)]) {
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
     }
 }
 
@@ -422,6 +424,25 @@ static TwinPushManager *_sharedInstance;
 
 
 #pragma mark - Private methods
+/** Implement to override default storage implementation using NSUserDefaults */
+- (NSString*)fetchValueForKey:(NSString*)key {
+    if ([_delegate respondsToSelector:@selector(fetchValueForKey:)]) {
+        return [_delegate fetchValueForKey:key];
+    }
+    else {
+        return [[NSUserDefaults standardUserDefaults] valueForKey:key];
+    }
+}
+
+- (void)storeValue:(NSString*)value forKey:(NSString*) key {
+    if ([_delegate respondsToSelector:@selector(storeValue:forKey:)]) {
+        [_delegate storeValue:value forKey:key];
+    }
+    else {
+        [[NSUserDefaults standardUserDefaults] setValue:value forKey:key];
+    }
+}
+
 
 - (BOOL)hasAppIdAndApiKey {
     if (_appId == nil || _apiKey == nil) {
@@ -619,12 +640,11 @@ static TwinPushManager *_sharedInstance;
             self.registeredPushToken = pushToken;
             self.lastRegisterHash = [[((TPCreateDeviceRequest*)self.registerRequest) createBodyContent] hash];
             
-            [[NSUserDefaults standardUserDefaults] setInteger:[self getApiHash] forKey:kNSUserDefaultsApiHashKey];
-            [[NSUserDefaults standardUserDefaults] setValue:_registeredAlias forKey:kNSUserDefaultsAliasKey];
-            [[NSUserDefaults standardUserDefaults] setValue:_registeredPushToken forKey:kNSUserDefaultsPushTokenKey];
-            [[NSUserDefaults standardUserDefaults] setValue:_deviceId forKey:kNSUserDefaultsDeviceIdKey];
-            [[NSUserDefaults standardUserDefaults] setInteger:_lastRegisterHash forKey:kNSUserDefaultsRegisterHashKey];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+            [self storeValue:@([self getApiHash]).stringValue forKey:kNSUserDefaultsApiHashKey];
+            [self storeValue:_registeredAlias forKey:kNSUserDefaultsAliasKey];
+            [self storeValue:_registeredPushToken forKey:kNSUserDefaultsPushTokenKey];
+            [self storeValue:_deviceId forKey:kNSUserDefaultsDeviceIdKey];
+            [self storeValue:@(_lastRegisterHash).stringValue forKey:kNSUserDefaultsRegisterHashKey];
             
             if ([self.delegate respondsToSelector:@selector(didFinishRegisteringDevice)]) {
                 [self.delegate didFinishRegisteringDevice];
