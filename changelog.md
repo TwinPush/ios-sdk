@@ -3,7 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- No changes
+### Changed
+- Removed UserNotifications and UserNotificationsUI frameworks from the podspec to maintain iOS < 10 compatibility
 
 ## [3.4.0] - 2017-10-17
 ### Added
