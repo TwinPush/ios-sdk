@@ -5,6 +5,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 - No changes
 
+## [3.4.2] - 2017-12-04
+### Changed
+- Push notification registration is now performed in the main thread. Required by iOS 11.1+
+
 ## [3.4.1] - 2017-10-31
 ### Changed
 - Removed UserNotifications and UserNotificationsUI frameworks from the podspec to maintain iOS < 10 compatibility
@@ -154,8 +158,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - First fully functional public release.
 
-[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v3.4.1...HEAD
-[3.4.0]: https://github.com/TwinPush/ios-sdk/compare/v3.4.0...v3.4.1
+[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v3.4.2...HEAD
+[3.4.2]: https://github.com/TwinPush/ios-sdk/compare/v3.4.1...v3.4.2
+[3.4.1]: https://github.com/TwinPush/ios-sdk/compare/v3.4.0...v3.4.1
 [3.4.0]: https://github.com/TwinPush/ios-sdk/compare/v3.3.0...v3.4.0
 [3.3.0]: https://github.com/TwinPush/ios-sdk/compare/v3.2.1...v3.3.0
 [3.2.1]: https://github.com/TwinPush/ios-sdk/compare/v3.2.0...v3.2.1
