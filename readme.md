@@ -69,7 +69,7 @@ If you are not using CocoaPods you can copy the sources to link the SDK to your 
 
 [Swift](https://developer.apple.com/swift/) is an innovative new programming language for Cocoa and Cocoa Touch created by Apple. TwinPush SDK is 100% compatible with Swift projects.
 
-To use TwinPush SDK in a Swift project, you can use any of the methods described above to install the SDK and then import TwinPushManager.h in your bridging header file to make it accessible from Swift code.
+To use TwinPush SDK in a Swift project, you can use any of the methods described above to install the SDK. When using CocoaPods you will have a `TwinPushSDK` module available to import, if you copied the sources you have to import TwinPushManager.h in your bridging header file to make it accessible from Swift code.
 
 For more information check [Swift and Objective-C in the Same Project](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html).
 
@@ -596,3 +596,41 @@ func fetchValue(forKey key: String!) -> String! {
 ~~~
 
 Please note that `value` might be `nil`.
+
+
+### Handling different environments
+
+It's a common practice to have different application registered in TwinPush for different environments. To handle the API keys gracefully in your application you can use preprocessor directives to distinguish between environments at compile time:
+
+~~~objective-c
+// Objective-C
+#ifdef DEBUG
+#define TWINPUSH_APP_ID @"<DEVEL_APP_ID>"
+#define TWINPUSH_API_KEY @"<DEVEL_API_KEY>"
+#else
+#define TWINPUSH_APP_ID @"<PROD_APP_ID>"
+#define TWINPUSH_API_KEY @"<PROD_API_KEY>"
+#endif
+
+[[TwinPushManager manager] setupTwinPushManagerWithAppId:TWINPUSH_APP_ID apiKey:TWINPUSH_API_KEY delegate:self];
+~~~
+~~~swift
+// Swift
+#if DEBUG
+    let tpApiKey = "<DEVEL_API_KEY>"
+    let tpAppId = "<DEVEL_APP_ID>"
+#else
+    let tpApiKey = "<PROD_API_KEY>"
+    let tpAppId = "<PROD_APP_ID>"
+#endif
+
+TwinPushManager.singleton().setupTwinPushManager(withAppId: tpAppId, apiKey: tpApiKey, delegate: self)
+~~~
+
+In order for this to work properly, make sure that `DEBUG` is correctly defined in your project build settings:
+
+![](https://i.imgur.com/NFm60iz.png)
+
+You can change these names or add more configurations to the project. By default, `Debug` configuration will be used for debugging and `Release` configuration will be used when archiving. You can change the build configuration in `Product -> Scheme -> Edit Scheme` view:
+
+![](https://i.imgur.com/cRODNwc.png)
