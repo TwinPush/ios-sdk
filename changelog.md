@@ -3,7 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- No changes
+- Implemented Inbox Summary request and added convenience method in TwinPushManager
+- Improved TPBaseRequest error handling to include the received error message
 
 ## [3.4.2] - 2017-12-04
 ### Changed
