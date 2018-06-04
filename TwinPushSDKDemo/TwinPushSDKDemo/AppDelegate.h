@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TwinPushManager.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UIAlertViewDelegate, TwinPushManagerDelegate, UNUserNotificationCenterDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UIAlertViewDelegate, TwinPushManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
