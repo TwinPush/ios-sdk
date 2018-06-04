@@ -20,6 +20,7 @@
 #import "TPCloseAppRequest.h"
 #import "TPUserOpenNotificationRequest.h"
 #import "TPDeleteNotificationRequest.h"
+#import "TPInboxSummaryRequest.h"
 #import <CoreLocation/CoreLocation.h>
 
 @interface TPRequestFactory : NSObject
@@ -105,5 +106,6 @@
 
 - (TPBaseRequest*)createUserOpenNotificationRequestWithDeviceId:(NSString*)deviceId notificationId:(NSString*)notificationId appId:(NSString*)appId onComplete:(TPRequestCompleteBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
+- (TPBaseRequest*)createInboxSummaryRequestWithDeviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(GetInboxSummaryResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 @end

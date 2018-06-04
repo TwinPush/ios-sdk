@@ -95,4 +95,10 @@
     return request;
 }
 
+- (TPBaseRequest *)createInboxSummaryRequestWithDeviceId:(NSString *)deviceId appId:(NSString*)appId onComplete:(GetInboxSummaryResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    TPBaseRequest* request = [[TPInboxSummaryRequest alloc] initWithDeviceId:deviceId appId:appId onComplete:onComplete onError:onError];
+    request.requestLauncher = _requestLauncher;
+    return request;
+}
+
 @end

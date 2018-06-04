@@ -16,8 +16,8 @@
 #pragma mark - App ID and API Key
 // Set here your API Key and APP ID. If you don't have one already, go to https://app.twinpush.com
 // to obtain your own key
-#define TWINPUSH_APP_ID @"YOUR APP ID HERE"
-#define TWINPUSH_API_KEY @"YOUR API KEY HERE"
+#define TWINPUSH_APP_ID @"23c8befd3f1b7f3d"
+#define TWINPUSH_API_KEY @"43e69710115e83638e8b939fcd38a4cf"
 #pragma mark -
 
 @implementation AppDelegate
@@ -80,6 +80,22 @@
     
     [[TwinPushManager manager] enableCertificateNamePinningWithDefaultValues];
     [[TwinPushManager manager] setupTwinPushManagerWithAppId:TWINPUSH_APP_ID apiKey:TWINPUSH_API_KEY delegate:self];
+    
+    [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+    
+    UILocalNotification* notification = [[UILocalNotification alloc] init];
+    notification.alertTitle = @"Notificacion local";
+    notification.alertBody = @"Detalle de notificacion";
+    notification.soundName = UILocalNotificationDefaultSoundName;
+    notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:5];
+    [application scheduleLocalNotification:notification];
+    
+    [[TwinPushManager manager] getInboxSummaryOnComplete:^(TPInboxSummary * result) {
+        NSLog(@"Summary obtained: totalCount %ld, unopenedCount %ld", (long)result.totalCount, (long)result.unopenedCount);
+    } onError:^(NSError *error) {
+        NSLog(@"Request failed with error %@", error);
+    }];
+    
     return YES;
 }
 
@@ -95,6 +111,18 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     NSLog(@"Received notification with contents: %@", userInfo);
     [[TwinPushManager manager] application:application didReceiveRemoteNotification:userInfo];
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    NSLog(@"Received local notification");
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
+    NSLog(@"Received local notification");
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification withResponseInfo:(NSDictionary *)responseInfo completionHandler:(void (^)())completionHandler {
+    NSLog(@"");
 }
 
 #pragma mark - Utility methods
@@ -162,6 +190,14 @@
 
 - (void)didSkipRegisteringDevice {
     [self didFinishRegisteringDevice];
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    NSLog(@"Will present ");
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
+    NSLog(@"Received notification response");
 }
 
 @end
