@@ -12,8 +12,10 @@
 
 // Error domain
 static NSString* const kErrorDomain  = @"com.twincoders.TCBaseRequest";
+static NSInteger const kDefaultErrorCode  = 400;
 static NSString* const kContentTypeHeaderKey = @"Content-Type";
 static NSString* const kAcceptContentTypeHeaderKey = @"Accept";
+
 
 @interface TPBaseRequest()
 
@@ -303,6 +305,13 @@ static NSString* const kAcceptContentTypeHeaderKey = @"Accept";
 }
 
 - (NSDictionary*)onProcessResponseDictionary:(NSDictionary*)response withError:(NSError**) error {
+    NSDictionary* errorDictionary = response[@"errors"];
+    if (errorDictionary != nil && [errorDictionary isKindOfClass:[NSDictionary class]]) {
+        NSString* type = errorDictionary[@"type"];
+        NSString* message = errorDictionary[@"message"];
+        NSDictionary* userInfo = @{ NSLocalizedDescriptionKey: message, @"ErrorType": type };
+        *error = [[NSError alloc] initWithDomain:kErrorDomain code:kDefaultErrorCode userInfo: userInfo];
+    }
     return response;
 }
 
