@@ -285,6 +285,13 @@ static TwinPushManager *_sharedInstance;
     }
 }
 
+- (void)getApplicationBadgeOnComplete:(GetApplicationBadgeResponse)onComplete onError:(TPRequestErrorBlock)onError {
+    if ([self hasAppIdAndApiKey]) {
+        TPBaseRequest* request = [self.requestFactory createGetApplicationBadgeRequestWithDeviceId:_deviceId appId:_appId onComplete:onComplete onError:onError];
+        [self enqueueRequest:request];
+    }
+}
+
 - (void)userDidOpenNotificationWithId:(NSString*)notificationId {
     if (![self isDeviceRegistered]) {
         NSLog(@"[TwinPushSDK] Warning: device not registered yet. Unable to open notification");

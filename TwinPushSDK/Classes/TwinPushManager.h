@@ -136,6 +136,7 @@ typedef enum {
 - (void)userDidOpenNotificationWithId:(NSString*)notificationId;
 - (void)deleteNotificationWithId:(NSString*)notificationId onComplete:(DeleteNotificationResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 - (void)getInboxSummaryOnComplete:(GetInboxSummaryResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (void)getApplicationBadgeOnComplete:(GetApplicationBadgeResponse)onComplete onError:(TPRequestErrorBlock)onError;
 
 #pragma mark Custom properties
 - (void)setProperty:(NSString*)name withStringValue:(NSString*)value;

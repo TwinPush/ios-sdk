@@ -3,7 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Implemented Get Application Badge request
+
+## [3.5.0] - 2017-06-05
+### Added
 - Implemented Inbox Summary request and added convenience method in TwinPushManager
+
+### Changed
 - Improved TPBaseRequest error handling to include the received error message
 
 ## [3.4.2] - 2017-12-04
@@ -159,7 +166,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - First fully functional public release.
 
-[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v3.4.2...HEAD
+[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v3.5.0...HEAD
+[3.5.0]: https://github.com/TwinPush/ios-sdk/compare/v3.4.2...v3.5.0
 [3.4.2]: https://github.com/TwinPush/ios-sdk/compare/v3.4.1...v3.4.2
 [3.4.1]: https://github.com/TwinPush/ios-sdk/compare/v3.4.0...v3.4.1
 [3.4.0]: https://github.com/TwinPush/ios-sdk/compare/v3.3.0...v3.4.0

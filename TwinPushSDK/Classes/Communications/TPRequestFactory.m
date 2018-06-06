@@ -101,4 +101,10 @@
     return request;
 }
 
+- (TPBaseRequest*)createGetApplicationBadgeRequestWithDeviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(GetApplicationBadgeResponse)onComplete onError:(TPRequestErrorBlock)onError {
+    TPBaseRequest* request = [[TPGetApplicationBadgeRequest alloc] initWithDeviceId:deviceId appId:appId onComplete:onComplete onError:onError];
+    request.requestLauncher = _requestLauncher;
+    return request;
+}
+
 @end
