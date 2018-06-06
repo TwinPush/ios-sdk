@@ -3,7 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- No changes
+### Added
+- Added documentation for Get Application Badge method
 
 ## [3.6.0] - 2017-06-05
 ### Added

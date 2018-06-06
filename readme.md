@@ -157,6 +157,26 @@ TwinPushManager.singleton().autoResetBadgeNumber = false
 TwinPushManager.singleton().setApplicationBadgeCount(0)
 ~~~
 
+#### Obtaining server badge count
+
+The server will update the badge count when sending a new notification. You can fetch the remote server badge count using the `getApplicationBadge` method of `TwinPushManager`:
+
+~~~objective-c
+// Objective-C
+[[TwinPushManager manager] getApplicationBadgeOnComplete:^(NSInteger badge) {
+    NSLog(@"Obtained remote badge count: %d", (int)badge);
+} onError:^(NSError *error) {
+    NSLog(@"Received error: %@", error);
+}];
+~~~
+~~~swift
+// Swift
+TwinPushManager.singleton().getApplicationBadge(
+    onComplete: { badge in print("Obtained remote badge count: \(badge)") },
+    onError: { error in print("Received error: \(error!)") }
+)
+~~~
+
 ### Assigning an alias to a device
 
 The _alias_ is a way to identify a user rather than a device in TwinPush. It's really useful to send a push notification to a user regardless of the device that he's using. The _alias_ is usually the user identifier, email or any other value to unequivocally identify the user. The same alias can be assigned to different devices, and the push notification sent to that alias will arrive to all its devices.
