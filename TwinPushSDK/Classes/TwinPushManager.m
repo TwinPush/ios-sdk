@@ -171,9 +171,13 @@ static TwinPushManager *_sharedInstance;
     }
 }
 
+- (TPRegisterInformation*)registerInfo {
+    return [[TPRegisterInformation alloc] initWithToken:_pushToken deviceAlias:_alias UDID:self.deviceId];
+}
+
 - (NSUInteger)currentRegisterHash {
-    TPCreateDeviceRequest* request = [[TPCreateDeviceRequest alloc] initCreateDeviceRequestWithToken:_pushToken deviceAlias:_alias UDID:self.deviceUDID appId:_appId apiKey:_apiKey onComplete:nil onError:nil];
-    return [[request createBodyContent] hash];
+    NSDictionary* infoDictionary = [[self registerInfo] toDictionary];
+    return [infoDictionary hash];
 }
 
 - (NSInteger)getApiHash {
@@ -639,7 +643,8 @@ static TwinPushManager *_sharedInstance;
 - (void)sendCreateDeviceRequestWithPushToken:(NSString*)pushToken andAlias:(NSString*)alias {
     if ([self hasAppIdAndApiKey]) {
         [self.registerRequest cancel];
-        self.registerRequest = [self.requestFactory createCreateDeviceRequestWithToken:pushToken deviceAlias:alias UDID:self.deviceUDID appId:_appId apiKey:_apiKey onComplete:^(TPDevice *device) {
+        TPRegisterInformation* registerInfo = [self registerInfo];
+        self.registerRequest = [self.requestFactory createCreateDeviceRequestWithInfo:registerInfo appId:_appId apiKey:_apiKey onComplete:^(TPDevice *device) {
             [self willChangeValueForKey:@"alias"];
             if ([device.deviceAlias isKindOfClass:[NSString class]]) {
                 _alias = device.deviceAlias;

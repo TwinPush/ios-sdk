@@ -29,8 +29,8 @@
 
 #pragma mark - Requests
 
-- (TPBaseRequest *)createCreateDeviceRequestWithToken:(NSString *)token deviceAlias:(NSString *)deviceAlias UDID:(NSString*)udid appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(CreateDeviceResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
-    TPBaseRequest* request = [[TPCreateDeviceRequest alloc] initCreateDeviceRequestWithToken:token deviceAlias:deviceAlias UDID:(NSString*)udid appId:appId apiKey:apiKey onComplete:onComplete onError:onError];
+- (TPBaseRequest *)createCreateDeviceRequestWithInfo:(TPRegisterInformation*)info appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(CreateDeviceResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    TPBaseRequest* request = [[TPCreateDeviceRequest alloc] initCreateDeviceRequestWithInfo: info appId:appId apiKey:apiKey onComplete:onComplete onError:onError];
     request.requestLauncher = _requestLauncher;
     return request;
 }

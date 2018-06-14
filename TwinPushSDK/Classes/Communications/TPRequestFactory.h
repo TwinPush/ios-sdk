@@ -37,7 +37,7 @@
  @param onComplete Block that will be executed if login is successful
  @param onError Block that will be executed if login is not successful
  */
-- (TPBaseRequest*)createCreateDeviceRequestWithToken:(NSString*)token deviceAlias:(NSString*)deviceAlias UDID:(NSString*)udid appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(CreateDeviceResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (TPBaseRequest*)createCreateDeviceRequestWithInfo:(TPRegisterInformation*)info appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(CreateDeviceResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 /**
  @brief Constructor for GetDeviceNotifications

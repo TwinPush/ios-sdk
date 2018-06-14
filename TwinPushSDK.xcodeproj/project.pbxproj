@@ -64,6 +64,8 @@
 		69D5D2D220C53319007F28FC /* TPInboxSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D5D2D020C53319007F28FC /* TPInboxSummary.m */; };
 		69D5D2D720C7E039007F28FC /* TPGetApplicationBadgeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 69D5D2D520C7E039007F28FC /* TPGetApplicationBadgeRequest.h */; };
 		69D5D2D820C7E039007F28FC /* TPGetApplicationBadgeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D5D2D620C7E039007F28FC /* TPGetApplicationBadgeRequest.m */; };
+		69D5D2FB20D27CD1007F28FC /* TPRegisterInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 69D5D2F920D27CD1007F28FC /* TPRegisterInformation.h */; };
+		69D5D2FC20D27CD1007F28FC /* TPRegisterInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 69D5D2FA20D27CD1007F28FC /* TPRegisterInformation.m */; };
 		7A63CB751779CC640073E0E7 /* TPReportStatisticsRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A63CB731779CC640073E0E7 /* TPReportStatisticsRequest.h */; };
 		7A63CB761779CC640073E0E7 /* TPReportStatisticsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A63CB741779CC640073E0E7 /* TPReportStatisticsRequest.m */; };
 		7A63CB791779D8980073E0E7 /* TPOpenAppRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A63CB771779D8980073E0E7 /* TPOpenAppRequest.h */; };
@@ -164,6 +166,8 @@
 		69D5D2D020C53319007F28FC /* TPInboxSummary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPInboxSummary.m; sourceTree = "<group>"; };
 		69D5D2D520C7E039007F28FC /* TPGetApplicationBadgeRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPGetApplicationBadgeRequest.h; sourceTree = "<group>"; };
 		69D5D2D620C7E039007F28FC /* TPGetApplicationBadgeRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPGetApplicationBadgeRequest.m; sourceTree = "<group>"; };
+		69D5D2F920D27CD1007F28FC /* TPRegisterInformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPRegisterInformation.h; sourceTree = "<group>"; };
+		69D5D2FA20D27CD1007F28FC /* TPRegisterInformation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPRegisterInformation.m; sourceTree = "<group>"; };
 		7A63CB731779CC640073E0E7 /* TPReportStatisticsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPReportStatisticsRequest.h; sourceTree = "<group>"; };
 		7A63CB741779CC640073E0E7 /* TPReportStatisticsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPReportStatisticsRequest.m; sourceTree = "<group>"; };
 		7A63CB771779D8980073E0E7 /* TPOpenAppRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPOpenAppRequest.h; sourceTree = "<group>"; };
@@ -222,6 +226,8 @@
 				21A33B4D16C4F78200EC7AF5 /* TPNotificationsPagination.m */,
 				69D5D2CF20C53319007F28FC /* TPInboxSummary.h */,
 				69D5D2D020C53319007F28FC /* TPInboxSummary.m */,
+				69D5D2F920D27CD1007F28FC /* TPRegisterInformation.h */,
+				69D5D2FA20D27CD1007F28FC /* TPRegisterInformation.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -483,6 +489,7 @@
 				7A63CB751779CC640073E0E7 /* TPReportStatisticsRequest.h in Headers */,
 				7A63CB791779D8980073E0E7 /* TPOpenAppRequest.h in Headers */,
 				7A63CB7D1779D8AA0073E0E7 /* TPCloseAppRequest.h in Headers */,
+				69D5D2FB20D27CD1007F28FC /* TPRegisterInformation.h in Headers */,
 				2198DA8717816E30003BA36B /* TPUserOpenNotificationRequest.h in Headers */,
 				69D5D2CD20C53198007F28FC /* TPInboxSummaryRequest.h in Headers */,
 				69215C591D5CE9E400A53FBE /* TPAliasInboxViewController.h in Headers */,
@@ -569,6 +576,7 @@
 				69AD46BF19704CFD0091F395 /* TPTwinFormsRequest.m in Sources */,
 				6941BECF1EFD72520041240B /* UIImage+UIBarButtonItem.m in Sources */,
 				7AD27C561758E334003ADC3C /* TPGetDeviceNotificationsRequest.m in Sources */,
+				69D5D2FC20D27CD1007F28FC /* TPRegisterInformation.m in Sources */,
 				7AD27C581758E334003ADC3C /* TPGetNotificationWithIdRequest.m in Sources */,
 				7AD27C5A1758E334003ADC3C /* TPUpdateBadgeRequest.m in Sources */,
 				7AD27C5E1758E3D6003ADC3C /* TPSetCustomPropertyRequest.m in Sources */,
