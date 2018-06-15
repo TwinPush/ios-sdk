@@ -3,15 +3,18 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+- No changes
+
+## [3.7.0] - 2018-06-15
 ### Added
 - Added documentation for Get Application Badge method
 - Implemented External Device Register mechanism
 
-## [3.6.0] - 2017-06-05
+## [3.6.0] - 2018-06-05
 ### Added
 - Implemented Get Application Badge request
 
-## [3.5.0] - 2017-06-05
+## [3.5.0] - 2018-06-05
 ### Added
 - Implemented Inbox Summary request and added convenience method in TwinPushManager
 
@@ -171,7 +174,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - First fully functional public release.
 
-[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v3.6.0...HEAD
+[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v3.7.0...HEAD
+[3.7.0]: https://github.com/TwinPush/ios-sdk/compare/v3.6.0...v3.7.0
 [3.6.0]: https://github.com/TwinPush/ios-sdk/compare/v3.5.0...v3.6.0
 [3.5.0]: https://github.com/TwinPush/ios-sdk/compare/v3.4.2...v3.5.0
 [3.4.2]: https://github.com/TwinPush/ios-sdk/compare/v3.4.1...v3.4.2
