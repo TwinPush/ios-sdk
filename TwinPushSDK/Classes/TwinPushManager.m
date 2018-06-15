@@ -644,7 +644,7 @@ static TwinPushManager *_sharedInstance;
     if ([self hasAppIdAndApiKey]) {
         [self.registerRequest cancel];
         TPRegisterInformation* registerInfo = [self registerInfo];
-        self.registerRequest = [self.requestFactory createCreateDeviceRequestWithInfo:registerInfo appId:_appId apiKey:_apiKey onComplete:^(TPDevice *device) {
+        TPRegisterCompletedBlock onComplete = ^(TPDevice *device) {
             [self willChangeValueForKey:@"alias"];
             if ([device.deviceAlias isKindOfClass:[NSString class]]) {
                 _alias = device.deviceAlias;
@@ -673,13 +673,20 @@ static TwinPushManager *_sharedInstance;
             self.registerRequest = nil;
             
             [self sendBadgeCountUpdate];
-        } onError:^(NSError *error) {
-            if ([self.delegate respondsToSelector:@selector(didFailRegisteringDevice:)]) {
-                [self.delegate didFailRegisteringDevice:error.localizedDescription];
-            }
-            self.registerRequest = nil;
-        }];
+        };
+        
+        if (self.externalRegisterBlock) {
+            self.externalRegisterBlock(registerInfo, onComplete);
+        }
+        else {
+            self.registerRequest = [self.requestFactory createCreateDeviceRequestWithInfo:registerInfo appId:_appId apiKey:_apiKey onComplete: onComplete onError:^(NSError *error) {
+                if ([self.delegate respondsToSelector:@selector(didFailRegisteringDevice:)]) {
+                    [self.delegate didFailRegisteringDevice:error.localizedDescription];
+                }
+                self.registerRequest = nil;
+            }];
         [self.registerRequest start];
+        }
     } else {
         if ([self.delegate respondsToSelector:@selector(didFailRegisteringDevice:)]) {
             [self.delegate didFailRegisteringDevice:@"Missing APP ID or API Key"];

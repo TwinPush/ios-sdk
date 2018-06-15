@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Added documentation for Get Application Badge method
+- Implemented External Device Register mechanism
 
 ## [3.6.0] - 2017-06-05
 ### Added

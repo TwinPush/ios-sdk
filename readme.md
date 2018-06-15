@@ -654,3 +654,31 @@ In order for this to work properly, make sure that `DEBUG` is correctly defined 
 You can change these names or add more configurations to the project. By default, `Debug` configuration will be used for debugging and `Release` configuration will be used when archiving. You can change the build configuration in `Product -> Scheme -> Edit Scheme` view:
 
 ![](https://i.imgur.com/cRODNwc.png)
+
+
+### External device register
+
+The external register mechanism allows you to replace the standard call to [/devices/register](http://developers.twinpush.com/developers/api#post-register) with a custom register method. This provides you full control over the registration and is useful if you want to perform the operation through another platform, to collect user information or to inject additional information.
+
+To implement this functionality you simply have to provide a custom registration block in the `TwinPushManager` instance before the `setup`:
+
+~~~objective-c
+// Objective-C
+[TwinPushManager manager].externalRegisterBlock = ^(TPRegisterInformation *info, TPRegisterCompletedBlock onComplete) {
+    // Perform the registration manually and create a TPDevice from the TwinPush response
+    TPDevice* device; // Obtain this device from the /devices/register result
+    
+    // Invoke onComplete block when the operation has been successful
+    onComplete(device);
+};
+~~~
+~~~swift
+// Swift
+TwinPushManager.singleton().externalRegisterBlock = { info, onComplete in
+    // Perform the registration manually and create a TPDevice from the TwinPush response
+    let device = TPDevice(); // Obtain this device from the /devices/register result
+    
+    // Invoke onComplete block when the operation has been successful
+    onComplete!(device);
+}
+~~~

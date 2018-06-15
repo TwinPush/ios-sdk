@@ -62,6 +62,13 @@ typedef enum {
     TPLocationAccuracyCoarse
 } TPLocationAccuracy;
 
+/** Callback to tell TwinPushManager when the external register has finished. */
+typedef void(^TPRegisterCompletedBlock)(TPDevice* device);
+/** Block to intercept standard TwinPush register and replace it with a custom external register.
+    It receives all the register information contained in a TPRegisterInformation object and a callback to
+    invoke when the external register has completed and a TPDevice object is obtained */
+typedef void(^TPExternalRegisterBlock)(TPRegisterInformation* info, TPRegisterCompletedBlock onComplete);
+
 @interface TwinPushManager : NSObject <UIAlertViewDelegate, TPNotificationsInboxViewControllerDelegate, TPNotificationDetailViewControllerDelegate, TPRequestEndDelegate, CLLocationManagerDelegate>
 
 #pragma mark - Properties
@@ -174,5 +181,11 @@ typedef enum {
 - (void)sendApplicationOpenedEvent;
 /** Sends the Application CLOSE Event so the server can calculate the usage time matching open & close events */
 - (void)sendApplicationClosedEvent;
+
+#pragma mark External register
+/** Set this property to replace standard TwinPush register with a custom method. The external register is used
+    to delegate the register of the devices to an external platform. Invoke the onComplete block with the returned
+    device, mandatory for the rest of the requests to work */
+@property (nonatomic, copy) TPExternalRegisterBlock externalRegisterBlock;
 
 @end
