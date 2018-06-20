@@ -172,7 +172,7 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (TPRegisterInformation*)registerInfo {
-    return [[TPRegisterInformation alloc] initWithToken:_pushToken deviceAlias:_alias UDID:self.deviceId];
+    return [[TPRegisterInformation alloc] initWithToken:_pushToken deviceAlias:_alias UDID:self.deviceUDID];
 }
 
 - (NSUInteger)currentRegisterHash {
