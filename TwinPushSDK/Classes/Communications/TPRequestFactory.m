@@ -47,7 +47,7 @@
     return request;
 }
 
-- (TPBaseRequest *)createGetDeviceNotificationWithId:(NSInteger)notificationId deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+- (TPBaseRequest *)createGetDeviceNotificationWithId:(NSString*)notificationId deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
     TPBaseRequest* request = [[TPGetNotificationWithIdRequest alloc] initGetDeviceNotificationWithId:notificationId deviceId:deviceId appId:appId onComplete:onComplete onError:onError];
     request.requestLauncher = _requestLauncher;
     return request;

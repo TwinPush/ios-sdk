@@ -81,7 +81,7 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
 - (void)fetchNotificationDetails {
     if ([TwinPushManager manager].deviceId != nil) {
         self.loading = YES;
-        [[TwinPushManager manager] getDeviceNotificationWithId:self.notification.notificationId.integerValue onComplete:^(TPNotification *notification) {
+        [[TwinPushManager manager] getDeviceNotificationWithId:self.notification.notificationId onComplete:^(TPNotification *notification) {
             if (notification != nil) {
                 self.notification = notification;
                 [self setNotificationDetails];

@@ -271,7 +271,7 @@ static TwinPushManager *_sharedInstance;
     [self sendGetAliasNotificationsRequestWithPagination: pagination onComplete:onComplete onError:onError];
 }
 
-- (void)getDeviceNotificationWithId:(NSInteger)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+- (void)getDeviceNotificationWithId:(NSString*)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
     [self sendGetDeviceNotificationRequestWithId:notificationId onComplete:onComplete onError:onError];
 }
 
@@ -728,7 +728,7 @@ static TwinPushManager *_sharedInstance;
     }
 }
 
-- (void)sendGetDeviceNotificationRequestWithId:(NSInteger)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+- (void)sendGetDeviceNotificationRequestWithId:(NSString*)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
     if ([self hasAppIdAndApiKey]) {
         [self.singleNotificationRequest cancel];
         self.singleNotificationRequest = [self.requestFactory createGetDeviceNotificationWithId:notificationId deviceId:self.deviceId appId:_appId onComplete:^(TPNotification* notification) {

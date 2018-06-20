@@ -139,7 +139,7 @@ typedef void(^TPExternalRegisterBlock)(TPRegisterInformation* info, TPRegisterCo
 #pragma mark Notifications
 - (void)getDeviceNotificationsWithFilters:(TPNotificationsFilters*)filters andPagination:(TPNotificationsPagination*)pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 - (void)getAliasNotificationsWithPagination:(TPNotificationsPagination*)pagination onComplete:(GetAliasNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
-- (void)getDeviceNotificationWithId:(NSInteger)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (void)getDeviceNotificationWithId:(NSString*)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 - (void)userDidOpenNotificationWithId:(NSString*)notificationId;
 - (void)deleteNotificationWithId:(NSString*)notificationId onComplete:(DeleteNotificationResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 - (void)getInboxSummaryOnComplete:(GetInboxSummaryResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
