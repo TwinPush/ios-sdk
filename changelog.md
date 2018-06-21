@@ -5,6 +5,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 - No changes
 
+## [3.7.2] - 2018-06-21
+### Changed
+- Fixed TPGetNotificationWithIdRequest response processing to not include an object wrapper
+- Notification ID is now correctly converted to String when processing the APNS dictionary
+
 ## [3.7.1] - 2018-06-20
 ### Changed
 - Get Device Notification now takes a String ID parameter instead of an Integer
@@ -179,7 +184,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - First fully functional public release.
 
-[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v3.7.1...HEAD
+[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v3.7.2...HEAD
+[3.7.2]: https://github.com/TwinPush/ios-sdk/compare/v3.7.1...v3.7.2
 [3.7.1]: https://github.com/TwinPush/ios-sdk/compare/v3.7.0...v3.7.1
 [3.7.0]: https://github.com/TwinPush/ios-sdk/compare/v3.6.0...v3.7.0
 [3.6.0]: https://github.com/TwinPush/ios-sdk/compare/v3.5.0...v3.6.0
