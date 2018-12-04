@@ -199,14 +199,15 @@ The device will remain associated to that alias until the alias property is set 
 
 ### Sending user information
 
-TwinPush SDK will automatically send information about the user device, like the operating system version, device model or the current locale. You can send additional information about your application users that you can use later for segmenting push targets or generate statistics. `TwinPushManager` offers methods for sending text, boolean, integer and float values.
+TwinPush SDK will automatically send information about the user device, like the operating system version, device model or the current locale. You can send additional information about your application users that you can use later for segmenting push targets or generate statistics. `TwinPushManager` offers methods for sending text, enum, boolean, integer and float values.
 
 The name that you to assign to every property will be visible from the TwinPush web portal.
 
 ~~~objective-c
 // Objective-C
 TwinPushManager* twinPush = [TwinPushManager manager];
-[twinPush setProperty: @"gender" withStringValue: @"Male"];
+[twinPush setProperty: @"name" withStringValue: @"Bruce Banner"];
+[twinPush setProperty: @"gender" withEnumValue: @"Male"];
 [twinPush setProperty: @"allow notifications" withBooleanValue: @(YES)];
 [twinPush setProperty: @"age" withIntegerValue: @(45)];
 [twinPush setProperty: @"rating" withIntegerValue: @(7.45)];
@@ -214,7 +215,8 @@ TwinPushManager* twinPush = [TwinPushManager manager];
 ~~~swift
 // Swift
 let twinPush = TwinPushManager.singleton()
-twinPush.setProperty("gender", withStringValue: "Male")
+twinPush.setProperty("name", withStringValue: "Bruce Banner")
+twinPush.setProperty("gender", withEnumValue: "Male")
 twinPush.setProperty("allow notifications", withBooleanValue: true)
 twinPush.setProperty("age", withIntegerValue: 45)
 twinPush.setProperty("rating", withFloatValue: 7.45)
