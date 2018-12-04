@@ -17,7 +17,7 @@
 #endif
 
 
-static NSString* const kSdkVersion = @"3.4.0";
+static NSString* const kSdkVersion = @"3.7.2";
 
 static NSString* const kDefaultServerUrl = @"https://%@.twinpush.com/api/v2";
 static NSString* const kDefaultServerSubdomain = @"app";
@@ -171,9 +171,13 @@ static TwinPushManager *_sharedInstance;
     }
 }
 
+- (TPRegisterInformation*)registerInfo {
+    return [[TPRegisterInformation alloc] initWithToken:_pushToken deviceAlias:_alias UDID:self.deviceUDID];
+}
+
 - (NSUInteger)currentRegisterHash {
-    TPCreateDeviceRequest* request = [[TPCreateDeviceRequest alloc] initCreateDeviceRequestWithToken:_pushToken deviceAlias:_alias UDID:self.deviceUDID appId:_appId apiKey:_apiKey onComplete:nil onError:nil];
-    return [[request createBodyContent] hash];
+    NSDictionary* infoDictionary = [[self registerInfo] toDictionary];
+    return [infoDictionary hash];
 }
 
 - (NSInteger)getApiHash {
@@ -267,13 +271,27 @@ static TwinPushManager *_sharedInstance;
     [self sendGetAliasNotificationsRequestWithPagination: pagination onComplete:onComplete onError:onError];
 }
 
-- (void)getDeviceNotificationWithId:(NSInteger)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+- (void)getDeviceNotificationWithId:(NSString*)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
     [self sendGetDeviceNotificationRequestWithId:notificationId onComplete:onComplete onError:onError];
 }
 
 - (void)deleteNotificationWithId:(NSString*)notificationId onComplete:(DeleteNotificationResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
     if ([self hasAppIdAndApiKey]) {
         TPBaseRequest* request = [self.requestFactory createDeleteNotificationWithId:notificationId deviceId:_deviceId appId:_appId onComplete:onComplete onError:onError];
+        [self enqueueRequest:request];
+    }
+}
+
+- (void)getInboxSummaryOnComplete:(GetInboxSummaryResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    if ([self hasAppIdAndApiKey]) {
+        TPBaseRequest* request = [self.requestFactory createInboxSummaryRequestWithDeviceId:_deviceId appId:_appId onComplete:onComplete onError:onError];
+        [self enqueueRequest:request];
+    }
+}
+
+- (void)getApplicationBadgeOnComplete:(GetApplicationBadgeResponse)onComplete onError:(TPRequestErrorBlock)onError {
+    if ([self hasAppIdAndApiKey]) {
+        TPBaseRequest* request = [self.requestFactory createGetApplicationBadgeRequestWithDeviceId:_deviceId appId:_appId onComplete:onComplete onError:onError];
         [self enqueueRequest:request];
     }
 }
@@ -489,8 +507,10 @@ static TwinPushManager *_sharedInstance;
         center.delegate = self;
         [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
              if( !error ) {
+                 dispatch_async(dispatch_get_main_queue(), ^{
                  [[UIApplication sharedApplication] registerForRemoteNotifications];
-                 NSLog( @"Push registration success." );
+                     NSLog( @"Push registration success." );
+                 });
              }
              else {
                  NSLog( @"Push registration FAILED" );
@@ -626,7 +646,8 @@ static TwinPushManager *_sharedInstance;
 - (void)sendCreateDeviceRequestWithPushToken:(NSString*)pushToken andAlias:(NSString*)alias {
     if ([self hasAppIdAndApiKey]) {
         [self.registerRequest cancel];
-        self.registerRequest = [self.requestFactory createCreateDeviceRequestWithToken:pushToken deviceAlias:alias UDID:self.deviceUDID appId:_appId apiKey:_apiKey onComplete:^(TPDevice *device) {
+        TPRegisterInformation* registerInfo = [self registerInfo];
+        TPRegisterCompletedBlock onComplete = ^(TPDevice *device) {
             [self willChangeValueForKey:@"alias"];
             if ([device.deviceAlias isKindOfClass:[NSString class]]) {
                 _alias = device.deviceAlias;
@@ -655,13 +676,20 @@ static TwinPushManager *_sharedInstance;
             self.registerRequest = nil;
             
             [self sendBadgeCountUpdate];
-        } onError:^(NSError *error) {
-            if ([self.delegate respondsToSelector:@selector(didFailRegisteringDevice:)]) {
-                [self.delegate didFailRegisteringDevice:error.localizedDescription];
-            }
-            self.registerRequest = nil;
-        }];
+        };
+        
+        if (self.externalRegisterBlock) {
+            self.externalRegisterBlock(registerInfo, onComplete);
+        }
+        else {
+            self.registerRequest = [self.requestFactory createCreateDeviceRequestWithInfo:registerInfo appId:_appId apiKey:_apiKey onComplete: onComplete onError:^(NSError *error) {
+                if ([self.delegate respondsToSelector:@selector(didFailRegisteringDevice:)]) {
+                    [self.delegate didFailRegisteringDevice:error.localizedDescription];
+                }
+                self.registerRequest = nil;
+            }];
         [self.registerRequest start];
+        }
     } else {
         if ([self.delegate respondsToSelector:@selector(didFailRegisteringDevice:)]) {
             [self.delegate didFailRegisteringDevice:@"Missing APP ID or API Key"];
@@ -703,7 +731,7 @@ static TwinPushManager *_sharedInstance;
     }
 }
 
-- (void)sendGetDeviceNotificationRequestWithId:(NSInteger)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+- (void)sendGetDeviceNotificationRequestWithId:(NSString*)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
     if ([self hasAppIdAndApiKey]) {
         [self.singleNotificationRequest cancel];
         self.singleNotificationRequest = [self.requestFactory createGetDeviceNotificationWithId:notificationId deviceId:self.deviceId appId:_appId onComplete:^(TPNotification* notification) {
@@ -835,7 +863,7 @@ static TwinPushManager *_sharedInstance;
 }
 
 //Called to let your app know which action was selected by the user for a given notification.
--(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler {
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
     TPNotification* notification = [TPNotification notificationFromUserNotification:response.notification];
     [self userDidOpenNotificationWithId:notification.notificationId];
     if ([_delegate respondsToSelector:@selector(didReceiveNotificationResponse:withCompletionHandler:)]) {

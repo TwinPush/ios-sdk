@@ -20,6 +20,8 @@
 #import "TPCloseAppRequest.h"
 #import "TPUserOpenNotificationRequest.h"
 #import "TPDeleteNotificationRequest.h"
+#import "TPInboxSummaryRequest.h"
+#import "TPGetApplicationBadgeRequest.h"
 #import <CoreLocation/CoreLocation.h>
 
 @interface TPRequestFactory : NSObject
@@ -35,7 +37,7 @@
  @param onComplete Block that will be executed if login is successful
  @param onError Block that will be executed if login is not successful
  */
-- (TPBaseRequest*)createCreateDeviceRequestWithToken:(NSString*)token deviceAlias:(NSString*)deviceAlias UDID:(NSString*)udid appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(CreateDeviceResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (TPBaseRequest*)createCreateDeviceRequestWithInfo:(TPRegisterInformation*)info appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(CreateDeviceResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 /**
  @brief Constructor for GetDeviceNotifications
@@ -59,7 +61,7 @@
  @param onComplete Block that will be executed if we obtain the notification with the specified id
  @param onError Block that will be executed if the device is not correct
  */
-- (TPBaseRequest *)createGetDeviceNotificationWithId:(NSInteger)notificationId deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (TPBaseRequest *)createGetDeviceNotificationWithId:(NSString*)notificationId deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 /**
  @brief Constructor for TPDeleteNotificationRequest
@@ -105,5 +107,8 @@
 
 - (TPBaseRequest*)createUserOpenNotificationRequestWithDeviceId:(NSString*)deviceId notificationId:(NSString*)notificationId appId:(NSString*)appId onComplete:(TPRequestCompleteBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
+- (TPBaseRequest*)createInboxSummaryRequestWithDeviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(GetInboxSummaryResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
+
+- (TPBaseRequest*)createGetApplicationBadgeRequestWithDeviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(GetApplicationBadgeResponse)onComplete onError:(TPRequestErrorBlock)onError;
 
 @end

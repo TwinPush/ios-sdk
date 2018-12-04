@@ -5,6 +5,40 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 - Implemented method for setting enum properties to the device.
 
+## [3.7.2] - 2018-06-21
+### Changed
+- Fixed TPGetNotificationWithIdRequest response processing to not include an object wrapper
+- Notification ID is now correctly converted to String when processing the APNS dictionary
+
+## [3.7.1] - 2018-06-20
+### Changed
+- Get Device Notification now takes a String ID parameter instead of an Integer
+- Register Information will now correctly contain the device UDID
+
+## [3.7.0] - 2018-06-15
+### Added
+- Added documentation for Get Application Badge method
+- Implemented External Device Register mechanism
+
+## [3.6.0] - 2018-06-05
+### Added
+- Implemented Get Application Badge request
+
+## [3.5.0] - 2018-06-05
+### Added
+- Implemented Inbox Summary request and added convenience method in TwinPushManager
+
+### Changed
+- Improved TPBaseRequest error handling to include the received error message
+
+## [3.4.2] - 2017-12-04
+### Changed
+- Push notification registration is now performed in the main thread. Required by iOS 11.1+
+
+## [3.4.1] - 2017-10-31
+### Changed
+- Removed UserNotifications and UserNotificationsUI frameworks from the podspec to maintain iOS < 10 compatibility
+
 ## [3.4.0] - 2017-10-17
 ### Added
 - TwinPushManager data storage can now be overriden by the TwinPushManagerDelegate implementation.
@@ -150,7 +184,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - First fully functional public release.
 
-[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v3.4.0...HEAD
+[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v3.7.2...HEAD
+[3.7.2]: https://github.com/TwinPush/ios-sdk/compare/v3.7.1...v3.7.2
+[3.7.1]: https://github.com/TwinPush/ios-sdk/compare/v3.7.0...v3.7.1
+[3.7.0]: https://github.com/TwinPush/ios-sdk/compare/v3.6.0...v3.7.0
+[3.6.0]: https://github.com/TwinPush/ios-sdk/compare/v3.5.0...v3.6.0
+[3.5.0]: https://github.com/TwinPush/ios-sdk/compare/v3.4.2...v3.5.0
+[3.4.2]: https://github.com/TwinPush/ios-sdk/compare/v3.4.1...v3.4.2
+[3.4.1]: https://github.com/TwinPush/ios-sdk/compare/v3.4.0...v3.4.1
 [3.4.0]: https://github.com/TwinPush/ios-sdk/compare/v3.3.0...v3.4.0
 [3.3.0]: https://github.com/TwinPush/ios-sdk/compare/v3.2.1...v3.3.0
 [3.2.1]: https://github.com/TwinPush/ios-sdk/compare/v3.2.0...v3.2.1

@@ -9,6 +9,7 @@
 #import "TPDevice.h"
 #import "TPTwinPushRequest.h"
 #import "TPBaseRequest.h"
+#import "TPRegisterInformation.h"
 
 @interface TPCreateDeviceRequest : TPTwinPushRequest
 
@@ -22,6 +23,6 @@ typedef void(^CreateDeviceResponseBlock)(TPDevice* device);
  @param onComplete Block that will be executed if the token is correct
  @param onError Block that will be executed if the token is not correct
  */
-- (id)initCreateDeviceRequestWithToken:(NSString*)token deviceAlias:(NSString*)deviceAlias UDID:(NSString*)udid appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(CreateDeviceResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
+- (id)initCreateDeviceRequestWithInfo:(TPRegisterInformation*)info appId:(NSString*)appId apiKey:(NSString*)apiKey onComplete:(CreateDeviceResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 @end

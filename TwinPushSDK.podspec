@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
   # Meta data
   s.name         = "TwinPushSDK"
-  s.version      = "3.4.0"
+  s.version      = "3.7.2"
   s.summary      = "TwinPush SDK is the official open source SDK for the TwinPush iOS and Android notification platform"
   s.homepage     = "http://twinpush.com"
   s.license      = { :type => "MIT", :file => "LICENSE" }
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   # Source configuration
   s.source_files  = "TwinPushSDK/**/*.{h,m}"
   s.public_header_files = "TwinPushSDK/Classes/**/*.h", "TwinPushSDK/ViewControllers/**/*.h"
-  s.frameworks = "MobileCoreServices", "CFNetwork", "SystemConfiguration", "CoreLocation", "Security", "UserNotifications", "UserNotificationsUI"
+  s.frameworks = "MobileCoreServices", "CFNetwork", "SystemConfiguration", "CoreLocation", "Security"
   s.library   = "z"
   s.requires_arc = true
   s.prefix_header_contents = <<-EOS

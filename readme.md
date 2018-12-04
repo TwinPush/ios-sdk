@@ -69,7 +69,7 @@ If you are not using CocoaPods you can copy the sources to link the SDK to your 
 
 [Swift](https://developer.apple.com/swift/) is an innovative new programming language for Cocoa and Cocoa Touch created by Apple. TwinPush SDK is 100% compatible with Swift projects.
 
-To use TwinPush SDK in a Swift project, you can use any of the methods described above to install the SDK and then import TwinPushManager.h in your bridging header file to make it accessible from Swift code.
+To use TwinPush SDK in a Swift project, you can use any of the methods described above to install the SDK. When using CocoaPods you will have a `TwinPushSDK` module available to import, if you copied the sources you have to import TwinPushManager.h in your bridging header file to make it accessible from Swift code.
 
 For more information check [Swift and Objective-C in the Same Project](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html).
 
@@ -155,6 +155,26 @@ Additionally, you can update the local and server badge count of your applicatio
 TwinPushManager.singleton().autoResetBadgeNumber = false
 // Update application badge count
 TwinPushManager.singleton().setApplicationBadgeCount(0)
+~~~
+
+#### Obtaining server badge count
+
+The server will update the badge count when sending a new notification. You can fetch the remote server badge count using the `getApplicationBadge` method of `TwinPushManager`:
+
+~~~objective-c
+// Objective-C
+[[TwinPushManager manager] getApplicationBadgeOnComplete:^(NSInteger badge) {
+    NSLog(@"Obtained remote badge count: %d", (int)badge);
+} onError:^(NSError *error) {
+    NSLog(@"Received error: %@", error);
+}];
+~~~
+~~~swift
+// Swift
+TwinPushManager.singleton().getApplicationBadge(
+    onComplete: { badge in print("Obtained remote badge count: \(badge)") },
+    onError: { error in print("Received error: \(error!)") }
+)
 ~~~
 
 ### Assigning an alias to a device
@@ -596,3 +616,69 @@ func fetchValue(forKey key: String!) -> String! {
 ~~~
 
 Please note that `value` might be `nil`.
+
+
+### Handling different environments
+
+It's a common practice to have different application registered in TwinPush for different environments. To handle the API keys gracefully in your application you can use preprocessor directives to distinguish between environments at compile time:
+
+~~~objective-c
+// Objective-C
+#ifdef DEBUG
+#define TWINPUSH_APP_ID @"<DEVEL_APP_ID>"
+#define TWINPUSH_API_KEY @"<DEVEL_API_KEY>"
+#else
+#define TWINPUSH_APP_ID @"<PROD_APP_ID>"
+#define TWINPUSH_API_KEY @"<PROD_API_KEY>"
+#endif
+
+[[TwinPushManager manager] setupTwinPushManagerWithAppId:TWINPUSH_APP_ID apiKey:TWINPUSH_API_KEY delegate:self];
+~~~
+~~~swift
+// Swift
+#if DEBUG
+    let tpApiKey = "<DEVEL_API_KEY>"
+    let tpAppId = "<DEVEL_APP_ID>"
+#else
+    let tpApiKey = "<PROD_API_KEY>"
+    let tpAppId = "<PROD_APP_ID>"
+#endif
+
+TwinPushManager.singleton().setupTwinPushManager(withAppId: tpAppId, apiKey: tpApiKey, delegate: self)
+~~~
+
+In order for this to work properly, make sure that `DEBUG` is correctly defined in your project build settings:
+
+![](https://i.imgur.com/NFm60iz.png)
+
+You can change these names or add more configurations to the project. By default, `Debug` configuration will be used for debugging and `Release` configuration will be used when archiving. You can change the build configuration in `Product -> Scheme -> Edit Scheme` view:
+
+![](https://i.imgur.com/cRODNwc.png)
+
+
+### External device register
+
+The external register mechanism allows you to replace the standard call to [/devices/register](http://developers.twinpush.com/developers/api#post-register) with a custom register method. This provides you full control over the registration and is useful if you want to perform the operation through another platform, to collect user information or to inject additional information.
+
+To implement this functionality you simply have to provide a custom registration block in the `TwinPushManager` instance before the `setup`:
+
+~~~objective-c
+// Objective-C
+[TwinPushManager manager].externalRegisterBlock = ^(TPRegisterInformation *info, TPRegisterCompletedBlock onComplete) {
+    // Perform the registration manually and create a TPDevice from the TwinPush response
+    TPDevice* device; // Obtain this device from the /devices/register result
+    
+    // Invoke onComplete block when the operation has been successful
+    onComplete(device);
+};
+~~~
+~~~swift
+// Swift
+TwinPushManager.singleton().externalRegisterBlock = { info, onComplete in
+    // Perform the registration manually and create a TPDevice from the TwinPush response
+    let device = TPDevice(); // Obtain this device from the /devices/register result
+    
+    // Invoke onComplete block when the operation has been successful
+    onComplete!(device);
+}
+~~~
