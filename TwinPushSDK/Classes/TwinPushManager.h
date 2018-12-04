@@ -141,6 +141,7 @@ typedef enum {
 - (void)setProperty:(NSString*)name withBooleanValue:(NSNumber*)value;
 - (void)setProperty:(NSString*)name withIntegerValue:(NSNumber*)value;
 - (void)setProperty:(NSString*)name withFloatValue:(NSNumber*)value;
+- (void)setProperty:(NSString*)name withEnumValue:(NSString*)value;
 
 #pragma mark Location
 /** Updates the current user location in TwinPush using the desired accuracy. It will initialize a CLLocationManager,

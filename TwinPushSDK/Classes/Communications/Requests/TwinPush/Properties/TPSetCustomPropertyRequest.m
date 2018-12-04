@@ -22,6 +22,7 @@ static NSString* const kTypeString = @"string";
 static NSString* const kTypeBoolean = @"boolean";
 static NSString* const kTypeInteger = @"integer";
 static NSString* const kTypeFloat = @"float";
+static NSString* const kTypeEnum = @"enum";
 
 @implementation TPSetCustomPropertyRequest
 
@@ -58,6 +59,7 @@ static NSString* const kTypeFloat = @"float";
         case TPPropertyTypeBoolean: value = kTypeBoolean; break;
         case TPPropertyTypeInteger: value = kTypeInteger; break;
         case TPPropertyTypeFloat:   value = kTypeFloat; break;
+        case TPPropertyTypeEnum:   value = kTypeEnum; break;
     }
     return value;
 }

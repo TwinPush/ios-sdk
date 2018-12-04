@@ -157,7 +157,7 @@ typedef NS_ENUM(NSInteger, TPLocationSegment) {
     TwinPushManager* twinPush = [TwinPushManager manager];
     [twinPush setAlias:alias];
     [twinPush setProperty:kAgeKey withIntegerValue:age];
-    [twinPush setProperty:kGenderKey withStringValue:gender];
+    [twinPush setProperty:kGenderKey withEnumValue:gender];
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     if (age.integerValue > 0) {
         [defaults setInteger:age.integerValue forKey:kAgeKey];

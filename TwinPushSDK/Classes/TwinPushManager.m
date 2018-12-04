@@ -322,6 +322,9 @@ static TwinPushManager *_sharedInstance;
 - (void) setProperty:(NSString*)name withFloatValue:(NSNumber*)value {
     [self setProperty:name type:TPPropertyTypeFloat value:value];
 }
+- (void)setProperty:(NSString *)name withEnumValue:(NSString *)value {
+    [self setProperty:name type:TPPropertyTypeEnum value:value];
+}
 
 - (void) setProperty:(NSString*)name type:(TPPropertyType)type value:(NSObject*)value {
     if (![self isDeviceRegistered]) {

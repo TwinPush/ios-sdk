@@ -12,7 +12,8 @@ typedef enum {
     TPPropertyTypeString,
     TPPropertyTypeBoolean,
     TPPropertyTypeInteger,
-    TPPropertyTypeFloat
+    TPPropertyTypeFloat,
+    TPPropertyTypeEnum
 } TPPropertyType;
 
 @interface TPSetCustomPropertyRequest : TPTwinPushRequest
