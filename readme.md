@@ -110,18 +110,18 @@ Make your application delegate (usually named AppDelegate) to implement TwinPush
 ~~~swift
 // Swift
 class AppDelegate: UIResponder, UIApplicationDelegate, TwinPushManagerDelegate {
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         TwinPushManager.singleton().serverSubdomain = SUBDOMAIN;
         TwinPushManager.singleton().setupTwinPushManagerWithAppId(TWINPUSH_APP_ID, apiKey: TWINPUSH_API_KEY, delegate: self)
         return true
     }
     
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         NSLog("Registered for remote notifications with token: %@", deviceToken)
         TwinPushManager.singleton().application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
         TwinPushManager.singleton().application(application, didReceiveRemoteNotification: userInfo)
     }
 }
@@ -214,7 +214,7 @@ TwinPushManager* twinPush = [TwinPushManager manager];
 ~~~
 ~~~swift
 // Swift
-let twinPush = TwinPushManager.singleton()
+let twinPush: TwinPushManager = TwinPushManager.singleton()
 twinPush.setProperty("name", withStringValue: "Bruce Banner")
 twinPush.setProperty("gender", withEnumValue: "Male")
 twinPush.setProperty("allow notifications", withBooleanValue: true)
@@ -240,7 +240,7 @@ This sample shows how to avoid registration of devices with no alias:
 ~~~
 ~~~swift
 // Swift
-func shouldRegisterDeviceWithAlias(alias: String!, token: String!) -> Bool {
+func shouldRegisterDevice(withAlias alias: String!, token: String!) -> Bool {
     return alias != nil && alias.utf16Count > 0
 }
 ~~~
@@ -421,12 +421,12 @@ Once you have that controller, you have to override the default behavior to stop
 ~~~swift
 // Swift
 // MARK: TwinPushManagerDelegate
-func showNotification(notification: TPNotification!) {
+func show(_ notification: TPNotification!) {
     // Only show content viewer for rich notifications
-    if notification != nil && notification.rich {
+    if let notification = notification, notification.isRich {
         let customViewer = TPNotificationDetailViewController(nibName: "CustomNotificationViewer", bundle: nil)
         customViewer.notification = notification
-        self.window?.rootViewController?.presentViewController(customViewer, animated: true, completion: nil)
+        self.window?.rootViewController?.present(customViewer, animated: true, completion: nil)
     }
 }
 ~~~
@@ -473,7 +473,7 @@ override func viewDidLoad() {
     super.viewDidLoad()
     self.inboxTableView.allowsMultipleSelectionDuringEditing = false
 }
-override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if (editingStyle == .delete) {
         let notification = self.notifications[indexPath.row] as! TPNotification
         self.deleteNotification(notification)
@@ -505,7 +505,7 @@ CLLocation* location = [[CLLocation alloc] initWithLatitude:40.383 longitude:-3.
 let location = CLLocation(latitude: 40.383, longitude: -3.717)
 TwinPushManager.singleton().setLocation(location)
 // Or
-TwinPushManager.singleton().setLocation(40.383, longitude: -3.717)
+TwinPushManager.singleton().setLocationWithLatitude(40.383, longitude: -3.717)
 ~~~
 
 #### Automatic location

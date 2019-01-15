@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- No changes
+- Updated Readme file for Swift 4.
 
 ## [3.7.3] - 2018-12-04
 ### Added
