@@ -126,8 +126,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TwinPushManagerDelegate {
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-	    NSLog("Failed to register for remote notifications with error: %@", (error as NSError).localizedDescription)
-	}
+        NSLog("Failed to register for remote notifications with error: %@", (error as NSError).localizedDescription)
+    }
 }
 ~~~
 Replace `SUBDOMAIN`, `TWINPUSH_APP_ID` and `TWINPUSH_API_KEY` with the configuration values for your application in [app.twinpush.com](http://app.twinpush.com). The method `setupTwinPushManagerWithAppId` must be called before any other TwinPushSDK method other than setting the subdomain or changing the server URL (see below).
