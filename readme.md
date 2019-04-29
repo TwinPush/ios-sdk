@@ -109,10 +109,12 @@ Make your application delegate (usually named AppDelegate) to implement TwinPush
 
 ~~~swift
 // Swift
+import TwinPushSDK
+
 class AppDelegate: UIResponder, UIApplicationDelegate, TwinPushManagerDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         TwinPushManager.singleton().serverSubdomain = SUBDOMAIN;
-        TwinPushManager.singleton().setupTwinPushManagerWithAppId(TWINPUSH_APP_ID, apiKey: TWINPUSH_API_KEY, delegate: self)
+        TwinPushManager.singleton().setupTwinPushManager(withAppId: TWINPUSH_APP_ID, apiKey: TWINPUSH_API_KEY, delegate: self)
         return true
     }
     
