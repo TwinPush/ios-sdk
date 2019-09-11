@@ -3,7 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+- No changes
+
+## [3.8.0] - 2019-09-11
+### Added
 - Updated Readme file for Swift 4.
+
+### Fixed
+- TwinPushManager will no longer use 'description' method to generate the string representation of the push token
 
 ## [3.7.3] - 2018-12-04
 ### Added
@@ -188,7 +195,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - First fully functional public release.
 
-[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v3.7.3...HEAD
+[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v3.8.0...HEAD
+[3.8.0]: https://github.com/TwinPush/ios-sdk/compare/v3.7.3...v3.8.0
 [3.7.3]: https://github.com/TwinPush/ios-sdk/compare/v3.7.2...v3.7.3
 [3.7.2]: https://github.com/TwinPush/ios-sdk/compare/v3.7.1...v3.7.2
 [3.7.1]: https://github.com/TwinPush/ios-sdk/compare/v3.7.0...v3.7.1
