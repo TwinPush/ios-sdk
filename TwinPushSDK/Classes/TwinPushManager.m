@@ -534,12 +534,23 @@ static TwinPushManager *_sharedInstance;
 #endif
 }
 
+- (NSString *)stringWithDeviceToken:(NSData *)deviceToken {
+    const char *data = [deviceToken bytes];
+    NSMutableString *token = [NSMutableString string];
+    
+    for (NSUInteger i = 0; i < [deviceToken length]; i++) {
+        [token appendFormat:@"%02.2hhX", data[i]];
+    }
+    
+    return [token copy];
+}
+
 #pragma mark - AppDelegate Public methods
 
 
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    NSString* stringPushToken = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    NSString* stringPushToken = [self stringWithDeviceToken:deviceToken];
     
     [self setPushToken:stringPushToken];
     
