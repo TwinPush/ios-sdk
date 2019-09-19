@@ -217,6 +217,7 @@ TwinPushManager* twinPush = [TwinPushManager manager];
 [twinPush setProperty: @"allow notifications" withBooleanValue: @(YES)];
 [twinPush setProperty: @"age" withIntegerValue: @(45)];
 [twinPush setProperty: @"rating" withIntegerValue: @(7.45)];
+[twinPush setProperty: @"interests" withEnumListValue: @[ @"Movies", @"Videogames", @"Comics" ]];
 ~~~
 ~~~swift
 // Swift
@@ -226,6 +227,7 @@ twinPush.setProperty("gender", withEnumValue: "Male")
 twinPush.setProperty("allow notifications", withBooleanValue: true)
 twinPush.setProperty("age", withIntegerValue: 45)
 twinPush.setProperty("rating", withFloatValue: 7.45)
+twinPush.setProperty("interests", ["Movies", "Videogames", "Comics"])
 ~~~
 
 Use `nil` as the property value to delete that property for the current device.

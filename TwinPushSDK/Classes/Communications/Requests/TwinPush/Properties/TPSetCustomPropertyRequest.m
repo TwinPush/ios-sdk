@@ -23,6 +23,7 @@ static NSString* const kTypeBoolean = @"boolean";
 static NSString* const kTypeInteger = @"integer";
 static NSString* const kTypeFloat = @"float";
 static NSString* const kTypeEnum = @"enum";
+static NSString* const kTypeEnumList = @"enum_list";
 
 @implementation TPSetCustomPropertyRequest
 
@@ -39,7 +40,12 @@ static NSString* const kTypeEnum = @"enum";
         // Add param tags
         [self addParam:name forKey:kNameKey];
         [self addParam:[self stringForType:type] forKey:kTypeKey];
-        [self addParam:(value != nil ? value : [NSNull null]) forKey:kValueKey];
+        if (type == TPPropertyTypeEnumList) {
+            [self addParam:[TPRequestParam paramWithKey:kValueKey andArrayValue:(NSArray*)value]];
+        }
+        else {
+            [self addParam:(value != nil ? value : [NSNull null]) forKey:kValueKey];
+        }
         
         // Set response handler blocks
         self.onError = onError;
@@ -60,6 +66,7 @@ static NSString* const kTypeEnum = @"enum";
         case TPPropertyTypeInteger: value = kTypeInteger; break;
         case TPPropertyTypeFloat:   value = kTypeFloat; break;
         case TPPropertyTypeEnum:   value = kTypeEnum; break;
+        case TPPropertyTypeEnumList:   value = kTypeEnumList; break;
     }
     return value;
 }

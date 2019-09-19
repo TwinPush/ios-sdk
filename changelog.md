@@ -3,7 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- No changes
+### Added
+- Added support for sending custom Enum List properties.
 
 ## [3.8.0] - 2019-09-11
 ### Added
