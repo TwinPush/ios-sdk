@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- No changes
+- Implemented functionality to clear all the custom properties of the device by calling `TwinPushManager.clearAllProperties`.
 
 ## [3.9.0] - 2019-09-19
 ### Added

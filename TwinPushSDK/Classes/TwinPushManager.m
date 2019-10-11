@@ -361,6 +361,20 @@ static TwinPushManager *_sharedInstance;
     [self enqueueRequest:request];
 }
 
+- (void)clearAllProperties {
+    if (![self isDeviceRegistered]) {
+        NSLog(@"[TwinPushSDK] Warning: device not registered yet. Unable to clear custom properties");
+        return;
+    }
+    
+    TPBaseRequest* request = [[self requestFactory] createClearCustomPropertiesWithDeviceId:_deviceId appId:_appId onComplete:^{
+        TCLog(@"All properties successfully cleared");
+    } onError:^(NSError *error) {
+        TCLog(@"ERROR clearing properties");
+    }];
+    [self enqueueRequest:request];
+}
+
 #pragma mark Location
 
 - (void)updateLocation:(TPLocationAccuracy)accuracy {

@@ -71,6 +71,12 @@
     return request;
 }
 
+- (TPBaseRequest*)createClearCustomPropertiesWithDeviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    TPBaseRequest* request = [[TPClearCustomPropertiesRequest alloc] initClearCustomPropertiesRequestWithDeviceId:deviceId appId:appId onComplete:onComplete onError:onError];
+    request.requestLauncher = _requestLauncher;
+    return request;
+}
+
 - (TPBaseRequest*)createReportStatisticsRequestWithCoordinate:(CLLocationCoordinate2D)coordinate deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError {
     TPBaseRequest* request = [[TPReportStatisticsRequest alloc] initReportStatisticsRequestWithCoordinate:coordinate deviceId:deviceId appId:appId onComplete:onComplete onError:onError];
     request.requestLauncher = _requestLauncher;

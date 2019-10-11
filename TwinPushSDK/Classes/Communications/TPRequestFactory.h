@@ -15,6 +15,7 @@
 #import "TPGetNotificationWithIdRequest.h"
 #import "TPUpdateBadgeRequest.h"
 #import "TPSetCustomPropertyRequest.h"
+#import "TPClearCustomPropertiesRequest.h"
 #import "TPReportStatisticsRequest.h"
 #import "TPOpenAppRequest.h"
 #import "TPCloseAppRequest.h"
@@ -89,6 +90,14 @@
  @param onError Block that will be executed if the device is not correct
  */
 - (TPBaseRequest*)createSetCustomPropertyRequestWithName:(NSString*)name type:(TPPropertyType)type value:(NSObject*)value deviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError;
+
+/**
+ @brief Creates a request for clearing all custom properties for the specified device
+ @param deviceId The Device id for which we want to get the notifications
+ @param onComplete Block that will be executed if we obtain the notifications for the device
+ @param onError Block that will be executed if the device is not correct
+ */
+- (TPBaseRequest*)createClearCustomPropertiesWithDeviceId:(NSString*)deviceId appId:(NSString*)appId onComplete:(TPRequestSuccessBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 #pragma mark Statistics
 
