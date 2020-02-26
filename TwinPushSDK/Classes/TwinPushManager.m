@@ -267,8 +267,12 @@ static TwinPushManager *_sharedInstance;
     [self sendGetDeviceNotificationsRequestWithFilters:filters andPagination:pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:onError];
 }
 
+-(void)getAliasNotificationsWithFilters:(TPNotificationsFilters *)filters andPagination:(TPNotificationsPagination *)pagination onComplete:(GetAliasNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
+    [self sendGetAliasNotificationsRequestWithFilters:filters andPagination: pagination onComplete:onComplete onError:onError];
+}
+
 - (void)getAliasNotificationsWithPagination:(TPNotificationsPagination*)pagination onComplete:(GetAliasNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
-    [self sendGetAliasNotificationsRequestWithPagination: pagination onComplete:onComplete onError:onError];
+    [self sendGetAliasNotificationsRequestWithFilters:nil andPagination: pagination onComplete:onComplete onError:onError];
 }
 
 - (void)getDeviceNotificationWithId:(NSString*)notificationId onComplete:(GetDeviceNotificationWithIdResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
@@ -742,11 +746,11 @@ static TwinPushManager *_sharedInstance;
     }
 }
 
-- (void)sendGetAliasNotificationsRequestWithPagination:
+- (void)sendGetAliasNotificationsRequestWithFilters:(TPNotificationsFilters*)filters andPagination:
 (TPNotificationsPagination*)pagination onComplete:(GetAliasNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError {
     [self.inboxRequest cancel];
     if ([self hasAppIdAndApiKey]) {
-        self.inboxRequest = [self.requestFactory createGetAliasNotificationsRequestWithDeviceId:_deviceId pagination:pagination appId:_appId onComplete:^(NSArray *array, BOOL hasMore) {
+        self.inboxRequest = [self.requestFactory createGetAliasNotificationsRequestWithDeviceId:_deviceId filters:filters pagination:pagination appId:_appId onComplete:^(NSArray *array, BOOL hasMore) {
             self.inboxRequest = nil;
             onComplete(array, hasMore);
         } onError:^(NSError *error) {

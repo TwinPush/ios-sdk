@@ -57,6 +57,15 @@
 - (TPBaseRequest *)createGetAliasNotificationsRequestWithDeviceId:(NSString*)deviceId pagination:(TPNotificationsPagination*)pagination appId:(NSString*)appId onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
 
 /**
+ @brief Constructor for GetAliasNotifications
+ @param device The Device for which we want to get the notifications
+ @param filters The filters to apply in the notification search
+ @param onComplete Block that will be executed if we obtain the notifications for the device
+ @param onError Block that will be executed if the device is not correct
+ */
+- (TPBaseRequest *)createGetAliasNotificationsRequestWithDeviceId:(NSString*)deviceId filters:(TPNotificationsFilters*)filters pagination:(TPNotificationsPagination*)pagination appId:(NSString*)appId onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;
+
+/**
  @brief Constructor for GetDeviceNotificationWithId
  @param notificationId The notification's ID of the notification we are asking for
  @param onComplete Block that will be executed if we obtain the notification with the specified id

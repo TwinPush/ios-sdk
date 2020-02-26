@@ -14,7 +14,7 @@
 - (void)getInbox {
     self.loading = YES;
     [self.inboxTableView reloadData];
-    [[TwinPushManager manager] getAliasNotificationsWithPagination:self.pagination onComplete:^(NSArray *array, BOOL hasMore) {
+    [[TwinPushManager manager] getAliasNotificationsWithFilters:self.filters andPagination:self.pagination onComplete:^(NSArray *array, BOOL hasMore) {
         if (self.notifications.count == 0) {
             self.notifications = [NSMutableArray arrayWithArray:array];
         } else {

@@ -14,6 +14,7 @@ NSString* const kTPRESTSegmentParamsSeparator = @"/";
 // Query String Params
 static NSString* const kQueryStringParamFormat = @"%@=%@";
 static NSString* const kQueryStringFormat = @"?%@";
+static NSString* const kQueryStringArrayKeyFormat = @"%@[]";
 static NSString* const kQueryStringSeparator = @"&";
 static NSString* const kContentType = @"application/x-www-form-urlencoded";
 
@@ -67,7 +68,21 @@ static NSString* const kContentType = @"application/x-www-form-urlencoded";
 }
 
 - (NSString*)queryStringForParameter:(TPRequestParam*)requestParam {
-    return [NSString stringWithFormat:kQueryStringParamFormat, requestParam.key, requestParam.value];
+    if (requestParam.array) {
+        NSString* key = [NSString stringWithFormat:kQueryStringArrayKeyFormat, requestParam.key];
+        NSMutableArray* array = [[NSMutableArray alloc] initWithCapacity:requestParam.params.count];
+        for (NSString* value in requestParam.params) {
+            NSString* queryStr = [self queryStringForKey:key value:value];
+            [array addObject:queryStr];
+        }
+        return [array componentsJoinedByString:kQueryStringSeparator];
+    }
+    return [self queryStringForKey:requestParam.key value:(NSString*)requestParam.value];
+}
+
+- (NSString*)queryStringForKey:(NSString*)key value:(NSString*)value {
+    NSString* encodedValue = [value stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding];
+    return [NSString stringWithFormat:kQueryStringParamFormat, key, encodedValue];
 }
 
 - (NSString*)queryStringFromRequestParamsArray:(NSArray*)paramsArray {
