@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.homepage     = "http://twinpush.com"
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author       = { "TwinCoders" => "info@twincoders.com" }
-  s.platform     = :ios, "7.0"
+  s.platform     = :ios, "11.0"
   s.source       = { :git => "https://github.com/TwinPush/ios-sdk.git", :tag => "v#{s.version}" }
 
   # Source configuration

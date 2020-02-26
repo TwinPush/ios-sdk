@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+- Deployment version changed to iOS 11.
 - Implemented tag filtering in alias inbox requests.
 
 ## [3.10.0] - 2019-10-22
