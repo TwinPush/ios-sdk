@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 #import "TPNotification.h"
 
 @protocol TPNotificationDetailViewControllerDelegate <NSObject>
@@ -16,7 +17,7 @@
 
 @end
 
-@interface TPNotificationDetailViewController : UIViewController <UIWebViewDelegate>
+@interface TPNotificationDetailViewController : UIViewController <WKUIDelegate, WKNavigationDelegate>
 
 #pragma mark - Properties
 @property (nonatomic, strong) TPNotification* notification;
@@ -27,7 +28,7 @@
 #pragma mark - IBOutlets
 @property (strong, nonatomic) IBOutlet UILabel *notificationTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *notificationDateLabel;
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet WKWebView *webView;
 
 #pragma mark - Public methods
 - (void)webViewLoadFailedWithErrorCode:(NSString*)errorDescription;

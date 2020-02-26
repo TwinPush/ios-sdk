@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   # Source configuration
   s.source_files  = "TwinPushSDK/**/*.{h,m}"
   s.public_header_files = "TwinPushSDK/Classes/**/*.h", "TwinPushSDK/ViewControllers/**/*.h"
-  s.frameworks = "MobileCoreServices", "CFNetwork", "SystemConfiguration", "CoreLocation", "Security"
+  s.frameworks = "MobileCoreServices", "CFNetwork", "SystemConfiguration", "CoreLocation", "Security", "WebKit"
   s.library   = "z"
   s.requires_arc = true
   s.prefix_header_contents = <<-EOS

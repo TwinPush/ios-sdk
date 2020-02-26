@@ -45,7 +45,7 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
             // Build the default GUI
             self.view.backgroundColor = [UIColor whiteColor];
             
-            UIWebView* webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+            WKWebView* webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
             webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
             self.webView = webView;
             [self.view addSubview:webView];
@@ -55,7 +55,8 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
         }
         [self setNotificationDetails];
     }
-    self.webView.delegate = self;
+    self.webView.UIDelegate = self;
+    self.webView.navigationDelegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -158,17 +159,9 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
     [self displayAlert:NSLocalizedStringWithDefaultValue(message, nil, [NSBundle mainBundle], defaultMessage, nil) withTitle:NSLocalizedStringWithDefaultValue(@"WEBVIEW_LOADING_ERROR_TITLE", nil, [NSBundle mainBundle], @"Error", nil)];
 }
 
-#pragma mark - UIWebViewDelegate
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    self.loading = true;
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    self.loading = false;
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    self.loading = false;
+#pragma mark - WKNavigationDelegate
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
+    self.loading = NO;
     if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorAppTransportSecurityRequiresSecureConnection) {
         BOOL openedInBrowser = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.notification.contentUrl]];
         if (openedInBrowser) {
@@ -177,6 +170,14 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
         }
     }
     [self webViewLoadFailedWithErrorCode:error.localizedDescription];
+}
+
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
+    self.loading = YES;
+}
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    self.loading = NO;
 }
 
 #pragma mark - IBAction

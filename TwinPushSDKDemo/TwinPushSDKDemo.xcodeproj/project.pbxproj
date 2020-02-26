@@ -56,6 +56,7 @@
 		69B9C8541C0CA06E002CDFFE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 69B9C8531C0CA06E002CDFFE /* LaunchScreen.xib */; };
 		69B9C8561C0CB1FF002CDFFE /* background@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 69B9C8551C0CB1FF002CDFFE /* background@2x.jpeg */; };
 		69BDAE8D194A2DA7000B0E57 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69BDAE8C194A2DA7000B0E57 /* Security.framework */; };
+		69F044C32407056D0048A205 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F044C22407056D0048A205 /* WebKit.framework */; };
 		69FFE0DB1E97E3B800211E94 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FFE0D91E97E3B800211E94 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		69FFE0DC1E97E3B800211E94 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FFE0DA1E97E3B800211E94 /* UserNotificationsUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7A0E2866175DFA6700A1AB71 /* TCKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0E2865175DFA6700A1AB71 /* TCKeyboardAvoidingScrollView.m */; };
@@ -163,6 +164,7 @@
 		69B9C8531C0CA06E002CDFFE /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		69B9C8551C0CB1FF002CDFFE /* background@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "background@2x.jpeg"; sourceTree = "<group>"; };
 		69BDAE8C194A2DA7000B0E57 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		69F044C22407056D0048A205 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		69FFE0D81E9779B200211E94 /* TwinPushSDKDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TwinPushSDKDemo.entitlements; sourceTree = "<group>"; };
 		69FFE0D91E97E3B800211E94 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		69FFE0DA1E97E3B800211E94 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
@@ -189,6 +191,7 @@
 				21213DBB16B2DC3900F62607 /* libTwinPushSDK.a in Frameworks */,
 				219BB70F16B02BF4008739D7 /* UIKit.framework in Frameworks */,
 				219BB71116B02BF4008739D7 /* Foundation.framework in Frameworks */,
+				69F044C32407056D0048A205 /* WebKit.framework in Frameworks */,
 				219BB71316B02BF4008739D7 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,6 +327,7 @@
 		219BB70D16B02BF4008739D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				69F044C22407056D0048A205 /* WebKit.framework */,
 				69FFE0D91E97E3B800211E94 /* UserNotifications.framework */,
 				69FFE0DA1E97E3B800211E94 /* UserNotificationsUI.framework */,
 				21213DA516B2DC2200F62607 /* TwinPushSDK.xcodeproj */,
@@ -460,6 +464,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 219BB6FF16B02BF4008739D7;
@@ -806,6 +811,7 @@
 				6924BD1D1EA533E1003DD5A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
