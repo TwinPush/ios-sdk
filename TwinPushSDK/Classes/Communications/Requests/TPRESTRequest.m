@@ -81,7 +81,7 @@ static NSString* const kContentType = @"application/x-www-form-urlencoded";
 }
 
 - (NSString*)queryStringForKey:(NSString*)key value:(NSString*)value {
-    NSString* encodedValue = [value stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding];
+    NSString* encodedValue = [value stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet];
     return [NSString stringWithFormat:kQueryStringParamFormat, key, encodedValue];
 }
 
