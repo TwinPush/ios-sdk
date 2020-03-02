@@ -11,10 +11,8 @@
 #import "TPTwinPushRequest.h"
 #import "TPRequestLauncher.h"
 
-#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 @interface TwinPushManager()<UNUserNotificationCenterDelegate>
 @end
-#endif
 
 
 static NSString* const kSdkVersion = @"3.10.0";
@@ -520,39 +518,21 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)registerForRemoteNotifications {
-#ifdef __IPHONE_8_0
-    #if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
-    // Use UserNotifications framework whenever possible
-    if ([UNUserNotificationCenter class]) {
-        UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
-        center.delegate = self;
-        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
-             if( !error ) {
-                 dispatch_async(dispatch_get_main_queue(), ^{
-                 [[UIApplication sharedApplication] registerForRemoteNotifications];
-                     NSLog( @"Push registration success." );
-                 });
-             }
-             else {
-                 NSLog( @"Push registration FAILED" );
-                 NSLog( @"ERROR: %@ - %@", error.localizedFailureReason, error.localizedDescription );
-                 NSLog( @"SUGGESTIONS: %@ - %@", error.localizedRecoveryOptions, error.localizedRecoverySuggestion );  
-             }  
-         }];
-    }
-    else
-    #endif
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerForRemoteNotifications)]) {
-        UIUserNotificationSettings *userNotificationSettings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert) categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:userNotificationSettings];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-    }
-    else {
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-    }
-#else
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-#endif
+    UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+    center.delegate = self;
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+         if( !error ) {
+             dispatch_async(dispatch_get_main_queue(), ^{
+             [[UIApplication sharedApplication] registerForRemoteNotifications];
+                 NSLog( @"Push registration success." );
+             });
+         }
+         else {
+             NSLog( @"Push registration FAILED" );
+             NSLog( @"ERROR: %@ - %@", error.localizedFailureReason, error.localizedDescription );
+             NSLog( @"SUGGESTIONS: %@ - %@", error.localizedRecoveryOptions, error.localizedRecoverySuggestion );
+         }
+     }];
 }
 
 - (NSString *)stringWithDeviceToken:(NSData *)deviceToken {
@@ -887,7 +867,6 @@ static TwinPushManager *_sharedInstance;
 }
 
 
-#if defined(__IPHONE_10_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
 //Called when a notification is delivered to a foreground app.
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler {
     NSLog(@"User Info : %@", notification.request.content.userInfo);
@@ -916,7 +895,5 @@ static TwinPushManager *_sharedInstance;
         completionHandler();
     }
 }
-
-#endif
 
 @end
