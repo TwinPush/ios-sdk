@@ -37,7 +37,6 @@ static NSString* const kAcceptContentTypeHeaderKey = @"Accept";
         _contentParams = [[NSMutableArray alloc] init];
         _name =  NSStringFromClass([self class]);
         _requestId = [self createID];
-        _shouldFollowRedirects = YES;
     }
     return self;
 }
@@ -82,48 +81,6 @@ static NSString* const kAcceptContentTypeHeaderKey = @"Accept";
     }
 }
 
-#pragma mark - NSURLConnectionDelegate
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    // Perform operations in main thread and retaining self
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (!self.isDummy) {
-            // Notify delegates
-            [self notifyEndDelegates];
-            [self onRequestError:connection error:error];
-        } else {
-            [self connectionDidFinishLoading:connection];
-        }
-    });
-}
-
-- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-    [self verifyAuthChallengeTrust:challenge];
-}
-
-#pragma mark - NSURLConnectionDataDelegate
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // Perform operations in main thread and retaining self
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self notifyEndDelegates];
-        [self onRequestFinished:connection];
-    });
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [self.responseData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    // This method is called each time there is a redirect so reinitializing it
-    // also serves to clear it
-    self.responseData = [[NSMutableData alloc] init];
-}
-
-- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response {
-    return self.shouldFollowRedirects ? request : nil;
-}
-
 #pragma mark - Param methods
 - (void)addParam:(TPRequestParam*)param {
     [_contentParams addObject:param];
@@ -148,78 +105,6 @@ static NSString* const kAcceptContentTypeHeaderKey = @"Accept";
 
 + (NSString*)errorDomain {
     return kErrorDomain;
-}
-
-#pragma mark - Certificate verification methods
-- (void)verifyAuthChallengeTrust:(NSURLAuthenticationChallenge*)challenge {
-    BOOL verified = FALSE;
-    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-        // By now, the OS will already have built a SecTrustRef instance for
-        // the server certificates; we just need to evaluate it
-        SecTrustRef serverTrust = challenge.protectionSpace.serverTrust;
-        SecTrustResultType res;
-        OSStatus status = SecTrustEvaluate(serverTrust, &res);
-        
-        if (status == errSecSuccess && ((res == kSecTrustResultProceed) || (res == kSecTrustResultUnspecified))) {
-            TCLog(@"iOS certificate chain validation for host %@ passed", challenge.protectionSpace.host);
-            // If the iOS Security Framework accepted the certificate chain, we'll
-            // check the chain *again* with OpenSSL. This is a relatively simplistic
-            // implementation - for example, it won't check hostnames - but we assume
-            // that the only gap we need to cover is basicConstraints checking, and
-            // OpenSSL *will* do that.
-            verified = [self verifyServerTrust:serverTrust];
-            if (verified) {
-                NSURLCredential* credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
-                [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
-            }
-        }
-        
-        if (!verified) {
-            TCLog(@"iOS certificate chain validation for host %@ failed", challenge.protectionSpace.host);
-            if (self.allowUntrustedCertificates) {
-                TCLog(@"WARNING: Connecting to untrusted site %@", challenge.protectionSpace.host);
-                verified = YES;
-                [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
-            }
-        }
-    }
-    else {
-        TCLog(@"Authentication method not supported: %@", challenge.protectionSpace.authenticationMethod);
-    }
-
-    if (!verified) {
-        [challenge.sender cancelAuthenticationChallenge:challenge];
-    }
-}
-
-- (BOOL)verifyServerTrust:(SecTrustRef)trust {
-    BOOL verified = YES;
-    if (self.expectedCertNames != nil) {
-        verified = [self verifySecurityTrust:trust withCertificateNames:self.expectedCertNames];
-    }
-    return verified;
-}
-
-- (NSArray*)getCertificateSummaries:(SecTrustRef)trustRef {
-    CFIndex chainLen = SecTrustGetCertificateCount(trustRef);
-    NSMutableArray* summaries = [NSMutableArray arrayWithCapacity:chainLen];
-    
-    for (int i = 0; i < chainLen; i++) {
-        SecCertificateRef leafRef = SecTrustGetCertificateAtIndex(trustRef, i);
-        CFStringRef summaryRef = SecCertificateCopySubjectSummary(leafRef);
-        NSString* summary = (__bridge NSString*)summaryRef;
-        
-        [summaries addObject:summary];
-        
-        CFRelease(summaryRef);
-    }
-    
-    return summaries;
-}
-
-- (BOOL)verifySecurityTrust:(SecTrustRef)trustRef withCertificateNames:(NSArray*)expectedCertNames {
-    NSArray* certNames = [self getCertificateSummaries:trustRef];
-    return [certNames isEqualToArray:expectedCertNames];
 }
 
 #pragma mark - Request launch methods
@@ -263,22 +148,22 @@ static NSString* const kAcceptContentTypeHeaderKey = @"Accept";
 
 #pragma mark - Request interception methods
 
-- (void)onRequestStarted:(NSURLConnection*)connection {
+- (void)onRequestStarted:(NSURLRequest*)request {
     // By default no additional operation is required
 }
 
-- (void)onRequestFinished:(NSURLConnection*)connection {
+- (void)onRequestFinished:(NSURLResponse*)response data:(NSData*)data {
     if (![self isCanceled]) {
         // Use when fetching text data
         NSString *responseString = nil;
         if (self.encoding != 0) {
-            responseString = [[NSString alloc] initWithData:self.responseData encoding:self.encoding];
+            responseString = [[NSString alloc] initWithData:data encoding:self.encoding];
         }
         if (responseString == nil) {
-            responseString = [[NSString alloc] initWithData:self.responseData encoding:NSUTF8StringEncoding];
+            responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         }
         if (responseString == nil) {
-            responseString = [[NSString alloc] initWithData:self.responseData encoding:NSASCIIStringEncoding];
+            responseString = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
         }
         TCLog(@"\nOUTPUT:\n%@", responseString);
         NSDictionary* responseDictionary = nil;
@@ -296,10 +181,11 @@ static NSString* const kAcceptContentTypeHeaderKey = @"Accept";
         } else {
             self.onError(error);
         }
+        [self notifyEndDelegates];
     }
 }
 
-- (void)onRequestError:(NSURLConnection*)connection error:(NSError*)error {
+- (void)onRequestError:(NSURLResponse*)response error:(NSError*)error {
     TCLog(@"Request error: %@", error);
     _onError(error);
 }

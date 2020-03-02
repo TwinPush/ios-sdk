@@ -83,15 +83,6 @@ extern NSString* const kStringErrorCodeKey;
 
 @property (nonatomic, strong) NSString* acceptsContentType;
 
-@property (nonatomic) BOOL shouldFollowRedirects;
-
-@property (nonatomic) BOOL allowUntrustedCertificates;
-
-/** @brief If not null, the request will validate the SSL certificate chain names using the list of certificate
- * names provided from (starting from the leaf certificate and ending with the root). The request will fail with
- * a generic error if the certificate names don't match */
-@property (nonatomic, strong) NSArray* expectedCertNames;
-
 /** @brief Starts the asynchronous execution of the request */
 -(void)start;
 
@@ -133,13 +124,13 @@ extern NSString* const kStringErrorCodeKey;
 
 /** @brief Method that can be overriden by subclass to perform any additional processing
     when the request is started */
-- (void)onRequestStarted:(NSURLConnection*)connection;
+- (void)onRequestStarted:(NSURLRequest*)request;
 
 /** @brief Method that can be overriden by subclass to process result from request. Default behavior is call onProcessResponseDictionary method with nil argument */
-- (void)onRequestFinished:(NSURLConnection*)connection;
+- (void)onRequestFinished:(NSURLResponse*)response data:(NSData*)data;
 
 /** @brief Method that can be overriden by subclass to process error from request. Default behavior is call onError with obtained error from request */
-- (void)onRequestError:(NSURLConnection*)connection error:(NSError*)error;
+- (void)onRequestError:(NSURLResponse*)response error:(NSError*)error;
 
 /** @brief Method that can be overriden by subclass to create a Dictionary from the response String. Default behavior returns nil */
 - (NSDictionary*) dictionaryForResponseString:(NSString*)string;
