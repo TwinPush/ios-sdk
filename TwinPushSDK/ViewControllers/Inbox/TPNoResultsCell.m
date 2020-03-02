@@ -40,7 +40,7 @@
 - (void)initializeCell {
     // Initialization code
     self.noResultsLabel = [[UILabel alloc]init];
-    self.noResultsLabel.textAlignment = UITextAlignmentLeft;
+    self.noResultsLabel.textAlignment = NSTextAlignmentLeft;
     self.noResultsLabel.font = [UIFont systemFontOfSize:12];
     [self.contentView addSubview:_noResultsLabel];
 }
