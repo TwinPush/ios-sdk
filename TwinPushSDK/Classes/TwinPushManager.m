@@ -634,23 +634,17 @@ static TwinPushManager *_sharedInstance;
     if (![_delegate respondsToSelector:@selector(didReceiveNotification:whileActive:)]) {
         if (active) {
             NSString* title = NSLocalizedStringWithDefaultValue(@"NOTIFICATION_RECEIVED_ALERT_TITLE", nil, [NSBundle mainBundle], @"Notification received", nil);
-            NSString* cancelButtonTitle;
-            NSString* openButtonTitle = nil;
             
             if ([_receivedNotification isRich]) {
-                cancelButtonTitle = NSLocalizedStringWithDefaultValue(@"NOTIFICATION_RECEIVED_ALERT_CANCEL_BUTTON", nil, [NSBundle mainBundle], @"Cancel", nil);
-                openButtonTitle = NSLocalizedStringWithDefaultValue(@"NOTIFICATION_RECEIVED_OPEN_BUTTON", nil, [NSBundle mainBundle], @"Open", nil);
+                NSString* openButtonTitle = NSLocalizedStringWithDefaultValue(@"NOTIFICATION_RECEIVED_OPEN_BUTTON", nil, [NSBundle mainBundle], @"Open", nil);
+                
+                [self displayAlert:_receivedNotification.message withTitle:title acceptTitle:openButtonTitle onAccept:^(UIAlertAction *action) {
+                    [self showNotification:self.receivedNotification];
+                }];
             }
             else {
-                cancelButtonTitle = NSLocalizedStringWithDefaultValue(@"NOTIFICATION_RECEIVED_ALERT_ACCEPT_BUTTON", nil, [NSBundle mainBundle], @"OK", nil);
+                [self displayAlert:_receivedNotification.message withTitle:title];
             }
-            
-            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title
-                                                                message:_receivedNotification.message
-                                                               delegate:self
-                                                      cancelButtonTitle:cancelButtonTitle
-                                                      otherButtonTitles:openButtonTitle, nil];
-            [alertView show];
         }
         else {
             [self showNotification:_receivedNotification];
@@ -777,27 +771,37 @@ static TwinPushManager *_sharedInstance;
     }
 }
 
+
 - (void)displayAlert:(NSString*)alert withTitle:(NSString*)title {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:alert delegate:self cancelButtonTitle:NSLocalizedStringWithDefaultValue(@"DEVICE_REGISTERED_ALERT_ACCEPT_BUTTON", nil, [NSBundle mainBundle], @"Accept", nil) otherButtonTitles:nil, nil];
-    [alertView show];
+    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:alert preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedStringWithDefaultValue(@"DEVICE_REGISTERED_ALERT_ACCEPT_BUTTON", nil, [NSBundle mainBundle], @"Accept", nil) style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:cancelAction];
+    
+    UIViewController* rootController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    [rootController presentViewController:alertController animated:YES completion:nil];
 }
+
+- (void)displayAlert:(NSString*)alert withTitle:(NSString*)title acceptTitle:(NSString*)acceptTitle onAccept:(void (^ __nullable)(UIAlertAction *action))onAccept {
+    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:alert preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedStringWithDefaultValue(@"NOTIFICATION_RECEIVED_ALERT_CANCEL_BUTTON", nil, [NSBundle mainBundle], @"Accept", nil) style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction* acceptAction = [UIAlertAction actionWithTitle:acceptTitle style:UIAlertActionStyleDefault handler:onAccept];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:acceptAction];
+    
+    UIViewController* rootController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    [rootController presentViewController:alertController animated:YES completion:nil];
+}
+
 
 #pragma mark - TPNotificationsInboxDelegate
 
 - (void)dismissModalView {
-    [[[[[UIApplication sharedApplication] delegate] window] rootViewController] dismissModalViewControllerAnimated:YES];
+    [[[[[UIApplication sharedApplication] delegate] window] rootViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didFinishLoadingNotifications {
     
-}
-
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	if (buttonIndex != alertView.cancelButtonIndex) {
-		[self showNotification:self.receivedNotification];
-	}
 }
 
 #pragma mark - TPRequestEndDelegate

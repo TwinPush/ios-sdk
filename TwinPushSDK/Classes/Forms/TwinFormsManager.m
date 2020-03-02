@@ -104,8 +104,12 @@ static TwinFormsManager *_sharedInstance;
 }
 
 - (void)displayAlert:(NSString*)alert withTitle:(NSString*)title {
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:alert delegate:self cancelButtonTitle:NSLocalizedStringWithDefaultValue(@"DEVICE_REGISTERED_ALERT_ACCEPT_BUTTON", nil, [NSBundle mainBundle], @"Accept", nil) otherButtonTitles:nil, nil];
-    [alertView show];
+    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:alert preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedStringWithDefaultValue(@"DEVICE_REGISTERED_ALERT_ACCEPT_BUTTON", nil, [NSBundle mainBundle], @"Accept", nil) style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:cancelAction];
+    
+    UIViewController* rootController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    [rootController presentViewController:alertController animated:YES completion:nil];
 }
 
 #pragma mark - TPRequestEndDelegate

@@ -45,8 +45,12 @@
         NSString* title = NSLocalizedStringWithDefaultValue(@"ERROR_DELETING_NOTIFICATION_TITLE", nil, [NSBundle mainBundle], @"Error", nil);
         NSString* message = NSLocalizedStringWithDefaultValue(@"ERROR_DELETING_NOTIFICATION_MSG", nil, [NSBundle mainBundle], @"Error deleting notification: ", nil);
         NSString* button = NSLocalizedStringWithDefaultValue(@"ERROR_DELETING_NOTIFICATION_BUTTON", nil, [NSBundle mainBundle], @"Accept", nil);
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:button otherButtonTitles:nil, nil];
-        [alertView show];
+        
+        UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:button style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:cancelAction];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
     }];
 }
 
