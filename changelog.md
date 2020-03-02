@@ -3,11 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- Deployment version changed to iOS 11.
+- No changes
+
+## [4.0.0] - 2020-03-02
+### Added
 - Implemented tag filtering in alias inbox requests.
-- Deprecated `UIWebView` has been replaced with `WKWebView` in notification details view.
-- Deprecated `UIAlertView` has been replaced with `UIAlertController`.
-- Deprecated method `openURL` replaced with `openURL:options:completionHandler:`.
+### Changed
+- Deployment version changed to iOS 11.
+- Fixed most deprecation warnings and removed legacy code for iOS 11 deployment target.
 
 ## [3.10.0] - 2019-10-22
 ### Added
@@ -207,7 +210,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - First fully functional public release.
 
-[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v3.10.0...HEAD
+[Unreleased]: https://github.com/TwinPush/ios-sdk/compare/v4.0.0...HEAD
+[4.0.0]: https://github.com/TwinPush/ios-sdk/compare/v3.10.0...v4.0.0
 [3.10.0]: https://github.com/TwinPush/ios-sdk/compare/v3.9.0...v3.10.0
 [3.9.0]: https://github.com/TwinPush/ios-sdk/compare/v3.8.0...v3.9.0
 [3.8.0]: https://github.com/TwinPush/ios-sdk/compare/v3.7.3...v3.8.0
