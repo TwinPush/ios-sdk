@@ -113,7 +113,7 @@
     NSURL* richURL = [NSURL URLWithString:notification.contentUrl];
     if ([response.actionIdentifier isEqualToString:@"SAFARI"] && richURL != nil) {
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
-            [[UIApplication sharedApplication] openURL:richURL];
+            [[UIApplication sharedApplication] openURL:richURL options:@{} completionHandler:nil];
         });
     }
     else {

@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Implemented tag filtering in alias inbox requests.
 - Deprecated `UIWebView` has been replaced with `WKWebView` in notification details view.
 - Deprecated `UIAlertView` has been replaced with `UIAlertController`.
+- Deprecated method `openURL` replaced with `openURL:options:completionHandler:`.
 
 ## [3.10.0] - 2019-10-22
 ### Added

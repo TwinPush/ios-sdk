@@ -165,13 +165,19 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
     self.loading = NO;
     if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorAppTransportSecurityRequiresSecureConnection) {
-        BOOL openedInBrowser = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.notification.contentUrl]];
-        if (openedInBrowser) {
-            [self closeModal];
-            return;
-        }
+        NSURL* url = [NSURL URLWithString:self.notification.contentUrl];
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
+            if (success) {
+                [self closeModal];
+            }
+            else {
+                [self webViewLoadFailedWithErrorCode:error.localizedDescription];
+            }
+        }];
     }
-    [self webViewLoadFailedWithErrorCode:error.localizedDescription];
+    else {
+        [self webViewLoadFailedWithErrorCode:error.localizedDescription];
+    }
 }
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
