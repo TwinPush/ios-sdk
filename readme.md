@@ -162,7 +162,7 @@ struct TwinPushSwiftDemoApp: App {
 }
 ~~~
 
-Replace `SUBDOMAIN`, `TWINPUSH_APP_ID` and `TWINPUSH_API_KEY` with the configuration values for your application in [app.twinpush.com](http://app.twinpush.com). The method `setupTwinPushManagerWithAppId` must be called before any other TwinPushSDK method other than setting the subdomain or changing the server URL (see below).
+Replace `SUBDOMAIN`, `TWINPUSH_APP_ID` and `TWINPUSH_API_KEY` with the configuration values for your application in [app.twinpush.com](http://app.twinpush.com). Configure the subdomain or server URL and, if used, [certificate pinning](#certificate-pinning) before calling `setupTwinPushManagerWithAppId`. Call setup before using the SDK's device and notification APIs.
 
 At this point you should be able to register correctly to TwinPush and you should be able to receive push notifications if both the application and the server certificates have been configured correctly. If not, check the Troubleshooting section.
 
@@ -723,9 +723,75 @@ TwinPushManager.singleton().externalRegisterBlock = { info, onComplete in
 }
 ~~~
 
-## Remote certificate pinning
+## Certificate pinning
 
-Enable signed, remotely managed TLS SPKI pins with a single call to
-`[twinPush enableCertificatePinning:key]` **before SDK setup**. The integration
-key is copied from the subdomain certificate-pins settings; no PEM files are
-required. See [integration, migration and security behavior](docs/remote-certificate-pinning.md).
+Certificate pinning adds a check of the server's TLS public key to the usual certificate authority and hostname validation. TwinPush manages the accepted pins remotely, so your app only needs one public integration key. You do not need to bundle PEM files, configure TLS pins manually, or supply an environment, key ID or additional URL.
+
+Copy the complete `tp-pinning-v1:...` key from **Configuration → Certificate pins → your subdomain** in TwinPush, after an administrator has generated the signing key and published a pin configuration. Include it in your trusted app configuration. This key is public and does not replace the **application API token** used by the SDK; never use an owner's API token in the app.
+
+### Enabling pinning
+
+On the main thread, set the subdomain (or `serverURL`), enable pinning, and then call setup. **Enable pinning before setup and before the first request**, because setup can register the device immediately. These examples belong in an `AppDelegate` that implements `TwinPushManagerDelegate`; call `configureTwinPush` from your launch callback.
+
+~~~objective-c
+// Objective-C
+#import <TwinPushSDK/TwinPushManager.h>
+
+- (void)configureTwinPush {
+    TwinPushManager *twinPush = [TwinPushManager manager];
+    twinPush.serverSubdomain = @"your-subdomain";
+
+    // Replace the entire placeholder with the key copied from TwinPush.
+    NSString *pinningKey = @"tp-pinning-v1:<YOUR_INTEGRATION_KEY>";
+    NSError *error = [twinPush enableCertificatePinning:pinningKey];
+    if (error != nil) {
+        NSLog(@"Invalid TwinPush pinning configuration: %@", error.localizedDescription);
+        return; // Stop SDK initialization; do not continue without pinning.
+    }
+
+    [twinPush setupTwinPushManagerWithAppId:@"YOUR_APP_ID"
+                                   apiKey:@"YOUR_APP_TOKEN"
+                                 delegate:self];
+}
+~~~
+
+~~~swift
+// Swift
+import TwinPushSDK
+
+private func configureTwinPush() {
+    let twinPush: TwinPushManager = TwinPushManager.singleton()
+    twinPush.serverSubdomain = "your-subdomain"
+
+    // Replace the entire placeholder with the key copied from TwinPush.
+    let pinningKey = "tp-pinning-v1:<YOUR_INTEGRATION_KEY>"
+    if let error = twinPush.enableCertificatePinning(pinningKey) {
+        NSLog("Invalid TwinPush pinning configuration: %@", error.localizedDescription)
+        return // Stop SDK initialization; do not continue without pinning.
+    }
+
+    twinPush.setupTwinPushManager(
+        withAppId: "YOUR_APP_ID",
+        apiKey: "YOUR_APP_TOKEN",
+        delegate: self
+    )
+}
+~~~
+
+### Loading, errors and configuration changes
+
+`enableCertificatePinning` validates the key immediately and returns an error for invalid input without changing the current mode. A `nil` result means pinning was enabled; downloading and verifying the pins happens asynchronously once the domain, app ID and token are available.
+
+- Ordinary TwinPush requests wait up to **25 seconds** for verified, unexpired pins. If none are available, they fail through their existing error callbacks; the SDK never silently falls back to unpinned HTTPS. Pinning errors use the `com.twinpush.CertificatePinning` domain, with the underlying bootstrap error available when applicable.
+- The SDK refreshes pins automatically and checks validity when the app resumes and before requests. A previously verified, still-valid configuration can be used during a network failure. Expired pins cannot authorize a connection. Failed ordinary requests are not automatically replayed, and cancelling a request suppresses its success/error callback.
+- Calling the method again with the same key is safe and requests a refresh subject to backoff. Changing the domain, app, token or key invalidates the old remote configuration; stale results cannot be applied to the new one. Already transmitted data cannot be recalled. Requests sent before activation are not retroactively protected.
+
+### Certificate rotation and migration
+
+Renewing a certificate or changing providers, for example from GoDaddy to Let's Encrypt, **does not change the integration key** as long as the signing key and environment stay the same. A certificate renewed with the same TLS public key keeps its pin. To change TLS keys, publish overlapping pins before switching the server certificate, then retire the old pin: `[A] → [A,B] → [B]`. Changing the signing key or subdomain requires distributing a new integration key through a trusted app update.
+
+The former certificate-name pinning methods (`enableCertificateNamePinningWithDefaultValues`, `enableCertificateNamePinningWithCertificateNames:` and `disableCertificateNamePinning`) have been removed. Remove those calls and use `enableCertificatePinning` before setup. Without this new call, the SDK uses its ordinary HTTPS behavior. Remote pinning always requires valid CA trust and hostname validation, and rejects redirects.
+
+The SDK persists verified pins and the highest accepted version to reject rollback across launches. First installation, data deletion or restoring an older backup can lose that history; an older, unexpired signed configuration may then be accepted. Expiry also depends on the device clock. Pinning does not eliminate these limitations or guarantee network availability.
+
+This feature covers requests made by `TwinPushManager`. It does not configure the separate `TwinFormsManager` service or rich notification content loaded in `WKWebView`. The pinning cache is managed separately from the delegate's custom data-storage methods.
