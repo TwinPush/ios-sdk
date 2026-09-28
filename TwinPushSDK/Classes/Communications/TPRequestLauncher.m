@@ -9,8 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "TPRequestLauncher.h"
 #import "TPRequestParam.h"
+#import "TPRemotePinning.h"
+
+@interface TPBaseRequest (RemoteTransport)
+- (void)finishRemoteData:(NSData *)data error:(NSError *)error;
+@end
 
 @interface TPRequestLauncher()
+
+@property (nonatomic, strong) TPRemotePinning *remotePinning;
 
 // Array of active requests
 @property (nonatomic, strong) NSMutableDictionary *activeRequests;
@@ -44,7 +51,14 @@
         request.expectedCertNames = self.expectedCertNames;
         
         NSURLRequest* urlRequest = [request createRequest];
-        NSURLConnection* urlConnection = [NSURLConnection connectionWithRequest:urlRequest delegate:request];
+        id urlConnection;
+        if (self.remotePinning) {
+            urlConnection = [self.remotePinning send:urlRequest certificateNames:self.expectedCertNames completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+                [request finishRemoteData:data error:error];
+            }];
+        } else {
+            urlConnection = [NSURLConnection connectionWithRequest:urlRequest delegate:request];
+        }
         
         // Display network activity indicator
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -59,7 +73,7 @@
 /** @brief Cancel the selected request */
 - (void)cancelRequest:(TPBaseRequest*)request {
     TCLog(@"Cancelling request...");
-    NSURLConnection* urlConnection = [_activeRequests objectForKey:request.requestId];
+    id urlConnection = [_activeRequests objectForKey:request.requestId];
     if (urlConnection != nil) {
         [urlConnection cancel];
         [_activeRequests removeObjectForKey:request.requestId];
@@ -68,7 +82,7 @@
 
 #pragma mark - RequestEndDelegate
 - (void)requestDidFinish:(TPBaseRequest *)request {
-    NSURLConnection* urlConnection = [_activeRequests objectForKey:request.requestId];
+    id urlConnection = [_activeRequests objectForKey:request.requestId];
     if (urlConnection != nil) {
         [urlConnection cancel];
         [_activeRequests removeObjectForKey:request.requestId];

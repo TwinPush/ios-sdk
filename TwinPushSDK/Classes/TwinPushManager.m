@@ -10,6 +10,9 @@
 #import "TPBaseRequest.h"
 #import "TPTwinPushRequest.h"
 #import "TPRequestLauncher.h"
+#import "TPRemotePinning.h"
+#import "TPRequestLauncher+RemotePinning.h"
+#import "TPPinningProtocol.h"
 
 @interface TwinPushManager()<UNUserNotificationCenterDelegate>
 @end
@@ -51,6 +54,7 @@ static NSString* const kNSUserDefaultsMonitorSignificantChangesKey = @"TPIsMonit
 @property (nonatomic, copy) NSString* registeredAlias;
 @property (nonatomic, copy) NSString* registeredPushToken;
 @property (nonatomic) NSUInteger lastRegisterHash;
+@property (nonatomic, copy) NSString *certificatePinningKey;
 
 @end
 
@@ -97,6 +101,7 @@ static TwinPushManager *_sharedInstance;
     self.appId = appId;
     self.apiKey = apiKey;
     self.delegate = delegate;
+    [self configureRemotePinning];
     
     // If the API Hash has changed since last register, we will ignore saved values
     NSInteger previousApiHash = [[self fetchValueForKey:kNSUserDefaultsApiHashKey] integerValue];
@@ -200,6 +205,7 @@ static TwinPushManager *_sharedInstance;
         [self applicationStartedWithOptions: notification.userInfo];
     }
     else if ([notification.name isEqualToString: UIApplicationDidBecomeActiveNotification]) {
+        [self refreshRemotePinning];
         if (self.autoResetBadgeNumber) {
             [self setApplicationBadgeCount:0];
         }
@@ -237,6 +243,7 @@ static TwinPushManager *_sharedInstance;
 }
 
 - (void)dealloc {
+    [self.requestFactory.requestLauncher.remotePinning invalidate];
     [self unregisterForApplicationEvents];
 }
 
@@ -316,6 +323,7 @@ static TwinPushManager *_sharedInstance;
     _serverURL = serverURL;
     
     [TPTwinPushRequest setServerURL:serverURL];
+    [self configureRemotePinning];
 }
 
 - (void)setServerSubdomain:(NSString *)serverSubdomain {
@@ -584,6 +592,28 @@ static TwinPushManager *_sharedInstance;
 }
 
 #pragma mark - Certificate pinning
+- (NSError *)enableCertificatePinning:(NSString *)key {
+    if (![NSThread isMainThread]) return TPPinningError(6, @"Activate certificate pinning on the main thread before SDK setup");
+    if (![TPRemotePinning validIntegrationKey:key]) return TPPinningError(1, @"Invalid tp-pinning-v1 integration key");
+    if ([self.certificatePinningKey isEqual:key]) {
+        [self.requestFactory.requestLauncher.remotePinning refresh];
+        return nil;
+    }
+    [self.requestFactory.requestLauncher.remotePinning invalidate];
+    self.certificatePinningKey = key;
+    self.requestFactory.requestLauncher.remotePinning = [[TPRemotePinning alloc] initWithKey:key];
+    [self configureRemotePinning];
+    return nil;
+}
+
+- (void)configureRemotePinning {
+    [self.requestFactory.requestLauncher.remotePinning configureURL:self.serverURL appID:self.appId token:self.apiKey];
+}
+
+- (void)refreshRemotePinning {
+    [self.requestFactory.requestLauncher.remotePinning refresh];
+}
+
 - (void)enableCertificateNamePinningWithDefaultValues {
     [self enableCertificateNamePinningWithCertificateNames:kDefaultCertificateNames];
 }

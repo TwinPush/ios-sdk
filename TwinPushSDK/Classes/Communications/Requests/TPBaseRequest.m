@@ -82,6 +82,16 @@ static NSString* const kAcceptContentTypeHeaderKey = @"Accept";
     }
 }
 
+// Called once on the main queue by the isolated remote-pinning transport.
+- (void)finishRemoteData:(NSData *)data error:(NSError *)error {
+    if (self.canceled) return;
+    self.responseData = [data mutableCopy];
+    [self notifyEndDelegates];
+    if (error) {
+        if (self.onError) [self onRequestError:nil error:error];
+    } else [self onRequestFinished:nil];
+}
+
 #pragma mark - NSURLConnectionDelegate
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // Perform operations in main thread and retaining self

@@ -692,3 +692,10 @@ TwinPushManager.singleton().externalRegisterBlock = { info, onComplete in
     onComplete!(device);
 }
 ~~~
+
+## Remote certificate pinning
+
+Enable signed, remotely managed TLS SPKI pins with a single call to
+`[twinPush enableCertificatePinning:key]` **before SDK setup**. The integration
+key is copied from the subdomain certificate-pins settings; no PEM files are
+required. See [integration, migration and security behavior](docs/remote-certificate-pinning.md).

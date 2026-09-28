@@ -83,6 +83,9 @@
 		7AD27C5D1758E3D6003ADC3C /* TPSetCustomPropertyRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 7AD27C5B1758E3D6003ADC3C /* TPSetCustomPropertyRequest.h */; };
 		7AD27C5E1758E3D6003ADC3C /* TPSetCustomPropertyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD27C5C1758E3D6003ADC3C /* TPSetCustomPropertyRequest.m */; };
 		7AD80F6517660FAC00C69CFC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AD80F6417660FAC00C69CFC /* CoreLocation.framework */; };
+		FA0000000000000000000003 /* TPPinningProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000001; };
+		FA0000000000000000000006 /* TPPinnedHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000004; };
+		FA0000000000000000000009 /* TPRemotePinning.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000007; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -187,6 +190,13 @@
 		7AD27C5B1758E3D6003ADC3C /* TPSetCustomPropertyRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPSetCustomPropertyRequest.h; sourceTree = "<group>"; };
 		7AD27C5C1758E3D6003ADC3C /* TPSetCustomPropertyRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPSetCustomPropertyRequest.m; sourceTree = "<group>"; };
 		7AD80F6417660FAC00C69CFC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		FA0000000000000000000001 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pinning/TPPinningProtocol.m; sourceTree = "<group>"; };
+		FA0000000000000000000002 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pinning/TPPinningProtocol.h; sourceTree = "<group>"; };
+		FA0000000000000000000004 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pinning/TPPinnedHTTP.m; sourceTree = "<group>"; };
+		FA0000000000000000000005 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pinning/TPPinnedHTTP.h; sourceTree = "<group>"; };
+		FA0000000000000000000007 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pinning/TPRemotePinning.m; sourceTree = "<group>"; };
+		FA0000000000000000000008 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pinning/TPRemotePinning.h; sourceTree = "<group>"; };
+		FA0000000000000000000010 = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pinning/TPRequestLauncher+RemotePinning.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,6 +367,13 @@
 			children = (
 				219BB79B16B03FDD008739D7 /* TPRequestFactory.h */,
 				219BB79C16B03FDD008739D7 /* TPRequestFactory.m */,
+				FA0000000000000000000001,
+				FA0000000000000000000002,
+				FA0000000000000000000004,
+				FA0000000000000000000005,
+				FA0000000000000000000007,
+				FA0000000000000000000008,
+				FA0000000000000000000010,
 				219BB76216B0375C008739D7 /* TPRequestLauncher.h */,
 				2124D01216B131D700B39430 /* TPRequestLauncher.m */,
 				219BB75D16B03542008739D7 /* Requests */,
@@ -567,6 +584,9 @@
 				219BB79D16B03FDE008739D7 /* TPRequestFactory.m in Sources */,
 				218CB3BB16B12E630080A5CA /* TPCreateDeviceRequest.m in Sources */,
 				2124D01116B1306900B39430 /* TPRequestParam.m in Sources */,
+				FA0000000000000000000003 /* TPPinningProtocol.m in Sources */,
+				FA0000000000000000000006 /* TPPinnedHTTP.m in Sources */,
+				FA0000000000000000000009 /* TPRemotePinning.m in Sources */,
 				2124D01316B131D800B39430 /* TPRequestLauncher.m in Sources */,
 				2124D01716B1334C00B39430 /* NSDictionary+ArrayForKey.m in Sources */,
 				2124D01D16B1347700B39430 /* TPDevice.m in Sources */,

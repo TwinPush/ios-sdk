@@ -132,6 +132,15 @@ typedef void(^TPExternalRegisterBlock)(TPRegisterInformation* info, TPRegisterCo
 - (void)applicationDidEnterBackground:(UIApplication *)application DEPRECATED_ATTRIBUTE DEPRECATED_MSG_ATTRIBUTE("Calling this method is no longer required");
 
 #pragma mark - Certificate pinning
+/** Enables remote SPKI pinning. Call on the main thread BEFORE setup (which may
+ * send registration). Domain may be configured before or after this call.
+ * Returns an NSError immediately for an invalid key; nil means activation, not
+ * bootstrap completion. Network errors use the existing request error callbacks.
+ * No ordinary request started after activation can use unpinned HTTPS.
+ * Existing in-flight legacy requests are not retroactively protected.
+ */
+- (NSError *)enableCertificatePinning:(NSString *)key;
+
 - (void)enableCertificateNamePinningWithDefaultValues;
 - (void)enableCertificateNamePinningWithCertificateNames:(NSArray*)certificateNames;
 - (void)disableCertificateNamePinning;
