@@ -71,13 +71,6 @@ static NSString* const kDateFormat = @"yyyy-MM-dd HH:mm:ss";
     }
 }
 
-- (void)viewDidUnload {
-    [self setNotificationTitleLabel:nil];
-    [self setNotificationDateLabel:nil];
-    [self setWebView:nil];
-    [super viewDidUnload];
-}
-
 #pragma mark - Public methods
 - (void)fetchNotificationDetails {
     if ([TwinPushManager manager].deviceId != nil) {

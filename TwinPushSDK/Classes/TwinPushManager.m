@@ -672,14 +672,14 @@ static TwinPushManager *_sharedInstance;
         TPRegisterCompletedBlock onComplete = ^(TPDevice *device) {
             [self willChangeValueForKey:@"alias"];
             if ([device.deviceAlias isKindOfClass:[NSString class]]) {
-                _alias = device.deviceAlias;
+                self->_alias = device.deviceAlias;
             } else {
-                _alias = @"";
+                self->_alias = @"";
             }
             [self didChangeValueForKey:@"alias"];
             
             [self willChangeValueForKey:@"deviceId"];
-            _deviceId = device.deviceId;
+            self->_deviceId = device.deviceId;
             [self didChangeValueForKey:@"deviceId"];
             
             self.registeredAlias = alias;
@@ -687,10 +687,10 @@ static TwinPushManager *_sharedInstance;
             self.lastRegisterHash = [[((TPCreateDeviceRequest*)self.registerRequest) createBodyContent] hash];
             
             [self storeValue:@([self getApiHash]).stringValue forKey:kNSUserDefaultsApiHashKey];
-            [self storeValue:_registeredAlias forKey:kNSUserDefaultsAliasKey];
-            [self storeValue:_registeredPushToken forKey:kNSUserDefaultsPushTokenKey];
-            [self storeValue:_deviceId forKey:kNSUserDefaultsDeviceIdKey];
-            [self storeValue:@(_lastRegisterHash).stringValue forKey:kNSUserDefaultsRegisterHashKey];
+            [self storeValue:self->_registeredAlias forKey:kNSUserDefaultsAliasKey];
+            [self storeValue:self->_registeredPushToken forKey:kNSUserDefaultsPushTokenKey];
+            [self storeValue:self->_deviceId forKey:kNSUserDefaultsDeviceIdKey];
+            [self storeValue:@(self->_lastRegisterHash).stringValue forKey:kNSUserDefaultsRegisterHashKey];
             
             if ([self.delegate respondsToSelector:@selector(didFinishRegisteringDevice)]) {
                 [self.delegate didFinishRegisteringDevice];

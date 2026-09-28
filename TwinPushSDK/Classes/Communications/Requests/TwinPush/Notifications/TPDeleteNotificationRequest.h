@@ -8,7 +8,7 @@
 
 #import "TPTwinPushRequest.h"
 
-typedef void(^DeleteNotificationResponseBlock)();
+typedef void(^DeleteNotificationResponseBlock)(void);
 
 @interface TPDeleteNotificationRequest : TPTwinPushRequest
 

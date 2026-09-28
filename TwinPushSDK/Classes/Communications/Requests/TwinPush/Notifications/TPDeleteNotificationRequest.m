@@ -25,7 +25,9 @@ static NSString* const kSegmentParamNotifications = @"notifications";
         self.deviceId = deviceId;
         // Set response handler blocks
         self.onError = onError;
-        self.onComplete = onComplete;
+        self.onComplete = ^(NSDictionary *response) {
+            if (onComplete) onComplete();
+        };
     }
     return self;
 }

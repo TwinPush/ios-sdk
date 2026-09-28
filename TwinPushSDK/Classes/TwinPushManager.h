@@ -44,7 +44,7 @@
     At the end of your implementation, you must call the completionHandler block to let the system know that you 
     are done processing the notification.
     Default implementation will call `showNotification:` regardless of the selected action */
--(void)didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler;
+-(void)didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)(void))completionHandler;
 /** Called to let your app know which action was selected by the user for a given notification.
     Default implementation will call `showNotification:` regardless of the selected action */
 -(void)didReceiveNotificationResponse:(UNNotificationResponse *)response;

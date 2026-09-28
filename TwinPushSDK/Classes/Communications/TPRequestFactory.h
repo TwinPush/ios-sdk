@@ -33,8 +33,9 @@
 
 /**
  @brief Constructor for CreateDeviceRequest
- @param token Token for getting the device id
- @param deviceAlias (Optional)
+ @param info Device registration information
+ @param appId Application identifier
+ @param apiKey Application API key
  @param onComplete Block that will be executed if login is successful
  @param onError Block that will be executed if login is not successful
  */
@@ -42,7 +43,7 @@
 
 /**
  @brief Constructor for GetDeviceNotifications
- @param device The Device for which we want to get the notifications
+ @param deviceId The ID of the device for which to get notifications
  @param onComplete Block that will be executed if we obtain the notifications for the device
  @param onError Block that will be executed if the device is not correct
  */
@@ -50,7 +51,7 @@
 
 /**
  @brief Constructor for GetAliasNotifications
- @param device The Device for which we want to get the notifications
+ @param deviceId The ID of the device for which to get notifications
  @param onComplete Block that will be executed if we obtain the notifications for the device
  @param onError Block that will be executed if the device is not correct
  */
@@ -58,7 +59,7 @@
 
 /**
  @brief Constructor for GetAliasNotifications
- @param device The Device for which we want to get the notifications
+ @param deviceId The ID of the device for which to get notifications
  @param filters The filters to apply in the notification search
  @param onComplete Block that will be executed if we obtain the notifications for the device
  @param onError Block that will be executed if the device is not correct

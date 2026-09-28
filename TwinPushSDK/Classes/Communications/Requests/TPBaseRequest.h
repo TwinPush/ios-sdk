@@ -39,7 +39,7 @@ typedef void(^TPRequestCompleteBlock)(NSDictionary* response);
 
 /**
  @brief Block to be called when a request is completed successfuly without response data */
-typedef void(^TPRequestSuccessBlock)();
+typedef void(^TPRequestSuccessBlock)(void);
 
 extern NSString* const kStringErrorCodeKey;
 

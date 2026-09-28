@@ -18,8 +18,9 @@ typedef void(^CreateDeviceResponseBlock)(TPDevice* device);
 
 /**
  @brief Constructor for CreateDeviceRequest
- @param token Token for getting the device id
- @param deviceAlias (Optional)
+ @param info Device registration information
+ @param appId Application identifier
+ @param apiKey Application API key
  @param onComplete Block that will be executed if the token is correct
  @param onError Block that will be executed if the token is not correct
  */

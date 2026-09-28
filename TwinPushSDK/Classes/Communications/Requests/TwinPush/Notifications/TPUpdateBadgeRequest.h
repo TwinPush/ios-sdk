@@ -8,7 +8,7 @@
 
 #import "TPTwinPushRequest.h"
 
-typedef void(^UpdateBadgeResponse)();
+typedef void(^UpdateBadgeResponse)(void);
 
 @interface TPUpdateBadgeRequest : TPTwinPushRequest
 

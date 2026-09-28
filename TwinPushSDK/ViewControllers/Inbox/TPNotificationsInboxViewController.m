@@ -80,11 +80,6 @@ static NSString* const kOnlyRichNotificationsTag = @"tp_rich";
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidUnload {
-    [self setInboxTableView:nil];
-    [super viewDidUnload];
-}
-
 #pragma mark - Private methods
 
 - (void)closeModal {
@@ -134,12 +129,12 @@ static NSString* const kOnlyRichNotificationsTag = @"tp_rich";
         self.hasMore = hasMore;
         if (hasMore) {
             self.pagination.page += 1;
-            TCLog(@"Page: %ld and HasMore: %@", (long)self.pagination.page, _hasMore ? @"YES" : @"NO");
+            TCLog(@"Page: %ld and HasMore: %@", (long)self.pagination.page, self->_hasMore ? @"YES" : @"NO");
         }
-        [_inboxTableView reloadData];
+        [self->_inboxTableView reloadData];
     } onError:^(NSError *error) {
         self.loading = NO;
-        [_inboxTableView reloadData];
+        [self->_inboxTableView reloadData];
         [self onRequestFailed:error];
     }];
 }
