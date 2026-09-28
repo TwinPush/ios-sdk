@@ -22,8 +22,6 @@ static NSString* const kSdkVersion = @"4.0.0";
 
 static NSString* const kDefaultServerUrl = @"https://%@.twinpush.com/api/v2";
 static NSString* const kDefaultServerSubdomain = @"app";
-//#define kDefaultCertificateNames @[@"*.twinpush.com", @"Go Daddy Secure Certificate Authority - G2", @"Go Daddy Root Certificate Authority - G2"]
-#define kDefaultCertificateNames @[@"*.twinpush.com", @"Starfield Secure Certificate Authority - G2", @"Starfield Root Certificate Authority - G2"]
 
 static NSString* const kPushIdKey = @"pushId";
 static NSString* const kPushTokenKey = @"pushToken";
@@ -612,18 +610,6 @@ static TwinPushManager *_sharedInstance;
 
 - (void)refreshRemotePinning {
     [self.requestFactory.requestLauncher.remotePinning refresh];
-}
-
-- (void)enableCertificateNamePinningWithDefaultValues {
-    [self enableCertificateNamePinningWithCertificateNames:kDefaultCertificateNames];
-}
-
-- (void)enableCertificateNamePinningWithCertificateNames:(NSArray*)certificateNames {
-    self.requestFactory.requestLauncher.expectedCertNames = certificateNames;
-}
-
-- (void)disableCertificateNamePinning {
-    [self enableCertificateNamePinningWithCertificateNames:nil];
 }
 
 #pragma mark - Private methods

@@ -141,9 +141,6 @@ typedef void(^TPExternalRegisterBlock)(TPRegisterInformation* info, TPRegisterCo
  */
 - (NSError *)enableCertificatePinning:(NSString *)key;
 
-- (void)enableCertificateNamePinningWithDefaultValues;
-- (void)enableCertificateNamePinningWithCertificateNames:(NSArray*)certificateNames;
-- (void)disableCertificateNamePinning;
 
 #pragma mark Notifications
 - (void)getDeviceNotificationsWithFilters:(TPNotificationsFilters*)filters andPagination:(TPNotificationsPagination*)pagination onComplete:(GetDeviceNotificationsResponseBlock)onComplete onError:(TPRequestErrorBlock)onError;

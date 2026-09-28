@@ -26,11 +26,6 @@
 #pragma mark - Shared instance
 + (TwinFormsManager*) manager;
 
-#pragma mark - Certificate pinning
-- (void)enableCertificateNamePinningWithDefaultValues;
-- (void)enableCertificateNamePinningWithCertificateNames:(NSArray*)certificateNames;
-- (void)disableCertificateNamePinning;
-
 #pragma mark - Forms report methods
 - (void)sendFormRequestWithUserId:(NSString*)userId deviceId:(NSString*)deviceId notification:(TPNotification*)notification formContents:(NSDictionary*)formContents;
 /** Same that sendFormRequestWithUserId:deviceId:notification:formContents: but will ask for the deviceId to TwinPushManager */

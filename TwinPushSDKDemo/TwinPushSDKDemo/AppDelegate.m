@@ -78,7 +78,6 @@
     [self applyCustomAppearance];
     [self configureCategories];
     
-    [[TwinPushManager manager] enableCertificateNamePinningWithDefaultValues];
     [[TwinPushManager manager] setupTwinPushManagerWithAppId:TWINPUSH_APP_ID apiKey:TWINPUSH_API_KEY delegate:self];
     return YES;
 }

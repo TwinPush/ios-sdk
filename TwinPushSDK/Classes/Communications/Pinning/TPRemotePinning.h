@@ -8,5 +8,5 @@
 - (void)configureURL:(NSString *)url appID:(NSString *)appID token:(NSString *)token;
 - (void)refresh;
 - (void)invalidate;
-- (TPPinningCall *)send:(NSURLRequest *)request certificateNames:(NSArray *)names completion:(void (^)(NSData *, NSURLResponse *, NSError *))completion;
+- (TPPinningCall *)send:(NSURLRequest *)request completion:(void (^)(NSData *, NSURLResponse *, NSError *))completion;
 @end

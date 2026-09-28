@@ -172,16 +172,9 @@ static NSString* const kAcceptContentTypeHeaderKey = @"Accept";
         
         if (status == errSecSuccess && ((res == kSecTrustResultProceed) || (res == kSecTrustResultUnspecified))) {
             TCLog(@"iOS certificate chain validation for host %@ passed", challenge.protectionSpace.host);
-            // If the iOS Security Framework accepted the certificate chain, we'll
-            // check the chain *again* with OpenSSL. This is a relatively simplistic
-            // implementation - for example, it won't check hostnames - but we assume
-            // that the only gap we need to cover is basicConstraints checking, and
-            // OpenSSL *will* do that.
-            verified = [self verifyServerTrust:serverTrust];
-            if (verified) {
-                NSURLCredential* credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
-                [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
-            }
+            verified = YES;
+            NSURLCredential* credential = [NSURLCredential credentialForTrust:serverTrust];
+            [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
         }
         
         if (!verified) {
@@ -200,36 +193,6 @@ static NSString* const kAcceptContentTypeHeaderKey = @"Accept";
     if (!verified) {
         [challenge.sender cancelAuthenticationChallenge:challenge];
     }
-}
-
-- (BOOL)verifyServerTrust:(SecTrustRef)trust {
-    BOOL verified = YES;
-    if (self.expectedCertNames != nil) {
-        verified = [self verifySecurityTrust:trust withCertificateNames:self.expectedCertNames];
-    }
-    return verified;
-}
-
-- (NSArray*)getCertificateSummaries:(SecTrustRef)trustRef {
-    CFIndex chainLen = SecTrustGetCertificateCount(trustRef);
-    NSMutableArray* summaries = [NSMutableArray arrayWithCapacity:chainLen];
-    
-    for (int i = 0; i < chainLen; i++) {
-        SecCertificateRef leafRef = SecTrustGetCertificateAtIndex(trustRef, i);
-        CFStringRef summaryRef = SecCertificateCopySubjectSummary(leafRef);
-        NSString* summary = (__bridge NSString*)summaryRef;
-        
-        [summaries addObject:summary];
-        
-        CFRelease(summaryRef);
-    }
-    
-    return summaries;
-}
-
-- (BOOL)verifySecurityTrust:(SecTrustRef)trustRef withCertificateNames:(NSArray*)expectedCertNames {
-    NSArray* certNames = [self getCertificateSummaries:trustRef];
-    return [certNames isEqualToArray:expectedCertNames];
 }
 
 #pragma mark - Request launch methods

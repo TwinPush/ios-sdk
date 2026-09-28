@@ -12,7 +12,6 @@
 #import "TPTwinFormsRequest.h"
 
 static NSString* const kDefaultServerUrl = @" https://forms.twinpush.com/";
-#define kDefaultCertificateNames @[@"*.twinpush.com", @"Starfield Secure Certificate Authority - G2", @"Starfield Root Certificate Authority - G2"]
 
 @interface TwinFormsManager()
 @property (nonatomic, copy) NSString* appId;
@@ -72,19 +71,6 @@ static TwinFormsManager *_sharedInstance;
 - (void)sendFormRequestWithUserId:(NSString*)userId notification:(TPNotification*)notification formContents:(NSDictionary*)formContents {
     NSString* deviceId = [TwinPushManager manager].deviceId;
     [self sendFormRequestWithUserId:userId deviceId:deviceId notification:notification formContents:formContents];
-}
-
-#pragma mark - Certificate pinning
-- (void)enableCertificateNamePinningWithDefaultValues {
-    [self enableCertificateNamePinningWithCertificateNames:kDefaultCertificateNames];
-}
-
-- (void)enableCertificateNamePinningWithCertificateNames:(NSArray*)certificateNames {
-    self.requestLauncher.expectedCertNames = certificateNames;
-}
-
-- (void)disableCertificateNamePinning {
-    [self enableCertificateNamePinningWithCertificateNames:nil];
 }
 
 #pragma mark - Private methods

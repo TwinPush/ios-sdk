@@ -295,8 +295,8 @@ static const NSUInteger TPMaximumStoredPinningBytes = 1024 * 1024;
         });
     }
 }
-- (TPPinningCall *)send:(NSURLRequest *)request certificateNames:(NSArray *)names completion:(void (^)(NSData *,NSURLResponse *,NSError *))completion {
-    request=[request copy]; names=[names copy];
+- (TPPinningCall *)send:(NSURLRequest *)request completion:(void (^)(NSData *,NSURLResponse *,NSError *))completion {
+    request=[request copy];
     TPPinningCall *call=[TPPinningCall new];
     NSUInteger revision=self.deliveryRevision;
     dispatch_async(self.queue, ^{
@@ -333,11 +333,6 @@ static const NSUInteger TPMaximumStoredPinningBytes = 1024 * 1024;
                         self.lastPinRefresh=self.clock(); self.nextRefresh=nil; [self beginRefresh];
                     }
                     return NO;
-                }
-                if (names) {
-                    NSMutableArray *actual=[NSMutableArray array];
-                    for (CFIndex i=0;i<SecTrustGetCertificateCount(trust);i++) [actual addObject:CFBridgingRelease(SecCertificateCopySubjectSummary(SecTrustGetCertificateAtIndex(trust,i))) ?: @""];
-                    if (![actual isEqual:names]) return NO;
                 }
                 return YES;
             };

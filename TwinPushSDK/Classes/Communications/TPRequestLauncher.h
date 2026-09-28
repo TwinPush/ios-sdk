@@ -14,11 +14,6 @@
 
 @property (nonatomic, assign, getter=isAllowUnsafeCertificate) BOOL allowUnsafeCertificate;
 
-/** @brief If not null, the request will validate the SSL certificate chain names using the list of certificate
- * names provided from (starting from the leaf certificate and ending with the root). The request will fail with
- * a generic error if the certificate names don't match */
-@property (nonatomic, strong) NSArray* expectedCertNames;
-
 /** @brief Launches the selected request */
 -(void)launchRequest:(TPBaseRequest*)request;
 

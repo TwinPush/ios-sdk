@@ -48,12 +48,11 @@
     if ([_activeRequests objectForKey:request.requestId] == nil) {
         [request addRequestEndDelegate:self];
         request.allowUntrustedCertificates = self.allowUnsafeCertificate;
-        request.expectedCertNames = self.expectedCertNames;
         
         NSURLRequest* urlRequest = [request createRequest];
         id urlConnection;
         if (self.remotePinning) {
-            urlConnection = [self.remotePinning send:urlRequest certificateNames:self.expectedCertNames completion:^(NSData *data, NSURLResponse *response, NSError *error) {
+            urlConnection = [self.remotePinning send:urlRequest completion:^(NSData *data, NSURLResponse *response, NSError *error) {
                 [request finishRemoteData:data error:error];
             }];
         } else {
