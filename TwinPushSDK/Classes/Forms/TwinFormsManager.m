@@ -1,3 +1,4 @@
+#import "TPLogging.h"
 //
 //  TwinFormsManager.m
 //  TwinPushSDK

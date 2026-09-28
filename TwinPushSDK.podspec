@@ -12,10 +12,11 @@ Pod::Spec.new do |s|
 
   # Source configuration
   s.source_files  = "TwinPushSDK/**/*.{h,m}"
+  s.exclude_files = "TwinPushSDK/include/*.h"
   s.public_header_files = Dir["TwinPushSDK/Classes/**/*.h", "TwinPushSDK/ViewControllers/**/*.h"].reject do |header|
-    header.start_with?("TwinPushSDK/Classes/Communications/Pinning/")
+    header.start_with?("TwinPushSDK/Classes/Communications/Pinning/") || header == "TwinPushSDK/Classes/TPLogging.h"
   end
-  s.private_header_files = "TwinPushSDK/Classes/Communications/Pinning/*.h"
+  s.private_header_files = "TwinPushSDK/Classes/Communications/Pinning/*.h", "TwinPushSDK/Classes/TPLogging.h"
   s.frameworks = "MobileCoreServices", "CFNetwork", "SystemConfiguration", "CoreLocation", "Security", "WebKit"
   s.library   = "z"
   s.requires_arc = true

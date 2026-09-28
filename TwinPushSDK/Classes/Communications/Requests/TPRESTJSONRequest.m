@@ -1,3 +1,4 @@
+#import "TPLogging.h"
 //
 //  TPRESTJSONRequest.m
 //  TwinPushSDK

@@ -1,3 +1,4 @@
+#import "TPLogging.h"
 //
 //  TPNotificationsInboxViewController.m
 //  TwinPushSDK

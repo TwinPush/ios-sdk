@@ -11,9 +11,13 @@ Native iOS SDK for [TwinPush platform](http://twinpush.com).
 
 To start using TwinPush you have to integrate the TwinPush SDK in your iOS application. You can download a working sample with the [TwinPush SDK sources](https://github.com/TwinPush/ios-sdk/archive/master.zip).
 
+### Using Swift Package Manager
+
+In Xcode, choose **File > Add Package Dependencies**, enter `https://github.com/TwinPush/ios-sdk.git`, and add the `TwinPushSDK` library product to your iOS app target. The package can be imported in Swift with `import TwinPushSDK` or in Objective-C with `#import <TwinPushSDK/TwinPushManager.h>`.
+
 ### Using CocoaPods
 
-[CocoaPods](http://cocoapods.org/) is the easiest and most maintainable way to install TwinPush SDK. If you are using CocoaPods (that you should) just follow these steps:
+We no longer publish new TwinPushSDK versions to the CocoaPods public specs repository. Existing installations can keep using the published version:
 
 1. Add a reference to the [TwinPush SDK pod](http://cocoapods.org/?q=twinpushsdk) to your `Podfile`.
 
@@ -27,9 +31,17 @@ To start using TwinPush you have to integrate the TwinPush SDK in your iOS appli
 	pod install
 	~~~
 
+To use a newer SDK release with CocoaPods, replace the pod declaration with a direct Git dependency, substituting the published release tag:
+
+~~~ruby
+pod 'TwinPushSDK', :git => 'https://github.com/TwinPush/ios-sdk.git', :tag => 'vX.Y.Z'
+~~~
+
+Run `pod install` after changing the `Podfile`. Existing projects using only `pod 'TwinPushSDK'` will not receive releases published solely on Git; they must update their `Podfile`.
+
 ### Copying the sources
 
-If you are not using CocoaPods you can copy the sources to link the SDK to your project:
+If you are not using CocoaPods or Swift Package Manager you can copy the sources to link the SDK to your project:
 
 1. [Download TwinPush SDK](https://github.com/TwinPush/ios-sdk/archive/master.zip) and unzip the file
 
@@ -69,7 +81,7 @@ If you are not using CocoaPods you can copy the sources to link the SDK to your 
 
 [Swift](https://developer.apple.com/swift/) is an innovative new programming language for Cocoa and Cocoa Touch created by Apple. TwinPush SDK is 100% compatible with Swift projects.
 
-To use TwinPush SDK in a Swift project, you can use any of the methods described above to install the SDK. When using CocoaPods you will have a `TwinPushSDK` module available to import, if you copied the sources you have to import TwinPushManager.h in your bridging header file to make it accessible from Swift code.
+To use TwinPush SDK in a Swift project, you can use any of the methods described above to install the SDK. Swift Package Manager and CocoaPods provide a `TwinPushSDK` module to import; if you copied the sources, import TwinPushManager.h in your bridging header file.
 
 For more information check [Swift and Objective-C in the Same Project](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html).
 
@@ -132,6 +144,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TwinPushManagerDelegate {
     }
 }
 ~~~
+
+If your app uses SwiftUI's `App` lifecycle, connect the configured `AppDelegate` to your app with `@UIApplicationDelegateAdaptor` so it receives the push notification callbacks:
+
+~~~swift
+import SwiftUI
+
+@main
+struct TwinPushSwiftDemoApp: App {
+    @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
+
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+~~~
+
 Replace `SUBDOMAIN`, `TWINPUSH_APP_ID` and `TWINPUSH_API_KEY` with the configuration values for your application in [app.twinpush.com](http://app.twinpush.com). The method `setupTwinPushManagerWithAppId` must be called before any other TwinPushSDK method other than setting the subdomain or changing the server URL (see below).
 
 At this point you should be able to register correctly to TwinPush and you should be able to receive push notifications if both the application and the server certificates have been configured correctly. If not, check the Troubleshooting section.
